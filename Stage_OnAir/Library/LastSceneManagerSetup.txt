@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/02_Ingame/02_Ingame.unity
+- path: Assets/06_Illust/06_Illust.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
