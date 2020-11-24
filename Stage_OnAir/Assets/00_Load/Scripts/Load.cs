@@ -7,5 +7,6 @@ public class Load : MonoBehaviour
     void Start()
     {
         LoadManager.LoaderCallback();
+        Debug.Log("Test 01");
     }
 }
