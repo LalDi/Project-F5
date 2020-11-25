@@ -31,4 +31,26 @@ public class UIManager_02 : MonoBehaviour
     public GameObject Popup_StaffUp;
     public GameObject Popup_Shop;
 
+
+    public void Popup_Quit()
+    {
+        Popup_Black.SetActive(false);
+
+        Popup_Option.SetActive(false);
+        Popup_Rank.SetActive(false);
+
+        Popup_Audition.SetActive(false);
+        Popup_Period.SetActive(false);
+        Popup_Prepare.SetActive(false);
+        Popup_Marketing.SetActive(false);
+        Popup_MarketingCk.SetActive(false);
+        Popup_Develop.SetActive(false);
+        Popup_DevelopUp.SetActive(false);
+        Popup_DevelopCk.SetActive(false);
+        Popup_Play.SetActive(false);
+
+        Popup_Staff.SetActive(false);
+        Popup_StaffUp.SetActive(false);
+        Popup_Shop.SetActive(false);
+    }
 }
