@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 660911240, guid: 77d6e49b5e6e74c909970a208a23105c, type: 3}
   m_Name: TheBackendSettings
   m_EditorClassIdentifier: 
-  clientAppID: 
-  signatureKey: 
+  clientAppID: 9fbe2360-1e4f-11eb-87fa-6f54f412f5f81626
+  signatureKey: 9fbe2361-1e4f-11eb-87fa-6f54f412f5f81626
   functionAuthKey: 
   packageName: com.DefaultCompany.Stage_OnAir
   isAllPlatform: 1
