@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -28,12 +29,17 @@ public class GameManager : Singleton<GameManager>
     public int NowActor { get; private set; }
     public int MaxActor { get; private set; }
 
+    // 플레이어 데이터
+    private string NickName;
+    public int DefaultSuccess;
+
     //public List<ActorData.Actor> Actors;
     //public Dictionary<string, StaffData> Staffs = new Dictionary<string, StaffData>();
 
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };
-    public Step NowStep;
+    public Step NowStep { get; private set; }
 
+    public Button Btn_Play;
 
 
     private void Awake()
@@ -41,6 +47,15 @@ public class GameManager : Singleton<GameManager>
         Screen.SetResolution(Screen.width, Screen.width * 9 / 16, true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.targetFrameRate = 144;
+
+        Year = 2000;
+        Month = 01;
+
+        Money = 5000000;
+
+        DefaultSuccess = 70;
+
+        Btn_Play = GameObject.Find("Play BT").GetComponent<Button>();
     }
 
     public void Reset()
@@ -60,6 +75,7 @@ public class GameManager : Singleton<GameManager>
 
         //Actors.Clear();
         NowStep = Step.Select_Scenario;
+        Btn_Play.interactable = false;
     }
 
     public void GoNextMonth()
@@ -73,4 +89,20 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void SetStep(Step NextStep)
+    {
+        NowStep = NextStep;
+    }
+
+    public void SetDefaultPeriod()
+    {
+        float Success;
+        for (int i = 0; i < MaxActor; i++)
+        {
+            // 모든 Actor의 경험의 평균치를 구하여, 이를 Success에 할당한다.
+            // 이 수치는 6개월을 기준으로, 기간이 성공률에 개입하지 않은 상태의 성공률을 의미한다.
+            // 이제, 이 수치가 DefaultSuccess에 가장 가깝게 조절한다. (성공률은 DefaultSuccess보다 항상 크게 책정된다.)
+            // 1개월을 기준으로 변화치는 Success의 10%이다.
+        }
+    }
 }
