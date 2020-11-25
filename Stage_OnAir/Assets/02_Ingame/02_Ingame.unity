@@ -2479,9 +2479,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe8c22150620e242bb26f98a15e1d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: {fileID: 0}
+  Money: {fileID: 1430924148}
   Year: {fileID: 0}
   Month: {fileID: 0}
+  Folder_Icons:
+  - {fileID: 155786315}
+  - {fileID: 881604646}
+  - {fileID: 1025703192}
   Popup_Black: {fileID: 955855585}
   Popup_Option: {fileID: 300148148}
   Popup_Rank: {fileID: 1001504375}

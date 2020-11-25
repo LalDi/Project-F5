@@ -6,8 +6,9 @@ using DG.Tweening;
 
 public class SettingMenu : MonoBehaviour
 {
-    public bool IsOpen = false;
-    public GameObject[] Icons = new GameObject[3];
+    private bool IsOpen = false;
+    private GameObject[] Icons = new GameObject[3];
+
     void Start()
     {
         for (int i = 0; i < Icons.Length; i++) {
