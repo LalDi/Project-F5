@@ -32,7 +32,7 @@ public class SettingMenu : MonoBehaviour
         MainBT.transform.DORotate(Vector3.forward * 180f, 0.5f).SetEase(Ease.OutBack);
         for (int i = 0; i < Icons.Length; i++)
         {
-            Icons[i].transform.DOMoveY(transform.position.x + 300 * (i - 1), 0.5f).SetEase(Ease.OutBack);
+            Icons[i].transform.DOMoveY(transform.position.y + (-300 * (i + 1)), 0.5f).SetEase(Ease.OutBack);
             Icons[i].GetComponent<Image>().DOFade(1, 0.2f);
             Icons[i].GetComponent<Button>().enabled = true;
         }
@@ -42,7 +42,7 @@ public class SettingMenu : MonoBehaviour
         MainBT.transform.DORotate(Vector3.forward * 360f, 0.5f).SetEase(Ease.OutBack);
         for (int i = 0; i < Icons.Length; i++)
         {
-            Icons[i].transform.DOMoveY(1300, 0.5f).SetEase(Ease.OutBack);
+            Icons[i].transform.DOMoveY(transform.position.y, 0.5f).SetEase(Ease.OutBack);
             Icons[i].GetComponent<Image>().DOFade(0, 0.2f);
             Icons[i].GetComponent<Button>().enabled = false;
         }
