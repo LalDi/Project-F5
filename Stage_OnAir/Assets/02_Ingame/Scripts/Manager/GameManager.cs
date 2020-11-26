@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Define;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -39,8 +40,6 @@ public class GameManager : Singleton<GameManager>
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };
     public Step NowStep { get; private set; }
 
-    public Button Btn_Play;
-
 
     private void Awake()
     {
@@ -54,8 +53,6 @@ public class GameManager : Singleton<GameManager>
         Money = 5000000;
 
         DefaultSuccess = 70;
-
-        Btn_Play = GameObject.Find("Play BT").GetComponent<Button>();
     }
 
     public void Reset()
@@ -75,7 +72,6 @@ public class GameManager : Singleton<GameManager>
 
         //Actors.Clear();
         NowStep = Step.Select_Scenario;
-        Btn_Play.interactable = false;
     }
 
     public void GoNextMonth()
@@ -94,6 +90,11 @@ public class GameManager : Singleton<GameManager>
         NowStep = NextStep;
     }
 
+    public void CostMoney(int value, bool Reduction = true)
+    {
+        Money = Reduction ? Money - value : Money + value;
+    }
+
     public void SetDefaultPeriod()
     {
         float Success;
@@ -104,5 +105,15 @@ public class GameManager : Singleton<GameManager>
             // 이제, 이 수치가 DefaultSuccess에 가장 가깝게 조절한다. (성공률은 DefaultSuccess보다 항상 크게 책정된다.)
             // 1개월을 기준으로 변화치는 Success의 10%이다.
         }
+    }
+
+    public void PlusPeriod()
+    {
+        Period++;
+    }
+
+    public void MinusPeriod()
+    {
+        Period--;
     }
 }

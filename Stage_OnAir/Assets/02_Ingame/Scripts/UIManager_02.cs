@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Define;
 
 public class UIManager_02 : MonoBehaviour
 {
@@ -63,8 +64,15 @@ public class UIManager_02 : MonoBehaviour
     private void Update()
     {
         Money.text = GameManager.Instance.Money.ToString("N0");
+        if (GameManager.Instance.Money <= 0)
+            Money.color = Color.red;
+        else
+            Money.color = Color.black;
         Year.text = GameManager.Instance.Year.ToString("D2");
         Month.text = GameManager.Instance.Month.ToString("D2");
+
+        SetProgress();
+
     }
 
     #region Popup
@@ -222,12 +230,14 @@ public class UIManager_02 : MonoBehaviour
                 Progress = () =>
                 {
                     Popup_On((int)PopupList.Period);
+                    GameManager.Instance.SetDefaultPeriod();
                 };
                 break;
             case GameManager.Step.Prepare_Play:
                 Progress = () =>
                 {
                     Popup_On((int)PopupList.Prepare);
+                    Popup_Prepare.transform.Find("Play BT").GetComponent<Button>().interactable = false;
                 };
                 break;
             case GameManager.Step.Start_Play:
@@ -243,5 +253,17 @@ public class UIManager_02 : MonoBehaviour
 
         Btn_Progress.onClick.RemoveAllListeners();
         Btn_Progress.onClick.AddListener(delegate { Progress(); } );
+    }
+
+    public void Progress_Audition()
+    {
+        GameManager.Instance.CostMoney(AUDITION.AUDITION_PRICE);
+        LoadManager.Load(LoadManager.Scene.Audition);
+    }
+
+    public void Progress_Period()
+    {
+
+        GameManager.Instance.SetStep(GameManager.Step.Prepare_Play);
     }
 }
