@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using BackEnd;
+using Define;
 
 public class ActorData : Singleton<ActorData>
 {
@@ -83,6 +84,12 @@ public class ActorData : Singleton<ActorData>
         }
     }
 
+    /**
+     *  @Func    RandomActors(int Count)
+     *  @remark  ActorList에서 캐스팅 되지 않은 배우들을 정해진 수만큼 랜덤으로 받아오는 함수
+     *  @param   int Count - 목록에서 가져올 배우의 수
+     *  @return  Count수만큼 랜덤으로 받아온 배우들의 List값
+     */
     public List<Actor> RandomActors(int Count)
     {
         List<Actor> RandomActor = new List<Actor>();
@@ -97,6 +104,31 @@ public class ActorData : Singleton<ActorData>
             }
         }
 
+        NonSelect = Math.ShuffleList(NonSelect);
+        
+        for (int i = 0; i < Count; i++)
+        {
+            RandomActor.Add(NonSelect[i]);
+        }
+
         return RandomActor;
+    }
+
+    /**
+     *  @Func    RiseActor(List<Actor> Actors, bool IsSuccess)
+     *  @remark  지정된 배우들의 경험, 가격을 성장시키는 함수
+     *  @param   List<Actor> Actors - 성장할 배우들의 목록
+     *  @param   bool IsSuccess - 목록에서 가져올 배우의 수
+     */
+    public void RiseActor(List<Actor> Actors, bool IsSuccess)
+    {
+        if (IsSuccess)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }
