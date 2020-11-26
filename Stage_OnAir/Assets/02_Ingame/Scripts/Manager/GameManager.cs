@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Define;
+using BackEnd;
+using Actor = ActorData.Actor;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -34,7 +36,8 @@ public class GameManager : Singleton<GameManager>
     private string NickName;
     public int DefaultSuccess;
 
-    //public List<ActorData.Actor> Actors;
+    // 오디션에서 고용한 배우들
+    public List<Actor> Actors;
     //public Dictionary<string, StaffData> Staffs = new Dictionary<string, StaffData>();
 
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };
@@ -47,12 +50,15 @@ public class GameManager : Singleton<GameManager>
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.targetFrameRate = 144;
 
+        Backend.Chart.GetAllChartAndSave(true);
+
         Year = 2000;
         Month = 01;
 
         Money = 5000000;
 
         DefaultSuccess = 70;
+        ActorData.Instance.SetActorsData();
     }
 
     public void Reset()
