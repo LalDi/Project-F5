@@ -6,10 +6,12 @@ using UnityEngine.EventSystems;
 
 public class UIManager_06 : MonoBehaviour
 {
+    public GameObject Popup_Black;
     public GameObject Popup_Illust;
 
     void Start()
     {
+        Popup_Black.SetActive(false);
         Popup_Illust.SetActive(false);
     }
 
@@ -17,10 +19,17 @@ public class UIManager_06 : MonoBehaviour
     {
         Popup_Illust.GetComponent<Image>().sprite =
             EventSystem.current.currentSelectedGameObject.transform.GetChild(1).GetComponent<Image>().sprite;
+        Popup_Black.SetActive(true);
         Popup_Illust.SetActive(true);
     }
     public void Exit_IllustPopup()
     {
+        Popup_Black.SetActive(false);
         Popup_Illust.SetActive(false);
+    }
+    public void Exit_IllustScene()
+    {
+        LoadManager.Load(LoadManager.Scene.Ingame);
+        LoadManager.LoaderCallback();
     }
 }
