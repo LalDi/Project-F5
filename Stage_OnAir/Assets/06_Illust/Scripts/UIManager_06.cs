@@ -27,9 +27,9 @@ public class UIManager_06 : MonoBehaviour
         Popup_Black.SetActive(false);
         Popup_Illust.SetActive(false);
     }
-    public void Exit_IllustScene()
+    public void To_Ingame()
     {
-        LoadManager.Load(LoadManager.Scene.Ingame);
         LoadManager.LoaderCallback();
+        LoadManager.Load(LoadManager.Scene.Ingame);
     }
 }
