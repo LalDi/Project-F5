@@ -116,24 +116,55 @@ public class GameManager : Singleton<GameManager>
 
     public void SetDefaultPeriod()
     {
-        float Success;
-        for (int i = 0; i < MaxActor; i++)
+        float Success = 0;
+        int Count = 0;
+
+        foreach (var item in Actors)
         {
-            // 모든 Actor의 경험의 평균치를 구하여, 이를 Success에 할당한다.
-            // 이 수치는 6개월을 기준으로, 기간이 성공률에 개입하지 않은 상태의 성공률을 의미한다.
-            // 이제, 이 수치가 DefaultSuccess에 가장 가깝게 조절한다. (성공률은 DefaultSuccess보다 항상 크게 책정된다.)
-            // 1개월을 기준으로 변화치는 Success의 10%이다.
+            Success += item.Experience;
+            Count++;
         }
+        Success = Success / Count;
+
+        Count = -5;
+        float temp = Success * 0.1f;
+        Success -= temp * 5;
+
+        while (Success < DefaultSuccess)
+        {
+            Success += temp;
+            Count++;
+        }
+
+        Period = Count + 6;
     }
 
-    public void PlusPeriod()
+    public float GetSuccess()
     {
-        Period++;
+        float Success = 0;
+        int Count = 0;
+
+        foreach (var item in Actors)
+        {
+            Success += item.Experience;
+            Count++;
+        }
+        Success = Success / Count;
+
+        float temp = Success * 0.1f;
+
+        return Success + (temp * (Period - 6));
     }
 
-    public void MinusPeriod()
+    public void SetPeriod()
     {
-        Period--;
+        Play_Success = GetSuccess();
+        SetStep(Step.Prepare_Play);
+    }
+
+    public void SetPeriod(int value)
+    {
+        Period += value;
     }
 
     public void PlusNowActor()

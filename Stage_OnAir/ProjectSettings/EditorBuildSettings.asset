@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/02_Ingame/02_Ingame.unity
     guid: 6da654e80fa2c6d4eaec1d678b9413dc
   - enabled: 1
-    path: Assets/04_Scenario/03_Scenario.unity
+    path: Assets/03_Scenario/03_Scenario.unity
     guid: 1b88ea1e7b349104b8facdeddd8fa4e9
   - enabled: 1
-    path: Assets/03_Audition/04_Audition.unity
+    path: Assets/04_Audition/04_Audition.unity
     guid: eda7bb061b8bc3e4a83d0405b31dd7e9
   - enabled: 1
     path: Assets/05_Play/05_Play.unity
