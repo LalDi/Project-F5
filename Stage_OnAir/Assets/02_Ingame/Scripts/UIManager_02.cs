@@ -36,6 +36,13 @@ public class UIManager_02 : MonoBehaviour
     public Text Text_Period;
     public Text Text_Success;
 
+    [Header("Option")]
+    public Toggle BGM;
+    public Toggle SFX;
+    public Toggle Push;
+    public InputField Nickname;
+    public Text DefaultSuccess;
+
     [Header("Button")]
     public Button Btn_Progress;
 
@@ -97,6 +104,7 @@ public class UIManager_02 : MonoBehaviour
             case PopupList.Option:
                 Popup_Black.SetActive(false);
                 Popup_Option.SetActive(true);
+                OnOption();
                 break;
             case PopupList.Rank:
                 Popup_Rank.SetActive(true);
@@ -315,6 +323,51 @@ public class UIManager_02 : MonoBehaviour
             Debug.Log("한달 개발함");
         }
     }
+
+    #region Option
+
+    public void OnOption()
+    {
+        BGM.isOn = GameManager.Instance.OnBGM;
+        SFX.isOn = GameManager.Instance.OnSFX;
+        Push.isOn = GameManager.Instance.OnPush;
+
+        DefaultSuccess.text = GameManager.Instance.DefaultSuccess.ToString() + "%";
+    }
+
+    public void SetBGM()
+    {
+        GameManager.Instance.OnBGM = BGM.isOn;
+    }
+    
+    public void SetSFX()
+    {
+        GameManager.Instance.OnSFX = SFX.isOn;
+    }
+
+    public void SetPush()
+    {
+        GameManager.Instance.OnPush = Push.isOn;
+    }
+
+    public void SaveData()
+    {
+
+    }
+
+    public void Regulate_DefaultSuccess(int value)
+    {
+        GameManager.Instance.DefaultSuccess += value;
+
+        if (GameManager.Instance.DefaultSuccess > 100)
+            GameManager.Instance.DefaultSuccess = 100;
+
+        if (GameManager.Instance.DefaultSuccess < 0)
+            GameManager.Instance.DefaultSuccess = 0;
+
+        DefaultSuccess.text = GameManager.Instance.DefaultSuccess.ToString() + "%";
+    }
+    #endregion
 
     public void Click_Illust()
     {

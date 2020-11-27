@@ -151,6 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultSuccess: 0
+  OnBGM: 0
+  OnSFX: 0
+  OnPush: 0
 --- !u!4 &13718733
 Transform:
   m_ObjectHideFlags: 0
@@ -475,7 +478,18 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: SetSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &79652185
 GameObject:
@@ -1353,6 +1367,11 @@ MonoBehaviour:
   Popup_Shop: {fileID: 451664751}
   Text_Period: {fileID: 408018758}
   Text_Success: {fileID: 1275132721}
+  BGM: {fileID: 1010420230}
+  SFX: {fileID: 77413166}
+  Push: {fileID: 502677093}
+  Nickname: {fileID: 8769250834316065589}
+  DefaultSuccess: {fileID: 8769250835876037424}
   Btn_Progress: {fileID: 874340410}
 --- !u!4 &323838447
 Transform:
@@ -2645,7 +2664,18 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: SetPush
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &512965800
 GameObject:
@@ -6398,7 +6428,18 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: SetBGM
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1025703192
 GameObject:
@@ -14722,7 +14763,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8769250834302419670}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: Regulate_DefaultSuccess
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8769250834302419667
 GameObject:
   m_ObjectHideFlags: 0
@@ -15088,7 +15140,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8769250834434852509}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: Regulate_DefaultSuccess
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8769250834434852509
 MonoBehaviour:
   m_ObjectHideFlags: 0
