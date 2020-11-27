@@ -788,7 +788,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 155786318}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: Click_Illust
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &155786318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,9 +1333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe8c22150620e242bb26f98a15e1d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: {fileID: 1430924148}
-  Year: {fileID: 915305337}
-  Month: {fileID: 1254395695}
+  Text_Money: {fileID: 1430924148}
+  Text_Year: {fileID: 915305337}
+  Text_Month: {fileID: 1254395695}
   Popup_Black: {fileID: 955855585}
   Popup_Option: {fileID: 8769250834073277990}
   Popup_Rank: {fileID: 1001504375}
@@ -1340,6 +1351,8 @@ MonoBehaviour:
   Popup_Staff: {fileID: 1831077862}
   Popup_StaffUp: {fileID: 756484412}
   Popup_Shop: {fileID: 451664751}
+  Text_Period: {fileID: 408018758}
+  Text_Success: {fileID: 1275132721}
   Btn_Progress: {fileID: 874340410}
 --- !u!4 &323838447
 Transform:
@@ -7001,12 +7014,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323838446}
-        m_MethodName: Period_Plus
-        m_Mode: 1
+        m_MethodName: Click_Period
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7615,12 +7628,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323838446}
-        m_MethodName: Period_Minus
-        m_Mode: 1
+        m_MethodName: Click_Period
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: -1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
