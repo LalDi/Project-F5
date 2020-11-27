@@ -45,11 +45,21 @@ public class Actor
         Temp = Mathf.CeilToInt(Price * 0.001f * Rand) * 1000;
         Price = Temp;
     }
+  
+    public void SetIsCasting(bool Casting)
+    {
+        IsCasting = Casting;
+    }
 }
 
 public class ActorData : Singleton<ActorData>
 {
     public List<Actor> ActorsList = new List<Actor>();
+
+    //void Start()
+    //{
+    //    SetActorsData();
+    //}
 
     /**
      *  @Func    SetActorsData()
@@ -57,7 +67,6 @@ public class ActorData : Singleton<ActorData>
      */
     public void SetActorsData()
     {
-        Debug.Log("SetActorsData");
         JsonData ChartJson = JsonMapper.ToObject(Backend.Chart.GetLocalChartData("Actor"));
         var rows = ChartJson["rows"];
         ActorsList.Clear();
@@ -148,4 +157,5 @@ public class ActorData : Singleton<ActorData>
             item.RiseActor(IsSuccess);
         }
     }
+
 }
