@@ -25,6 +25,26 @@ public class Actor
         IsCasting = _IsCasting;
         Sprite = _Sprite;
     }
+
+    public void RiseActor(bool IsSuccess)
+    {
+        float Rand;
+
+        if (IsSuccess)
+        {
+            Rand = Random.Range(0.05f, 0.1f);
+        }
+        else
+        {
+            Rand = Random.Range(0.1f, 0.25f);
+        }
+
+        int Temp = Mathf.CeilToInt(Experience * Rand);
+        Experience = Temp;
+
+        Temp = Mathf.CeilToInt(Price * 0.001f * Rand) * 1000;
+        Price = Temp;
+    }
 }
 
 public class ActorData : Singleton<ActorData>
@@ -123,13 +143,9 @@ public class ActorData : Singleton<ActorData>
      */
     public void RiseActor(List<Actor> Actors, bool IsSuccess)
     {
-        if (IsSuccess)
+        foreach (var item in Actors)
         {
-
-        }
-        else
-        {
-
+            item.RiseActor(IsSuccess);
         }
     }
 }
