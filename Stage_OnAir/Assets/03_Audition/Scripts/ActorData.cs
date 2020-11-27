@@ -27,6 +27,11 @@ public class ActorData : Singleton<ActorData>
             IsCasting = _IsCasting;
             Sprite = _Sprite;
         }
+
+        public void SetIsCasting(bool Casting)
+        {
+            IsCasting = Casting;
+        }
     }
 
     public List<Actor> ActorsList = new List<Actor>();
@@ -132,4 +137,5 @@ public class ActorData : Singleton<ActorData>
 
         }
     }
+
 }

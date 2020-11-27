@@ -43,7 +43,6 @@ public class GameManager : Singleton<GameManager>
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };
     public Step NowStep { get; private set; }
 
-
     private void Awake()
     {
         Screen.SetResolution(Screen.width, Screen.width * 16 / 9, true);
