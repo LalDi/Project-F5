@@ -49,7 +49,6 @@ public class Actor
 
 public class ActorData : Singleton<ActorData>
 {
-
     public List<Actor> ActorsList = new List<Actor>();
 
     /**
@@ -58,6 +57,7 @@ public class ActorData : Singleton<ActorData>
      */
     public void SetActorsData()
     {
+        Debug.Log("SetActorsData");
         JsonData ChartJson = JsonMapper.ToObject(Backend.Chart.GetLocalChartData("Actor"));
         var rows = ChartJson["rows"];
         ActorsList.Clear();

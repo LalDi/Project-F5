@@ -53,6 +53,9 @@ TagManager:
   - name: Frontground
     uniqueID: 3842142063
     locked: 0
+  - name: Light
+    uniqueID: 566941617
+    locked: 0
   - name: UI
     uniqueID: 1347534903
     locked: 0

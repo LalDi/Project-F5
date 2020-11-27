@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Stage_OnAir/Assets/TextMesh Pro.meta
+guid: d49e339c45ff22c47a00a59dc3318f9f
+=======
 guid: 65cb7ba72b2f477428f14f1c461e09f0
+>>>>>>> Feature/ServerData:Stage_OnAir/Assets/02_Ingame/Resources/Sprites/Background.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

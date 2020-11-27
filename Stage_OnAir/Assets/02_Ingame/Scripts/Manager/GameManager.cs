@@ -45,7 +45,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
-        Screen.SetResolution(Screen.width, Screen.width * 9 / 16, true);
+        Screen.SetResolution(Screen.width, Screen.width * 16 / 9, true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.targetFrameRate = 144;
 
@@ -65,7 +65,6 @@ public class GameManager : Singleton<GameManager>
             }
         });
 
-
         Backend.Chart.GetAllChartAndSave(true);
 
         Year = 2000;
@@ -75,7 +74,7 @@ public class GameManager : Singleton<GameManager>
 
         DefaultSuccess = 70;
     }
-
+    
     public void Reset()
     {
         Play_Quality = 0;
@@ -136,5 +135,10 @@ public class GameManager : Singleton<GameManager>
     public void MinusPeriod()
     {
         Period--;
+    }
+
+    public void PlusNowActor()
+    {
+        NowActor++;
     }
 }
