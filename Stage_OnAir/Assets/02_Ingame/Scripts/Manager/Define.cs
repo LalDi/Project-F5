@@ -4,6 +4,14 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    class SCENARIO
+    {
+        public int SCENARIO_ILLUST_QUALITY(int Quality)
+        {
+            return Quality * 5;
+        }
+    }
+
     class AUDITION
     {
         public const int AUDITION_PRICE = 50000;
