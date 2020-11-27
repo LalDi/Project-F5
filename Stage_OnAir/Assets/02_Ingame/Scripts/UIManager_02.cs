@@ -210,7 +210,7 @@ public class UIManager_02 : MonoBehaviour
 
     public void SetProgress()
     {
-        GameManager.Step NowStep = GameManager.Instance.NowStep;
+        GameManager.Step NowStep = GameManager.Step.Cast_Actor/* = GameManager.Instance.NowStep*/;
 
         switch (NowStep)
         {

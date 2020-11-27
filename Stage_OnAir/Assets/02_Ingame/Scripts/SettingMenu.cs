@@ -9,6 +9,7 @@ public class SettingMenu : MonoBehaviour
     public bool IsOpen = false;
     public GameObject MainBT;
     public GameObject[] Icons = new GameObject[3];
+    // Start is called before the first frame update
     void Start()
     {
         MainBT = transform.GetChild(3).gameObject;
@@ -17,6 +18,7 @@ public class SettingMenu : MonoBehaviour
             Icons[i] = transform.GetChild(i).gameObject;
             Icons[i].GetComponent<Button>().enabled = false;
         }
+
     }
 
     public void Anim()
@@ -46,6 +48,6 @@ public class SettingMenu : MonoBehaviour
             Icons[i].GetComponent<Image>().DOFade(0, 0.2f);
             Icons[i].GetComponent<Button>().enabled = false;
         }
+
     }
 }
-

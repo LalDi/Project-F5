@@ -298,7 +298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 205f58225bc234141bc526bfd4c6a3c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e0a530dffd9fdba448414b94ae7e859a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -316,92 +316,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13549912}
   m_CullTransparentMesh: 0
---- !u!1 &112251871
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 112251873}
-  - component: {fileID: 112251872}
-  m_Layer: 0
-  m_Name: ActorData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &112251872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112251871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0a2cb3a32c3a664b90fefbdfc94d9a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActorsList:
-  - No: 0
-    Name: "\uC544\uBB34\uAC1C"
-    Acting: 100
-    Experience: 100
-    Price: 100000
-    IsCasting: 0
-  - No: 1
-    Name: "\uC774\uC608\uC900"
-    Acting: 500
-    Experience: 100
-    Price: 500000
-    IsCasting: 0
-  - No: 2
-    Name: "\uCD5C\uC9C0\uC6D0"
-    Acting: 350
-    Experience: 70
-    Price: 300000
-    IsCasting: 0
-  - No: 3
-    Name: "\uC774\uBCF4\uC601"
-    Acting: 300
-    Experience: 95
-    Price: 300000
-    IsCasting: 0
-  - No: 4
-    Name: "\uC591\uBCF8\uC774"
-    Acting: 250
-    Experience: 75
-    Price: 150000
-    IsCasting: 0
-  - No: 5
-    Name: "\uC624\uC218\uD604"
-    Acting: 450
-    Experience: 100
-    Price: 400000
-    IsCasting: 0
-  - No: 6
-    Name: "\uC9F1\uC9F1\uD300\uC7A5\uC774\uC608\uC900"
-    Acting: 1000
-    Experience: 120
-    Price: 500000
-    IsCasting: 0
---- !u!4 &112251873
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112251871}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &126840633
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,7 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3279cbc978f99d40b522a942aebdd56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NowStep: 0
+  DefaultSuccess: 0
 --- !u!4 &466316039
 Transform:
   m_ObjectHideFlags: 0
@@ -1098,7 +1012,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d3b54eae45bb0234b9dcb6874e2d84ac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63fbca5b92f9ec2478bedafc407aebfb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1813,6 +1727,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Popup_Balck: {fileID: 3358914}
   Popup_Result: {fileID: 13549912}
+  Count: {fileID: 0}
+  Profile: {fileID: 0}
+  ActorCount: 0
 --- !u!4 &1141770229
 Transform:
   m_ObjectHideFlags: 0

@@ -50,6 +50,22 @@ public class GameManager : Singleton<GameManager>
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.targetFrameRate = 144;
 
+        Backend.Initialize(() =>
+        {
+            // 초기화 성공한 경우 실행
+            if (Backend.IsInitialized)
+            {
+                var data = Backend.BMember.CustomLogin("LalDi", "Laldi_1305");
+
+                Debug.Log("초기화 완료");
+            }
+            // 초기화 실패한 경우 실행
+            else
+            {
+
+            }
+        });
+
         Backend.Chart.GetAllChartAndSave(true);
 
         Year = 2000;
@@ -58,9 +74,8 @@ public class GameManager : Singleton<GameManager>
         Money = 5000000;
 
         DefaultSuccess = 70;
-        ActorData.Instance.SetActorsData();
-    }
 
+    }
     public void Reset()
     {
         Play_Quality = 0;
@@ -121,5 +136,10 @@ public class GameManager : Singleton<GameManager>
     public void MinusPeriod()
     {
         Period--;
+    }
+
+    public void PlusNowActor()
+    {
+        NowActor++;
     }
 }
