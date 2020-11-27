@@ -37,7 +37,7 @@ public class GameManager : Singleton<GameManager>
     public int DefaultSuccess;
 
     // 오디션에서 고용한 배우들
-    public List<Actor> Actors;
+    public List<Actor> Actors = new List<Actor>();
     //public Dictionary<string, StaffData> Staffs = new Dictionary<string, StaffData>();
 
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };

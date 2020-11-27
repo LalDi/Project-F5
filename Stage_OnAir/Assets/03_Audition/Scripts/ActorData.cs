@@ -36,13 +36,17 @@ public class ActorData : Singleton<ActorData>
 
     public List<Actor> ActorsList = new List<Actor>();
 
+    //void Start()
+    //{
+    //    SetActorsData();
+    //}
+
     /**
      *  @Func    SetActorsData()
      *  @remark  서버에서 데이터를 불러와 ActorsList의 값을 초기화 시키는 함수.
      */
     public void SetActorsData()
     {
-        Debug.Log("SetActorsData");
         JsonData ChartJson = JsonMapper.ToObject(Backend.Chart.GetLocalChartData("Actor"));
         var rows = ChartJson["rows"];
         ActorsList.Clear();
