@@ -35,6 +35,9 @@ public class GameManager : Singleton<GameManager>
     private string NickName;
     public int DefaultSuccess;
 
+    //시나리오
+    public Scenario NowScenario { get; private set; }
+
     // 오디션에서 고용한 배우들
     public List<Actor> Actors = new List<Actor>();
     //public Dictionary<string, StaffData> Staffs = new Dictionary<string, StaffData>();
@@ -124,6 +127,10 @@ public class GameManager : Singleton<GameManager>
             // 이제, 이 수치가 DefaultSuccess에 가장 가깝게 조절한다. (성공률은 DefaultSuccess보다 항상 크게 책정된다.)
             // 1개월을 기준으로 변화치는 Success의 10%이다.
         }
+    }
+    public void SetScenario(Scenario NextScenario)
+    {
+        NowScenario = NextScenario;
     }
 
     public void PlusPeriod()
