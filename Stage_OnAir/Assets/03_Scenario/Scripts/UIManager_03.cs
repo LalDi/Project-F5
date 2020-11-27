@@ -25,12 +25,11 @@ public class UIManager_03 : MonoBehaviour
         {
             ScenarioData.Instance.SetScenarioData();
             for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
-                {
-                    Scroll.transform.GetChild(i).parent = Scroll.transform.GetChild(0);
-                    Scroll.transform.GetChild(i).GetChild(0).GetComponent<Text>().text =
-                        ScenarioData.Instance.ScenarioList[i].Name;
-                    Scroll.transform.GetChild(i).gameObject.SetActive(true);
-                }
+            {
+                Scroll.transform.GetChild(i).GetChild(0).GetComponent<Text>().text =
+                    ScenarioData.Instance.ScenarioList[i].Name;
+                Scroll.transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
     }
 
@@ -56,7 +55,7 @@ public class UIManager_03 : MonoBehaviour
         Popup_Black.SetActive(true);
         Popup_Scenario_Select.SetActive(false);
 
-        if (GameManager.Instance.Money >= 
+        if (GameManager.Instance.Money >=
             Data.Price)
         {
             Popup_Buy_Checking.transform.GetChild(1).GetComponent<Text>().text =
