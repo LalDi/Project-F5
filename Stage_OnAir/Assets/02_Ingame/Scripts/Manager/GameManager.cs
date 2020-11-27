@@ -34,6 +34,9 @@ public class GameManager : Singleton<GameManager>
     // 플레이어 데이터
     private string NickName;
     public int DefaultSuccess;
+    public bool OnBGM;
+    public bool OnSFX;
+    public bool OnPush;
 
     // 오디션에서 고용한 배우들
     public List<Actor> Actors = new List<Actor>();
@@ -71,7 +74,7 @@ public class GameManager : Singleton<GameManager>
 
         Money = 5000000;
 
-        DefaultSuccess = 70;
+        DefaultSuccess = 60;
     }
     
     public void Reset()
