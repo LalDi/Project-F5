@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Define;
 using BackEnd;
-using Actor = ActorData.Actor;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -74,8 +73,8 @@ public class GameManager : Singleton<GameManager>
         Money = 5000000;
 
         DefaultSuccess = 70;
-
     }
+    
     public void Reset()
     {
         Play_Quality = 0;
