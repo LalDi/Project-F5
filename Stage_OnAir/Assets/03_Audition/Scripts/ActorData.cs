@@ -5,35 +5,55 @@ using LitJson;
 using BackEnd;
 using Define;
 
-public class ActorData : Singleton<ActorData>
+public class Actor
 {
-    public class Actor
+    public int No { get; private set; }
+    public string Name { get; private set; }
+    public int Acting { get; private set; }
+    public int Experience { get; private set; }
+    public int Price { get; private set; }
+    public bool IsCasting { get; private set; }
+    public int Sprite { get; private set; }
+
+    public Actor(int _No, string _Name, int _Acting, int _Experience, int _Price, bool _IsCasting, int _Sprite)
     {
-        public int No { get; private set; }
-        public string Name { get; private set; }
-        public int Acting { get; private set; }
-        public int Experience { get; private set; }
-        public int Price { get; private set; }
-        public bool IsCasting { get; private set; }
-        public int Sprite { get; private set; }
-
-        public Actor(int _No, string _Name, int _Acting, int _Experience, int _Price, bool _IsCasting, int _Sprite)
-        {
-            No = _No;
-            Name = _Name;
-            Acting = _Acting;
-            Experience = _Experience;
-            Price = _Price;
-            IsCasting = _IsCasting;
-            Sprite = _Sprite;
-        }
-
-        public void SetIsCasting(bool Casting)
-        {
-            IsCasting = Casting;
-        }
+        No = _No;
+        Name = _Name;
+        Acting = _Acting;
+        Experience = _Experience;
+        Price = _Price;
+        IsCasting = _IsCasting;
+        Sprite = _Sprite;
     }
 
+    public void RiseActor(bool IsSuccess)
+    {
+        float Rand;
+
+        if (IsSuccess)
+        {
+            Rand = Random.Range(0.05f, 0.1f);
+        }
+        else
+        {
+            Rand = Random.Range(0.1f, 0.25f);
+        }
+
+        int Temp = Mathf.CeilToInt(Experience * Rand);
+        Experience = Temp;
+
+        Temp = Mathf.CeilToInt(Price * 0.001f * Rand) * 1000;
+        Price = Temp;
+    }
+  
+    public void SetIsCasting(bool Casting)
+    {
+        IsCasting = Casting;
+    }
+}
+
+public class ActorData : Singleton<ActorData>
+{
     public List<Actor> ActorsList = new List<Actor>();
 
     //void Start()
@@ -132,13 +152,9 @@ public class ActorData : Singleton<ActorData>
      */
     public void RiseActor(List<Actor> Actors, bool IsSuccess)
     {
-        if (IsSuccess)
+        foreach (var item in Actors)
         {
-
-        }
-        else
-        {
-
+            item.RiseActor(IsSuccess);
         }
     }
 
