@@ -1721,7 +1721,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1141770227}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e51c83f89ebbf9e499000f2300cbb0d4, type: 3}
+  m_Script: {fileID: 11500000, guid: bdd47db82db0bf648986771eda7b5d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ActorPrefab: {fileID: 4004420269623658511, guid: 6860d9fcef5563649a9039af968eab44,
