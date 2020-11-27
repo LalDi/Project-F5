@@ -25,8 +25,7 @@ public class Scenario
     }
 }
 
-
-public class ScenarioData : MonoBehaviour
+public class ScenarioData : Singleton<ScenarioData>
 {
     public List<Scenario> ScenarioList = new List<Scenario>();
 
@@ -44,11 +43,10 @@ public class ScenarioData : MonoBehaviour
                 int.Parse(item["Quality"]["S"].ToString()),
                 int.Parse(item["Actors"]["S"].ToString()),
                 int.Parse(item["Price"]["S"].ToString()),
-                int.Parse(item["Code"]["S"].ToString()));
+                int.Parse(item["Code"]["S"].ToString()) );
 
             ScenarioList.Add(scenario);
         }
-
         SortScenario();
     }
 
