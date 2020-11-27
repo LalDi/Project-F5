@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class UIManager_04 : MonoBehaviour
 {
@@ -60,8 +61,11 @@ public class UIManager_04 : MonoBehaviour
 
     public void Result()
     {
+        float Width = 0;
         for(int i = 0; i < PassActors.Count; i++)
         {
+            Width += 325;
+            Debug.Log(PassActors[i].Name);
             PassActors[i].SetIsCasting(true);
             GameManager.Instance.Actors.Add(PassActors[i]);
 
@@ -70,6 +74,8 @@ public class UIManager_04 : MonoBehaviour
             ActorData.transform.Find("Actor Name Text").GetComponent<Text>().text =
                 PassActors[i].Name;
         }
+        Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0).
+            GetComponent<RectTransform>().sizeDelta = new Vector2(Width, 940.4614f);
     }
 
     public void Out_BT()
@@ -84,6 +90,7 @@ public class UIManager_04 : MonoBehaviour
 
     public void To_Ingame()
     {
+        GameManager.Instance.SetStep(GameManager.Step.Set_Period);
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
     }

@@ -25,6 +25,7 @@ public class Scenario
     }
 }
 
+
 public class ScenarioData : Singleton<ScenarioData>
 {
     public List<Scenario> ScenarioList = new List<Scenario>();
