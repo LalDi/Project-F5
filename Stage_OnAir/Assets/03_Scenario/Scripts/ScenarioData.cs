@@ -44,11 +44,10 @@ public class ScenarioData : Singleton<ScenarioData>
                 int.Parse(item["Quality"]["S"].ToString()),
                 int.Parse(item["Actors"]["S"].ToString()),
                 int.Parse(item["Price"]["S"].ToString()),
-                int.Parse(item["Code"]["S"].ToString()));
+                int.Parse(item["Code"]["S"].ToString()) );
 
             ScenarioList.Add(scenario);
         }
-
         SortScenario();
     }
 

@@ -38,6 +38,9 @@ public class GameManager : Singleton<GameManager>
     public bool OnSFX;
     public bool OnPush;
 
+    //시나리오
+    public Scenario NowScenario { get; private set; }
+
     // 오디션에서 고용한 배우들
     public List<Actor> Actors = new List<Actor>();
     //public Dictionary<string, StaffData> Staffs = new Dictionary<string, StaffData>();
@@ -157,6 +160,10 @@ public class GameManager : Singleton<GameManager>
         float temp = Success * 0.1f;
 
         return Success + (temp * (Period - 6));
+    }
+    public void SetScenario(Scenario NextScenario)
+    {
+        NowScenario = NextScenario;
     }
 
     public void SetPeriod()
