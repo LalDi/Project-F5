@@ -5,6 +5,7 @@ using LitJson;
 using BackEnd;
 using Define;
 
+    //[System.Serializable]
 public class Scenario
 {
     public int No { get; private set; }
