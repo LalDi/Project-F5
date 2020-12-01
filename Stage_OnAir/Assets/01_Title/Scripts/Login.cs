@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using BackEnd;
+using Define;
 
 public class Login : MonoBehaviour
 {
@@ -48,11 +49,11 @@ public class Login : MonoBehaviour
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "400":
-                Error_Message = "모든 항목을 빠짐없이 입력하여주십시오.";
+                Error_Message = ERROR_MESSAGE.LOGIN_EMPTY;
                 Control_Error(true);
                 break;
             case "401":
-                Error_Message = "존재하지 않는 계정입니다.\n아이디 혹은 비밀번호를 확인해주세요.";
+                Error_Message = ERROR_MESSAGE.LOGIN_DUPLICATE;
                 Control_Error(true);
                 break;
             case "403":
@@ -83,11 +84,11 @@ public class Login : MonoBehaviour
                     Nickname_Popup.SetActive(true);
                     break;
                 case "400":
-                    Error_Message = "모든 항목을 빠짐없이 입력하여주십시오.";
+                    Error_Message = ERROR_MESSAGE.SIGNUP_EMPTY;
                     Control_Error(true);
                     break;
                 case "409":
-                    Error_Message = "이미 존재하는 아이디입니다.\n아이디를 바꿔주십시오.";
+                    Error_Message = ERROR_MESSAGE.SIGNUP_DUPLICATE;
                     Control_Error(true);
                     break;
                 default:
@@ -96,7 +97,7 @@ public class Login : MonoBehaviour
         }
         else
         {
-            Error_Message = "비밀번호가 일치하지 않습니다.";
+            Error_Message = ERROR_MESSAGE.SIGNUP_DISCORDANCE;
             Control_Error(true);
         }
     }
@@ -120,17 +121,17 @@ public class Login : MonoBehaviour
                 switch (Nickname.GetErrorCode())
                 {
                     case "UndefinedParameterException":
-                        Error_Message = "닉네임은 공백으로 설정할 수 없습니다.";
+                        Error_Message = ERROR_MESSAGE.SETNICK_EMPTY;
                         Control_Error(true);
                         break;
                     case "BadParameterException":
-                        Error_Message = "닉네임은 20자를 넘기거나\n공백을 포함할 수 없습니다.";
+                        Error_Message = ERROR_MESSAGE.SETNICK_BAD;
                         Control_Error(true);
                         break;
                 }
                 break;
             case "409":
-                Error_Message = "중복된 닉네임입니다.\n다른 닉네임을 설정해주십시오.";
+                Error_Message = ERROR_MESSAGE.SETNICK_DUPLICATE;
                 Control_Error(true);
                 break;
         }
