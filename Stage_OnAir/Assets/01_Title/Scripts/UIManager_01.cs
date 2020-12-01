@@ -16,7 +16,7 @@ public class UIManager_01 : MonoBehaviour
 
     void Start()
     {
-        ActorData.Instance.SetActorsData();
+        //ActorData.Instance.SetActorsData();
         //ttsText.transform.DOScaleX(1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutQuad);
         Popup_Black.SetActive(false);
         Popup_LogIn.SetActive(false);

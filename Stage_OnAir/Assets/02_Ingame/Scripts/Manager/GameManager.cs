@@ -70,7 +70,7 @@ public class GameManager : Singleton<GameManager>
             }
         });
 
-        Backend.Chart.GetAllChartAndSave(true);
+        //Backend.Chart.GetAllChartAndSave(true);
 
         Year = 2000;
         Month = 01;
