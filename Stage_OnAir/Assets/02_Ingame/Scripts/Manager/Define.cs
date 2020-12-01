@@ -4,6 +4,20 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    class ERROR_MESSAGE
+    {
+        public const string LOGIN_EMPTY = "모든 항목을 빠짐없이 입력하여주십시오.";
+        public const string LOGIN_DUPLICATE = "존재하지 않는 계정입니다.\n아이디 혹은 비밀번호를 확인해주세요.";
+
+        public const string SIGNUP_EMPTY = "모든 항목을 빠짐없이 입력하여주십시오.";
+        public const string SIGNUP_DUPLICATE = "이미 존재하는 아이디입니다.\n아이디를 바꿔주십시오.";
+        public const string SIGNUP_DISCORDANCE = "비밀번호가 일치하지 않습니다.";
+
+        public const string SETNICK_EMPTY = "닉네임은 공백으로 설정할 수 없습니다.";
+        public const string SETNICK_BAD = "닉네임은 20자를 넘기거나\n공백을 포함할 수 없습니다.";
+        public const string SETNICK_DUPLICATE = "중복된 닉네임입니다.\n다른 닉네임을 설정해주십시오.";
+    }
+
     class SCENARIO
     {
         public int SCENARIO_ILLUST_QUALITY(int Quality)
