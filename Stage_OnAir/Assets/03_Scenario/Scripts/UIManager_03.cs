@@ -31,12 +31,10 @@ public class UIManager_03 : MonoBehaviour
         Popup_Warning.SetActive(false);
         Popup_Buy_Checking.SetActive(false);
     }
-    void Update()
+
+    void Start()
     {
-        if (ScenarioData.Instance.ScenarioList.Count == 0)
-        {
-            ScenarioData.Instance.SetScenarioData();
-            for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
+        for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
             {
                 Scroll.transform.GetChild(i).GetComponent<ScenarioScript>().ScenarioData =
                     ScenarioData.Instance.ScenarioList[i];
@@ -44,9 +42,13 @@ public class UIManager_03 : MonoBehaviour
                     ScenarioData.Instance.ScenarioList[i].Name;
                 Scroll.transform.GetChild(i).gameObject.SetActive(true);
             }
-            Scroll.GetComponent<RectTransform>().sizeDelta = 
+            Scroll.GetComponent<RectTransform>().sizeDelta =
                 new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 310 + 100);
-        }
+    }
+
+    void Update()
+    {
+        
     }
 
     public void Popup_Scenario()

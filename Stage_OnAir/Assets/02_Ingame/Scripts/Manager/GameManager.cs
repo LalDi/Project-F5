@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Define;
 using BackEnd;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -37,6 +38,7 @@ public class GameManager : Singleton<GameManager>
 
     //시나리오
     public Scenario NowScenario { get; private set; }
+    public bool[] ScenarioIllust = new bool[10];
 
     // 오디션에서 고용한 배우들
     public List<Actor> Actors = new List<Actor>();
@@ -51,30 +53,14 @@ public class GameManager : Singleton<GameManager>
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.targetFrameRate = 144;
 
-        Backend.Initialize(() =>
-        {
-            // 초기화 성공한 경우 실행
-            if (Backend.IsInitialized)
-            {
-                var data = Backend.BMember.CustomLogin("LalDi", "Laldi_1305");
-
-                Debug.Log("초기화 완료");
-            }
-            // 초기화 실패한 경우 실행
-            else
-            {
-
-            }
-        });
-
-        Backend.Chart.GetAllChartAndSave(true);
-
         Year = 2000;
         Month = 01;
 
         Money = 5000000;
 
         DefaultSuccess = 70;
+
+        NowStep = Step.Select_Scenario;
     }
     
     public void Reset()

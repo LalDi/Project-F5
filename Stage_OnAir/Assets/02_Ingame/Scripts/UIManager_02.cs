@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Define;
+using BackEnd;
 
 public class UIManager_02 : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class UIManager_02 : MonoBehaviour
     [Header("Button")]
     public Button Btn_Progress;
 
+    public GameObject StepText;
+
     public enum PopupList
     {
         Option = 0, //  0
@@ -58,6 +61,23 @@ public class UIManager_02 : MonoBehaviour
 
     private void Start()
     {
+        Backend.Initialize(() =>
+        {
+            // 초기화 성공한 경우 실행
+            if (Backend.IsInitialized)
+            {
+                var data = Backend.BMember.CustomLogin("test2", "1234");
+
+                Debug.Log("초기화 완료");
+            }
+            // 초기화 실패한 경우 실행
+            else
+            {
+
+            }
+        });
+
+        Backend.Chart.GetAllChartAndSave(true); 
         SetProgress();
     }
 
@@ -70,6 +90,8 @@ public class UIManager_02 : MonoBehaviour
             Money.color = Color.black;
         Year.text = GameManager.Instance.Year.ToString("D2");
         Month.text = GameManager.Instance.Month.ToString("D2");
+
+        StepText.GetComponent<Text>().text = GameManager.Instance.NowStep.ToString();
 
         SetProgress();
 
@@ -210,13 +232,14 @@ public class UIManager_02 : MonoBehaviour
 
     public void SetProgress()
     {
-        GameManager.Step NowStep = GameManager.Step.Cast_Actor/* = GameManager.Instance.NowStep*/;
+        GameManager.Step NowStep = /*GameManager.Step.Select_Scenario*/GameManager.Instance.NowStep;
 
         switch (NowStep)
         {
             case GameManager.Step.Select_Scenario:
                 Progress = () =>
                 {
+                    ScenarioData.Instance.SetScenarioData();
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
                 break;
@@ -254,7 +277,6 @@ public class UIManager_02 : MonoBehaviour
         Btn_Progress.onClick.RemoveAllListeners();
         Btn_Progress.onClick.AddListener(delegate { Progress(); } );
     }
-
     public void Progress_Audition()
     {
         GameManager.Instance.CostMoney(AUDITION.AUDITION_PRICE);
@@ -265,5 +287,10 @@ public class UIManager_02 : MonoBehaviour
     {
 
         GameManager.Instance.SetStep(GameManager.Step.Prepare_Play);
+    }
+    public void Illuset_Scene()
+    {
+        ScenarioData.Instance.SetScenarioData();
+        LoadManager.Load(LoadManager.Scene.Illust);
     }
 }
