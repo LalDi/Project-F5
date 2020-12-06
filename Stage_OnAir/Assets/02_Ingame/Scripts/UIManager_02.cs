@@ -61,23 +61,6 @@ public class UIManager_02 : MonoBehaviour
 
     private void Start()
     {
-        Backend.Initialize(() =>
-        {
-            // 초기화 성공한 경우 실행
-            if (Backend.IsInitialized)
-            {
-                var data = Backend.BMember.CustomLogin("test2", "1234");
-
-                Debug.Log("초기화 완료");
-            }
-            // 초기화 실패한 경우 실행
-            else
-            {
-
-            }
-        });
-
-        Backend.Chart.GetAllChartAndSave(true); 
         SetProgress();
     }
 
@@ -91,7 +74,9 @@ public class UIManager_02 : MonoBehaviour
         Year.text = GameManager.Instance.Year.ToString("D2");
         Month.text = GameManager.Instance.Month.ToString("D2");
 
-        StepText.GetComponent<Text>().text = GameManager.Instance.NowStep.ToString();
+        StepText.GetComponent<Text>().text = GameManager.Instance.NowStep.ToString() + 
+            "\n" + GameManager.Instance.NowActor + 
+            " / " +  GameManager.Instance.MaxActor;
 
         SetProgress();
 

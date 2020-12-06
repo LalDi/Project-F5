@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
     public Scenario NowScenario { get; private set; }
     public bool[] ScenarioIllust = new bool[10];
 
-    // 오디션에서 고용한 배우들
+    // 오디션에서 고용된 배우들
     public List<Actor> Actors = new List<Actor>();
     //public Dictionary<string, StaffData> Staffs = new Dictionary<string, StaffData>();
 
@@ -78,7 +78,7 @@ public class GameManager : Singleton<GameManager>
         NowActor = 0;
         MaxActor = 0;
 
-        //Actors.Clear();
+        Actors.Clear();
         NowStep = Step.Select_Scenario;
     }
 
@@ -113,6 +113,10 @@ public class GameManager : Singleton<GameManager>
             // 이제, 이 수치가 DefaultSuccess에 가장 가깝게 조절한다. (성공률은 DefaultSuccess보다 항상 크게 책정된다.)
             // 1개월을 기준으로 변화치는 Success의 10%이다.
         }
+    }
+    public void SetMaxActor(int Num)
+    {
+        MaxActor = Num;
     }
     public void SetScenario(Scenario NextScenario)
     {
