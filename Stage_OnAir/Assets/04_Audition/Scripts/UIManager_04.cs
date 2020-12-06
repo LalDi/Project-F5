@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using BackEnd;
+using UnityEngine.UIElements;
 
 public class UIManager_04 : MonoBehaviour
 {
@@ -80,18 +80,24 @@ public class UIManager_04 : MonoBehaviour
 
     public void Result()
     {
-        for (int i = 0; i < PassActors.Count; i++)
+        float Width = 0;
+        for(int i = 0; i < PassActors.Count; i++)
         {
-            GameObject ActorProfile = Instantiate(ActorPrefab);
-            ActorProfile.transform.parent = Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0);
-            ActorProfile.transform.Find("Actor Name Text").GetComponent<Text>().text =
+            Width += 325;
+            Debug.Log(PassActors[i].Name);
+            PassActors[i].SetIsCasting(true);
+            GameManager.Instance.Actors.Add(PassActors[i]);
+
+            GameObject ActorData = Instantiate(ActorPrefab);
+            ActorData.transform.parent = Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0);
+            ActorData.transform.Find("Actor Name Text").GetComponent<Text>().text =
                 PassActors[i].Name;
             ActorData.Instance.ActorsList[PassActors[i].No].SetIsCasting(true);
             GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
             GameManager.Instance.PlusNowActor();
         }
-        Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0).GetComponent<RectTransform>().sizeDelta =
-            new Vector2(PassActors.Count * 325, 450);
+        Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0).
+            GetComponent<RectTransform>().sizeDelta = new Vector2(Width, 940.4614f);
     }
 
     public void Out_BT()
@@ -106,6 +112,7 @@ public class UIManager_04 : MonoBehaviour
 
     public void To_Ingame()
     {
+        GameManager.Instance.SetStep(GameManager.Step.Set_Period);
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
     }

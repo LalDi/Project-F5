@@ -151,7 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultSuccess: 0
-  ScenarioIllust: 00000000000000000000
+  OnBGM: 0
+  OnSFX: 0
+  OnPush: 0
 --- !u!4 &13718733
 Transform:
   m_ObjectHideFlags: 0
@@ -476,7 +478,18 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: SetSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &79652185
 GameObject:
@@ -791,7 +804,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323838446}
-        m_MethodName: Illuset_Scene
+        m_MethodName: Click_Illust
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1420,9 +1433,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe8c22150620e242bb26f98a15e1d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: {fileID: 1430924148}
-  Year: {fileID: 915305337}
-  Month: {fileID: 1254395695}
+  Text_Money: {fileID: 1430924148}
+  Text_Year: {fileID: 915305337}
+  Text_Month: {fileID: 1254395695}
   Popup_Black: {fileID: 955855585}
   Popup_Option: {fileID: 8769250834073277990}
   Popup_Rank: {fileID: 1001504375}
@@ -1438,6 +1451,13 @@ MonoBehaviour:
   Popup_Staff: {fileID: 1831077862}
   Popup_StaffUp: {fileID: 756484412}
   Popup_Shop: {fileID: 451664751}
+  Text_Period: {fileID: 408018758}
+  Text_Success: {fileID: 1275132721}
+  BGM: {fileID: 1010420230}
+  SFX: {fileID: 77413166}
+  Push: {fileID: 502677093}
+  Nickname: {fileID: 8769250834316065589}
+  DefaultSuccess: {fileID: 8769250835876037424}
   Btn_Progress: {fileID: 874340410}
   StepText: {fileID: 379915168}
 --- !u!4 &323838447
@@ -1851,7 +1871,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 822b552927d3672479c25510b26eec67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42c9bbf602fc54244926c5d77f92b37d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2810,7 +2830,18 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: SetPush
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &512965800
 GameObject:
@@ -5318,8 +5349,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 79.91004, y: -57.1}
-  m_SizeDelta: {x: 140.17993, y: 24.646545}
+  m_AnchoredPosition: {x: 78.45002, y: -63}
+  m_SizeDelta: {x: 143.1, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &915305336
 CanvasRenderer:
@@ -6563,7 +6594,18 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: SetBGM
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1025703192
 GameObject:
@@ -7179,12 +7221,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323838446}
-        m_MethodName: Period_Plus
-        m_Mode: 1
+        m_MethodName: Click_Period
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7615,7 +7657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e4551399c26ed5e4380ce170a86965fc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 15e9db09768e21f47a473a7fd0881b56, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7793,12 +7835,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323838446}
-        m_MethodName: Period_Minus
-        m_Mode: 1
+        m_MethodName: Click_Period
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: -1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8671,7 +8713,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b2a64afcf3e4d3040937851f3fcf8862, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2080c03faa60bd14e81098f6e66a13b6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14887,7 +14929,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8769250834302419670}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: Regulate_DefaultSuccess
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8769250834302419667
 GameObject:
   m_ObjectHideFlags: 0
@@ -15253,7 +15306,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8769250834434852509}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 323838446}
+        m_MethodName: Regulate_DefaultSuccess
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8769250834434852509
 MonoBehaviour:
   m_ObjectHideFlags: 0
