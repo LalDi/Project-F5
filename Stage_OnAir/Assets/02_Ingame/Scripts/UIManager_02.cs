@@ -6,7 +6,6 @@ using DG.Tweening;
 using BackEnd;
 using LitJson;
 using Define;
-using BackEnd;
 
 public class UIManager_02 : MonoBehaviour
 {
@@ -57,6 +56,12 @@ public class UIManager_02 : MonoBehaviour
     [Header("Button")]
     public Button Btn_Progress;
 
+    [Header("Error")]
+    public GameObject Popup_Error;
+    public Text Error_Text;
+    private string Error_Message;
+
+    [Space(20)]
     public GameObject StepText;
 
     public enum PopupList
@@ -74,7 +79,8 @@ public class UIManager_02 : MonoBehaviour
         Play,       //  10
         Staff,      //  11
         StaffUp,    //  12
-        Shop        //  13
+        Shop,       //  13
+        Error       //  14
     }
 
     public delegate void ProgressDel();
@@ -242,6 +248,10 @@ public class UIManager_02 : MonoBehaviour
             case PopupList.Shop:
                 Popup_Shop.SetActive(true);
                 break;
+            case PopupList.Error:
+                Error_Text.text = Error_Message;
+                Popup_Error.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -267,6 +277,8 @@ public class UIManager_02 : MonoBehaviour
         Popup_Staff.SetActive(false);
         Popup_StaffUp.SetActive(false);
         Popup_Shop.SetActive(false);
+
+        Popup_Error.SetActive(false);
     }
 
     public void Popup_Quit(int Popup)
@@ -317,9 +329,19 @@ public class UIManager_02 : MonoBehaviour
             case PopupList.Shop:
                 Popup_Shop.SetActive(false);
                 break;
+            case PopupList.Error:
+                Popup_Error.SetActive(false);
+                break;
             default:
                 break;
         }
+    }
+
+    public void Control_Error(bool Open)
+    {
+        Popup_Black.SetActive(Open);
+        Popup_Error.SetActive(Open);
+        Error_Text.text = Error_Message;
     }
     #endregion
 
@@ -348,6 +370,7 @@ public class UIManager_02 : MonoBehaviour
                 {
                     Popup_On((int)PopupList.Period);
                     GameManager.Instance.SetDefaultPeriod();
+                    Set_Period_Text();
                 };
                 break;
             case GameManager.Step.Prepare_Play:
@@ -382,7 +405,7 @@ public class UIManager_02 : MonoBehaviour
         GameManager.Instance.SetPeriod();
         SetProgress();
         CountMonth = 0;
-        StartPrepare();
+        StartCoroutine(StartPrepare());
         Popup_Quit();
     }
     #endregion
@@ -430,6 +453,8 @@ public class UIManager_02 : MonoBehaviour
         SFX.isOn = GameManager.Instance.OnSFX;
         Push.isOn = GameManager.Instance.OnPush;
 
+        Nickname.text = Backend.BMember.GetUserInfo().GetReturnValuetoJSON()["row"]["nickname"].ToString();
+
         DefaultSuccess.text = GameManager.Instance.DefaultSuccess.ToString() + "%";
     }
 
@@ -450,6 +475,36 @@ public class UIManager_02 : MonoBehaviour
 
     public void SaveData()
     {
+
+    }
+
+    public void ChangeNickname()
+    {
+        BackendReturnObject bro = Backend.BMember.CheckNicknameDuplication(Nickname.text);
+
+        switch (bro.GetStatusCode())
+        {
+            case "204":
+                Backend.BMember.UpdateNickname(Nickname.text);
+                break;
+            case "400":
+                switch (bro.GetErrorCode())
+                {
+                    case "UndefinedParameterException":
+                        Error_Message = ERROR_MESSAGE.SETNICK_EMPTY;
+                        Control_Error(true);
+                        break;
+                    case "BadParameterException":
+                        Error_Message = ERROR_MESSAGE.SETNICK_BAD;
+                        Control_Error(true);
+                        break;
+                }
+                break;
+            case "409":
+                Error_Message = ERROR_MESSAGE.SETNICK_DUPLICATE;
+                Control_Error(true);
+                break;
+        }
 
     }
 
