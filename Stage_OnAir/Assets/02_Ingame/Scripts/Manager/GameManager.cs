@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Define;
 using BackEnd;
+using LitJson;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -38,6 +39,8 @@ public class GameManager : Singleton<GameManager>
     public bool OnSFX;
     public bool OnPush;
 
+    // 랭킹
+
     //시나리오
     public Scenario NowScenario { get; private set; }
 
@@ -59,9 +62,12 @@ public class GameManager : Singleton<GameManager>
             // 초기화 성공한 경우 실행
             if (Backend.IsInitialized)
             {
-                var data = Backend.BMember.CustomLogin("LalDi", "Laldi_1305");
-
                 Debug.Log("초기화 완료");
+
+                // 게임 디버깅 및 테스트를 위한 임시 로그인
+                var data = Backend.BMember.CustomLogin("jungjh0513", "1234");
+                Debug.Log("로그인 완료");
+
             }
             // 초기화 실패한 경우 실행
             else
@@ -69,7 +75,6 @@ public class GameManager : Singleton<GameManager>
 
             }
         });
-
         //Backend.Chart.GetAllChartAndSave(true);
 
         Year = 2000;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using BackEnd;
+using LitJson;
 using Define;
 
 public class UIManager_02 : MonoBehaviour
@@ -43,6 +45,14 @@ public class UIManager_02 : MonoBehaviour
     public InputField Nickname;
     public Text DefaultSuccess;
 
+    [Header("Ranking")]
+    public Text Text_MyRank;
+    public GameObject Ranks;
+    public GameObject Rank_Button;
+    public Toggle[] Rank_Toggle = new Toggle[3];
+
+    RANKING.RANK NowRank = RANKING.RANK.QUALITY;
+
     [Header("Button")]
     public Button Btn_Progress;
 
@@ -69,6 +79,7 @@ public class UIManager_02 : MonoBehaviour
 
     private int CountMonth = 0;
 
+
     private void Start()
     {
         SetProgress();
@@ -92,6 +103,84 @@ public class UIManager_02 : MonoBehaviour
 
     }
 
+    #region Rank
+    public void SetRankKind(int Code)
+    {
+        NowRank = (RANKING.RANK)Code;
+        for (int i = 0; i < Ranks.transform.childCount; i++)
+        {
+            Ranks.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            RectTransform trans = Rank_Toggle[i].gameObject.GetComponent<RectTransform>();
+            RectTransform back = Rank_Toggle[i].transform.Find("Background").GetComponent<RectTransform>();
+
+            if (Rank_Toggle[i].isOn)
+            {
+                trans.sizeDelta = RANKING.SELECT_BT;
+                back.sizeDelta = RANKING.SELECT_BT;
+            }
+            else
+            {
+                trans.sizeDelta = RANKING.NONSELECT_BT;
+                back.sizeDelta = RANKING.NONSELECT_BT;
+            }
+        }
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)Rank_Button.transform);
+        SetRank();
+    }
+
+    public void SetRank()
+    {
+        JsonData Rank = new JsonData();
+        JsonData MyRank = new JsonData();
+
+        switch (NowRank)
+        {
+            case RANKING.RANK.QUALITY:
+                Rank = Backend.Rank.GetRankByUuid(RANKING.QUALITY_UUID).GetReturnValuetoJSON()["rows"];
+                MyRank = Backend.Rank.GetMyRank(RANKING.QUALITY_UUID).GetReturnValuetoJSON()["rows"];
+                break;
+            case RANKING.RANK.AUDIENCE:
+                Rank = Backend.Rank.GetRankByUuid(RANKING.AUDIENCE_UUID).GetReturnValuetoJSON()["rows"];
+                MyRank = Backend.Rank.GetMyRank(RANKING.AUDIENCE_UUID).GetReturnValuetoJSON()["rows"];
+                break;
+            case RANKING.RANK.PROFIT:
+                Rank = Backend.Rank.GetRankByUuid(RANKING.PROFIT_UUID).GetReturnValuetoJSON()["rows"];
+                MyRank = Backend.Rank.GetMyRank(RANKING.PROFIT_UUID).GetReturnValuetoJSON()["rows"];
+                break;
+        }
+
+        int Count;
+
+        if (Rank.Count >= 50)
+            Count = 50;
+        else
+            Count = Rank.Count;
+
+        for (int i = 0; i < Count; i++)
+        {
+            GameObject Text = ObjManager.SpawnPool("RankText", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            string rank = int.Parse(Rank[i]["rank"]["N"].ToString()).ToString("D2");
+            string nickname = Rank[i]["nickname"]["S"].ToString();
+            string score = Rank[i]["score"]["N"].ToString();
+
+            Text.GetComponent<RectTransform>().localScale = Vector3.one;
+            Text.GetComponent<Text>().text = rank + "." + nickname + " : " + score;
+        }
+
+        string Myrank = int.Parse(MyRank[0]["rank"]["N"].ToString()).ToString("D2");
+        string Mynickname = MyRank[0]["nickname"]["S"].ToString();
+        string Myscore = MyRank[0]["score"]["N"].ToString();
+
+        Text_MyRank.text = Myrank + "." + Mynickname + " : " + Myscore;
+    }
+
+    #endregion
+
     #region Popup
     public void Popup_On(int Popup)
     {
@@ -107,6 +196,7 @@ public class UIManager_02 : MonoBehaviour
                 OnOption();
                 break;
             case PopupList.Rank:
+                SetRankKind((int)RANKING.RANK.QUALITY);
                 Popup_Rank.SetActive(true);
                 break;
             case PopupList.Audition:
