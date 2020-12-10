@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using BackEnd;
 
 public class UIManager_01 : MonoBehaviour
@@ -20,6 +19,10 @@ public class UIManager_01 : MonoBehaviour
 
     public void To_Ingame()
     {
+        Backend.Chart.GetAllChartAndSave(true);
+        ScenarioData.Instance.SetScenarioData();
+        ActorData.Instance.SetActorsData();
+
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
     }

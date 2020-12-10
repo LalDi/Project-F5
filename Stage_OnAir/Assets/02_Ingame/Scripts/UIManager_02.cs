@@ -243,7 +243,7 @@ public class UIManager_02 : MonoBehaviour
             case GameManager.Step.Select_Scenario:
                 Progress = () =>
                 {
-                    ScenarioData.Instance.SetScenarioData();
+                    //ScenarioData.Instance.SetScenarioData();
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
                 break;
@@ -293,6 +293,7 @@ public class UIManager_02 : MonoBehaviour
         SetProgress();
         CountMonth = 0;
         StartPrepare();
+        Popup_Quit();
     }
     #endregion
 

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Define;
 using BackEnd;
-using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -61,18 +60,18 @@ public class GameManager : Singleton<GameManager>
             // 초기화 성공한 경우 실행
             if (Backend.IsInitialized)
             {
-                var data = Backend.BMember.CustomLogin("LalDi", "Laldi_1305");
-
+                //var data = Backend.BMember.CustomLogin("test2", "1234");
+        
                 Debug.Log("초기화 완료");
             }
             // 초기화 실패한 경우 실행
             else
             {
-
+        
             }
         });
 
-        Backend.Chart.GetAllChartAndSave(true);
+        //Backend.Chart.GetAllChartAndSave(true);
 
         Year = 2000;
         Month = 01;
