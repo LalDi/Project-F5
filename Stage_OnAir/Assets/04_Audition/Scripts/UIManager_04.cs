@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 
 public class UIManager_04 : MonoBehaviour
@@ -13,6 +12,8 @@ public class UIManager_04 : MonoBehaviour
     public GameObject Popup_Result;
     public GameObject Count;
     public GameObject Profile;
+
+    public SpriteRenderer Character;
 
     public List<Actor> PprActors = null;
     public List<Actor> PassActors = new List<Actor>();
@@ -45,13 +46,15 @@ public class UIManager_04 : MonoBehaviour
         }
         else if (ActorCount <= MaxActor)
         {
-            Count.transform.Find("Count Text").GetComponent<Text>().text =
+            Count.GetComponent<Text>().text =
                 ActorCount.ToString() + " / " + MaxActor;
-            Profile.transform.Find("Profile Name Text").GetComponent<Text>().text = PprActors[ActorCount - 1].Name;
-            Profile.transform.Find("Profile Stats Text").GetComponent<Text>().text =
+            Profile.transform.GetChild(0).GetComponent<Text>().text = PprActors[ActorCount - 1].Name;
+            Profile.transform.GetChild(1).GetComponent<Text>().text =
                 "연기력 : " + PprActors[ActorCount - 1].Acting + "\n" +
                 "경험 : " + PprActors[ActorCount - 1].Experience + "\n" +
                 "가격 : " + PprActors[ActorCount - 1].Price.ToString();
+            Profile.transform.GetChild(5).GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].No];
+            Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].No];
         }
         else
         {
@@ -73,8 +76,10 @@ public class UIManager_04 : MonoBehaviour
 
             GameObject ActorObj = Instantiate(ActorPrefab);
             ActorObj.transform.parent = Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0);
-            ActorObj.transform.Find("Actor Name Text").GetComponent<Text>().text =
+            ActorObj.transform.GetChild(1).GetComponent<Text>().text =
                 PassActors[i].Name;
+            ActorObj.transform.GetChild(0).GetComponent<Image>().sprite = 
+                ActorData.Instance.ActorProfileImage[PassActors[i].No];
             ActorData.Instance.ActorsList[PassActors[i].No].SetIsCasting(true);
             GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
             GameManager.Instance.PlusNowActor();
