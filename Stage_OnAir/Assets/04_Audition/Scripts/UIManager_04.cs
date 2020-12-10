@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+
 
 public class UIManager_04 : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class UIManager_04 : MonoBehaviour
     public GameObject Count;
     public GameObject Profile;
 
+    public SpriteRenderer Character;
+
     public List<Actor> PprActors = null;
     public List<Actor> PassActors = new List<Actor>();
 
@@ -22,30 +24,12 @@ public class UIManager_04 : MonoBehaviour
     //오디션 보는 배우 수 (한명에서 7명정도)
     void Start()
     {
-        //Backend.Initialize(() =>
-        //{
-        //    // 초기화 성공한 경우 실행
-        //    if (Backend.IsInitialized)
-        //    {
-        //        var data = Backend.BMember.CustomLogin("test2", "1234");
-
-        //        Debug.Log("초기화 완료");
-        //    }
-        //    // 초기화 실패한 경우 실행
-        //    else
-        //    {
-
-        //    }
-        //});
-
-        //Backend.Chart.GetAllChartAndSave(true);
-
         Popup_Balck.SetActive(false);
         Popup_Result.SetActive(false);
 
         ActorCount = 0;
         //MaxActor = Random.Range(1, GameManager.Instance.MaxActor - GameManager.Instance.NowActor);
-        MaxActor = Random.Range(1, 7);
+        MaxActor = Random.Range(1, 8 - GameManager.Instance.NowActor);
 
         PprActors = ActorData.Instance.RandomActors(MaxActor);
         Reroad_ActorProfile();
@@ -62,13 +46,15 @@ public class UIManager_04 : MonoBehaviour
         }
         else if (ActorCount <= MaxActor)
         {
-            Count.transform.Find("Count Text").GetComponent<Text>().text =
+            Count.GetComponent<Text>().text =
                 ActorCount.ToString() + " / " + MaxActor;
-            Profile.transform.Find("Profile Name Text").GetComponent<Text>().text = PprActors[ActorCount - 1].Name;
-            Profile.transform.Find("Profile Stats Text").GetComponent<Text>().text =
+            Profile.transform.GetChild(0).GetComponent<Text>().text = PprActors[ActorCount - 1].Name;
+            Profile.transform.GetChild(1).GetComponent<Text>().text =
                 "연기력 : " + PprActors[ActorCount - 1].Acting + "\n" +
                 "경험 : " + PprActors[ActorCount - 1].Experience + "\n" +
                 "가격 : " + PprActors[ActorCount - 1].Price.ToString();
+            Profile.transform.GetChild(5).GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].No];
+            Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].No];
         }
         else
         {
@@ -88,10 +74,12 @@ public class UIManager_04 : MonoBehaviour
             PassActors[i].SetIsCasting(true);
             GameManager.Instance.Actors.Add(PassActors[i]);
 
-            GameObject ActorData = Instantiate(ActorPrefab);
-            ActorData.transform.parent = Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0);
-            ActorData.transform.Find("Actor Name Text").GetComponent<Text>().text =
+            GameObject ActorObj = Instantiate(ActorPrefab);
+            ActorObj.transform.parent = Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0);
+            ActorObj.transform.GetChild(1).GetComponent<Text>().text =
                 PassActors[i].Name;
+            ActorObj.transform.GetChild(0).GetComponent<Image>().sprite = 
+                ActorData.Instance.ActorProfileImage[PassActors[i].No];
             ActorData.Instance.ActorsList[PassActors[i].No].SetIsCasting(true);
             GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
             GameManager.Instance.PlusNowActor();
@@ -112,7 +100,6 @@ public class UIManager_04 : MonoBehaviour
 
     public void To_Ingame()
     {
-        GameManager.Instance.SetStep(GameManager.Step.Set_Period);
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
     }

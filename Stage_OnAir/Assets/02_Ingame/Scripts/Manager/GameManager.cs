@@ -64,6 +64,7 @@ public class GameManager : Singleton<GameManager>
             // 초기화 성공한 경우 실행
             if (Backend.IsInitialized)
             {
+                //var data = Backend.BMember.CustomLogin("test2", "1234");
                 Debug.Log("초기화 완료");
 
                 // 게임 디버깅 및 테스트를 위한 임시 로그인
@@ -74,11 +75,11 @@ public class GameManager : Singleton<GameManager>
             // 초기화 실패한 경우 실행
             else
             {
-
+        
             }
         });
 
-        Backend.Chart.GetAllChartAndSave(true);
+        //Backend.Chart.GetAllChartAndSave(true);
 
         Year = 2000;
         Month = 01;

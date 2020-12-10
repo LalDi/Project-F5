@@ -55,6 +55,8 @@ public class Actor
 public class ActorData : Singleton<ActorData>
 {
     public List<Actor> ActorsList = new List<Actor>();
+    public List<Sprite> ActorImage = new List<Sprite>();
+    public List<Sprite> ActorProfileImage = new List<Sprite>();
 
     /**
      *  @Func    SetActorsData()

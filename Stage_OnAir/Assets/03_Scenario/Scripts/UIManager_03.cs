@@ -41,6 +41,7 @@ public class UIManager_03 : MonoBehaviour
                 Scroll.transform.GetChild(i).GetChild(0).GetComponent<Text>().text =
                     ScenarioData.Instance.ScenarioList[i].Name;
                 Scroll.transform.GetChild(i).gameObject.SetActive(true);
+            //ObjManager.SpawnPool("Scenario", )
             }
         Scroll.GetComponent<RectTransform>().sizeDelta =
             new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 310 + 100);
@@ -92,7 +93,6 @@ public class UIManager_03 : MonoBehaviour
     public void Buy_Scenario()
     {
         GameManager.Instance.SetStep(GameManager.Step.Cast_Actor);
-        ActorData.Instance.SetActorsData();
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
     }

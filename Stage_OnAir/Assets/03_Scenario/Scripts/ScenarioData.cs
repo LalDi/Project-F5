@@ -33,6 +33,7 @@ public class ScenarioData : Singleton<ScenarioData>
 
     public void SetScenarioData()
     {
+        Debug.Log("시나리오 초기화");
         JsonData ChartJson = JsonMapper.ToObject(Backend.Chart.GetLocalChartData("Scenario"));
         var rows = ChartJson["rows"];
         ScenarioList.Clear();

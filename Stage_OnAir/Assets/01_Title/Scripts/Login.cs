@@ -46,6 +46,9 @@ public class Login : MonoBehaviour
         switch (Login.GetStatusCode())
         {
             case "200":
+                Backend.Chart.GetAllChartAndSave(true);
+                ScenarioData.Instance.SetScenarioData();
+                ActorData.Instance.SetActorsData();
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "400":
@@ -115,6 +118,9 @@ public class Login : MonoBehaviour
         switch (Nickname.GetStatusCode())
         {
             case "204":
+                Backend.Chart.GetAllChartAndSave(true);
+                ScenarioData.Instance.SetScenarioData();
+                ActorData.Instance.SetActorsData();
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "400":
