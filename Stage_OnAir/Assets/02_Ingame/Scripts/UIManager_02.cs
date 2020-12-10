@@ -14,6 +14,10 @@ public class UIManager_02 : MonoBehaviour
     public Text Text_Year;
     public Text Text_Month;
 
+    [Header("Bottom UI")]
+    public Image Buttom_Progress;
+    public Sprite[] Image_Progress = new Sprite[4];
+
     [Header("Popup UI")]
     public GameObject Popup_Black;
     [Space(10)]
@@ -358,12 +362,14 @@ public class UIManager_02 : MonoBehaviour
                     //ScenarioData.Instance.SetScenarioData();
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
+                Buttom_Progress.sprite = Image_Progress[0];
                 break;
             case GameManager.Step.Cast_Actor:
                 Progress = () =>
                 {
                     Popup_On((int)PopupList.Audition);
                 };
+                Buttom_Progress.sprite = Image_Progress[1];
                 break;
             case GameManager.Step.Set_Period:
                 Progress = () =>
@@ -372,6 +378,7 @@ public class UIManager_02 : MonoBehaviour
                     GameManager.Instance.SetDefaultPeriod();
                     Set_Period_Text();
                 };
+                Buttom_Progress.sprite = Image_Progress[2];
                 break;
             case GameManager.Step.Prepare_Play:
                 Progress = () =>
@@ -379,6 +386,7 @@ public class UIManager_02 : MonoBehaviour
                     Popup_On((int)PopupList.Prepare);
                     Popup_Prepare.transform.Find("Play BT").GetComponent<Button>().interactable = false;
                 };
+                Buttom_Progress.sprite = Image_Progress[3];
                 break;
             case GameManager.Step.Start_Play:
                 Progress = () =>
