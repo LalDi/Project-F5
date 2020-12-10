@@ -31,12 +31,10 @@ public class UIManager_03 : MonoBehaviour
         Popup_Warning.SetActive(false);
         Popup_Buy_Checking.SetActive(false);
     }
-    void Update()
+
+    void Start()
     {
-        if (ScenarioData.Instance.ScenarioList.Count == 0)
-        {
-            ScenarioData.Instance.SetScenarioData();
-            for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
+        for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
             {
                 Scroll.transform.GetChild(i).GetComponent<ScenarioScript>().ScenarioData =
                     ScenarioData.Instance.ScenarioList[i];
@@ -44,11 +42,9 @@ public class UIManager_03 : MonoBehaviour
                     ScenarioData.Instance.ScenarioList[i].Name;
                 Scroll.transform.GetChild(i).gameObject.SetActive(true);
             }
-            Scroll.GetComponent<RectTransform>().sizeDelta = 
-                new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 310 + 100);
-        }
+        Scroll.GetComponent<RectTransform>().sizeDelta =
+            new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 310 + 100);
     }
-
     public void Popup_Scenario()
     {
         Data = EventSystem.current.currentSelectedGameObject.transform.
@@ -79,8 +75,8 @@ public class UIManager_03 : MonoBehaviour
                 "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> " +
                 (GameManager.Instance.Money - Data.Price).ToString("N0");
             GameManager.Instance.SetScenario(Data);
-            GameManager.Instance.CostMoney(
-                Data.Price, true);
+            GameManager.Instance.CostMoney(Data.Price, true);
+            GameManager.Instance.SetMaxActor(Data.Actors);
             Popup_Buy_Checking.SetActive(true);
         }
         else
@@ -96,6 +92,7 @@ public class UIManager_03 : MonoBehaviour
     public void Buy_Scenario()
     {
         GameManager.Instance.SetStep(GameManager.Step.Cast_Actor);
+        ActorData.Instance.SetActorsData();
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
     }

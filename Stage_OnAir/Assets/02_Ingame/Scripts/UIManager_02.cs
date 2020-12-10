@@ -6,6 +6,7 @@ using DG.Tweening;
 using BackEnd;
 using LitJson;
 using Define;
+using BackEnd;
 
 public class UIManager_02 : MonoBehaviour
 {
@@ -56,6 +57,8 @@ public class UIManager_02 : MonoBehaviour
     [Header("Button")]
     public Button Btn_Progress;
 
+    public GameObject StepText;
+
     public enum PopupList
     {
         Option = 0, //  0
@@ -98,6 +101,10 @@ public class UIManager_02 : MonoBehaviour
             Text_Money.color = Color.black;
         Text_Year.text = GameManager.Instance.Year.ToString("D2");
         Text_Month.text = GameManager.Instance.Month.ToString("D2");
+
+        StepText.GetComponent<Text>().text = GameManager.Instance.NowStep.ToString() + 
+            "\n" + GameManager.Instance.NowActor + 
+            " / " +  GameManager.Instance.MaxActor;
 
         SetProgress();
 
@@ -319,13 +326,14 @@ public class UIManager_02 : MonoBehaviour
     #region Progress
     public void SetProgress()
     {
-        GameManager.Step NowStep = GameManager.Step.Cast_Actor/* = GameManager.Instance.NowStep*/;
+        GameManager.Step NowStep = /*GameManager.Step.Select_Scenario*/GameManager.Instance.NowStep;
 
         switch (NowStep)
         {
             case GameManager.Step.Select_Scenario:
                 Progress = () =>
                 {
+                    ScenarioData.Instance.SetScenarioData();
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
                 break;
@@ -363,7 +371,6 @@ public class UIManager_02 : MonoBehaviour
         Btn_Progress.onClick.RemoveAllListeners();
         Btn_Progress.onClick.AddListener(delegate { Progress(); } );
     }
-
     public void Progress_Audition()
     {
         GameManager.Instance.CostMoney(AUDITION.AUDITION_PRICE);
@@ -463,5 +470,4 @@ public class UIManager_02 : MonoBehaviour
     {
         LoadManager.Load(LoadManager.Scene.Illust);
     }
-
 }

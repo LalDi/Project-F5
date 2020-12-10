@@ -2,25 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+using BackEnd;
 
 public class UIManager_01 : MonoBehaviour
 {
-    public GameObject ttsText;
-
     public GameObject Popup_Black;
     public GameObject Popup_LogIn;
     public GameObject Popup_SignUp;
 
-    TouchScreenKeyboard Keyboard;
-
     void Start()
     {
-        //ActorData.Instance.SetActorsData();
-        //ttsText.transform.DOScaleX(1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutQuad);
         Popup_Black.SetActive(false);
         Popup_LogIn.SetActive(false);
         Popup_SignUp.SetActive(false);
+
     }
 
     public void To_Ingame()

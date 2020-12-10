@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Define;
 using BackEnd;
 using LitJson;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -43,8 +44,9 @@ public class GameManager : Singleton<GameManager>
 
     //시나리오
     public Scenario NowScenario { get; private set; }
+    public bool[] ScenarioIllust = new bool[10];
 
-    // 오디션에서 고용한 배우들
+    // 오디션에서 고용된 배우들
     public List<Actor> Actors = new List<Actor>();
     //public Dictionary<string, StaffData> Staffs = new Dictionary<string, StaffData>();
 
@@ -75,14 +77,15 @@ public class GameManager : Singleton<GameManager>
 
             }
         });
-        //Backend.Chart.GetAllChartAndSave(true);
+
+        Backend.Chart.GetAllChartAndSave(true);
 
         Year = 2000;
         Month = 01;
 
         Money = 5000000;
 
-        DefaultSuccess = 60;
+        DefaultSuccess = 70;
     }
     
     public void Reset()
@@ -100,7 +103,7 @@ public class GameManager : Singleton<GameManager>
         NowActor = 0;
         MaxActor = 0;
 
-        //Actors.Clear();
+        Actors.Clear();
         NowStep = Step.Select_Scenario;
     }
 
@@ -165,6 +168,10 @@ public class GameManager : Singleton<GameManager>
         float temp = Success * 0.1f;
 
         return Success + (temp * (Period - 6));
+    }
+    public void SetMaxActor(int Num)
+    {
+        MaxActor = Num;
     }
     public void SetScenario(Scenario NextScenario)
     {
