@@ -70,12 +70,11 @@ public class UIManager_04 : MonoBehaviour
         for(int i = 0; i < PassActors.Count; i++)
         {
             Width += 325;
-            Debug.Log(PassActors[i].Name);
             PassActors[i].SetIsCasting(true);
             GameManager.Instance.Actors.Add(PassActors[i]);
 
             GameObject ActorObj = Instantiate(ActorPrefab);
-            ActorObj.transform.parent = Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0);
+            ActorObj.transform.SetParent(Popup_Result.transform.GetChild(2).GetChild(0));
             ActorObj.transform.GetChild(1).GetComponent<Text>().text =
                 PassActors[i].Name;
             ActorObj.transform.GetChild(0).GetComponent<Image>().sprite = 
@@ -84,7 +83,7 @@ public class UIManager_04 : MonoBehaviour
             GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
             GameManager.Instance.PlusNowActor();
         }
-        Popup_Result.transform.Find("Scroll Rect Mask").GetChild(0).
+        Popup_Result.transform.GetChild(2).GetChild(0).
             GetComponent<RectTransform>().sizeDelta = new Vector2(Width, 940.4614f);
     }
 
