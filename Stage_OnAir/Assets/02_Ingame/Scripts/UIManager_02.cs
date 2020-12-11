@@ -58,7 +58,12 @@ public class UIManager_02 : MonoBehaviour
     RANKING.RANK NowRank = RANKING.RANK.QUALITY;
 
     [Header("Button")]
-    public Button Btn_Progress;
+    public GameObject Btn_Progress;
+
+    public List<Sprite> Progress_Btn_Sprites;
+
+    [Header("BG")]
+    public List<GameObject> Backgrounds;
 
     [Header("Error")]
     public GameObject Popup_Error;
@@ -359,7 +364,6 @@ public class UIManager_02 : MonoBehaviour
             case GameManager.Step.Select_Scenario:
                 Progress = () =>
                 {
-                    //ScenarioData.Instance.SetScenarioData();
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
                 Buttom_Progress.sprite = Image_Progress[0];
@@ -394,20 +398,22 @@ public class UIManager_02 : MonoBehaviour
                     Popup_On((int)PopupList.Prepare);
                     Popup_Prepare.transform.Find("Play BT").GetComponent<Button>().interactable = true;
                 };
+                Btn_Progress.GetComponent<Image>().sprite = Progress_Btn_Sprites[3];
+                Backgrounds[1].SetActive(false);
+                Backgrounds[2].SetActive(true);
                 break;
             default:
                 break;
         }
 
-        Btn_Progress.onClick.RemoveAllListeners();
-        Btn_Progress.onClick.AddListener(delegate { Progress(); } );
+        Btn_Progress.GetComponent<Button>().onClick.RemoveAllListeners();
+        Btn_Progress.GetComponent<Button>().onClick.AddListener(delegate { Progress(); } );
     }
     public void Progress_Audition()
     {
         GameManager.Instance.CostMoney(AUDITION.AUDITION_PRICE);
         LoadManager.Load(LoadManager.Scene.Audition);
     }
-
     public void Progress_Period()
     {
         GameManager.Instance.SetPeriod();
@@ -415,6 +421,14 @@ public class UIManager_02 : MonoBehaviour
         CountMonth = 0;
         StartCoroutine(StartPrepare());
         Popup_Quit();
+    }
+    public void Progress_Play()
+    {
+        LoadManager.Load(LoadManager.Scene.Play);
+    }
+    public void Progress_Illust()
+    {
+        LoadManager.Load(LoadManager.Scene.Illust);
     }
     #endregion
 
@@ -529,9 +543,4 @@ public class UIManager_02 : MonoBehaviour
         DefaultSuccess.text = GameManager.Instance.DefaultSuccess.ToString() + "%";
     }
     #endregion
-
-    public void Click_Illust()
-    {
-        LoadManager.Load(LoadManager.Scene.Illust);
-    }
 }
