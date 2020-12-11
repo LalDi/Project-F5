@@ -68,7 +68,7 @@ public class GameManager : Singleton<GameManager>
                 Debug.Log("초기화 완료");
 
                 // 게임 디버깅 및 테스트를 위한 임시 로그인
-                var data = Backend.BMember.CustomLogin("jungjh0513", "1234");
+                var data = Backend.BMember.CustomLogin("yejun", "qwer");
                 Debug.Log("로그인 완료");
 
             }

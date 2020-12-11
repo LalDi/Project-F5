@@ -16,6 +16,10 @@ public class UIManager_05 : MonoBehaviour
 
     public GameObject BlackBG;
     public GameObject ResultPU;
+
+    public SpriteRenderer Character1;
+    public SpriteRenderer Character2;
+
     void Start()
     {
         //시나리오에 맞는 배경 켜기
@@ -25,7 +29,10 @@ public class UIManager_05 : MonoBehaviour
         }
         Backgrounds[GameManager.Instance.NowScenario.No - 1].SetActive(true);
 
-        Light.GetComponent<SpriteRenderer>().DOFade(0, 5).SetLoops(-1, LoopType.Yoyo);
+        Light.GetComponent<SpriteRenderer>().DOFade(0, 2).SetLoops(-1, LoopType.Yoyo);
+
+        Character1.sprite = ActorData.Instance.ActorImage[GameManager.Instance.Actors[1].No];
+        Character2.sprite = ActorData.Instance.ActorImage[GameManager.Instance.Actors[2].No];
 
         StartCoroutine(StartDelay());
     }

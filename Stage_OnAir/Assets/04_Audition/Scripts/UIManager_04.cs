@@ -70,6 +70,9 @@ public class UIManager_04 : MonoBehaviour
         for(int i = 0; i < PassActors.Count; i++)
         {
             Width += 325;
+
+            Debug.Log(PassActors[i].Name);
+
             PassActors[i].SetIsCasting(true);
             GameManager.Instance.Actors.Add(PassActors[i]);
 
