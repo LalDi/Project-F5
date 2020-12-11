@@ -3578,7 +3578,7 @@ MonoBehaviour:
     size: 5
     prefab: {fileID: 8516266845261856600, guid: f9b53a0d6b78f4c4a9d753b01c71b3b7,
       type: 3}
-    parentObj: {fileID: 0}
+    parentObj: {fileID: 262586536}
 --- !u!4 &527778727
 Transform:
   m_ObjectHideFlags: 0
@@ -15626,7 +15626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -53.999996, y: 3}
+  m_AnchoredPosition: {x: -54, y: 3}
   m_SizeDelta: {x: -148, y: -32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8769250834042517566
