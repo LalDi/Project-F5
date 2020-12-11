@@ -6,7 +6,6 @@ using DG.Tweening;
 using BackEnd;
 using LitJson;
 using Define;
-using BackEnd;
 
 public class UIManager_02 : MonoBehaviour
 {
@@ -14,6 +13,10 @@ public class UIManager_02 : MonoBehaviour
     public Text Text_Money;
     public Text Text_Year;
     public Text Text_Month;
+
+    [Header("Bottom UI")]
+    public Image Buttom_Progress;
+    public Sprite[] Image_Progress = new Sprite[4];
 
     [Header("Popup UI")]
     public GameObject Popup_Black;
@@ -62,6 +65,12 @@ public class UIManager_02 : MonoBehaviour
     [Header("BG")]
     public List<GameObject> Backgrounds;
 
+    [Header("Error")]
+    public GameObject Popup_Error;
+    public Text Error_Text;
+    private string Error_Message;
+
+    [Space(20)]
     public GameObject StepText;
 
     public enum PopupList
@@ -79,7 +88,8 @@ public class UIManager_02 : MonoBehaviour
         Play,       //  10
         Staff,      //  11
         StaffUp,    //  12
-        Shop        //  13
+        Shop,       //  13
+        Error       //  14
     }
 
     public delegate void ProgressDel();
@@ -247,6 +257,10 @@ public class UIManager_02 : MonoBehaviour
             case PopupList.Shop:
                 Popup_Shop.SetActive(true);
                 break;
+            case PopupList.Error:
+                Error_Text.text = Error_Message;
+                Popup_Error.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -272,6 +286,8 @@ public class UIManager_02 : MonoBehaviour
         Popup_Staff.SetActive(false);
         Popup_StaffUp.SetActive(false);
         Popup_Shop.SetActive(false);
+
+        Popup_Error.SetActive(false);
     }
 
     public void Popup_Quit(int Popup)
@@ -322,9 +338,19 @@ public class UIManager_02 : MonoBehaviour
             case PopupList.Shop:
                 Popup_Shop.SetActive(false);
                 break;
+            case PopupList.Error:
+                Popup_Error.SetActive(false);
+                break;
             default:
                 break;
         }
+    }
+
+    public void Control_Error(bool Open)
+    {
+        Popup_Black.SetActive(Open);
+        Popup_Error.SetActive(Open);
+        Error_Text.text = Error_Message;
     }
     #endregion
 
@@ -340,18 +366,14 @@ public class UIManager_02 : MonoBehaviour
                 {
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
-                Btn_Progress.GetComponent<Image>().sprite = Progress_Btn_Sprites[0];
-                Backgrounds[2].SetActive(false);
-                Backgrounds[0].SetActive(true);
+                Buttom_Progress.sprite = Image_Progress[0];
                 break;
             case GameManager.Step.Cast_Actor:
                 Progress = () =>
                 {
                     Popup_On((int)PopupList.Audition);
                 };
-                Btn_Progress.GetComponent<Image>().sprite = Progress_Btn_Sprites[1];
-                Backgrounds[0].SetActive(false);
-                Backgrounds[1].SetActive(true);
+                Buttom_Progress.sprite = Image_Progress[1];
                 break;
             case GameManager.Step.Set_Period:
                 Progress = () =>
@@ -360,9 +382,7 @@ public class UIManager_02 : MonoBehaviour
                     GameManager.Instance.SetDefaultPeriod();
                     Set_Period_Text();
                 };
-                Btn_Progress.GetComponent<Image>().sprite = Progress_Btn_Sprites[2];
-                Backgrounds[0].SetActive(false);
-                Backgrounds[1].SetActive(true);
+                Buttom_Progress.sprite = Image_Progress[2];
                 break;
             case GameManager.Step.Prepare_Play:
                 Progress = () =>
@@ -370,9 +390,7 @@ public class UIManager_02 : MonoBehaviour
                     Popup_On((int)PopupList.Prepare);
                     Popup_Prepare.transform.Find("Play BT").GetComponent<Button>().interactable = false;
                 };
-                Btn_Progress.GetComponent<Image>().sprite = Progress_Btn_Sprites[3];
-                Backgrounds[1].SetActive(false);
-                Backgrounds[2].SetActive(true);
+                Buttom_Progress.sprite = Image_Progress[3];
                 break;
             case GameManager.Step.Start_Play:
                 Progress = () =>
@@ -457,6 +475,8 @@ public class UIManager_02 : MonoBehaviour
         SFX.isOn = GameManager.Instance.OnSFX;
         Push.isOn = GameManager.Instance.OnPush;
 
+        Nickname.text = Backend.BMember.GetUserInfo().GetReturnValuetoJSON()["row"]["nickname"].ToString();
+
         DefaultSuccess.text = GameManager.Instance.DefaultSuccess.ToString() + "%";
     }
 
@@ -477,6 +497,36 @@ public class UIManager_02 : MonoBehaviour
 
     public void SaveData()
     {
+
+    }
+
+    public void ChangeNickname()
+    {
+        BackendReturnObject bro = Backend.BMember.CheckNicknameDuplication(Nickname.text);
+
+        switch (bro.GetStatusCode())
+        {
+            case "204":
+                Backend.BMember.UpdateNickname(Nickname.text);
+                break;
+            case "400":
+                switch (bro.GetErrorCode())
+                {
+                    case "UndefinedParameterException":
+                        Error_Message = ERROR_MESSAGE.SETNICK_EMPTY;
+                        Control_Error(true);
+                        break;
+                    case "BadParameterException":
+                        Error_Message = ERROR_MESSAGE.SETNICK_BAD;
+                        Control_Error(true);
+                        break;
+                }
+                break;
+            case "409":
+                Error_Message = ERROR_MESSAGE.SETNICK_DUPLICATE;
+                Control_Error(true);
+                break;
+        }
 
     }
 

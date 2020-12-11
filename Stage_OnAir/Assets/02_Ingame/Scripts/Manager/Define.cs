@@ -14,7 +14,7 @@
         public const string SIGNUP_DISCORDANCE = "비밀번호가 일치하지 않습니다.";
 
         public const string SETNICK_EMPTY = "닉네임은 공백으로 설정할 수 없습니다.";
-        public const string SETNICK_BAD = "닉네임은 20자를 넘기거나\n공백을 포함할 수 없습니다.";
+        public const string SETNICK_BAD = "닉네임은 20자를 넘기거나\n앞,뒤에 공백을 넣을 수 없습니다.\n(닉네임의 중간에는 공백을 포함할 수 있습니다.)";
         public const string SETNICK_DUPLICATE = "중복된 닉네임입니다.\n다른 닉네임을 설정해주십시오.";
     }
 
