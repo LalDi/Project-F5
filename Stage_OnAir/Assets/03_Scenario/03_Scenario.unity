@@ -1455,7 +1455,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &784453963
 GameObject:
@@ -2031,8 +2031,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1513324321}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1156183527
 MonoBehaviour:
@@ -2236,11 +2236,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fdef4fc656d7b498a3b970c303bca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Popup_Black: {fileID: 0}
-  Popup_Scenario_Select: {fileID: 0}
-  Popup_Warning: {fileID: 0}
-  Popup_Buy_Checking: {fileID: 0}
-  Scroll: {fileID: 0}
+  Popup_Black: {fileID: 890747059}
+  Popup_Scenario_Select: {fileID: 1862238255}
+  Popup_Warning: {fileID: 1355038775}
+  Popup_Buy_Checking: {fileID: 1869974426}
+  Scroll: {fileID: 418871539}
 --- !u!4 &1513324321
 Transform:
   m_ObjectHideFlags: 0
@@ -2251,8 +2251,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1156183526}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

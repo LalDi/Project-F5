@@ -10,7 +10,7 @@ public class ScenarioScript : MonoBehaviour
 
     void Start()
     {
-        transform.GetComponent<Button>().onClick.AddListener(()=> {
-            GameObject.Find("UIManager").GetComponent<UIManager_03>().Popup_Scenario(); });
+        //transform.GetComponent<Button>().onClick.AddListener(()=> {
+        //    GameObject.Find("UIManager").GetComponent<UIManager_03>().Popup_Scenario(); });
     }
 }

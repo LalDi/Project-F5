@@ -6,6 +6,7 @@ using DG.Tweening;
 using BackEnd;
 using LitJson;
 using Define;
+using System;
 
 public class UIManager_02 : MonoBehaviour
 {
@@ -231,12 +232,14 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Prepare.SetActive(true);
                 break;
             case PopupList.Marketing:
+                SetMarketingItem();
                 Popup_Marketing.SetActive(true);
                 break;
             case PopupList.MarketingCk:
                 Popup_MarketingCk.SetActive(true);
                 break;
             case PopupList.Develop:
+                SetDevelopItem();
                 Popup_Develop.SetActive(true);
                 break;
             case PopupList.DevelopUp:
@@ -249,13 +252,15 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Play.SetActive(true);
                 break;
             case PopupList.Staff:
+                SetStaffItem();
                 Popup_Staff.SetActive(true);
                 break;
             case PopupList.StaffUp:
                 Popup_StaffUp.SetActive(true);
                 break;
             case PopupList.Shop:
-                Popup_Shop.SetActive(true);
+                SetShopItem();
+                Popup_Shop.SetActive(true); 
                 break;
             case PopupList.Error:
                 Error_Text.text = Error_Message;
@@ -288,12 +293,18 @@ public class UIManager_02 : MonoBehaviour
         Popup_Shop.SetActive(false);
 
         Popup_Error.SetActive(false);
+
+        Close_Item(Popup_Shop);
+        Close_Item(Popup_Staff);
+        Close_Item(Popup_Marketing);
+        Close_Item(Popup_Develop);
     }
 
     public void Popup_Quit(int Popup)
     {
         PopupList Select = (PopupList)Popup;
 
+        Popup_Black.SetActive(false);
         switch (Select)
         {
             case PopupList.Option:
@@ -312,12 +323,14 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Prepare.SetActive(false);
                 break;
             case PopupList.Marketing:
+                Close_Item(Popup_Marketing);
                 Popup_Marketing.SetActive(false);
                 break;
             case PopupList.MarketingCk:
                 Popup_MarketingCk.SetActive(false);
                 break;
             case PopupList.Develop:
+                Close_Item(Popup_Develop);
                 Popup_Develop.SetActive(false);
                 break;
             case PopupList.DevelopUp:
@@ -330,12 +343,14 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Play.SetActive(false);
                 break;
             case PopupList.Staff:
+                Close_Item(Popup_Staff);
                 Popup_Staff.SetActive(false);
                 break;
             case PopupList.StaffUp:
                 Popup_StaffUp.SetActive(false);
                 break;
             case PopupList.Shop:
+                Close_Item(Popup_Shop);
                 Popup_Shop.SetActive(false);
                 break;
             case PopupList.Error:
@@ -344,6 +359,10 @@ public class UIManager_02 : MonoBehaviour
             default:
                 break;
         }
+    }
+    public void Load_Illust()
+    {
+        LoadManager.Load(LoadManager.Scene.Illust);
     }
 
     public void Control_Error(bool Open)
@@ -367,6 +386,8 @@ public class UIManager_02 : MonoBehaviour
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
                 Buttom_Progress.sprite = Image_Progress[0];
+                Backgrounds[2].SetActive(false);
+                Backgrounds[0].SetActive(true);
                 break;
             case GameManager.Step.Cast_Actor:
                 Progress = () =>
@@ -374,6 +395,8 @@ public class UIManager_02 : MonoBehaviour
                     Popup_On((int)PopupList.Audition);
                 };
                 Buttom_Progress.sprite = Image_Progress[1];
+                Backgrounds[0].SetActive(false);
+                Backgrounds[1].SetActive(true);
                 break;
             case GameManager.Step.Set_Period:
                 Progress = () =>
@@ -425,10 +448,6 @@ public class UIManager_02 : MonoBehaviour
     public void Progress_Play()
     {
         LoadManager.Load(LoadManager.Scene.Play);
-    }
-    public void Progress_Illust()
-    {
-        LoadManager.Load(LoadManager.Scene.Illust);
     }
     #endregion
 
@@ -541,6 +560,78 @@ public class UIManager_02 : MonoBehaviour
             GameManager.Instance.DefaultSuccess = 0;
 
         DefaultSuccess.text = GameManager.Instance.DefaultSuccess.ToString() + "%";
+    }
+    #endregion
+
+    #region Shop
+    public void SetShopItem()
+    {
+        for(int i = 0; i < Items.Instance.ShopItems.Count; i++)
+        {
+            GameObject item = ObjManager.SpawnPool("ShopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
+            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
+        }
+        double count = (Items.Instance.ShopItems.Count / 2f);
+        Popup_Shop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+    }
+    #endregion
+
+    #region Staff
+    public void SetStaffItem()
+    {
+        for (int i = 0; i < Items.Instance.StaffItems.Count; i++)
+        {
+            GameObject item = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.StaffItems[i].name;
+            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.StaffItems[i].Icon;
+        }
+        double count = Items.Instance.StaffItems.Count / 2f;
+        Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+    }
+    #endregion
+
+    #region Marketing
+    public void SetMarketingItem()
+    {
+        for (int i = 0; i < Items.Instance.MarketingItems.Count; i++)
+        {
+            GameObject item = ObjManager.SpawnPool("MarketingItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.MarketingItems[i].name;
+            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.MarketingItems[i].Icon;
+        }
+        double count = (Items.Instance.MarketingItems.Count / 2f);
+        Popup_Marketing.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+    }
+    #endregion
+
+    #region Develop
+    public void SetDevelopItem()
+    {
+        for (int i = 0; i < Items.Instance.DevelopItems.Count; i++)
+        {
+            GameObject item = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.DevelopItems[i].name;
+            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.DevelopItems[i].Icon;
+        }
+        double count = (Items.Instance.DevelopItems.Count / 2f);
+        Popup_Develop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+    }
+
+    public void Close_Item(GameObject Obj)
+    {
+        for (int i = 0; i < Obj.transform.GetChild(2).GetChild(0).childCount; i++)
+        {
+            Obj.transform.GetChild(2).GetChild(0).GetChild(i).gameObject.SetActive(false);
+        }
     }
     #endregion
 }

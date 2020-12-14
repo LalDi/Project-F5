@@ -835,7 +835,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323838446}
-        m_MethodName: Progress_Illust
+        m_MethodName: Load_Illust
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1385,7 +1385,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &278155441
 GameObject:
@@ -1674,7 +1674,15 @@ MonoBehaviour:
   - {fileID: 334569936}
   - {fileID: 1196262963}
   - {fileID: 561972084}
-  Btn_Progress: {fileID: 874340410}
+  Btn_Progress: {fileID: 874340408}
+  Progress_Btn_Sprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Backgrounds:
+  - {fileID: 876753443}
+  - {fileID: 1134891789}
+  - {fileID: 1050169686}
   Popup_Error: {fileID: 1969042407}
   Error_Text: {fileID: 278155443}
   StepText: {fileID: 379915168}
@@ -2128,7 +2136,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &365086953
 GameObject:
@@ -2442,11 +2450,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 323838446}
         m_MethodName: Popup_Quit
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 13
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2594,7 +2602,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &434436982
 GameObject:
@@ -2691,7 +2699,7 @@ RectTransform:
   - {fileID: 964297630}
   - {fileID: 379915169}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3479,8 +3487,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -89.9}
-  m_SizeDelta: {x: 840.0001, y: 694.11786}
+  m_AnchoredPosition: {x: 0, y: -61.15}
+  m_SizeDelta: {x: 690, y: 719.31854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &521712157
 MonoBehaviour:
@@ -3544,7 +3552,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1d7eff99852caab49918919b84a68c0c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3597,6 +3605,22 @@ MonoBehaviour:
     prefab: {fileID: 8516266845261856600, guid: f9b53a0d6b78f4c4a9d753b01c71b3b7,
       type: 3}
     parentObj: {fileID: 262586536}
+  - tag: ShopItem
+    size: 10
+    prefab: {fileID: 6926821468119327, guid: 7147d4d4b348cd047947fa9218ebdf87, type: 3}
+    parentObj: {fileID: 1107050351}
+  - tag: StaffItem
+    size: 7
+    prefab: {fileID: 6926821468119327, guid: 7147d4d4b348cd047947fa9218ebdf87, type: 3}
+    parentObj: {fileID: 890929464}
+  - tag: MarketingItem
+    size: 10
+    prefab: {fileID: 6926821468119327, guid: 7147d4d4b348cd047947fa9218ebdf87, type: 3}
+    parentObj: {fileID: 956159866}
+  - tag: DevelopItem
+    size: 10
+    prefab: {fileID: 6926821468119327, guid: 7147d4d4b348cd047947fa9218ebdf87, type: 3}
+    parentObj: {fileID: 995035719}
 --- !u!4 &527778727
 Transform:
   m_ObjectHideFlags: 0
@@ -3609,7 +3633,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &532660314
 GameObject:
@@ -3763,6 +3787,262 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543562835}
   m_CullTransparentMesh: 0
+--- !u!1 &546112798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 546112800}
+  - component: {fileID: 546112799}
+  m_Layer: 0
+  m_Name: ItemData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &546112799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546112798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fbd7253dc485b541a5cee440208020c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShopItems:
+  - no: 1
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 1"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 1\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 1000000
+    Icon: {fileID: 21300120, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  - no: 2
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 2"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 2\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 2000000
+    Icon: {fileID: 21300122, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  - no: 3
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 3"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 3\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 3000000
+    Icon: {fileID: 21300124, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  - no: 4
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 4"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 4\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 4000000
+    Icon: {fileID: 21300126, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  - no: 5
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 5"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 5\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 5000000
+    Icon: {fileID: 21300128, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  - no: 6
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 6"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 6\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 6000000
+    Icon: {fileID: 21300130, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  - no: 7
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 7"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 7\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 7000000
+    Icon: {fileID: 21300132, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  - no: 8
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 8"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 8\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 8000000
+    Icon: {fileID: 21300134, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  - no: 9
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 9"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 9\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 9000000
+    Icon: {fileID: 21300136, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  - no: 10
+    name: "\uC0C1\uC810 \uC544\uC774\uD15C 10"
+    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 10\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
+      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
+      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    pay: 10000000
+    Icon: {fileID: 21300138, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
+  MarketingItems:
+  - no: 1
+    name: "\uD64D\uBCF4 \uC0C1\uD488 1"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      1\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 100000
+    Icon: {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  - no: 2
+    name: "\uD64D\uBCF4 \uC0C1\uD488 2"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      2\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 200000
+    Icon: {fileID: 21300146, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  - no: 3
+    name: "\uD64D\uBCF4 \uC0C1\uD488 3"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      3\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 300000
+    Icon: {fileID: 21300148, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  - no: 4
+    name: "\uD64D\uBCF4 \uC0C1\uD488 4"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      4\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 400000
+    Icon: {fileID: 21300150, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  - no: 5
+    name: "\uD64D\uBCF4 \uC0C1\uD488 5"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      5\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 500000
+    Icon: {fileID: 21300152, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  - no: 6
+    name: "\uD64D\uBCF4 \uC0C1\uD488 6"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      6\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 600000
+    Icon: {fileID: 21300154, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  - no: 7
+    name: "\uD64D\uBCF4 \uC0C1\uD488 7"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      7\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 700000
+    Icon: {fileID: 21300156, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  - no: 8
+    name: "\uD64D\uBCF4 \uC0C1\uD488 8"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      8\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 800000
+    Icon: {fileID: 21300158, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  - no: 9
+    name: "\uD64D\uBCF4 \uC0C1\uD488 9"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      9\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 900000
+    Icon: {fileID: 21300160, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  - no: 10
+    name: "\uD64D\uBCF4 \uC0C1\uD488 10"
+    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
+      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
+      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
+      10\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    pay: 1000000
+    Icon: {fileID: 21300162, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+  DevelopItems:
+  - no: 1
+    name: "\uBC1C\uC804 \uC0C1\uD488 1"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 100000
+    Icon: {fileID: 21300564, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  - no: 2
+    name: "\uBC1C\uC804 \uC0C1\uD488 2"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 200000
+    Icon: {fileID: 21300566, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  - no: 3
+    name: "\uBC1C\uC804 \uC0C1\uD488 3"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 300000
+    Icon: {fileID: 21300568, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  - no: 4
+    name: "\uBC1C\uC804 \uC0C1\uD488 4"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 400000
+    Icon: {fileID: 21300570, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  - no: 5
+    name: "\uBC1C\uC804 \uC0C1\uD488 5"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 500000
+    Icon: {fileID: 21300572, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  - no: 6
+    name: "\uBC1C\uC804 \uC0C1\uD488 6"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 600000
+    Icon: {fileID: 21300574, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  - no: 7
+    name: "\uBC1C\uC804 \uC0C1\uD488 7"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 700000
+    Icon: {fileID: 21300576, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  - no: 8
+    name: "\uBC1C\uC804 \uC0C1\uD488 8"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 800000
+    Icon: {fileID: 21300578, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  - no: 9
+    name: "\uBC1C\uC804 \uC0C1\uD488 9"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 900000
+    Icon: {fileID: 21300580, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  - no: 10
+    name: "\uBC1C\uC804 \uC0C1\uD488 10"
+    script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
+    pay: 1000000
+    Icon: {fileID: 21300582, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+--- !u!4 &546112800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546112798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &551039782
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,7 +5917,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &877372556
 GameObject:
@@ -5931,10 +6211,10 @@ RectTransform:
   m_Father: {fileID: 1713897132}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.999939, y: -1230.2793}
-  m_SizeDelta: {x: -138.75647, y: 2460.5583}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -1251.9327}
+  m_SizeDelta: {x: 690, y: 3225.4348}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &890929466
 MonoBehaviour:
@@ -5951,13 +6231,13 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 320, y: 370}
-  m_Spacing: {x: 55, y: 55.28}
+  m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!114 &890929467
@@ -6520,10 +6800,10 @@ RectTransform:
   m_Father: {fileID: 521712156}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -345.3854}
-  m_SizeDelta: {x: -183.79523, y: 690.77075}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -1251.9327}
+  m_SizeDelta: {x: 690, y: 3225.4348}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &956159868
 MonoBehaviour:
@@ -6540,13 +6820,13 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 300, y: 420}
-  m_Spacing: {x: 55, y: 55.28}
+  m_CellSize: {x: 320, y: 370}
+  m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!114 &956159869
@@ -6670,10 +6950,10 @@ RectTransform:
   m_Father: {fileID: 1637849761}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1230.2792}
-  m_SizeDelta: {x: -183.93591, y: 2460.558}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -1251.9327}
+  m_SizeDelta: {x: 690, y: 3225.4348}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &995035721
 MonoBehaviour:
@@ -6690,13 +6970,13 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 300, y: 360}
-  m_Spacing: {x: 55, y: 55.28}
+  m_CellSize: {x: 320, y: 370}
+  m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!114 &995035722
@@ -7704,7 +7984,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1076518033
 GameObject:
@@ -7946,10 +8226,10 @@ RectTransform:
   m_Father: {fileID: 1197598506}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3, y: -1230.2793}
-  m_SizeDelta: {x: -138.75647, y: 2460.5583}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -1251.9327}
+  m_SizeDelta: {x: 690, y: 3225.4348}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1107050353
 MonoBehaviour:
@@ -7966,13 +8246,13 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 324.0577, y: 374.887}
-  m_Spacing: {x: 55, y: 55.28}
+  m_CellSize: {x: 320, y: 370}
+  m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!114 &1107050354
@@ -8166,7 +8446,7 @@ Transform:
   m_Children:
   - {fileID: 1199910332}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1140551546
 GameObject:
@@ -8582,8 +8862,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -89.9}
-  m_SizeDelta: {x: 840.0001, y: 694.11786}
+  m_AnchoredPosition: {x: 0, y: -61.15}
+  m_SizeDelta: {x: 690, y: 719.31854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1197598507
 MonoBehaviour:
@@ -8647,7 +8927,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1d7eff99852caab49918919b84a68c0c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11495,8 +11775,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -89.9}
-  m_SizeDelta: {x: 840.0001, y: 694.11786}
+  m_AnchoredPosition: {x: 0, y: -61.15}
+  m_SizeDelta: {x: 690, y: 719.31854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1637849762
 MonoBehaviour:
@@ -11736,11 +12016,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 323838446}
         m_MethodName: Popup_Quit
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 11
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -12167,8 +12447,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -89.900024}
-  m_SizeDelta: {x: 840.0001, y: 694.1179}
+  m_AnchoredPosition: {x: 0, y: -61.15}
+  m_SizeDelta: {x: 690, y: 719.31854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1713897133
 MonoBehaviour:
@@ -12232,7 +12512,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1d7eff99852caab49918919b84a68c0c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12712,7 +12992,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1748007163
 GameObject:
@@ -12742,8 +13022,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1940113880}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1748007165
 SpriteRenderer:
@@ -12811,7 +13091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1749673390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12841,7 +13121,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1760943660
 GameObject:
@@ -14718,7 +14998,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2112284762
 GameObject:
