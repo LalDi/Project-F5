@@ -71,8 +71,6 @@ public class UIManager_04 : MonoBehaviour
         {
             Width += 325;
 
-            Debug.Log(PassActors[i].Name);
-
             PassActors[i].SetIsCasting(true);
             GameManager.Instance.Actors.Add(PassActors[i]);
 

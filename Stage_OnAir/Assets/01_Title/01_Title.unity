@@ -228,6 +228,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21ac19df33a69a41a62991cf56bb151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scenarioBGs:
+  - Ingame: {fileID: 21300000, guid: 1c1480f5545b26e4eb6c56d2444a8ac5, type: 3}
+    Play_1: {fileID: 21300000, guid: 05f8b24bcfe27bb41a264d38ab37f7cd, type: 3}
+    Play_2: {fileID: 21300000, guid: 6677735753447a74a897f3e717a98d88, type: 3}
+  - Ingame: {fileID: 21300000, guid: ea39f6a2d28329b4491d4c333c369732, type: 3}
+    Play_1: {fileID: 21300000, guid: 6254d8af223a9a04a98d36381b2c6c11, type: 3}
+    Play_2: {fileID: 21300000, guid: 7b2ab9dace260724a97906c85dec5915, type: 3}
+  - Ingame: {fileID: 21300000, guid: ab22b8a1ffc445843b753b3a8ae25f1a, type: 3}
+    Play_1: {fileID: 21300000, guid: cd41fc62fd443354b99b3a20cfb111d5, type: 3}
+    Play_2: {fileID: 21300000, guid: fceab6f5cf5a72046ba16f3d17ef2b6a, type: 3}
+  - Ingame: {fileID: 21300000, guid: 89c576bf340c44b47808fd6d1a535bbd, type: 3}
+    Play_1: {fileID: 21300000, guid: 745e3950c4b748943b12259147de23b4, type: 3}
+    Play_2: {fileID: 21300000, guid: 1c85db5a720a3214e8637f3864774cfa, type: 3}
+  - Ingame: {fileID: 21300000, guid: 78dfc9d93d9879f44a6486257988a7e3, type: 3}
+    Play_1: {fileID: 21300000, guid: 65f1c16aa5f509a4499b9d02af89da0c, type: 3}
+    Play_2: {fileID: 21300000, guid: 9d719ae1a252482428fc41185f87a043, type: 3}
+  - Ingame: {fileID: 21300000, guid: d380b796c3fa6454cbd4fc1157be8b99, type: 3}
+    Play_1: {fileID: 21300000, guid: 9345a237980f8da48be1bf7712638fca, type: 3}
+    Play_2: {fileID: 21300000, guid: 7399ebca087e70b419eb826d9ab501a8, type: 3}
+  - Ingame: {fileID: 21300000, guid: b1a734df963a2834ca962b355aeacebb, type: 3}
+    Play_1: {fileID: 21300000, guid: c1f2d00c047073a4c89feac8063b1b06, type: 3}
+    Play_2: {fileID: 21300000, guid: 804a33c5a71f1104ba6fff995a36fbe9, type: 3}
+  - Ingame: {fileID: 21300000, guid: 4464102069ebe3a48b7ab3b90653c264, type: 3}
+    Play_1: {fileID: 21300000, guid: 2f5ac0bfc8a355e469a6a8a98d349421, type: 3}
+    Play_2: {fileID: 21300000, guid: 2c66502568073084e99cfaa6a3d433ba, type: 3}
+  - Ingame: {fileID: 21300000, guid: c128fb5265c8fca45862d9cb794a9822, type: 3}
+    Play_1: {fileID: 21300000, guid: 25896f931d57d88458d1a0ea75550ffe, type: 3}
+    Play_2: {fileID: 21300000, guid: 78526961976205a46aa896fe395c0fc7, type: 3}
+  - Ingame: {fileID: 21300000, guid: ab28330eb23e40e42b9a673b6f700650, type: 3}
+    Play_1: {fileID: 21300000, guid: ee59ea6d1f3023b45ae3135b185f5a0e, type: 3}
+    Play_2: {fileID: 21300000, guid: fc177dd281fc2b84db9008ee4965c5c1, type: 3}
 --- !u!4 &153881479
 Transform:
   m_ObjectHideFlags: 0
@@ -5852,6 +5883,7 @@ MonoBehaviour:
   OnSFX: 0
   OnPush: 0
   ScenarioIllust: 00000000000000000000
+  StaffLevel: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!4 &1791618586
 Transform:
   m_ObjectHideFlags: 0

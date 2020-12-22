@@ -46,7 +46,7 @@ public class UIManager_03 : MonoBehaviour
             scenario.transform.gameObject.SetActive(true);
         }
         Scroll.GetComponent<RectTransform>().sizeDelta =
-            new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 310 + 100);
+            new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 250);
     }
     public void Popup_Scenario(int num)
     {

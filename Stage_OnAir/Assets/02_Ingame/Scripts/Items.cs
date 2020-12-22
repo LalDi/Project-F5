@@ -91,4 +91,17 @@ public class Items : Singleton<Items>
             StaffItems.Add(staff);
         }
     }
+    public int Staff_MathPay(string sort, int num, int level)
+    {
+        if (sort == "Pay"){
+            return StaffItems[num].pay + (StaffItems[num].plus_pay * level);
+        }
+        else if (sort == "Directing"){
+            return StaffItems[num].directing + (StaffItems[num].plus_directing * level);
+        }
+        else if (sort == "Cost"){
+            return StaffItems[num].cost_upgrade + (StaffItems[num].plus_cost * level-1);
+        }
+        return 0;
+    }
 }
