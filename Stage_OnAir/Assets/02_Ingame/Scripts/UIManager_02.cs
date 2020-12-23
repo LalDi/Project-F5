@@ -586,12 +586,16 @@ public class UIManager_02 : MonoBehaviour
         {
             GameObject item = ObjManager.SpawnPool("ShopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
-            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
+            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
+            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
+            item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.ShopItems[i].pay.ToString("N0")
+                + "\n점수: +" + Items.Instance.ShopItems[i].score.ToString("N0");
+            int j = i;
+            item.transform.GetComponent<Button>().onClick.AddListener(() => Buy_Item("Shop", j));
         }
         double count = (Items.Instance.ShopItems.Count / 2f);
         Popup_Shop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
-            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
     #endregion
 
@@ -602,14 +606,14 @@ public class UIManager_02 : MonoBehaviour
         {
             GameObject item = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.StaffItems[i].name;
-            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.StaffItems[i].Icon;
+            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.Staff_Icons[i];
+            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.StaffItems[i].name;
             int j = i;
             item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Staff", j));
         }
         double count = Items.Instance.StaffItems.Count / 2f;
         Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
-            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
     #endregion
 
@@ -620,12 +624,16 @@ public class UIManager_02 : MonoBehaviour
         {
             GameObject item = ObjManager.SpawnPool("MarketingItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.MarketingItems[i].name;
-            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.MarketingItems[i].Icon;
+            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.MarketingItems[i].Icon;
+            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.MarketingItems[i].name;
+            item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.MarketingItems[i].pay.ToString("N0")
+                + "\n점수: +" + Items.Instance.MarketingItems[i].score.ToString("N0");
+            int j = i;
+            item.transform.GetComponent<Button>().onClick.AddListener(() => Buy_Item("Marketing", j));
         }
         double count = (Items.Instance.MarketingItems.Count / 2f);
         Popup_Marketing.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
-            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
     #endregion
 
@@ -636,14 +644,14 @@ public class UIManager_02 : MonoBehaviour
         {
             GameObject item = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.DevelopItems[i].name;
-            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.DevelopItems[i].Icon;
+            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.DevelopItems[i].Icon;
+            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.DevelopItems[i].name;
             int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Develop", j));
+            item.transform.GetComponent<Button>().onClick.AddListener(() => Buy_Item("Develop", j));
         }
         double count = (Items.Instance.DevelopItems.Count / 2f);
         Popup_Develop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
-            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
 
     public void Buy_Item(string sort, int num)
@@ -704,7 +712,7 @@ public class UIManager_02 : MonoBehaviour
         else if (sort == "Staff"){
             Popup_On(12);
             obj = Popup_StaffUp;
-            Icon = Items.Instance.StaffItems[num].Icon;
+            Icon = Items.Instance.Staff_Icons[num];
             Name = Items.Instance.StaffItems[num].name;
             obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
             obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();

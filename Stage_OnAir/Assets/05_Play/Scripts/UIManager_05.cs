@@ -54,8 +54,6 @@ public class UIManager_05 : MonoBehaviour
         {
             tmp.text  = Scr;
             yield return new WaitForSeconds(4f);
-            //while (!Input.GetMouseButtonDown(0))
-            //{ }
         }
         BlackBG.SetActive(true);
         BlackBG.GetComponent<Image>().DOFade(0.5f, 2);

@@ -4008,163 +4008,103 @@ MonoBehaviour:
   ShopItems:
   - no: 1
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 1"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 1\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 1000000
     Icon: {fileID: 21300120, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   - no: 2
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 2"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 2\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 2000000
     Icon: {fileID: 21300122, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   - no: 3
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 3"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 3\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 3000000
     Icon: {fileID: 21300124, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   - no: 4
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 4"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 4\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 4000000
     Icon: {fileID: 21300126, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   - no: 5
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 5"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 5\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 5000000
     Icon: {fileID: 21300128, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   - no: 6
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 6"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 6\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 6000000
     Icon: {fileID: 21300130, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   - no: 7
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 7"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 7\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 7000000
     Icon: {fileID: 21300132, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   - no: 8
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 8"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 8\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 8000000
     Icon: {fileID: 21300134, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   - no: 9
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 9"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 9\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 9000000
     Icon: {fileID: 21300136, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   - no: 10
     name: "\uC0C1\uC810 \uC544\uC774\uD15C 10"
-    script: "\uC774 \uC0C1\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC6B0\uB9AC \uAC8C\uC784 \uC0C1\uC810\uC5D0 10\uBC88\uC9F8\uB3C4 \uB4F1\uB85D\uB41C
-      \uC0C1\uD488\uC73C\uB85C \uC544\uBB34 \uD6A8\uB2A5 \uC5C6\uC9C0\uB9CC \uB354\uB7FD\uAC8C
-      \uBE44\uC2FC \uAC00\uACA9\uC744 \uAC00\uC9C4 \uC0C1\uD488\uC774\uB2E4."
+    score: 0
     pay: 10000000
     Icon: {fileID: 21300138, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
   MarketingItems:
   - no: 1
     name: "\uD64D\uBCF4 \uC0C1\uD488 1"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      1\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 100000
     Icon: {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   - no: 2
     name: "\uD64D\uBCF4 \uC0C1\uD488 2"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      2\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 200000
     Icon: {fileID: 21300146, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   - no: 3
     name: "\uD64D\uBCF4 \uC0C1\uD488 3"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      3\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 300000
     Icon: {fileID: 21300148, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   - no: 4
     name: "\uD64D\uBCF4 \uC0C1\uD488 4"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      4\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 400000
     Icon: {fileID: 21300150, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   - no: 5
     name: "\uD64D\uBCF4 \uC0C1\uD488 5"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      5\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 500000
     Icon: {fileID: 21300152, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   - no: 6
     name: "\uD64D\uBCF4 \uC0C1\uD488 6"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      6\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 600000
     Icon: {fileID: 21300154, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   - no: 7
     name: "\uD64D\uBCF4 \uC0C1\uD488 7"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      7\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 700000
     Icon: {fileID: 21300156, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   - no: 8
     name: "\uD64D\uBCF4 \uC0C1\uD488 8"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      8\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 800000
     Icon: {fileID: 21300158, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   - no: 9
     name: "\uD64D\uBCF4 \uC0C1\uD488 9"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      9\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 900000
     Icon: {fileID: 21300160, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   - no: 10
     name: "\uD64D\uBCF4 \uC0C1\uD488 10"
-    script: "\uC774 \uC81C\uD488\uC73C\uB85C \uB9D0\uD560\uAC83 \uAC19\uC73C\uBA74
-      \uC5EC\uB7EC\uBD84\uC758 \uACF5\uC5F0\uC744 \uC544\uC8FC \uBA4B\uC9C0\uAC8C
-      \uD64D\uBCF4\uD574\uC8FC\uB294 \uC0C1\uD488\uC73C\uB85C \uD64D\uBCF4 \uC0C1\uC810\uC758
-      10\uBC88\uC9F8 \uC0C1\uD488\uC785\uB2C8\uB2E4."
+    score: 0
     pay: 1000000
     Icon: {fileID: 21300162, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
   DevelopItems:
@@ -4218,6 +4158,7 @@ MonoBehaviour:
     script: "\uC774\uAC8C \uBB50\uC600\uC9C0"
     pay: 1000000
     Icon: {fileID: 21300582, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
+  Staff_Icons: []
 --- !u!4 &546112800
 Transform:
   m_ObjectHideFlags: 0
@@ -6193,7 +6134,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 320, y: 370}
+  m_CellSize: {x: 320, y: 400}
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 2
@@ -6782,7 +6723,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 320, y: 370}
+  m_CellSize: {x: 320, y: 400}
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 2
@@ -6933,7 +6874,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 320, y: 370}
+  m_CellSize: {x: 320, y: 400}
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 2
@@ -8287,7 +8228,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 320, y: 370}
+  m_CellSize: {x: 320, y: 400}
   m_Spacing: {x: 50, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 2
@@ -9218,13 +9159,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Close_Popup
-        m_Mode: 1
+      - m_Target: {fileID: 323838446}
+        m_MethodName: Popup_Quit
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 15
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

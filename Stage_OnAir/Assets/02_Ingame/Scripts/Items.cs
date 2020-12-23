@@ -9,8 +9,7 @@ public class ShopItem
 {
     [Tooltip("번호")]    public int no;
     [Tooltip("이름")]    public string name;
-    [TextArea(1, 3)]
-    [Tooltip("설명")]    public string script;
+    [Tooltip("점수")]    public int score;
     [Tooltip("가격")]    public int pay;
     [Tooltip("아이콘")] public Sprite Icon;
 }
@@ -25,8 +24,6 @@ public class StaffItem
     public int plus_pay { get; private set; }
     public int plus_directing { get; private set; }
     public int plus_cost { get; private set; }
-
-    public Sprite Icon;
 
     public StaffItem(int _No, string _Name, int _Pay, int _Directing, int _Cost_purchass, 
         int _Cost_upgrade, int _Plus_pay, int _Plus_directing, int _Plus_cost)
@@ -47,8 +44,7 @@ public class MarketingItem
 {
     [Tooltip("번호")] public int no;
     [Tooltip("이름")] public string name;
-    [TextArea(1, 3)]
-    [Tooltip("설명")] public string script;
+    [Tooltip("점수")] public int score;
     [Tooltip("가격")] public int pay;
     [Tooltip("아이콘")] public Sprite Icon;
 };
@@ -68,6 +64,9 @@ public class Items : Singleton<Items>
     public List<StaffItem> StaffItems = new List<StaffItem>();
     public List<MarketingItem> MarketingItems = new List<MarketingItem>();
     public List<DevelopItem> DevelopItems = new List<DevelopItem>();
+
+    [SerializeField]
+    public List<Sprite> Staff_Icons = new List<Sprite>();
 
     public void SetStaffData()
     {
