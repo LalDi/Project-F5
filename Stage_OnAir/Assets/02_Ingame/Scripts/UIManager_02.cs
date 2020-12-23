@@ -651,7 +651,8 @@ public class UIManager_02 : MonoBehaviour
         //Debug.Log(GameManager.Instance.Money + " , " + Items.Instance.DevelopItems[num].pay);
         if (sort == "Marketing" && GameManager.Instance.Money >= Items.Instance.MarketingItems[num].pay)
         {
-
+            GameManager.Instance.CostMoney(Items.Instance.MarketingItems[num].pay);
+            //marketing아이템을 구매했을 때 나타나는 효과.
         }
         else if (sort == "Develop" && GameManager.Instance.Money >= Items.Instance.DevelopItems[num].pay)
         {
@@ -673,7 +674,8 @@ public class UIManager_02 : MonoBehaviour
         }
         else if (sort == "Shop" && GameManager.Instance.Money >= Items.Instance.ShopItems[num].pay)
         {
-
+            GameManager.Instance.CostMoney(Items.Instance.ShopItems[num].pay);
+            //Shop아이템을 구매했을 때 나타나는 효과.
         }
         else
         {
