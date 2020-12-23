@@ -67,6 +67,47 @@
 
             return RandomList;
         }
+
+        /**
+         *  @return  최종 Quality점수를 계산
+         */
+        static public float FINALQUALITY()
+        {
+            float Scenario = GameManager.Instance.Quality_Scenario;     // 시나리오 퀄리티 점수
+            float Acting = GameManager.Instance.Quality_Acting;         // 배우 연기력 총합
+            float Direction = GameManager.Instance.Quality_Direction;   // 스태프 연출력 총합
+
+            int Actors = GameManager.Instance.NowActor;                 // 시나리오 배우 수
+
+            float result;
+            result = Scenario + (Scenario * Direction * 0.01f) + (Acting + (Acting * (Actors - 2) * 0.1f) / Actors);
+            //(시나리오 퀄리티) + (시나리오 퀄리티 * 스태프 기술력 * 0.01) + ((배우 연기력 총합 + 배우 연기력 총합 * (배우 수 - 2) * 0.1) / 배우 수)
+
+            return result;
+        }
+
+        /**
+         *  @return  마케팅 점수를 Ratio당 1.0으로 반환
+         */
+        static public float MARKETING()
+        {
+            float Ratio = 500f;
+            return GameManager.Instance.Play_Marketing / Ratio;
+        }
+
+        /**
+         *  @return  최종 수익을 계산
+         */
+        static public float RESULT()
+        {
+            float Quality = GameManager.Instance.Play_Quality;
+            float Marketing = MARKETING();
+
+            float result;
+            result = Quality * Marketing * 10000;
+
+            return result;
+        }
     }
 
 }

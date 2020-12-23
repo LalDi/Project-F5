@@ -10,14 +10,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     // 연극의 3가지 점수 요소
-    public float Play_Quality { get; private set; }
-    public float Play_Marketing { get; private set; }
-    public float Play_Success { get; private set; }
+    public float Play_Quality { get; private set; }     //  퀄리티 최종 점수
+    public float Play_Marketing { get; private set; }   //  마케팅 총합 점수
+    public float Play_Success { get; private set; }     //  최종 성공률
 
     // 연극의 퀄리티 점수를 결정하는 3가지 수치
-    public float Quality_Acting { get; private set; }
-    public float Quality_Scenario { get; private set; }
-    public float Quality_Direction { get; private set; }
+    public float Quality_Acting { get; private set; }   //  배우 연기력 총합
+    public float Quality_Scenario { get; private set; } //  시나리오 퀄리티
+    public float Quality_Direction { get; private set; }//  스태프 연출력 총합
 
     // 현재 보유 금액
     public int Money { get; private set; }
@@ -72,11 +72,13 @@ public class GameManager : Singleton<GameManager>
                 var data = Backend.BMember.CustomLogin("test2", "1234");
                 Debug.Log("로그인 완료");
 
+                Backend.GameSchemaInfo.Insert("Staff");
+                Debug.Log("스태프 데이터 생성");
             }
             // 초기화 실패한 경우 실행
             else
             {
-        
+                
             }
         });
 
