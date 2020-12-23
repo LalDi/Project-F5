@@ -29,26 +29,31 @@ public class Staff
 
     public Staff(JsonData Data)
     {
-        Code = int.Parse(Data["rows"]["num"]["S"].ToString());
+        Code = int.Parse(Data["num"]["S"].ToString());
 
-        Name = Data["rows"]["Name"]["S"].ToString();
-        Level = 0;
+        Name = Data["Name"]["S"].ToString();
 
-        Default_Pay = int.Parse(Data["rows"]["Pay"]["S"].ToString());
-        Default_Directing = int.Parse(Data["rows"]["Directing"]["S"].ToString());
-        Default_Cost = int.Parse(Data["rows"]["Cost_Upgrade"]["S"].ToString());
+        string indate = Backend.BMember.GetUserInfo().GetInDate();
 
-        Plus_Pay = int.Parse(Data["rows"]["Plus_Pay"]["S"].ToString());
-        Plus_Directing = int.Parse(Data["rows"]["Plus_Directing"]["S"].ToString());
-        Plus_Cost = int.Parse(Data["rows"]["Plus_Cost"]["S"].ToString());
+        JsonData data = Backend.GameSchemaInfo.Get("Staff", indate).GetReturnValuetoJSON();
+        Debug.Log(data["Staff" + Code.ToString()]["N"].ToString());
+        Level = int.Parse(data["Staff" + Code.ToString()]["N"].ToString());
 
-        Pay = Default_Pay;
-        Directing = Default_Directing;
+        Default_Pay = int.Parse(Data["Pay"]["S"].ToString());
+        Default_Directing = int.Parse(Data["Directing"]["S"].ToString());
+        Default_Cost = int.Parse(Data["Cost_Upgrade"]["S"].ToString());
 
-        Cost_Purchase = int.Parse(Data["rows"]["Cost_Purchase"]["S"].ToString());
-        Cost_Upgrade = Default_Cost;
+        Plus_Pay = int.Parse(Data["Plus_Pay"]["S"].ToString());
+        Plus_Directing = int.Parse(Data["Plus_Directing"]["S"].ToString());
+        Plus_Cost = int.Parse(Data["Plus_Cost"]["S"].ToString());
 
-        IsPurchase = false;
+        Pay = Default_Pay + ((Level - 1) * Plus_Pay);
+        Directing = Default_Directing + ((Level - 1) * Plus_Directing);
+
+        Cost_Purchase = int.Parse(Data["Cost_Purchase"]["S"].ToString());
+        Cost_Upgrade = Default_Cost + ((Level - 1) * Plus_Cost);
+
+        IsPurchase = Level == 0 ? false : true;
     }
 
     public void SetLevel()
@@ -62,6 +67,12 @@ public class Staff
     {
         string Name = "Staff" + Code.ToString();
         string InDate = Backend.BMember.GetUserInfo().GetInDate();
+
+        if (IsPurchase)
+        {
+            Debug.Log("이미 고용한 스태프입니다.");
+            return;
+        }
 
         GameManager.Instance.CostMoney(Cost_Purchase);
         Level = 1;
@@ -77,6 +88,12 @@ public class Staff
     {
         string Name = "Staff" + Code.ToString();
 
+        if (!IsPurchase)
+        {
+            Debug.Log("아직 고용하지 않은 스태프입니다.");
+            return;
+        }
+
         GameManager.Instance.CostMoney(Cost_Upgrade);
         Level++;
         SetLevel();
@@ -88,53 +105,58 @@ public class Staff
 
     public void SetStaff(JsonData Data)
     {
-        Code = int.Parse(Data["rows"]["num"]["S"].ToString());
+        Code = int.Parse(Data["num"]["S"].ToString());
 
-        Name = Data["rows"]["Name"]["S"].ToString();
+        Name = Data["Name"]["S"].ToString();
 
         string indate = Backend.BMember.GetUserInfo().GetInDate();
 
         JsonData data = Backend.GameSchemaInfo.Get("Staff", indate).GetReturnValuetoJSON();
-        Level = int.Parse(data["rows"]["Staff" + Code.ToString()]["N"].ToString());
+        Level = int.Parse(data["Staff" + Code.ToString()]["N"].ToString());
 
-        Default_Pay = int.Parse(Data["rows"]["Pay"]["S"].ToString());
-        Default_Directing = int.Parse(Data["rows"]["Directing"]["S"].ToString());
-        Default_Cost = int.Parse(Data["rows"]["Cost_Upgrade"]["S"].ToString());
+        Default_Pay = int.Parse(Data["Pay"]["S"].ToString());
+        Default_Directing = int.Parse(Data["Directing"]["S"].ToString());
+        Default_Cost = int.Parse(Data["Cost_Upgrade"]["S"].ToString());
 
-        Plus_Pay = int.Parse(Data["rows"]["Plus_Pay"]["S"].ToString());
-        Plus_Directing = int.Parse(Data["rows"]["Plus_Directing"]["S"].ToString());
-        Plus_Cost = int.Parse(Data["rows"]["Plus_Cost"]["S"].ToString());
+        Plus_Pay = int.Parse(Data["Plus_Pay"]["S"].ToString());
+        Plus_Directing = int.Parse(Data["Plus_Directing"]["S"].ToString());
+        Plus_Cost = int.Parse(Data["Plus_Cost"]["S"].ToString());
 
         Pay = Default_Pay + ((Level - 1) * Plus_Pay);
         Directing = Default_Directing + ((Level - 1) * Plus_Directing);
 
-        Cost_Purchase = int.Parse(Data["rows"]["Cost_Purchase"]["S"].ToString());
+        Cost_Purchase = int.Parse(Data["Cost_Purchase"]["S"].ToString());
         Cost_Upgrade = Default_Cost + ((Level - 1) * Plus_Cost);
 
-        IsPurchase = false;
+        IsPurchase = Level == 0 ? false : true;
     }
 }
 
-public class StaffData : MonoBehaviour
+public class StaffData : Singleton<StaffData>
 {
-    public List<Staff> StaffsList = new List<Staff>();
     public List<Sprite> StaffImage = new List<Sprite>();
-    public List<Sprite> StaffProfileImage = new List<Sprite>();
 
-    public void SetStaffData()
+    public List<Staff> SetStaffData()
     {
+        List<Staff> StaffsList = new List<Staff>();
+
         JsonData ChartJson = JsonMapper.ToObject(Backend.Chart.GetLocalChartData("Staff"));
+        var row = ChartJson["rows"];
         StaffsList.Clear();
 
-        foreach (JsonData item in ChartJson)
+        foreach (JsonData item in row)
         {
             Staff staff = new Staff(item);
             StaffsList.Add(staff);
         }
+
+        return StaffsList;
     }
 
-    public void ResetStaffData()
+    public List<Staff> ResetStaffData()
     {
+        List<Staff> StaffsList = SetStaffData();
+
         JsonData ChartJson = JsonMapper.ToObject(Backend.Chart.GetLocalChartData("Staff"));
 
         for (int i = 0; i < StaffsList.Count; i++)
@@ -144,11 +166,14 @@ public class StaffData : MonoBehaviour
                 StaffsList[i].SetStaff(item);
             }
         }
+
+        return StaffsList;
     }
 
-    public Staff FindStaff(int Code)
+    public static Staff FindStaff(int Code)
     {
         Staff result = null;
+        List<Staff> StaffsList = GameManager.Instance.Staffs;
 
         foreach (var item in StaffsList)
         {

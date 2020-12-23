@@ -311,7 +311,7 @@ public class UIManager_02 : MonoBehaviour
     {
         PopupList Select = (PopupList)Popup;
 
-        Popup_Black.SetActive(false);
+        //Popup_Black.SetActive(false);
         switch (Select)
         {
             case PopupList.Option:
@@ -614,6 +614,14 @@ public class UIManager_02 : MonoBehaviour
         double count = Items.Instance.StaffItems.Count / 2f;
         Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
+    }
+
+    public void _SetStaffItem()
+    {
+        foreach (var item in GameManager.Instance.Staffs)
+        {
+
+        }
     }
     #endregion
 

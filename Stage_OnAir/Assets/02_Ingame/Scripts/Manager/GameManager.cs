@@ -49,8 +49,11 @@ public class GameManager : Singleton<GameManager>
     // 오디션에서 고용된 배우들
     public List<Actor> Actors = new List<Actor>();
     //public Dictionary<string, StaffData> Staffs = new Dictionary<string, StaffData>();
+
     //스탭 레벨 저장
     public int[] StaffLevel = new int[10];
+    // 스태프 정보 저장
+    public List<Staff> Staffs = new List<Staff>();
 
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };
     public Step NowStep { get; private set; }
@@ -71,9 +74,6 @@ public class GameManager : Singleton<GameManager>
                 // 게임 디버깅 및 테스트를 위한 임시 로그인
                 var data = Backend.BMember.CustomLogin("test2", "1234");
                 Debug.Log("로그인 완료");
-
-                Backend.GameSchemaInfo.Insert("Staff");
-                Debug.Log("스태프 데이터 생성");
             }
             // 초기화 실패한 경우 실행
             else
@@ -91,7 +91,15 @@ public class GameManager : Singleton<GameManager>
 
         DefaultSuccess = 70;
     }
-    
+
+    public new void Start()
+    {
+        base.Start();
+
+        Staffs = StaffData.Instance.SetStaffData();
+        Debug.Log("스태프 데이터 생성");
+    }
+
     public void Reset()
     {
         Play_Quality = 0;
