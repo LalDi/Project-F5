@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 using BackEnd;
 using LitJson;
 using Define;
@@ -37,6 +36,8 @@ public class UIManager_02 : MonoBehaviour
     public GameObject Popup_Staff;
     public GameObject Popup_StaffUp;
     public GameObject Popup_Shop;
+    [Space(10)]
+    public GameObject Popup_Warning;
 
     [Header("Period")]
     public Text Text_Period;
@@ -63,7 +64,9 @@ public class UIManager_02 : MonoBehaviour
     public List<Sprite> Progress_Btn_Sprites;
 
     [Header("BG")]
-    public List<GameObject> Backgrounds;
+    public GameObject Background_1;
+    public GameObject Background_2;
+    public GameObject Background_3;
 
     [Header("Error")]
     public GameObject Popup_Error;
@@ -89,7 +92,8 @@ public class UIManager_02 : MonoBehaviour
         Staff,      //  11
         StaffUp,    //  12
         Shop,       //  13
-        Error       //  14
+        Error,       //  14
+        Warning //   15
     }
 
     public delegate void ProgressDel();
@@ -231,12 +235,14 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Prepare.SetActive(true);
                 break;
             case PopupList.Marketing:
+                SetMarketingItem();
                 Popup_Marketing.SetActive(true);
                 break;
             case PopupList.MarketingCk:
                 Popup_MarketingCk.SetActive(true);
                 break;
             case PopupList.Develop:
+                SetDevelopItem();
                 Popup_Develop.SetActive(true);
                 break;
             case PopupList.DevelopUp:
@@ -249,17 +255,22 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Play.SetActive(true);
                 break;
             case PopupList.Staff:
+                SetStaffItem();
                 Popup_Staff.SetActive(true);
                 break;
             case PopupList.StaffUp:
                 Popup_StaffUp.SetActive(true);
                 break;
             case PopupList.Shop:
-                Popup_Shop.SetActive(true);
+                SetShopItem();
+                Popup_Shop.SetActive(true); 
                 break;
             case PopupList.Error:
                 Error_Text.text = Error_Message;
                 Popup_Error.SetActive(true);
+                break;
+            case PopupList.Warning:
+                Popup_Warning.SetActive(true);
                 break;
             default:
                 break;
@@ -288,12 +299,19 @@ public class UIManager_02 : MonoBehaviour
         Popup_Shop.SetActive(false);
 
         Popup_Error.SetActive(false);
+        Popup_Warning.SetActive(false);
+
+        Close_Item(Popup_Shop);
+        Close_Item(Popup_Staff);
+        Close_Item(Popup_Marketing);
+        Close_Item(Popup_Develop);
     }
 
     public void Popup_Quit(int Popup)
     {
         PopupList Select = (PopupList)Popup;
 
+        Popup_Black.SetActive(false);
         switch (Select)
         {
             case PopupList.Option:
@@ -312,12 +330,14 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Prepare.SetActive(false);
                 break;
             case PopupList.Marketing:
+                Close_Item(Popup_Marketing);
                 Popup_Marketing.SetActive(false);
                 break;
             case PopupList.MarketingCk:
                 Popup_MarketingCk.SetActive(false);
                 break;
             case PopupList.Develop:
+                Close_Item(Popup_Develop);
                 Popup_Develop.SetActive(false);
                 break;
             case PopupList.DevelopUp:
@@ -330,20 +350,30 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Play.SetActive(false);
                 break;
             case PopupList.Staff:
+                Close_Item(Popup_Staff);
                 Popup_Staff.SetActive(false);
                 break;
             case PopupList.StaffUp:
                 Popup_StaffUp.SetActive(false);
                 break;
             case PopupList.Shop:
+                Close_Item(Popup_Shop);
                 Popup_Shop.SetActive(false);
                 break;
             case PopupList.Error:
                 Popup_Error.SetActive(false);
                 break;
+            case PopupList.Warning:
+                Popup_Warning.SetActive(false);
+                break;
+                
             default:
                 break;
         }
+    }
+    public void Load_Illust()
+    {
+        LoadManager.Load(LoadManager.Scene.Illust);
     }
 
     public void Control_Error(bool Open)
@@ -367,6 +397,8 @@ public class UIManager_02 : MonoBehaviour
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
                 Buttom_Progress.sprite = Image_Progress[0];
+                Background_3.SetActive(false);
+                Background_1.SetActive(true);
                 break;
             case GameManager.Step.Cast_Actor:
                 Progress = () =>
@@ -374,6 +406,8 @@ public class UIManager_02 : MonoBehaviour
                     Popup_On((int)PopupList.Audition);
                 };
                 Buttom_Progress.sprite = Image_Progress[1];
+                Background_1.SetActive(false);
+                Background_2.SetActive(true);
                 break;
             case GameManager.Step.Set_Period:
                 Progress = () =>
@@ -383,6 +417,8 @@ public class UIManager_02 : MonoBehaviour
                     Set_Period_Text();
                 };
                 Buttom_Progress.sprite = Image_Progress[2];
+                Background_1.SetActive(false);
+                Background_2.SetActive(true);
                 break;
             case GameManager.Step.Prepare_Play:
                 Progress = () =>
@@ -399,8 +435,11 @@ public class UIManager_02 : MonoBehaviour
                     Popup_Prepare.transform.Find("Play BT").GetComponent<Button>().interactable = true;
                 };
                 Btn_Progress.GetComponent<Image>().sprite = Progress_Btn_Sprites[3];
-                Backgrounds[1].SetActive(false);
-                Backgrounds[2].SetActive(true);
+                Background_2.SetActive(false);
+
+                Background_3.GetComponent<SpriteRenderer>().sprite = 
+                    ScenarioData.Instance.scenarioBGs[GameManager.Instance.NowScenario.Code-1].Ingame;
+                Background_3.SetActive(true);
                 break;
             default:
                 break;
@@ -425,10 +464,6 @@ public class UIManager_02 : MonoBehaviour
     public void Progress_Play()
     {
         LoadManager.Load(LoadManager.Scene.Play);
-    }
-    public void Progress_Illust()
-    {
-        LoadManager.Load(LoadManager.Scene.Illust);
     }
     #endregion
 
@@ -541,6 +576,178 @@ public class UIManager_02 : MonoBehaviour
             GameManager.Instance.DefaultSuccess = 0;
 
         DefaultSuccess.text = GameManager.Instance.DefaultSuccess.ToString() + "%";
+    }
+    #endregion
+
+    #region Shop
+    public void SetShopItem()
+    {
+        for(int i = 0; i < Items.Instance.ShopItems.Count; i++)
+        {
+            GameObject item = ObjManager.SpawnPool("ShopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
+            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
+        }
+        double count = (Items.Instance.ShopItems.Count / 2f);
+        Popup_Shop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+    }
+    #endregion
+
+    #region Staff
+    public void SetStaffItem()
+    {
+        for (int i = 0; i < Items.Instance.StaffItems.Count; i++)
+        {
+            GameObject item = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.StaffItems[i].name;
+            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.StaffItems[i].Icon;
+            int j = i;
+            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Staff", j));
+        }
+        double count = Items.Instance.StaffItems.Count / 2f;
+        Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+    }
+    #endregion
+
+    #region Marketing
+    public void SetMarketingItem()
+    {
+        for (int i = 0; i < Items.Instance.MarketingItems.Count; i++)
+        {
+            GameObject item = ObjManager.SpawnPool("MarketingItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.MarketingItems[i].name;
+            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.MarketingItems[i].Icon;
+        }
+        double count = (Items.Instance.MarketingItems.Count / 2f);
+        Popup_Marketing.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+    }
+    #endregion
+
+    #region Develop
+    public void SetDevelopItem()
+    {
+        for (int i = 0; i < Items.Instance.DevelopItems.Count; i++)
+        {
+            GameObject item = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            item.transform.GetChild(0).GetComponent<Text>().text = Items.Instance.DevelopItems[i].name;
+            item.transform.GetChild(1).GetComponent<Image>().sprite = Items.Instance.DevelopItems[i].Icon;
+            int j = i;
+            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Develop", j));
+        }
+        double count = (Items.Instance.DevelopItems.Count / 2f);
+        Popup_Develop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 420) + 50);
+    }
+
+    public void Buy_Item(string sort, int num)
+    {
+        //Debug.Log(GameManager.Instance.Money + " , " + Items.Instance.DevelopItems[num].pay);
+        if (sort == "Marketing" && GameManager.Instance.Money >= Items.Instance.MarketingItems[num].pay)
+        {
+            GameManager.Instance.CostMoney(Items.Instance.MarketingItems[num].pay);
+            //marketing아이템을 구매했을 때 나타나는 효과.
+        }
+        else if (sort == "Develop" && GameManager.Instance.Money >= Items.Instance.DevelopItems[num].pay)
+        {
+            Popup_DevelopCk.transform.GetChild(1).GetComponent<Text>().text 
+                = "『" + Items.Instance.DevelopItems[num].name + "』을\n구매하였습니다.";
+            Popup_DevelopCk.transform.GetChild(2).GetComponent<Text>().text
+                = "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> " 
+                + (GameManager.Instance.Money - Items.Instance.DevelopItems[num].pay).ToString("N0");
+
+            Popup_On(9);
+            GameManager.Instance.CostMoney(Items.Instance.DevelopItems[num].pay);
+            //develop아이템을 구매했을 때 나타나는 효과.
+        }
+        else if (sort == "Staff" && GameManager.Instance.Money >= Items.Instance.StaffItems[num].pay)
+        {
+            GameManager.Instance.CostMoney(Items.Instance.StaffItems[num].pay);
+            GameManager.Instance.StaffLevel[num]++;
+            Open_Item_Popup("Staff", num);
+        }
+        else if (sort == "Shop" && GameManager.Instance.Money >= Items.Instance.ShopItems[num].pay)
+        {
+            GameManager.Instance.CostMoney(Items.Instance.ShopItems[num].pay);
+            //Shop아이템을 구매했을 때 나타나는 효과.
+        }
+        else
+        {
+            Popup_On(15);
+        }
+    }
+
+    public void Open_Item_Popup(string sort, int num)
+    {
+        GameObject obj;
+        Sprite Icon;
+        string Name;
+        string Script;
+        string Pay;
+
+        if (sort == "Develop"){
+            Popup_On(8);
+            obj = Popup_DevelopUp;
+            Icon = Items.Instance.DevelopItems[num].Icon;
+            Name = Items.Instance.DevelopItems[num].name;
+            Script = Items.Instance.DevelopItems[num].script;
+            Pay = "가격: " + Items.Instance.DevelopItems[num].pay.ToString("N0");
+            obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+            obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Item("Develop", num));
+        }
+        else if (sort == "Staff"){
+            Popup_On(12);
+            obj = Popup_StaffUp;
+            Icon = Items.Instance.StaffItems[num].Icon;
+            Name = Items.Instance.StaffItems[num].name;
+            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
+            obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+            if (GameManager.Instance.StaffLevel[num] == 0)
+            {
+                Script = "월급: " + Items.Instance.StaffItems[num].pay
+                    + "\n개발력" + Items.Instance.StaffItems[num].directing;
+                Pay = "가격: " + Items.Instance.StaffItems[num].cost_purchass.ToString("N0");
+                obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Item("Staff", num));
+            }
+            else
+            {
+                Script = "월급: " + Items.Instance.Staff_MathPay("Pay", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
+                    + "\n -> " + Items.Instance.Staff_MathPay("Pay", num, GameManager.Instance.StaffLevel[num] + 1).ToString("N0")
+                    + "\n개발력" + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
+                    + "\n -> " + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num] + 1).ToString("N0");
+                Pay = "가격: " + Items.Instance.Staff_MathPay("Cost", num, GameManager.Instance.StaffLevel[num]).ToString("N0");
+                obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "업그레이드";
+                obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Item("Staff", num));
+            }
+        }
+        else
+        {
+            obj = new GameObject();
+            Icon = null;
+            Name = null;
+            Script = null;
+            Pay = null;
+        }
+
+        obj.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = Icon;
+        obj.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = Name;
+        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
+        obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
+    }
+
+    public void Close_Item(GameObject Obj)
+    {
+        for (int i = 0; i < Obj.transform.GetChild(2).GetChild(0).childCount; i++)
+        {
+            Obj.transform.GetChild(2).GetChild(0).GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
+            Obj.transform.GetChild(2).GetChild(0).GetChild(i).gameObject.SetActive(false);
+        }
     }
     #endregion
 }

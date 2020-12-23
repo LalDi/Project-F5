@@ -49,6 +49,7 @@ public class Login : MonoBehaviour
                 Backend.Chart.GetAllChartAndSave(true);
                 ScenarioData.Instance.SetScenarioData();
                 ActorData.Instance.SetActorsData();
+                Items.Instance.SetStaffData();
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "400":

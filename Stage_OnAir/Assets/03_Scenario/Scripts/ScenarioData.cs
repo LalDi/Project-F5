@@ -5,7 +5,6 @@ using LitJson;
 using BackEnd;
 using Define;
 
-    //[System.Serializable]
 public class Scenario
 {
     public int No { get; private set; }
@@ -25,11 +24,18 @@ public class Scenario
         Code = _Code;
     }
 }
-
+[System.Serializable]
+public class ScenarioBG
+{
+    public Sprite Ingame;
+    public Sprite Play_1;
+    public Sprite Play_2;
+}
 
 public class ScenarioData : Singleton<ScenarioData>
 {
     public List<Scenario> ScenarioList = new List<Scenario>();
+    public ScenarioBG[] scenarioBGs = new ScenarioBG[10];
 
     public void SetScenarioData()
     {

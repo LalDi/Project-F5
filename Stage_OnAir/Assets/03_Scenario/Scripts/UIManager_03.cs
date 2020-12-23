@@ -22,7 +22,7 @@ public class UIManager_03 : MonoBehaviour
 
         Popup_Black = Popups.transform.Find("Black BG").gameObject;
         Popup_Scenario_Select = Popups.transform.Find("Scenario Select PU").gameObject;
-        Popup_Warning= Popups.transform.Find("Warning PU").gameObject;
+        Popup_Warning = Popups.transform.Find("Warning PU").gameObject;
         Popup_Buy_Checking = Popups.transform.Find("Buy Checking PU").gameObject;
         Scroll = GameObject.Find("Scroll Rect Image").gameObject;
 
@@ -35,21 +35,23 @@ public class UIManager_03 : MonoBehaviour
     void Start()
     {
         for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
-            {
-                Scroll.transform.GetChild(i).GetComponent<ScenarioScript>().ScenarioData =
-                    ScenarioData.Instance.ScenarioList[i];
-                Scroll.transform.GetChild(i).GetChild(0).GetComponent<Text>().text =
-                    ScenarioData.Instance.ScenarioList[i].Name;
-                Scroll.transform.GetChild(i).gameObject.SetActive(true);
-            //ObjManager.SpawnPool("Scenario", )
-            }
+        {
+            GameObject scenario = ObjManager.SpawnPool("Scenario", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            int j = i;
+            scenario.transform.GetComponent<Button>().onClick.AddListener(() => { Popup_Scenario(j); });
+            
+            scenario.transform.GetChild(0).GetComponent<Text>().text =
+                ScenarioData.Instance.ScenarioList[i].Name;
+            scenario.transform.gameObject.SetActive(true);
+        }
         Scroll.GetComponent<RectTransform>().sizeDelta =
-            new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 310 + 100);
+            new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 250);
     }
-    public void Popup_Scenario()
+    public void Popup_Scenario(int num)
     {
-        Data = EventSystem.current.currentSelectedGameObject.transform.
-            GetComponent<ScenarioScript>().ScenarioData;
+        //Debug.Log(num);
+        Data = ScenarioData.Instance.ScenarioList[num];
 
         Popup_Scenario_Select.transform.Find("Text").GetComponent<Text>().text = Data.Name;
         Popup_Scenario_Select.transform.Find("Quality Image").GetChild(0).GetComponent<Text>().text =
