@@ -311,7 +311,6 @@ public class UIManager_02 : MonoBehaviour
     {
         PopupList Select = (PopupList)Popup;
 
-        Popup_Black.SetActive(false);
         switch (Select)
         {
             case PopupList.Option:
@@ -464,6 +463,16 @@ public class UIManager_02 : MonoBehaviour
     public void Progress_Play()
     {
         LoadManager.Load(LoadManager.Scene.Play);
+    }
+    public void Play_Popup()
+    {
+        Popup_Play.transform.GetChild(2).GetChild(0).GetComponent<Text>().text 
+            = "퀄리티 : " + Define.Math.FINALQUALITY().ToString("N0");
+        Popup_Play.transform.GetChild(3).GetChild(0).GetComponent<Text>().text
+            = "마케팅 : " + GameManager.Instance.Play_Marketing.ToString("N0");
+        Popup_Play.transform.GetChild(4).GetChild(0).GetComponent<Text>().text
+            = "성공률 : " + GameManager.Instance.Play_Success + "%";
+        Popup_On(10);
     }
     #endregion
 
@@ -657,9 +666,19 @@ public class UIManager_02 : MonoBehaviour
     public void Buy_Item(string sort, int num)
     {
         //Debug.Log(GameManager.Instance.Money + " , " + Items.Instance.DevelopItems[num].pay);
-        if (sort == "Marketing" && GameManager.Instance.Money >= Items.Instance.MarketingItems[num].pay)
+        if (sort == "Marketing")
         {
+            Popup_MarketingCk.transform.GetChild(1).GetComponent<Text>().text
+                = "『" + Items.Instance.MarketingItems[num].name + "』을\n구매하였습니다.";
+            Popup_MarketingCk.transform.GetChild(2).GetComponent<Text>().text
+                = "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> "
+                + (GameManager.Instance.Money - Items.Instance.DevelopItems[num].pay).ToString("N0")
+                + "\n마케팅 점수 : " + (GameManager.Instance.Play_Marketing.ToString("N0")) + " -> "
+                + (GameManager.Instance.Play_Marketing + Items.Instance.MarketingItems[num].score).ToString("N0");
+
+            Popup_On(6);
             GameManager.Instance.CostMoney(Items.Instance.MarketingItems[num].pay);
+            GameManager.Instance.CostMarketing(Items.Instance.MarketingItems[num].score, false);
             //marketing아이템을 구매했을 때 나타나는 효과.
         }
         else if (sort == "Develop" && GameManager.Instance.Money >= Items.Instance.DevelopItems[num].pay)
@@ -674,13 +693,13 @@ public class UIManager_02 : MonoBehaviour
             GameManager.Instance.CostMoney(Items.Instance.DevelopItems[num].pay);
             //develop아이템을 구매했을 때 나타나는 효과.
         }
-        else if (sort == "Staff" && GameManager.Instance.Money >= Items.Instance.StaffItems[num].pay)
+        else if (sort == "Staff")
         {
             GameManager.Instance.CostMoney(Items.Instance.StaffItems[num].pay);
             GameManager.Instance.StaffLevel[num]++;
             Open_Item_Popup("Staff", num);
         }
-        else if (sort == "Shop" && GameManager.Instance.Money >= Items.Instance.ShopItems[num].pay)
+        else if (sort == "Shop")
         {
             GameManager.Instance.CostMoney(Items.Instance.ShopItems[num].pay);
             //Shop아이템을 구매했을 때 나타나는 효과.

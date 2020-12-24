@@ -195,4 +195,8 @@ public class GameManager : Singleton<GameManager>
     {
         NowActor++;
     }
+    public void CostMarketing(int value, bool Reduction = true)
+    {
+        Play_Marketing = Reduction ? Play_Marketing - value : Play_Marketing + value;
+    }
 }

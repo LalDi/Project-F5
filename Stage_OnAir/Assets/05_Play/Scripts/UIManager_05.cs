@@ -58,11 +58,15 @@ public class UIManager_05 : MonoBehaviour
         BlackBG.SetActive(true);
         BlackBG.GetComponent<Image>().DOFade(0.5f, 2);
         yield return new WaitForSeconds(2f);
+        ResultPU.transform.GetChild(1).GetComponent<Text>().text = Define.Math.RESULT().ToString("N0");
+        ResultPU.transform.GetChild(2).GetComponent<Text>().text
+            = (GameManager.Instance.Play_Quality * GameManager.Instance.Play_Marketing).ToString("N0");
         ResultPU.SetActive(true);
     }
 
     public void To_Ingame()
     {
+        GameManager.Instance.CostMoney((int)Define.Math.RESULT(), false);
         GameManager.Instance.ScenarioIllust[GameManager.Instance.NowScenario.No - 1] = true;
         GameManager.Instance.Reset();
         LoadManager.LoaderCallback();
