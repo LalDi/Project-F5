@@ -35,9 +35,30 @@ public class Staff
 
         string indate = Backend.BMember.GetUserInfo().GetInDate();
 
-        JsonData data = Backend.GameSchemaInfo.Get("Staff", indate).GetReturnValuetoJSON();
-        Debug.Log(data["Staff" + Code.ToString()]["N"].ToString());
-        Level = int.Parse(data["Staff" + Code.ToString()]["N"].ToString());
+        Debug.Log(Backend.GameSchemaInfo.Get("Staff", indate).GetStatusCode());
+        if (Backend.GameSchemaInfo.Get("Staff", indate).GetStatusCode() == "200")
+        {
+            BackendReturnObject contents = Backend.GameSchemaInfo.Get("Staff", indate);
+            var rows = contents.Rows();
+
+            JsonData data = rows[0];
+
+            string InfoName = "Staff" + Code.ToString();
+
+            if (data.Keys.Contains(InfoName))
+            {
+                Level = int.Parse(data[InfoName]["N"].ToString());
+            }
+            else
+                Debug.Log("그없");
+        }
+        else
+        {
+            Level = 0;
+            Param param = new Param();
+            param.Add("Staff" + Code.ToString(), Level);
+            Backend.GameSchemaInfo.Insert("Staff", param, (callback) => { }); // 비동기
+        }
 
         Default_Pay = int.Parse(Data["Pay"]["S"].ToString());
         Default_Directing = int.Parse(Data["Directing"]["S"].ToString());
@@ -81,12 +102,21 @@ public class Staff
 
         Param param = new Param();
         param.Add(Name, Level);
-        Backend.GameSchemaInfo.Insert("Staff", param, (callback) => { }); // 비동기
+
+        if (Backend.GameSchemaInfo.Get("Staff", InDate).GetStatusCode() == "404")
+        {
+            Backend.GameSchemaInfo.Insert("Staff", param, (callback) => { }); // 비동기
+        }
+        else
+        {
+            Backend.GameSchemaInfo.Update("Staff", InDate, param, (callback) => { }); // 비동기
+        }
     }
 
     public void UpgradeStaff()
     {
         string Name = "Staff" + Code.ToString();
+        string InDate = Backend.BMember.GetUserInfo().GetInDate();
 
         if (!IsPurchase)
         {
@@ -100,7 +130,15 @@ public class Staff
 
         Param param = new Param();
         param.Add(Name, Level);
-        Backend.GameSchemaInfo.Insert("Staff", param, (callback) => { }); // 비동기
+
+        if (Backend.GameSchemaInfo.Get("Staff", InDate).GetStatusCode() == "404")
+        {
+            Backend.GameSchemaInfo.Insert("Staff", param, (callback) => { }); // 비동기
+        }
+        else
+        {
+            Backend.GameSchemaInfo.Update("Staff", InDate, param, (callback) => { }); // 비동기
+        }
     }
 
     public void SetStaff(JsonData Data)
@@ -134,6 +172,7 @@ public class Staff
 
 public class StaffData : Singleton<StaffData>
 {
+    public List<Sprite> StaffIcon = new List<Sprite>();
     public List<Sprite> StaffImage = new List<Sprite>();
 
     public List<Staff> SetStaffData()

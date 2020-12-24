@@ -620,6 +620,10 @@ public class UIManager_02 : MonoBehaviour
     {
         foreach (var item in GameManager.Instance.Staffs)
         {
+            GameObject StaffItem = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            StaffItem.transform.GetChild(0).GetComponent<Image>().sprite = StaffData.Instance.StaffIcon[item.Code];
+            StaffItem.transform.GetChild(1).GetComponent<Text>().text = item.Name;
 
         }
     }
