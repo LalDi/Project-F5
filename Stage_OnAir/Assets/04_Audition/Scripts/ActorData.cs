@@ -154,5 +154,4 @@ public class ActorData : Singleton<ActorData>
             item.RiseActor(IsSuccess);
         }
     }
-
 }

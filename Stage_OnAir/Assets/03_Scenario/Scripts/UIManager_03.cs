@@ -40,7 +40,7 @@ public class UIManager_03 : MonoBehaviour
 
             int j = i;
             scenario.transform.GetComponent<Button>().onClick.AddListener(() => { Popup_Scenario(j); });
-            
+
             scenario.transform.GetChild(0).GetComponent<Text>().text =
                 ScenarioData.Instance.ScenarioList[i].Name;
             scenario.transform.gameObject.SetActive(true);
@@ -50,7 +50,6 @@ public class UIManager_03 : MonoBehaviour
     }
     public void Popup_Scenario(int num)
     {
-        //Debug.Log(num);
         Data = ScenarioData.Instance.ScenarioList[num];
 
         Popup_Scenario_Select.transform.Find("Text").GetComponent<Text>().text = Data.Name;
@@ -69,21 +68,13 @@ public class UIManager_03 : MonoBehaviour
         Popup_Black.SetActive(true);
         Popup_Scenario_Select.SetActive(false);
 
-        if (GameManager.Instance.Money >=
-            Data.Price)
-        {
-            Popup_Buy_Checking.transform.GetChild(1).GetComponent<Text>().text =
-               " 『" + Data.Name + "』 \n을 구매하였습니다.";
-            Popup_Buy_Checking.transform.GetChild(2).GetComponent<Text>().text =
-                "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> " +
-                (GameManager.Instance.Money - Data.Price).ToString("N0");
-            GameManager.Instance.SetScenario(Data);
-            GameManager.Instance.CostMoney(Data.Price, true);
-            GameManager.Instance.SetMaxActor(Data.Actors);
-            Popup_Buy_Checking.SetActive(true);
-        }
-        else
-            Popup_Warning.SetActive(true);
+        Popup_Buy_Checking.transform.GetChild(1).GetComponent<Text>().text =
+           " 『" + Data.Name + "』 \n을 구매하였습니다.";
+        Popup_Buy_Checking.transform.GetChild(2).GetComponent<Text>().text =
+            "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> " +
+            (GameManager.Instance.Money - Data.Price).ToString("N0");
+        GameManager.Instance.SetScenario(Data);
+        Popup_Buy_Checking.SetActive(true);
     }
     public void Close_Popup()
     {
@@ -91,12 +82,6 @@ public class UIManager_03 : MonoBehaviour
         Popup_Scenario_Select.SetActive(false);
         Popup_Warning.SetActive(false);
         Popup_Buy_Checking.SetActive(false);
-    }
-    public void Buy_Scenario()
-    {
-        GameManager.Instance.SetStep(GameManager.Step.Cast_Actor);
-        LoadManager.LoaderCallback();
-        LoadManager.Load(LoadManager.Scene.Ingame);
     }
     public void To_Ingame()
     {

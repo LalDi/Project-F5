@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using BackEnd;
 using LitJson;
 using Define;
+using DG.Tweening;
 
 public class UIManager_02 : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class UIManager_02 : MonoBehaviour
     public Text Text_Money;
     public Text Text_Year;
     public Text Text_Month;
+    public GameObject Stat_UI;
 
     [Header("Bottom UI")]
     public Image Buttom_Progress;
@@ -101,7 +103,6 @@ public class UIManager_02 : MonoBehaviour
 
     private int CountMonth = 0;
 
-
     private void Start()
     {
         SetProgress();
@@ -125,8 +126,44 @@ public class UIManager_02 : MonoBehaviour
             "\n" + GameManager.Instance.NowActor + 
             " / " +  GameManager.Instance.MaxActor;
 
-        SetProgress();
+        string StatText;
+        //진행 단계
+        StatText = "진행 단계: ";
+        switch(GameManager.Instance.NowStep)
+        {
+            case GameManager.Step.Select_Scenario:
+                StatText += "시나리오 선택"; break;
+            case GameManager.Step.Cast_Actor:
+                StatText += "배우 캐스팅"; break;
+            case GameManager.Step.Set_Period:
+                StatText += "준비 기간 설정"; break;
+            case GameManager.Step.Prepare_Play:
+                StatText += "공연 준비"; break;
+            case GameManager.Step.Start_Play:
+                StatText += "연극 공연 개시"; break;
+            default: 
+                break;
+        }
+        //시나리오, 배우
+        if (GameManager.Instance.NowStep == GameManager.Step.Select_Scenario)
+            StatText += "\n시나리오 이름: 없음" + "\n배우: 없음";
+        else {
+            StatText += "\n시나리오 이름: " + GameManager.Instance.NowScenario.Name
+            + "\n배우: " + GameManager.Instance.NowActor + " / " + GameManager.Instance.MaxActor;
+        }
+        //준비 기간
+        if (GameManager.Instance.NowStep > GameManager.Step.Set_Period)
+            StatText += "\n준비 기간: " + GameManager.Instance.Period + "개월";
+        else
+            StatText += "\n준비 기간: 없음";
+        //퀄리티, 마케팅, 성공률
+        StatText += "\n\n퀄리티: " + GameManager.Instance.Play_Quality.ToString("N0")
+            + "\n마케팅: " + GameManager.Instance.Play_Marketing.ToString("N0")
+            + "\n성공률: " + GameManager.Instance.Play_Success + "%";
 
+        Stat_UI.transform.GetChild(1).GetComponent<Text>().text = StatText;
+
+        SetProgress();
     }
 
     #region Rank
@@ -479,8 +516,11 @@ public class UIManager_02 : MonoBehaviour
     #region Period
     public void Click_Period(int value)
     {
-        GameManager.Instance.SetPeriod(value);
-        Set_Period_Text();
+        if (GameManager.Instance.Period + value > 0)
+        {
+            GameManager.Instance.SetPeriod(value);
+            Set_Period_Text();
+        }
     }
 
     private void Set_Period_Text()
@@ -588,7 +628,8 @@ public class UIManager_02 : MonoBehaviour
     }
     #endregion
 
-    #region Shop
+    #region Item
+
     public void SetShopItem()
     {
         for(int i = 0; i < Items.Instance.ShopItems.Count; i++)
@@ -606,9 +647,6 @@ public class UIManager_02 : MonoBehaviour
         Popup_Shop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
-    #endregion
-
-    #region Staff
     public void SetStaffItem()
     {
         for (int i = 0; i < Items.Instance.StaffItems.Count; i++)
@@ -624,9 +662,6 @@ public class UIManager_02 : MonoBehaviour
         Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
-    #endregion
-
-    #region Marketing
     public void SetMarketingItem()
     {
         for (int i = 0; i < Items.Instance.MarketingItems.Count; i++)
@@ -644,9 +679,6 @@ public class UIManager_02 : MonoBehaviour
         Popup_Marketing.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
-    #endregion
-
-    #region Develop
     public void SetDevelopItem()
     {
         for (int i = 0; i < Items.Instance.DevelopItems.Count; i++)
@@ -662,10 +694,8 @@ public class UIManager_02 : MonoBehaviour
         Popup_Develop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
-
     public void Buy_Item(string sort, int num)
     {
-        //Debug.Log(GameManager.Instance.Money + " , " + Items.Instance.DevelopItems[num].pay);
         if (sort == "Marketing")
         {
             Popup_MarketingCk.transform.GetChild(1).GetComponent<Text>().text
@@ -678,7 +708,7 @@ public class UIManager_02 : MonoBehaviour
 
             Popup_On(6);
             GameManager.Instance.CostMoney(Items.Instance.MarketingItems[num].pay);
-            GameManager.Instance.CostMarketing(Items.Instance.MarketingItems[num].score, false);
+            GameManager.Instance.Plus_Play_Marketing(Items.Instance.MarketingItems[num].score);
             //marketing아이템을 구매했을 때 나타나는 효과.
         }
         else if (sort == "Develop" && GameManager.Instance.Money >= Items.Instance.DevelopItems[num].pay)
@@ -709,7 +739,6 @@ public class UIManager_02 : MonoBehaviour
             Popup_On(15);
         }
     }
-
     public void Open_Item_Popup(string sort, int num)
     {
         GameObject obj;
@@ -767,7 +796,6 @@ public class UIManager_02 : MonoBehaviour
         obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
         obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
     }
-
     public void Close_Item(GameObject Obj)
     {
         for (int i = 0; i < Obj.transform.GetChild(2).GetChild(0).childCount; i++)
@@ -777,4 +805,12 @@ public class UIManager_02 : MonoBehaviour
         }
     }
     #endregion
+
+    public void Stat_UI_Anim()
+    {
+        if (Stat_UI.transform.position.x >= -700)
+            Stat_UI.transform.DOLocalMoveX(-720f, 0.3f).SetEase(Ease.OutBack);
+        else
+            Stat_UI.transform.DOLocalMoveX(-290f, 0.3f).SetEase(Ease.OutBack);
+    }
 }

@@ -58,9 +58,9 @@ public class UIManager_05 : MonoBehaviour
         BlackBG.SetActive(true);
         BlackBG.GetComponent<Image>().DOFade(0.5f, 2);
         yield return new WaitForSeconds(2f);
-        ResultPU.transform.GetChild(1).GetComponent<Text>().text = Define.Math.RESULT().ToString("N0");
-        ResultPU.transform.GetChild(2).GetComponent<Text>().text
-            = (GameManager.Instance.Play_Quality * GameManager.Instance.Play_Marketing).ToString("N0");
+        ResultPU.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "수익: " + Define.Math.RESULT().ToString("N0");
+        ResultPU.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
+            = "관객수: " + (GameManager.Instance.Play_Quality * GameManager.Instance.Play_Marketing).ToString("N0");
         ResultPU.SetActive(true);
     }
 
