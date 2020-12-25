@@ -1254,7 +1254,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1513324320}
-        m_MethodName: Buy_Scenario
+        m_MethodName: To_Ingame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1875,7 +1875,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Popup_Black: {fileID: 890747059}
   Popup_Scenario_Select: {fileID: 1862238255}
-  Popup_Warning: {fileID: 0}
   Popup_Buy_Checking: {fileID: 1869974426}
   Scroll: {fileID: 418871539}
 --- !u!4 &1513324321

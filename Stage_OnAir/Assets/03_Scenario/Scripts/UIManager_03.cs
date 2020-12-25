@@ -11,7 +11,6 @@ public class UIManager_03 : MonoBehaviour
 
     public GameObject Popup_Black;
     public GameObject Popup_Scenario_Select;
-    public GameObject Popup_Warning;
     public GameObject Popup_Buy_Checking;
 
     public GameObject Scroll;
@@ -22,13 +21,11 @@ public class UIManager_03 : MonoBehaviour
 
         Popup_Black = Popups.transform.Find("Black BG").gameObject;
         Popup_Scenario_Select = Popups.transform.Find("Scenario Select PU").gameObject;
-        Popup_Warning = Popups.transform.Find("Warning PU").gameObject;
         Popup_Buy_Checking = Popups.transform.Find("Buy Checking PU").gameObject;
         Scroll = GameObject.Find("Scroll Rect Image").gameObject;
 
         Popup_Black.SetActive(false);
         Popup_Scenario_Select.SetActive(false);
-        Popup_Warning.SetActive(false);
         Popup_Buy_Checking.SetActive(false);
     }
 
@@ -80,7 +77,6 @@ public class UIManager_03 : MonoBehaviour
     {
         Popup_Black.SetActive(false);
         Popup_Scenario_Select.SetActive(false);
-        Popup_Warning.SetActive(false);
         Popup_Buy_Checking.SetActive(false);
     }
     public void To_Ingame()

@@ -28,16 +28,22 @@ public class UIManager_02 : MonoBehaviour
     public GameObject Popup_Audition;
     public GameObject Popup_Period;
     public GameObject Popup_Prepare;
+    [Space(10)]
     public GameObject Popup_Marketing;
+    public GameObject Popup_MarketingUp;
     public GameObject Popup_MarketingCk;
     public GameObject Popup_Develop;
     public GameObject Popup_DevelopUp;
     public GameObject Popup_DevelopCk;
+    [Space(10)]
     public GameObject Popup_Play;
     [Space(10)]
     public GameObject Popup_Staff;
     public GameObject Popup_StaffUp;
+    public GameObject Popup_StaffCk;
     public GameObject Popup_Shop;
+    public GameObject Popup_ShopUp;
+    public GameObject Popup_ShopCk;
     [Space(10)]
     public GameObject Popup_Warning;
 
@@ -86,16 +92,20 @@ public class UIManager_02 : MonoBehaviour
         Period,     //  3
         Prepare,    //  4
         Marketing,  //  5
-        MarketingCk,//  6
-        Develop,    //  7
-        DevelopUp,  //  8
-        DevelopCk,  //  9
-        Play,       //  10
-        Staff,      //  11
-        StaffUp,    //  12
-        Shop,       //  13
-        Error,       //  14
-        Warning //   15
+        MarketingUp, //6
+        MarketingCk,//  7
+        Develop,    //  8
+        DevelopUp,  //  9
+        DevelopCk,  //  10
+        Play,       //  11
+        Staff,      //  12
+        StaffUp,    //  13
+        StaffCk,   //  14
+        Shop,       //  15
+        ShopUp,  //16
+        ShopCk,  //17
+        Error,       //  18
+        Warning //   19
     }
 
     public delegate void ProgressDel();
@@ -275,6 +285,9 @@ public class UIManager_02 : MonoBehaviour
                 SetMarketingItem();
                 Popup_Marketing.SetActive(true);
                 break;
+            case PopupList.MarketingUp:
+                Popup_MarketingUp.SetActive(true);
+                break;
             case PopupList.MarketingCk:
                 Popup_MarketingCk.SetActive(true);
                 break;
@@ -297,10 +310,20 @@ public class UIManager_02 : MonoBehaviour
                 break;
             case PopupList.StaffUp:
                 Popup_StaffUp.SetActive(true);
+                Close_Item(Popup_Staff);
+                break;
+            case PopupList.StaffCk:
+                Popup_StaffCk.SetActive(true);
                 break;
             case PopupList.Shop:
                 SetShopItem();
                 Popup_Shop.SetActive(true); 
+                break;
+            case PopupList.ShopUp:
+                Popup_ShopUp.SetActive(true);
+                break;
+            case PopupList.ShopCk:
+                Popup_ShopCk.SetActive(true);
                 break;
             case PopupList.Error:
                 Error_Text.text = Error_Message;
@@ -369,6 +392,9 @@ public class UIManager_02 : MonoBehaviour
                 Close_Item(Popup_Marketing);
                 Popup_Marketing.SetActive(false);
                 break;
+            case PopupList.MarketingUp:
+                Popup_MarketingUp.SetActive(false);
+                break;
             case PopupList.MarketingCk:
                 Popup_MarketingCk.SetActive(false);
                 break;
@@ -390,11 +416,22 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Staff.SetActive(false);
                 break;
             case PopupList.StaffUp:
+                Popup_Quit(12);
+                Popup_On(12);
                 Popup_StaffUp.SetActive(false);
+                break;
+            case PopupList.StaffCk:
+                Popup_StaffCk.SetActive(false);
                 break;
             case PopupList.Shop:
                 Close_Item(Popup_Shop);
                 Popup_Shop.SetActive(false);
+                break;
+            case PopupList.ShopUp:
+                Popup_ShopUp.SetActive(false);
+                break;
+            case PopupList.ShopCk:
+                Popup_ShopCk.SetActive(false);
                 break;
             case PopupList.Error:
                 Popup_Error.SetActive(false);
@@ -509,7 +546,7 @@ public class UIManager_02 : MonoBehaviour
             = "마케팅 : " + GameManager.Instance.Play_Marketing.ToString("N0");
         Popup_Play.transform.GetChild(4).GetChild(0).GetComponent<Text>().text
             = "성공률 : " + GameManager.Instance.Play_Success + "%";
-        Popup_On(10);
+        Popup_On(11);
     }
     #endregion
 
@@ -629,22 +666,36 @@ public class UIManager_02 : MonoBehaviour
     #endregion
 
     #region Item
-
-    public void SetShopItem()
+    public void SetMarketingItem()
     {
-        for(int i = 0; i < Items.Instance.ShopItems.Count; i++)
+        for (int i = 0; i < Items.Instance.MarketingItems.Count; i++)
         {
-            GameObject item = ObjManager.SpawnPool("ShopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+            GameObject item = ObjManager.SpawnPool("MarketingItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
-            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
-            item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.ShopItems[i].pay.ToString("N0")
-                + "\n점수: +" + Items.Instance.ShopItems[i].score.ToString("N0");
+            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.MarketingItems[i].Icon;
+            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.MarketingItems[i].name;
+            item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.MarketingItems[i].pay.ToString("N0")
+                + "\n점수: +" + Items.Instance.MarketingItems[i].score.ToString("N0");
             int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Buy_Item("Shop", j));
+            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Marketing", j));
         }
-        double count = (Items.Instance.ShopItems.Count / 2f);
-        Popup_Shop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+        double count = (Items.Instance.MarketingItems.Count / 2f);
+        Popup_Marketing.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+            new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
+    }
+    public void SetDevelopItem()
+    {
+        for (int i = 0; i < Items.Instance.DevelopItems.Count; i++)
+        {
+            GameObject item = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
+            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.DevelopItems[i].Icon;
+            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.DevelopItems[i].name;
+            int j = i;
+            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Develop", j));
+        }
+        double count = (Items.Instance.DevelopItems.Count / 2f);
+        Popup_Develop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
     public void SetStaffItem()
@@ -662,82 +713,22 @@ public class UIManager_02 : MonoBehaviour
         Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
-    public void SetMarketingItem()
+    public void SetShopItem()
     {
-        for (int i = 0; i < Items.Instance.MarketingItems.Count; i++)
+        for(int i = 0; i < Items.Instance.ShopItems.Count; i++)
         {
-            GameObject item = ObjManager.SpawnPool("MarketingItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+            GameObject item = ObjManager.SpawnPool("ShopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.MarketingItems[i].Icon;
-            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.MarketingItems[i].name;
-            item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.MarketingItems[i].pay.ToString("N0")
-                + "\n점수: +" + Items.Instance.MarketingItems[i].score.ToString("N0");
+            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
+            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
+            item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.ShopItems[i].pay.ToString("N0")
+                + "\n점수: +" + Items.Instance.ShopItems[i].score.ToString("N0");
             int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Buy_Item("Marketing", j));
+            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Shop", j));
         }
-        double count = (Items.Instance.MarketingItems.Count / 2f);
-        Popup_Marketing.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+        double count = (Items.Instance.ShopItems.Count / 2f);
+        Popup_Shop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
-    }
-    public void SetDevelopItem()
-    {
-        for (int i = 0; i < Items.Instance.DevelopItems.Count; i++)
-        {
-            GameObject item = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
-
-            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.DevelopItems[i].Icon;
-            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.DevelopItems[i].name;
-            int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Buy_Item("Develop", j));
-        }
-        double count = (Items.Instance.DevelopItems.Count / 2f);
-        Popup_Develop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
-            new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
-    }
-    public void Buy_Item(string sort, int num)
-    {
-        if (sort == "Marketing")
-        {
-            Popup_MarketingCk.transform.GetChild(1).GetComponent<Text>().text
-                = "『" + Items.Instance.MarketingItems[num].name + "』을\n구매하였습니다.";
-            Popup_MarketingCk.transform.GetChild(2).GetComponent<Text>().text
-                = "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> "
-                + (GameManager.Instance.Money - Items.Instance.DevelopItems[num].pay).ToString("N0")
-                + "\n마케팅 점수 : " + (GameManager.Instance.Play_Marketing.ToString("N0")) + " -> "
-                + (GameManager.Instance.Play_Marketing + Items.Instance.MarketingItems[num].score).ToString("N0");
-
-            Popup_On(6);
-            GameManager.Instance.CostMoney(Items.Instance.MarketingItems[num].pay);
-            GameManager.Instance.Plus_Play_Marketing(Items.Instance.MarketingItems[num].score);
-            //marketing아이템을 구매했을 때 나타나는 효과.
-        }
-        else if (sort == "Develop" && GameManager.Instance.Money >= Items.Instance.DevelopItems[num].pay)
-        {
-            Popup_DevelopCk.transform.GetChild(1).GetComponent<Text>().text 
-                = "『" + Items.Instance.DevelopItems[num].name + "』을\n구매하였습니다.";
-            Popup_DevelopCk.transform.GetChild(2).GetComponent<Text>().text
-                = "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> " 
-                + (GameManager.Instance.Money - Items.Instance.DevelopItems[num].pay).ToString("N0");
-
-            Popup_On(9);
-            GameManager.Instance.CostMoney(Items.Instance.DevelopItems[num].pay);
-            //develop아이템을 구매했을 때 나타나는 효과.
-        }
-        else if (sort == "Staff")
-        {
-            GameManager.Instance.CostMoney(Items.Instance.StaffItems[num].pay);
-            GameManager.Instance.StaffLevel[num]++;
-            Open_Item_Popup("Staff", num);
-        }
-        else if (sort == "Shop")
-        {
-            GameManager.Instance.CostMoney(Items.Instance.ShopItems[num].pay);
-            //Shop아이템을 구매했을 때 나타나는 효과.
-        }
-        else
-        {
-            Popup_On(15);
-        }
     }
     public void Open_Item_Popup(string sort, int num)
     {
@@ -747,8 +738,20 @@ public class UIManager_02 : MonoBehaviour
         string Script;
         string Pay;
 
-        if (sort == "Develop"){
-            Popup_On(8);
+        if (sort == "Marketing")
+        {
+            Popup_On(6);
+            obj = Popup_MarketingUp;
+            Icon = Items.Instance.MarketingItems[num].Icon;
+            Name = Items.Instance.MarketingItems[num].name;
+            Script = "마케팅점수: +" + Items.Instance.MarketingItems[num].score.ToString("N0");
+            Pay = "가격: " + Items.Instance.MarketingItems[num].pay.ToString("N0");
+            obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+            obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Item("Marketing", num));
+        }
+        else if (sort == "Develop")
+        {
+            Popup_On(9);
             obj = Popup_DevelopUp;
             Icon = Items.Instance.DevelopItems[num].Icon;
             Name = Items.Instance.DevelopItems[num].name;
@@ -757,18 +760,19 @@ public class UIManager_02 : MonoBehaviour
             obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
             obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Item("Develop", num));
         }
-        else if (sort == "Staff"){
-            Popup_On(12);
+        else if (sort == "Staff")
+        {
+            Popup_On(13);
             obj = Popup_StaffUp;
             Icon = Items.Instance.Staff_Icons[num];
             Name = Items.Instance.StaffItems[num].name;
-            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
             obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
             if (GameManager.Instance.StaffLevel[num] == 0)
             {
                 Script = "월급: " + Items.Instance.StaffItems[num].pay
                     + "\n개발력" + Items.Instance.StaffItems[num].directing;
                 Pay = "가격: " + Items.Instance.StaffItems[num].cost_purchass.ToString("N0");
+                obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
                 obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Item("Staff", num));
             }
             else
@@ -781,6 +785,17 @@ public class UIManager_02 : MonoBehaviour
                 obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "업그레이드";
                 obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Item("Staff", num));
             }
+        }
+        else if (sort == "Shop")
+        {
+            Popup_On(16);
+            obj = Popup_ShopUp;
+            Icon = Items.Instance.ShopItems[num].Icon;
+            Name = Items.Instance.ShopItems[num].name;
+            Script = "점수: +" + Items.Instance.ShopItems[num].score.ToString("N0");
+            Pay = "가격: " + Items.Instance.ShopItems[num].pay.ToString("N0");
+            obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+            obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Item("Shop", num));
         }
         else
         {
@@ -795,6 +810,72 @@ public class UIManager_02 : MonoBehaviour
         obj.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = Name;
         obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
         obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
+    }
+    public void Buy_Item(string sort, int num)
+    {
+        if (sort == "Marketing")
+        {
+            Popup_MarketingCk.transform.GetChild(1).GetComponent<Text>().text
+                = "『" + Items.Instance.MarketingItems[num].name + "』을\n구매하였습니다.";
+            Popup_MarketingCk.transform.GetChild(2).GetComponent<Text>().text
+                = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
+                + (GameManager.Instance.Money - Items.Instance.DevelopItems[num].pay).ToString("N0")
+                + "\n마케팅 점수: " + (GameManager.Instance.Play_Marketing.ToString("N0")) + " -> "
+                + (GameManager.Instance.Play_Marketing + Items.Instance.MarketingItems[num].score).ToString("N0");
+
+            Popup_On(7);
+            GameManager.Instance.CostMoney(Items.Instance.MarketingItems[num].pay);
+            GameManager.Instance.Plus_Play_Marketing(Items.Instance.MarketingItems[num].score);
+            //marketing아이템을 구매했을 때 나타나는 효과.
+        }
+        else if (sort == "Develop" && GameManager.Instance.Money >= Items.Instance.DevelopItems[num].pay)
+        {
+            Popup_DevelopCk.transform.GetChild(1).GetComponent<Text>().text 
+                = "『" + Items.Instance.DevelopItems[num].name + "』을\n구매하였습니다.";
+            Popup_DevelopCk.transform.GetChild(2).GetComponent<Text>().text
+                = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> " 
+                + (GameManager.Instance.Money - Items.Instance.DevelopItems[num].pay).ToString("N0");
+
+            Popup_On(10);
+            GameManager.Instance.CostMoney(Items.Instance.DevelopItems[num].pay);
+            //develop아이템을 구매했을 때 나타나는 효과.
+        }
+        else if (sort == "Staff")
+        {
+            if (GameManager.Instance.StaffLevel[num] == 0)
+            {
+                Popup_StaffCk.transform.GetChild(1).GetComponent<Text>().text
+                = "『" + Items.Instance.StaffItems[num].name + "』을\n구매하였습니다.";
+                Popup_StaffCk.transform.GetChild(2).GetComponent<Text>().text
+                    = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
+                    + (GameManager.Instance.Money - Items.Instance.StaffItems[num].pay).ToString("N0")
+                    + "\n개발력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
+                    + (GameManager.Instance.Quality_Direction + Items.Instance.MarketingItems[num].score).ToString("N0");
+                Popup_On(14);
+            }
+            GameManager.Instance.CostMoney(Items.Instance.StaffItems[num].pay);
+            GameManager.Instance.Plus_Quality_Direction(Items.Instance.MarketingItems[num].score);
+            GameManager.Instance.StaffLevel[num]++;
+            Open_Item_Popup("Staff", num);
+        }
+        else if (sort == "Shop")
+        {
+            Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
+                = "『" + Items.Instance.ShopItems[num].name + "』을\n구매하였습니다.";
+            Popup_ShopCk.transform.GetChild(2).GetComponent<Text>().text
+                = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
+                + (GameManager.Instance.Money - Items.Instance.ShopItems[num].pay).ToString("N0");
+                //+ "\n점수: " + (GameManager.Instance.ShopItems.ToString("N0")) + " -> "
+                //+ (GameManager.Instance.ShopItems + Items.Instance.MarketingItems[num].score).ToString("N0");
+
+            Popup_On(17);
+            GameManager.Instance.CostMoney(Items.Instance.ShopItems[num].pay);
+            //Shop아이템을 구매했을 때 나타나는 효과.
+        }
+        else
+        {
+            Popup_On(15);
+        }
     }
     public void Close_Item(GameObject Obj)
     {
