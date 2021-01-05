@@ -16,18 +16,19 @@ public class UIManager_06 : MonoBehaviour
 
     void Start()
     {
-        Scroll = GameObject.Find("Scroll Rect Image").gameObject;
         for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
         {
+            GameObject item = ObjManager.SpawnPool("Illust", Vector3.zero, Quaternion.Euler(0, 0, 0));
+
             if (GameManager.Instance.ScenarioIllust[i])
-                Scroll.transform.GetChild(i).GetChild(1).GetComponent<Image>().sprite =
-                    Illusts[i];
+                item.transform.GetChild(1).GetComponent<Image>().sprite = Illusts[i];
             else
-                Scroll.transform.GetChild(i).GetChild(1).GetComponent<Image>().sprite =
-                    Null;
-            Scroll.transform.GetChild(i).GetChild(0).GetComponent<Text>().text =
+                item.transform.GetChild(1).GetComponent<Image>().sprite = Null;
+            item.transform.GetChild(0).GetComponent<Text>().text =
                 ScenarioData.Instance.ScenarioList[i].Name;
-            Scroll.transform.GetChild(i).gameObject.SetActive(true);
+
+            int j = i;
+            item.transform.GetComponent<Button>().onClick.AddListener(() => Push_IllustBT(j));
         }
         Scroll.GetComponent<RectTransform>().sizeDelta =
             new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 610 + 100);
@@ -36,20 +37,22 @@ public class UIManager_06 : MonoBehaviour
         Popup_Illust.SetActive(false);
     }
 
-    public void Push_IllustBT()
+    public void Push_IllustBT(int num)
     {
-        Popup_Illust.GetComponent<Image>().sprite =
-            EventSystem.current.currentSelectedGameObject.transform.GetChild(1).GetComponent<Image>().sprite;
+        SoundManager.Instance.PlaySound("Pop_6");
+        Popup_Illust.GetComponent<Image>().sprite = Illusts[num];
         Popup_Black.SetActive(true);
         Popup_Illust.SetActive(true);
     }
     public void Exit_IllustPopup()
     {
+        SoundManager.Instance.PlaySound("Pop_3");
         Popup_Black.SetActive(false);
         Popup_Illust.SetActive(false);
     }
     public void To_Ingame()
     {
+        SoundManager.Instance.PlaySound("Pop_6");
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
     }

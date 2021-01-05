@@ -12,6 +12,7 @@ public class SettingMenu : MonoBehaviour
     
     public void Anim()
     {
+        SoundManager.Instance.PlaySound("Pop_6");
         if (IsOpen) {
             MainBT.transform.DORotate(Vector3.forward * 360f, 0.5f).SetEase(Ease.OutBack);
             for (int i = 0; i < Icons.Length; i++)

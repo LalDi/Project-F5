@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Define;
 using BackEnd;
 using LitJson;
-using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -39,6 +38,8 @@ public class GameManager : Singleton<GameManager>
     public bool OnBGM;
     public bool OnSFX;
     public bool OnPush;
+    [SerializeField]
+    public bool IsBankrupt;
 
     //시나리오
     public Scenario NowScenario { get; private set; }
@@ -85,6 +86,12 @@ public class GameManager : Singleton<GameManager>
         Money = 5000000;
 
         DefaultSuccess = 70;
+
+
+        OnBGM = true;
+        OnSFX = true;
+        OnPush = true;
+        IsBankrupt = false;
     }
     public void Reset()
     {
@@ -140,14 +147,17 @@ public class GameManager : Singleton<GameManager>
     public void Plus_Quality_Acting(int value)
     {
         Quality_Acting += value;
+        Plus_Play_Quality(value);
     }
     public void Plus_Quality_Scenario(int value)
     {
         Quality_Scenario += value;
+        Plus_Play_Quality(value);
     }
     public void Plus_Quality_Direction(int value)
     {
         Quality_Direction += value;
+        Plus_Play_Quality(value);
     }
     #endregion
 
@@ -202,6 +212,20 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Player Data
+    public void ReStart()
+    {
+        Reset();
+        StaffLevel = Enumerable.Repeat<int>(0, 10).ToArray<int>();
+        Year = 2000;
+        Month = 01;
+        Money = 5000000;
+        DefaultSuccess = 70;
+        IsBankrupt = false;
+    }
+    public void Is_Bankrupt(bool Is) 
+    {
+        IsBankrupt = Is;
+    }
     #endregion
 
     #region Scenario n Actor n Staff
@@ -210,7 +234,7 @@ public class GameManager : Singleton<GameManager>
         NowScenario = NextScenario;
         CostMoney(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Price);
         SetMaxActor(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Actors);
-        Plus_Play_Quality(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Quality);
+        Plus_Quality_Scenario(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Quality);
         SetStep(Step.Cast_Actor);
     }
     public void SetMaxActor(int Num)

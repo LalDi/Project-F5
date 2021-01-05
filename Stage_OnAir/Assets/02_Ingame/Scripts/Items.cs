@@ -13,6 +13,7 @@ public class ShopItem
     [Tooltip("가격")]    public int pay;
     [Tooltip("아이콘")] public Sprite Icon;
 }
+
 public class StaffItem
 {
     public int no { get; private set; }
@@ -39,6 +40,7 @@ public class StaffItem
         plus_cost = _Plus_cost;
     }
 };
+
 [System.Serializable]
 public class MarketingItem
 {
@@ -48,6 +50,7 @@ public class MarketingItem
     [Tooltip("가격")] public int pay;
     [Tooltip("아이콘")] public Sprite Icon;
 };
+
 [System.Serializable]
 public class DevelopItem
 {
@@ -58,6 +61,7 @@ public class DevelopItem
     [Tooltip("가격")] public int pay;
     [Tooltip("아이콘")] public Sprite Icon;
 };
+
 public class Items : Singleton<Items>
 {
     public List<ShopItem> ShopItems = new List<ShopItem>();
@@ -93,13 +97,13 @@ public class Items : Singleton<Items>
     public int Staff_MathPay(string sort, int num, int level)
     {
         if (sort == "Pay"){
-            return StaffItems[num].pay + (StaffItems[num].plus_pay * level);
+            return StaffItems[num].pay + (StaffItems[num].plus_pay * (level - 1));
         }
         else if (sort == "Directing"){
-            return StaffItems[num].directing + (StaffItems[num].plus_directing * level);
+            return StaffItems[num].directing + (StaffItems[num].plus_directing * (level - 1));
         }
         else if (sort == "Cost"){
-            return StaffItems[num].cost_upgrade + (StaffItems[num].plus_cost * level-1);
+            return StaffItems[num].cost_upgrade + (StaffItems[num].plus_cost * (level-1));
         }
         return 0;
     }

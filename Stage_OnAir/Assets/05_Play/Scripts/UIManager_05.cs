@@ -58,6 +58,7 @@ public class UIManager_05 : MonoBehaviour
         BlackBG.SetActive(true);
         BlackBG.GetComponent<Image>().DOFade(0.5f, 2);
         yield return new WaitForSeconds(2f);
+        SoundManager.Instance.PlaySound("Special&Powerup_35");
         ResultPU.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "수익: " + Define.Math.RESULT().ToString("N0");
         ResultPU.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
             = "관객수: " + (GameManager.Instance.Play_Quality * GameManager.Instance.Play_Marketing).ToString("N0");
@@ -67,7 +68,12 @@ public class UIManager_05 : MonoBehaviour
     public void To_Ingame()
     {
         GameManager.Instance.CostMoney((int)Define.Math.RESULT(), false);
-        GameManager.Instance.ScenarioIllust[GameManager.Instance.NowScenario.No - 1] = true;
+        if (GameManager.Instance.Money < 0) //파산
+            GameManager.Instance.Is_Bankrupt(true);
+
+        if (GameManager.Instance.Play_Success >= 90) //일정 성공률 이상이면 일러스트 해금
+            GameManager.Instance.ScenarioIllust[GameManager.Instance.NowScenario.No - 1] = true;
+
         GameManager.Instance.Reset();
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
