@@ -63,6 +63,11 @@ public class SoundManager : Singleton<SoundManager>
         StartCoroutine(Fade("out"));
         bgmPlayer.Stop();
     }
+    public void PlayBGM()
+    {
+        StartCoroutine(Fade("In"));
+        bgmPlayer.Play();
+    }
 
     public void SetSFX(float volume)
     {

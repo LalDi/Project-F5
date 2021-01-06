@@ -85,8 +85,9 @@ public class UIManager_02 : MonoBehaviour
     public Text Error_Text;
     private string Error_Message;
 
-    [Header("GameOver")]
+    [Header("Anim UI")]
     public GameObject GameOver;
+    public GameObject Play;
 
     public enum PopupList
     {
@@ -123,16 +124,7 @@ public class UIManager_02 : MonoBehaviour
     private void Start()
     {
         if (GameManager.Instance.IsBankrupt == true)
-        {
-            SoundManager.Instance.StopBGM();
-            SoundManager.Instance.PlaySound("Negative_6");
-            GameOver.SetActive(true);
-            GameOver.transform.GetChild(0).GetComponent<Image>().DOFade(1, 0.5f);
-            GameOver.transform.GetChild(1).GetComponent<Text>().DOFade(1, 0.5f);
-            GameOver.transform.GetChild(2).GetComponent<Text>().DOFade(1, 0.5f);
-            GameOver.transform.GetChild(3).GetComponent<Button>().image.DOFade(1, 0.5f);
-            GameOver.transform.GetChild(3).GetChild(0).GetComponent<Text>().DOFade(1, 0.5f);
-        }
+            StartCoroutine(GameOver_Anim());
         SetProgress();
         if (GameManager.Instance.NowStep == GameManager.Step.Prepare_Play)
         {
@@ -651,6 +643,7 @@ public class UIManager_02 : MonoBehaviour
             GameManager.Instance.SetStep(GameManager.Step.Start_Play);
             CountMonth = 0;
             SetProgress();
+            StartCoroutine(Play_Anim());
             Debug.Log("개발 완료");
         }
         else
@@ -1045,9 +1038,45 @@ public class UIManager_02 : MonoBehaviour
 
         GameOver.SetActive(false);
         GameOver.transform.GetChild(1).GetComponent<Text>().color = new Color(255, 255, 255, 0);
-        GameOver.transform.GetChild(2).GetComponent<Text>().color = new Color(255, 255, 255, 0);
-        GameOver.transform.GetChild(3).GetComponent<Button>().image.color = new Color(255, 255, 255, 0);
-        GameOver.transform.GetChild(3).GetChild(0).GetComponent<Text>().color = new Color(255, 255, 255, 0);
+        GameOver.transform.GetChild(3).GetComponent<Text>().color = new Color(255, 255, 255, 0);
+        GameOver.transform.GetChild(4).GetComponent<Button>().image.color = new Color(255, 255, 255, 0);
+        GameOver.transform.GetChild(4).GetChild(0).GetComponent<Text>().color = new Color(255, 255, 255, 0);
+    }
+
+    public IEnumerator GameOver_Anim()
+    {
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlaySound("Negative_6");
+        GameOver.SetActive(true);
+        GameOver.transform.GetChild(0).GetComponent<Image>().DOFade(1, 1f);
+        GameOver.transform.GetChild(2).DOScale(3, 0.7f).From().SetEase(Ease.OutExpo);
+        yield return new WaitForSeconds(0.5f);
+        GameOver.transform.GetChild(1).GetComponent<Text>().DOFade(1, 0.5f);
+        GameOver.transform.GetChild(3).GetComponent<Text>().DOFade(1, 0.5f);
+        GameOver.transform.GetChild(4).GetComponent<Button>().image.DOFade(1, 0.5f);
+        GameOver.transform.GetChild(4).GetChild(0).GetComponent<Text>().DOFade(1, 0.5f);
+    }
+
+    public IEnumerator Play_Anim()
+    {
+        Popup_Quit();
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlaySound("Positive_6");
+        Play.SetActive(true);
+        Play.transform.GetChild(1).DOLocalMoveY(-35, 0.5f).SetEase(Ease.OutBounce);
+        yield return new WaitForSeconds(0.5f);
+        Play.transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.5f);
+        yield return new WaitForSeconds(1.5f);
+        Play.transform.GetChild(1).DOLocalMoveY(2500, 0.5f);
+        Play.transform.GetChild(2).DOLocalMoveY(-500, 0.5f);
+        yield return new WaitForSeconds(2.5f);
+        Play.transform.GetChild(2).DOLocalMoveY(-1500, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+
+        Play.SetActive(false);
+        SoundManager.Instance.PlayBGM();
+
+        Play.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, 0);
     }
 
 }
