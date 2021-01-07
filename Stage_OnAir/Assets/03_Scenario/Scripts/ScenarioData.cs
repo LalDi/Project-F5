@@ -68,4 +68,17 @@ public class ScenarioData : Singleton<ScenarioData>
             return 0;
         });
     }
+
+    public Scenario FindScenario(int Code)
+    {
+        Scenario result = null;
+
+        foreach (var item in ScenarioList)
+        {
+            if (item.Code == Code)
+                result = item;
+        }
+
+        return result;
+    }
 }

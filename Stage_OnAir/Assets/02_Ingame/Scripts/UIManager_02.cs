@@ -772,39 +772,39 @@ public class UIManager_02 : MonoBehaviour
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
 
-    public void SetStaffItem()
-    {
-        for (int i = 0; i < Items.Instance.StaffItems.Count; i++)
-        {
-            GameObject item = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
-
-            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.Staff_Icons[i];
-            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.StaffItems[i].name;
-            int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Staff", j));
-        }
-        double count = Items.Instance.StaffItems.Count / 2f;
-        Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
-            new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
-    }
-
-    public void SetShopItem()
-    {
-        for (int i = 0; i < Items.Instance.ShopItems.Count; i++)
-        {
-            GameObject item = ObjManager.SpawnPool("ShopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
-
-            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
-            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
-            item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.ShopItems[i].pay.ToString("N0")
-                + "\n점수: +" + Items.Instance.ShopItems[i].score.ToString("N0");
-            int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Shop", j));
-        }
-        double count = (Items.Instance.ShopItems.Count / 2f);
-        Popup_Shop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
-            new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
-    }
+    //public void SetStaffItem()
+    //{
+    //    for (int i = 0; i < Items.Instance.StaffItems.Count; i++)
+    //    {
+    //        GameObject item = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+    //
+    //        item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.Staff_Icons[i];
+    //        item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.StaffItems[i].name;
+    //        int j = i;
+    //        item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Staff", j));
+    //    }
+    //    double count = Items.Instance.StaffItems.Count / 2f;
+    //    Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+    //        new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
+    //}
+    //
+    //public void SetShopItem()
+    //{
+    //    for (int i = 0; i < Items.Instance.ShopItems.Count; i++)
+    //    {
+    //        GameObject item = ObjManager.SpawnPool("ShopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+    //
+    //        item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
+    //        item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
+    //        item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.ShopItems[i].pay.ToString("N0")
+    //            + "\n점수: +" + Items.Instance.ShopItems[i].score.ToString("N0");
+    //        int j = i;
+    //        item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Shop", j));
+    //    }
+    //    double count = (Items.Instance.ShopItems.Count / 2f);
+    //    Popup_Shop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+    //        new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
+    //}
 
     public void Open_Item_Popup(string sort, int num)
     {
@@ -1021,7 +1021,7 @@ public class UIManager_02 : MonoBehaviour
             Obj.transform.GetChild(2).GetChild(0).GetChild(i).gameObject.SetActive(false);
         }
     }
-    #endregion
+    //#endregion
 
     public void Stat_UI_Anim()
     {
