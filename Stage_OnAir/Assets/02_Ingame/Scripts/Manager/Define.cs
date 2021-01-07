@@ -18,6 +18,19 @@
         public const string SETNICK_DUPLICATE = "중복된 닉네임입니다.\n다른 닉네임을 설정해주십시오.";
     }
 
+    public class MANAGERDATA
+    {
+        public enum DATALIST
+        { 
+            QUALITY,
+            MARKETING,
+            SUCCESS,
+            ACTING,
+            SCENARIO,
+            DIRECTION
+        }
+    }
+
     public class RANKING
     {
         public enum RANK 

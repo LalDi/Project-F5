@@ -532,7 +532,7 @@ public class UIManager_02 : MonoBehaviour
 
     public void SaveData()
     {
-
+        GameManager.Instance.SaveData();
     }
 
     public void ChangeNickname()
@@ -543,6 +543,7 @@ public class UIManager_02 : MonoBehaviour
         {
             case "204":
                 Backend.BMember.UpdateNickname(Nickname.text);
+                GameManager.Instance.NickName = Nickname.text;
                 break;
             case "400":
                 switch (bro.GetErrorCode())
@@ -600,31 +601,82 @@ public class UIManager_02 : MonoBehaviour
     #endregion
 
     #region Staff
+
     public void SetStaffItem()
     {
-        for (int i = 0; i < Items.Instance.StaffItems.Count; i++)
+        foreach (Staff item in GameManager.Instance.Staffs)
         {
-            GameObject item = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+            GameObject StaffItem = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.Staff_Icons[i];
-            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.StaffItems[i].name;
-            int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Staff", j));
+            StaffItem.transform.GetChild(0).GetComponent<Image>().sprite = StaffData.Instance.StaffIcon[item.Code-1];
+            StaffItem.transform.GetChild(1).GetComponent<Text>().text = item.Name;
+
+            StaffItem.transform.GetComponent<Button>().onClick.AddListener(() => Open_Staff_Popup(item));
         }
-        double count = Items.Instance.StaffItems.Count / 2f;
+        double count = GameManager.Instance.Staffs.Count / 2f;
         Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
 
-    public void _SetStaffItem()
+    public void Open_Staff_Popup(Staff Data)
     {
-        foreach (var item in GameManager.Instance.Staffs)
+        GameObject obj;
+        Sprite Icon;
+        string Name;
+        string Script;
+        string Pay;
+
+        Popup_On((int)PopupList.StaffUp);
+        obj = Popup_StaffUp;
+        Icon = StaffData.Instance.StaffIcon[Data.Code-1];
+        Name = Data.Name;
+        obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+        if (Data.IsPurchase)
         {
-            GameObject StaffItem = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+            Script = "월급: " + Data.Pay.ToString("N0")
+            + "\n -> " + (Data.Pay + Data.Plus_Pay).ToString("N0")
+            + "\n개발력" + Data.Directing.ToString("N0")
+            + "\n -> " + (Data.Directing + Data.Plus_Directing).ToString("N0");
+            Pay = "가격: " + Data.Cost_Upgrade.ToString("N0");
+            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "업그레이드";
+            obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
+        }
+        else
+        {
+            Script = "월급: " + Data.Pay.ToString("N0")
+                    + "\n개발력" + Data.Directing.ToString("N0");
+            Pay = "가격: " + Data.Cost_Purchase.ToString("N0");
+            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
+            obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
+        }
 
-            StaffItem.transform.GetChild(0).GetComponent<Image>().sprite = StaffData.Instance.StaffIcon[item.Code];
-            StaffItem.transform.GetChild(1).GetComponent<Text>().text = item.Name;
+        obj.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = Icon;
+        obj.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = Name;
+        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
+        obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
+    }
 
+    public void Buy_Staff(Staff Data)
+    {
+        if (Data.IsPurchase)
+        {
+            if (GameManager.Instance.Money >= Data.Cost_Upgrade)
+            {
+                Data.UpgradeStaff();
+                Open_Staff_Popup(Data);
+            }
+            else
+                Popup_On((int)PopupList.Warning);
+        }
+        else
+        {
+            if (GameManager.Instance.Money >= Data.Cost_Purchase)
+            {
+                Data.BuyStaff();
+                Open_Staff_Popup(Data);
+            }
+            else
+                Popup_On((int)PopupList.Warning);
         }
     }
     #endregion
@@ -632,20 +684,27 @@ public class UIManager_02 : MonoBehaviour
     #region Marketing
     public void SetMarketingItem()
     {
-        for (int i = 0; i < Items.Instance.MarketingItems.Count; i++)
+        foreach (var item in MarketingData.Instance.MarketingList)
         {
-            GameObject item = ObjManager.SpawnPool("MarketingItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+            GameObject Obj = ObjManager.SpawnPool("MarketingItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.MarketingItems[i].Icon;
-            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.MarketingItems[i].name;
-            item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.MarketingItems[i].pay.ToString("N0")
-                + "\n점수: +" + Items.Instance.MarketingItems[i].score.ToString("N0");
-            int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Buy_Item("Marketing", j));
+            Obj.transform.GetChild(0).GetComponent<Image>().sprite = MarketingData.Instance.MarketingIcon[item.Code - 1];
+            Obj.transform.GetChild(1).GetComponent<Text>().text = item.Name;
+            Obj.transform.GetChild(2).GetComponent<Text>().text = "비용: " + item.Price.ToString("N0")
+                + "\n점수: +" + item.Score.ToString("N0");
+
+            Obj.transform.GetComponent<Button>().onClick.AddListener(() => Buy_Marketing(item));
         }
-        double count = (Items.Instance.MarketingItems.Count / 2f);
+
+        double count = (MarketingData.Instance.MarketingList.Count / 2f);
         Popup_Marketing.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
+    }
+
+    public void Buy_Marketing(Marketing Data)
+    {
+        GameManager.Instance.CostMoney(Data.Price);
+        GameManager.Instance.SetValue(MANAGERDATA.DATALIST.MARKETING, Data.Score, true);
     }
     #endregion
 

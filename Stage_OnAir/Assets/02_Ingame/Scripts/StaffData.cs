@@ -79,9 +79,9 @@ public class Staff
 
     public void SetLevel()
     {
-        Pay = Default_Pay + (Plus_Pay * Level-1);
-        Directing = Default_Directing + (Plus_Directing * Level-1);
-        Cost_Upgrade = Default_Cost + (Plus_Cost * Level-1);
+        Pay = Default_Pay + (Plus_Pay * (Level - 1));
+        Directing = Default_Directing + (Plus_Directing * (Level - 1));
+        Cost_Upgrade = Default_Cost + (Plus_Cost * (Level - 1));
     }
 
     public void BuyStaff()
@@ -98,19 +98,9 @@ public class Staff
         GameManager.Instance.CostMoney(Cost_Purchase);
         Level = 1;
         SetLevel();
+        SaveStaff();
+
         IsPurchase = true;
-
-        Param param = new Param();
-        param.Add(Name, Level);
-
-        if (Backend.GameSchemaInfo.Get("Staff", InDate).GetStatusCode() == "404")
-        {
-            Backend.GameSchemaInfo.Insert("Staff", param, (callback) => { }); // 비동기
-        }
-        else
-        {
-            Backend.GameSchemaInfo.Update("Staff", InDate, param, (callback) => { }); // 비동기
-        }
     }
 
     public void UpgradeStaff()
@@ -127,18 +117,7 @@ public class Staff
         GameManager.Instance.CostMoney(Cost_Upgrade);
         Level++;
         SetLevel();
-
-        Param param = new Param();
-        param.Add(Name, Level);
-
-        if (Backend.GameSchemaInfo.Get("Staff", InDate).GetStatusCode() == "404")
-        {
-            Backend.GameSchemaInfo.Insert("Staff", param, (callback) => { }); // 비동기
-        }
-        else
-        {
-            Backend.GameSchemaInfo.Update("Staff", InDate, param, (callback) => { }); // 비동기
-        }
+        SaveStaff();
     }
 
     public void SetStaff(JsonData Data)
@@ -167,6 +146,30 @@ public class Staff
         Cost_Upgrade = Default_Cost + ((Level - 1) * Plus_Cost);
 
         IsPurchase = Level == 0 ? false : true;
+    }
+
+    public void SaveStaff()
+    {
+        string Name = "Staff" + Code.ToString();
+        string InDate = Backend.BMember.GetUserInfo().GetInDate();
+
+        Param param = new Param();
+        param.Add(Name, Level);
+
+        var Info = Backend.GameSchemaInfo.Get("Staff", InDate);
+        string InfoInDate;
+
+        if (Info.GetStatusCode() == "404")
+        {
+            Backend.GameSchemaInfo.Insert("Staff", param, (callback) => { }); // 비동기
+            Debug.Log("정보 추가");
+        }
+        else
+        {
+            InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
+            Backend.GameSchemaInfo.Update("Staff", InfoInDate, param, (callback) => { }); // 비동기
+            Debug.Log("정보 갱신");
+        }
     }
 }
 
@@ -221,5 +224,15 @@ public class StaffData : Singleton<StaffData>
         }
 
         return result;
+    }
+
+    public static void SaveAllStaff()
+    {
+        List<Staff> StaffsList = GameManager.Instance.Staffs;
+
+        foreach (var item in StaffsList)
+        {
+            item.SaveStaff();
+        }
     }
 }

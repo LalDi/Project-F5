@@ -19,7 +19,10 @@ public class UIManager_01 : MonoBehaviour
     public void To_Ingame()
     {
         Backend.Chart.GetAllChartAndSave(true);
+        Debug.Log(Backend.Chart.GetAllChartAndSave(true).GetReturnValue());
+
         ScenarioData.Instance.SetScenarioData();
+        MarketingData.Instance.SetMarketingData();
         ActorData.Instance.SetActorsData();
         Items.Instance.SetStaffData();
 
