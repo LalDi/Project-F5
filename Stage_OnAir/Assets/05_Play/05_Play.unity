@@ -364,84 +364,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!1 &177233382
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 177233383}
-  - component: {fileID: 177233385}
-  - component: {fileID: 177233384}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &177233383
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177233382}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 695899626}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 29.97}
-  m_SizeDelta: {x: 945.94434, y: 185.68164}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &177233384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177233382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: a8787520cb49bf547b88ab2df3fad19c, type: 3}
-    m_FontSize: 40
-    m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 4
-    m_MaxSize: 62
-    m_Alignment: 3
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 
---- !u!222 &177233385
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177233382}
-  m_CullTransparentMesh: 0
 --- !u!1 &182755032
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,10 +818,8 @@ RectTransform:
   m_GameObject: {fileID: 695899625}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1465780571}
-  - {fileID: 177233383}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_Children: []
   m_Father: {fileID: 1296083602}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1474,6 +1394,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 695899626}
+  - {fileID: 1465780571}
   - {fileID: 2105904448}
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -1509,16 +1430,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465780570}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 695899626}
-  m_RootOrder: 0
+  m_Father: {fileID: 1296083602}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 29.97}
+  m_AnchoredPosition: {x: 0, y: 559.56995}
   m_SizeDelta: {x: 945.94434, y: 185.68164}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1465780572
@@ -1609,15 +1530,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1778739348d09dd4b8d2f411934eedb8, type: 2}
-  m_sharedMaterial: {fileID: -6191263095044457269, guid: 1778739348d09dd4b8d2f411934eedb8,
+  m_fontAsset: {fileID: 11400000, guid: 4a3fbeeea12255640a9504257302b084, type: 2}
+  m_sharedMaterial: {fileID: -2313776809366385876, guid: 4a3fbeeea12255640a9504257302b084,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285756275
+    rgba: 4279440147
   m_fontColor: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1635,12 +1556,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 80.9
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 50
+  m_fontSizeMin: 30
+  m_fontSizeMax: 45
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1927,39 +1848,139 @@ MonoBehaviour:
   - {fileID: 597627410}
   Light: {fileID: 559204271}
   Script_Image: {fileID: 695899625}
+  tmp: {fileID: 1465780573}
   Scrs:
     scripts:
-    - script: []
     - script:
-      - "\uD558\uC580 \uD1A0\uB07C \uD55C \uB9C8\uB9AC\uAC00 \uC568\uB9AC\uC2A4\uB97C
-        \uC9C0\uB098\uCCD0 \uB6F0\uC5B4\uAC14\uB2E4."
-      - "\u201C\uC5D0\uAD6C\uAD6C! \uC5D0\uAD6C\uAD6C! \uB108\uBB34 \uB2A6\uACA0\uB124!\u201D"
-      - "\uD1A0\uB07C\uAC00 \uC8FC\uBA38\uB2C8\uC5D0\uC11C \uC2DC\uACC4\uB97C \uAEBC\uB0B4\uC5B4
-        \uBCF8 \uD6C4 \uBC1C\uAC78\uC74C\uC744 \uC7AC\uCD09\uD588\uB2E4."
-      - "\uC568\uB9AC\uC2A4\uB294 \uC774\uC804\uC5D0 \uC870\uB07C\uB97C \uAC78\uCE58\uAC70\uB098
-        \uADF8 \uC8FC\uBA38\uB2C8\uC5D0\uC11C \uC2DC\uACC4\uB97C \uAEBC\uB0B4\uB294
-        \uD1A0\uB07C\uB97C \uD55C \uBC88\uB3C4 \uBCF8 \uC801\uC774 \uC5C6\uB2E4\uB294
-        \uC0DD\uAC01\uC774 \uB4E4\uC5C8\uB2E4."
-      - "\uADF8\uB7EC\uC790 \uC568\uB9AC\uC2A4\uB294 \uD638\uAE30\uC2EC\uC5D0 \uBD88\uD0C0\uC62C\uB77C
-        \uD1A0\uB07C\uB97C \uCAD3\uC544 \uB4E4\uD310\uC744 \uAC00\uB85C\uC9C8\uB7EC
-        \uB2EC\uB9AC\uAE30 \uC2DC\uC791\uD588\uB2E4."
-      - "\uADF8\uB9AC\uACE0 \uC6B4 \uC88B\uAC8C\uB3C4 \uD1A0\uB07C\uAC00 \uC0DD\uC6B8\uD0C0\uB9AC
-        \uBC14\uB85C \uBC11\uC758 \uD070 \uD1A0\uB07C\uAD74\uB85C \uC3D9 \uB4E4\uC5B4\uAC00\uB294
-        \uAC83\uC744 \uBCFC \uC218 \uC788\uC5C8\uB2E4."
-      - "\uB2E4\uC74C \uC21C\uAC04, \uC568\uB9AC\uC2A4\uB294 \uD1A0\uB07C\uB97C \uCAD3\uC544
-        \uAD74\uB85C \uB6F0\uC5B4\uB4E4\uACE0 \uC788\uC5C8\uB2E4."
-      - "\uC5B4\uB5BB\uAC8C \uB2E4\uC2DC \uBE60\uC838 \uB098\uC62C \uAC83\uC778\uC9C0\uB294
-        \uC0DD\uAC01\uC870\uCC28 \uD558\uC9C0 \uC54A\uC558\uB2E4\u2500."
-    - script: []
-    - script: []
-    - script: []
-    - script: []
-    - script: []
-    - script: []
-    - script: []
-    - script: []
+      - "\uB098\uB294 \uBFB0\uC871\uD55C \uAC00\uC2DC\uAC00 \uC788\uC5B4\uC11C \uC5B4\uB5A4
+        \uC0AC\uB098\uC6B4 \uB9F9\uC218\uB3C4 \uAC74\uB4DC\uB9AC\uC9C0 \uBABB\uD574."
+      - "\uADF8\uB798\uB3C4 \uAC70\uC13C \uBC14\uB78C\uC740 \uACAC\uB51C \uC218 \uC5C6\uC744\uAC78."
+      - "\uB098\uB294 \uAC15\uD558\uB2C8\uAE4C \uBC14\uB78C\uC774 \uBD88\uC5B4\uB3C4
+        \uC544\uBB34\uB807\uC9C0 \uC54A\uC544!"
+      - "\uADF8\uB807\uAD6C\uB098, \uB300\uB2E8\uD558\uB124."
+      - "\uADF8\uB798, \uB300\uB2E8\uD558\uC9C0. \uAC15\uD55C \uAC74 \uC815\uB9D0
+        \uBA4B\uC9C4 \uAC70\uC57C."
+      - "\uBB3C\uB860 \uADF8\uB798\uC11C \uAC00\uB054\uC740 \uC870\uAE08 \uC678\uB86D\uAE30\uB3C4
+        \uD558\uC9C0\uB9CC..."
+      Direction: 000100010000
+      Bgm: 0
+    - script:
+      - "\uC548 \uB3FC, \uC544\uC774\uACE0, \uC774\uB7EC\uB2E4 \uB108\uBB34 \uB2A6\uACA0\uC5B4!"
+      - "\uADF8 \uBD84\uAED8\uC11C \uBCC4\uB85C \uC88B\uC544\uD558\uC9C0 \uC54A\uC73C\uC2E4\uAC70\uC57C!"
+      - "\uD1A0\uB07C\uAC00 \uB9D0\uC744 \uD558\uC796\uC544?"
+      - "\uAE30\uB2E4\uB824! \uC5B4\uB51C \uAC00\uAE38\uB798 \uADF8\uB807\uAC8C \uBC14\uC05C\uAC70\uC57C?"
+      - "\uB204\uAD70\uC9C0\uB294 \uBAB0\uB77C\uB3C4 \uC9C0\uAE08 \uB300\uB2F5\uD560
+        \uC2DC\uAC04\uC774 \uC5C6\uC5B4."
+      - "\uC548\uB155, \uC798 \uAC00! \uBC14\uC058\uB2E4 \uBC14\uBE60!"
+      - "\uB9D0\uD558\uB294 \uBC14\uC05C \uD1A0\uB07C\uB77C\uB2C8, \uC774\uC0C1\uD55C
+        \uC77C\uC774\uB124. \uB530\uB77C\uAC00\uBCFC\uAE4C..."
+      Direction: 00000101000001
+      Bgm: 0
+    - script:
+      - "\uB3C4\uC640\uC918\uC11C \uACE0\uB9C8\uC6CC\uC694, \uC544\uAC00\uC528."
+      - "\uADF8\uB7F0\uB370 \uC5B4\uB51C \uAC00\uB294 \uAE38\uC778\uAC00\uC694?"
+      - "\uB9C8\uBC95\uC0AC \uC624\uC988\uD55C\uD14C \uAC00\uACE0\uC788\uC5B4\uC694."
+      - "\uC81C\uAC00 \uC0B4\uB358 \uACF3\uC73C\uB85C \uB3CC\uC544\uAC00\uB824\uBA74
+        \uADF8 \uB9C8\uBC95\uC0AC\uC758 \uB3C4\uC6C0\uC774 \uD544\uC694\uD558\uB2E4\uACE0
+        \uD574\uC11C\uC694."
+      - "\uADF8\uB7FC \uC800\uB3C4 \uAC19\uC774 \uAC00\uB3C4 \uB420\uAE4C\uC694?"
+      - "\uB9C8\uBC95\uC0AC \uC624\uC988\uB77C\uBA74 \uC9C0\uD478\uB77C\uAE30\uBC16\uC5D0
+        \uC5C6\uB294 \uC800\uD55C\uD14C \uC9C4\uC9DC \uB1CC\uB97C \uC904 \uC218 \uC788\uC744\uAC70\uC608\uC694..."
+      Direction: 010100000101
+      Bgm: 0
+    - script:
+      - "\uC544\uB2C8, \uC5EC\uAE30 \uC788\uB358 \uC57C\uC218\uB294 \uC5B4\uB514\uB85C
+        \uAC14\uC8E0?"
+      - "\uC81C\uAC00 \uBC14\uB85C \uADF8 \uC57C\uC218\uC785\uB2C8\uB2E4."
+      - "\uB2F9\uC2E0 \uB355\uBD84\uC5D0 \uC81C\uAC8C \uAC78\uB824\uC788\uB358 \uB9C8\uBC95\uC774
+        \uD480\uB838\uC5B4\uC694."
+      - "\uC774 \uC740\uD61C\uB294 \uBB34\uC5C7\uC73C\uB85C\uB3C4 \uAC1A\uC9C0 \uBABB\uD560
+        \uAC70\uC608\uC694. \uC815\uB9D0 \uAC10\uC0AC\uB4DC\uB9BD\uB2C8\uB2E4..."
+      Direction: 01000000
+      Bgm: 0
+    - script:
+      - "\uB2F9\uC2E0\uC774 \uC5D0\uB4DC\uC6CC\uB4DC \uD558\uC774\uB4DC \uB9DE\uC2B5\uB2C8\uAE4C?"
+      - "\uB0B4\uAC00 \uB9DE\uAE30\uB294 \uD558\uC9C0\uB9CC, \uC5B4\uB5BB\uAC8C \uC54C\uC558\uC2B5\uB2C8\uAE4C?"
+      - "\uB4E4\uC740 \uBC14\uAC00 \uC788\uC5C8\uC2B5\uB2C8\uB2E4."
+      - "\uC9C0\uD0AC \uBC15\uC0AC\uC640 \uAD00\uACC4\uAC00 \uC788\uC73C\uC2E0 \uAC78\uB85C
+        \uC544\uB294\uB370\uC694."
+      - "\uC9C0\uD0AC \uBC15\uC0AC\uB294 \uC9C0\uAE08 \uB9CC\uB0A0 \uC218 \uC5C6\uC744
+        \uAC70\uC694. \uC9D1\uC5D0 \uC548 \uACC4\uC2DC\uB2C8\uAE4C..."
+      Direction: 0100010100
+      Bgm: 1
+    - script:
+      - "\uB85C\uBBF8\uC624!"
+      - "\uC904\uB9AC\uC5E3, \uD55C\uBC24\uC911\uC5D0 \uCC3E\uC544\uC628 \uC800\uB97C
+        \uC6A9\uC11C\uD558\uC138\uC694!"
+      - "\uC774\uB807\uAC8C \uD558\uC9C0 \uC54A\uC73C\uBA74 \uB9CC\uB0A0 \uC218 \uC5C6\uC744
+        \uAC83 \uAC19\uC558\uC5B4\uC694."
+      - "\uC54C\uC544\uC694. \uB0B4\uB824\uAC00\uC11C \uB9CC\uB098\uACE0 \uC2F6\uC740\uB370
+        \uADF8\uB7F4 \uC218 \uC5C6\uC5B4\uC11C \uB108\uBB34 \uB2F5\uB2F5\uD574\uC694!"
+      - "\uB85C\uBBF8\uC624, \uB2F9\uC2E0\uC740 \uC65C \uB85C\uBBF8\uC624\uC778\uAC00\uC694?"
+      - "\uC65C \uC6B0\uB9B0 \uC0AC\uB791\uD574\uB3C4 \uB9CC\uB0A0 \uC218\uAC00 \uC5C6\uC744\uAE4C\uC694?"
+      - "\uC800\uB3C4 \uAC19\uC740 \uB9C8\uC74C\uC774\uC5D0\uC694, \uC904\uB9AC\uC5E3."
+      - "\uADF8\uB798\uB3C4 \uB2E4\uD589\uC774\uC5D0\uC694. \uB2EC\uBE5B \uB355\uBD84\uC5D0
+        \uB2F9\uC2E0\uC758 \uC5BC\uAD74\uC774 \uBCF4\uC5EC\uC11C..."
+      Direction: 0100000101010000
+      Bgm: 1
+    - script:
+      - "\uACC4\uC57D\uD55C \uB300\uB85C \uC0E4\uC77C\uB85D, \uB2F9\uC2E0\uC740 \uC548\uD1A0\uB2C8\uC624\uC758
+        \uC0B4 1\uD30C\uC6B4\uB4DC\uB97C \uC798\uB77C\uB0BC \uC218 \uC788\uC2B5\uB2C8\uB2E4. "
+      - "\uC54C\uACA0\uC2B5\uB2C8\uB2E4, \uC7AC\uD310\uAD00\uB2D8."
+      - "\uD558\uC9C0\uB9CC \uACC4\uC57D\uC11C\uC5D0 \uBA85\uC2DC\uB41C \uB300\uB85C
+        \uC0B4 1\uD30C\uC6B4\uB4DC\uB9CC\uC744 \uC798\uB77C\uC57C \uD569\uB2C8\uB2E4."
+      - "\uC798\uB77C\uB0B4\uBA74\uC11C \uC548\uD1A0\uB2C8\uC624\uC758 \uD53C \uD55C
+        \uBC29\uC6B8\uC774\uB77C\uB3C4 \uD758\uB9B0\uB2E4\uBA74 \uACC4\uC57D \uC704\uBC18\uC73C\uB85C
+        \uAC04\uC8FC\uD569\uB2C8\uB2E4."
+      - "\uC608? \uC5B4\uB5BB\uAC8C \uD53C\uB97C \uD758\uB9AC\uC9C0 \uC54A\uACE0
+        \uC0B4\uC744 \uC790\uB978\uB2E8 \uB9D0\uC500\uC774\uC2ED\uB2C8\uAE4C..."
+      Direction: 0001000001
+      Bgm: 1
+    - script:
+      - "\uADF8\uB9CC \uD574, \uC870 \uC5B8\uB2C8. \uAF2D \uB0A8\uC790\uC560\uAC19\uC796\uC544! "
+      - "\uADF8\uB798\uC11C \uD558\uB294\uAC70\uC57C."
+      - "\uB108\uD76C \uB458 \uB2E4 \uC5B4\uB9B0\uC560\uCC98\uB7FC \uC2F8\uC6B0\uB294\uAC74
+        \uADF8\uB9CC \uC878\uC5C5\uD574\uC57C\uC9C0!"
+      - "\uADF8\uB798, \uC774\uB9CC \uD654\uD574\uD588\uC73C\uBA74 \uC88B\uACA0\uB2E4."
+      - "\uAD6C\uB984\uC740 \uACC4\uC18D \uD758\uB7EC\uAC00\uAE30 \uB9C8\uB828\uC774\uC796\uC544."
+      - "\uBCA0\uC2A4 \uB9D0 \uB4E3\uACE0 \uB0B4\uAC00 \uCC38\uC544\uC904\uAC8C,
+        \uC5D0\uC774\uBBF8."
+      - "\uBCA0\uC2A4\uAC00 \uD55C \uB9C8\uB514 \uD558\uACE0\uB098\uC11C\uC57C \uADF8\uB9CC\uB450\uB294
+        \uAC83\uB3C4 \uC624\uB298\uAE4C\uC9C0\uB9CC\uC774\uC57C."
+      - "\uB124, \uB124~."
+      Direction: 0100000101000000
+      Bgm: 0
+    - script:
+      - "\uC790, \uC5EC\uAE30 \uC740 \uCD1B\uB300\uB3C4 \uC798 \uCC59\uACA8\uC11C
+        \uAC00\uAC8C."
+      - "\uC65C \uAC70\uC9D3\uB9D0\uC744 \uD55C \uAC81\uB2C8\uAE4C?"
+      - "\uADF8 \uC740 \uC2DD\uAE30\uB4E4\uC740 \uB2F9\uC2E0\uC774 \uB098\uD55C\uD14C
+        \uC900 \uAC8C \uC544\uB2C8\uC5C8\uC796\uC544\uC694."
+      - "\uB098\uB294 \uC544\uAE4C \uC790\uB124\uC758 \uB208\uC5D0 \uC120\uD568\uC774
+        \uB0A8\uC544\uC788\uB294\uAC78 \uBCF4\uC558\uB2E4\uB124."
+      - "\uD55C \uBC88 \uB354 \uADF8 \uC120\uD568\uC744 \uBBFF\uAE30\uB85C \uD588\uC9C0."
+      - "\uC740 \uC2DD\uAE30\uC640 \uC740 \uCD1B\uB300\uB294 \uC798 \uAC00\uC838\uAC00\uAC8C."
+      - "\uAC00\uC838\uAC00\uC11C \uAF2D \uC88B\uC740 \uC77C\uC5D0 \uC4F0\uAE38 \uBC14\uB77C\uB124.
+        \uAF2D \uB9D0\uC77C\uC138..."
+      Direction: 01000001010101
+      Bgm: 0
+    - script:
+      - "\uC0AC\uB290\uB0D0 \uC8FD\uB290\uB0D0, \uADF8\uAC83\uC774 \uBB38\uC81C\uB85C\uB2E4!"
+      - "\uC6B4\uBA85\uC774 \uB0B4\uAC8C \uB358\uC9C0\uB294 \uB3CC\uACFC \uD654\uC0B4\uC744
+        \uACAC\uB514\uB294 \uAC83\uACFC,"
+      - "\uC5ED\uACBD\uC5D0 \uB9DE\uC11C \uC2F8\uC6B0\uB294 \uAC83 \uC911 \uBB34\uC5C7\uC774
+        \uB354 \uACE0\uC0C1\uD560\uAE4C?"
+      - "\uC8FD\uC73C\uBA74 \uC7A0\uC5D0 \uB4E4 \uBFD0\uC774\uB2C8 \uCC28\uB77C\uB9AC
+        \uD3B8\uC548\uD574\uC9C8 \uC218 \uC788\uC744\uAE4C?"
+      - "(\uBB34\uB98E\uAFC7\uACE0 \uAE30\uB3C4\uD558\uB294 \uC624\uD544\uB9AC\uC5B4\uB97C
+        \uBCF4\uACE0) \uC624\uD544\uB9AC\uC5B4."
+      - "\uB2F9\uC2E0\uC774 \uAE30\uB3C4\uD560 \uB54C \uC78A\uC9C0 \uB9D0\uACE0 \uB098\uC758
+        \uC8C4\uB3C4 \uD568\uAED8 \uBE4C\uC5B4\uC918..."
+      Direction: 000000000000
+      Bgm: 1
   BlackBG: {fileID: 743679930}
   ResultPU: {fileID: 182755032}
+  Bgm: {fileID: 0}
   Character1: {fileID: 1222414607}
   Character2: {fileID: 147493552}
 --- !u!4 &1973949643
@@ -2136,7 +2157,7 @@ RectTransform:
   - {fileID: 743679931}
   - {fileID: 182755033}
   m_Father: {fileID: 1296083602}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -11,17 +11,23 @@ public class UIManager_05 : MonoBehaviour
     public GameObject Light;
 
     public GameObject Script_Image;
+    public TextMeshProUGUI tmp;
     [SerializeField]
     public ScriptS Scrs = new ScriptS();
-
+    
     public GameObject BlackBG;
     public GameObject ResultPU;
+    public GameObject Bgm;
 
     public SpriteRenderer Character1;
     public SpriteRenderer Character2;
 
     void Start()
     {
+        SoundManager.Instance.StopBGM();
+        Bgm = SoundManager.Instance.LoopSound(Scrs.scripts[GameManager.Instance.NowScenario.No - 1].Bgm 
+            ? "Casual_Game_Music_14" : "Casual_Game_Music_09");
+
         //시나리오에 맞는 배경 켜기
         foreach (var Obj in Backgrounds)
         {
@@ -49,15 +55,20 @@ public class UIManager_05 : MonoBehaviour
         BlackBG.SetActive(false);
         Script_Image.SetActive(true);
 
-        TextMeshProUGUI tmp = Script_Image.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        foreach (var Scr in Scrs.scripts[GameManager.Instance.NowScenario.No - 1].script)
+        Script Scr = Scrs.scripts[GameManager.Instance.NowScenario.No - 1];
+
+
+        for (int i = 0; i < Scr.script.Count; i++)
         {
-            tmp.text  = Scr;
+            tmp.text = Scr.script[i];
+            Script_Image.transform.localScale = new Vector3((Scr.Direction[i] ? 1 : -1), 1, 1);
             yield return new WaitForSeconds(4f);
         }
+
         BlackBG.SetActive(true);
         BlackBG.GetComponent<Image>().DOFade(0.5f, 2);
         yield return new WaitForSeconds(2f);
+        SoundManager.Instance.PlaySound("Positive_3");
         SoundManager.Instance.PlaySound("Special&Powerup_35");
         ResultPU.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "수익: " + Define.Math.RESULT().ToString("N0");
         ResultPU.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
@@ -67,6 +78,9 @@ public class UIManager_05 : MonoBehaviour
 
     public void To_Ingame()
     {
+        Destroy(Bgm);
+        SoundManager.Instance.PlayBGM();
+
         GameManager.Instance.CostMoney((int)Define.Math.RESULT(), false);
         if (GameManager.Instance.Money < 0) //파산
             GameManager.Instance.Is_Bankrupt(true);

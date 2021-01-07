@@ -15,6 +15,7 @@ public class UIManager_02 : MonoBehaviour
     public Text Text_Money;
     public Text Text_Year;
     public Text Text_Month;
+    public GameObject Forder_UI;
     public GameObject Stat_UI;
 
     [Header("Bottom UI")]
@@ -1059,14 +1060,16 @@ public class UIManager_02 : MonoBehaviour
 
     public IEnumerator Play_Anim()
     {
+        Forder_UI.SetActive(false);
+        Stat_UI.SetActive(false); 
         Popup_Quit();
         SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySound("Positive_6");
         Play.SetActive(true);
-        Play.transform.GetChild(1).DOLocalMoveY(-35, 0.5f).SetEase(Ease.OutBounce);
-        yield return new WaitForSeconds(0.5f);
+        Play.transform.GetChild(1).DOLocalMoveY(-35, 1.2f).SetEase(Ease.OutExpo);
+        yield return new WaitForSeconds(1.2f);
         Play.transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.5f);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         Play.transform.GetChild(1).DOLocalMoveY(2500, 0.5f);
         Play.transform.GetChild(2).DOLocalMoveY(-500, 0.5f);
         yield return new WaitForSeconds(2.5f);
@@ -1074,6 +1077,8 @@ public class UIManager_02 : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         Play.SetActive(false);
+        Forder_UI.SetActive(true);
+        Stat_UI.SetActive(true);
         SoundManager.Instance.PlayBGM();
 
         Play.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, 0);
