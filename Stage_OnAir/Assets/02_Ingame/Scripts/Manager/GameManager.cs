@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Define;
 using BackEnd;
 using LitJson;
-using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -39,8 +38,8 @@ public class GameManager : Singleton<GameManager>
     public bool OnBGM;
     public bool OnSFX;
     public bool OnPush;
-
-    // 랭킹
+    [SerializeField]
+    public bool IsBankrupt;
 
     //시나리오
     public Scenario NowScenario { get; private set; }
@@ -48,7 +47,6 @@ public class GameManager : Singleton<GameManager>
 
     // 오디션에서 고용된 배우들
     public List<Actor> Actors = new List<Actor>();
-    //public Dictionary<string, StaffData> Staffs = new Dictionary<string, StaffData>();
 
     //스탭 레벨 저장
     public int[] StaffLevel = new int[10];
@@ -88,6 +86,11 @@ public class GameManager : Singleton<GameManager>
         base.Start();
 
         LoadData();
+
+        OnBGM = true;
+        OnSFX = true;
+        OnPush = true;
+        IsBankrupt = false;
     }
 
     public void Reset()
@@ -106,6 +109,7 @@ public class GameManager : Singleton<GameManager>
         MaxActor = 0;
 
         Actors.Clear();
+        ActorData.Instance.SetActorsData();
         NowStep = Step.Select_Scenario;
     }
 
@@ -195,27 +199,70 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("스태프 데이터 생성");
     }
 
-    public void GoNextMonth()
+
+    public float GetSuccess()
     {
-        Month++;
-        if (Month == 13)
+        float Success = 0;
+        int Count = 0;
+
+        foreach (var item in Actors)
         {
-            Year++;
-            Month = 1;
-            // 스태프 연봉 지급하는 코드
+            Success += item.Experience;
+            Count++;
         }
+        Success = Success / Count;
+
+        float temp = Success * 0.1f;
+
+        return Success + (temp * (Period - 6));
     }
 
-    public void SetStep(Step NextStep)
+    #region Play n Quality
+    // 연극의 3가지 점수 요소
+    public void Plus_Play_Quality(int value)
     {
-        NowStep = NextStep;
+        Play_Quality += value;
     }
+    public void Plus_Play_Marketing(int value)
+    {
+        Play_Marketing += value;
+    }
+    public void Plus_Play_Success(int value)
+    {
+        Play_Success += value;
+    }
+    // 연극의 퀄리티 점수를 결정하는 3가지 수치
+    public void Plus_Quality_Acting(int value)
+    {
+        Quality_Acting += value;
+        Plus_Play_Quality(value);
+    }
+    public void Plus_Quality_Scenario(int value)
+    {
+        Quality_Scenario += value;
+        Plus_Play_Quality(value);
+    }
+    public void Plus_Quality_Direction(int value)
+    {
+        Quality_Direction += value;
+        Plus_Play_Quality(value);
+    }
+    #endregion
 
+    #region Money n Day
     public void CostMoney(int value, bool Reduction = true)
     {
         Money = Reduction ? Money - value : Money + value;
     }
-
+    public void SetPeriod()
+    {
+        Play_Success = GetSuccess();
+        SetStep(Step.Prepare_Play);
+    }
+    public void SetPeriod(int value)
+    {
+        Period += value;
+    }
     public void SetDefaultPeriod()
     {
         float Success = 0;
@@ -240,50 +287,60 @@ public class GameManager : Singleton<GameManager>
 
         Period = Count + 6;
     }
-
-    public float GetSuccess()
+    public void GoNextMonth()
     {
-        float Success = 0;
-        int Count = 0;
-
-        foreach (var item in Actors)
+        Month++;
+        if (Month == 13)
         {
-            Success += item.Experience;
-            Count++;
+            Year++;
+            Month = 1;
+            // 스태프 연봉 지급하는 코드
         }
-        Success = Success / Count;
-
-        float temp = Success * 0.1f;
-
-        return Success + (temp * (Period - 6));
     }
 
+    #endregion
+
+    #region Player Data
+    public void ReStart()
+    {
+        Reset();
+        StaffLevel = Enumerable.Repeat<int>(0, 10).ToArray<int>();
+        Year = 2000;
+        Month = 01;
+        Money = 5000000;
+        DefaultSuccess = 70;
+        IsBankrupt = false;
+    }
+
+    public void Is_Bankrupt(bool Is) 
+    {
+        IsBankrupt = Is;
+    }
+    #endregion
+
+    #region Scenario n Actor n Staff
+    public void SetScenario(Scenario NextScenario)
+    {
+        NowScenario = NextScenario;
+        CostMoney(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Price);
+        SetMaxActor(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Actors);
+        Plus_Quality_Scenario(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Quality);
+        SetStep(Step.Cast_Actor);
+    }
     public void SetMaxActor(int Num)
     {
         MaxActor = Num;
     }
-
-    public void SetScenario(Scenario NextScenario)
-    {
-        NowScenario = NextScenario;
-    }
-
-    public void SetPeriod()
-    {
-        Play_Success = GetSuccess();
-        SetStep(Step.Prepare_Play);
-    }
-
-    public void SetPeriod(int value)
-    {
-        Period += value;
-    }
-
     public void PlusNowActor()
     {
         NowActor++;
     }
-
+    public void SetStep(Step NextStep)
+    {
+        NowStep = NextStep;
+    }
+    #endregion
+    
     public void SetValue(MANAGERDATA.DATALIST data, float value, bool IsPlus = false)
     {
         if (IsPlus)

@@ -28,7 +28,6 @@ public class UIManager_04 : MonoBehaviour
         Popup_Result.SetActive(false);
 
         ActorCount = 0;
-        //MaxActor = Random.Range(1, GameManager.Instance.MaxActor - GameManager.Instance.NowActor);
         MaxActor = Random.Range(1, 8 - GameManager.Instance.NowActor);
 
         PprActors = ActorData.Instance.RandomActors(MaxActor);
@@ -71,9 +70,6 @@ public class UIManager_04 : MonoBehaviour
         {
             Width += 325;
 
-            PassActors[i].SetIsCasting(true);
-            GameManager.Instance.Actors.Add(PassActors[i]);
-
             GameObject ActorObj = Instantiate(ActorPrefab);
             ActorObj.transform.SetParent(Popup_Result.transform.GetChild(2).GetChild(0));
             ActorObj.transform.GetChild(1).GetComponent<Text>().text =
@@ -83,6 +79,7 @@ public class UIManager_04 : MonoBehaviour
             ActorData.Instance.ActorsList[PassActors[i].No].SetIsCasting(true);
             GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
             GameManager.Instance.PlusNowActor();
+            GameManager.Instance.Plus_Quality_Acting(PassActors[i].Acting);
         }
         Popup_Result.transform.GetChild(2).GetChild(0).
             GetComponent<RectTransform>().sizeDelta = new Vector2(Width, 940.4614f);
@@ -90,16 +87,19 @@ public class UIManager_04 : MonoBehaviour
 
     public void Out_BT()
     {
+        SoundManager.Instance.PlaySound("Pop_3");
         Reroad_ActorProfile();
     }
     public void Pass_BT()
     {
+        SoundManager.Instance.PlaySound("Pop_6");
         PassActors.Add(PprActors[ActorCount - 1]);
         Reroad_ActorProfile();
     }
 
     public void To_Ingame()
     {
+        SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
     }

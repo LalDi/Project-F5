@@ -65,7 +65,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: a8787520cb49bf547b88ab2df3fad19c, type: 3}
     m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 1
@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 6352758150399559564}
   - component: {fileID: 6352758150399559565}
   - component: {fileID: 6352758150399559566}
-  - component: {fileID: 6528567702133354671}
   m_Layer: 5
   m_Name: Illust
   m_TagString: Untagged
@@ -199,18 +198,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6528567702133354671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6352758150399559568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 416312dad73897942b74ba62357818c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6352758151787433760
 GameObject:
   m_ObjectHideFlags: 0

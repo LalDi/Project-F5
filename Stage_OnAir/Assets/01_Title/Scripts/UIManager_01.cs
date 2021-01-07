@@ -18,6 +18,7 @@ public class UIManager_01 : MonoBehaviour
 
     public void To_Ingame()
     {
+        SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
         Backend.Chart.GetAllChartAndSave(true);
         Debug.Log(Backend.Chart.GetAllChartAndSave(true).GetReturnValue());
 
@@ -44,6 +45,7 @@ public class UIManager_01 : MonoBehaviour
     }
     public void ClosePopup()
     {
+        SoundManager.Instance.PlaySound("Pop_6");
         Popup_Black.SetActive(false);
         Popup_LogIn.SetActive(false);
         Popup_SignUp.SetActive(false);

@@ -46,6 +46,7 @@ public class Login : MonoBehaviour
         switch (Login.GetStatusCode())
         {
             case "200":
+                SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
                 Backend.Chart.GetAllChartAndSave(true);
                 ScenarioData.Instance.SetScenarioData();
                 ActorData.Instance.SetActorsData();
@@ -85,6 +86,7 @@ public class Login : MonoBehaviour
             switch (SignUp.GetStatusCode())
             {
                 case "201":
+                    SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
                     Backend.BMember.CustomLogin(SignUp_ID.text, SignUp_Password.text);
                     Nickname_Popup.SetActive(true);
                     break;
@@ -120,10 +122,13 @@ public class Login : MonoBehaviour
         switch (Nickname.GetStatusCode())
         {
             case "204":
+                SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
                 Backend.Chart.GetAllChartAndSave(true);
                 ScenarioData.Instance.SetScenarioData();
                 ActorData.Instance.SetActorsData();
                 MarketingData.Instance.SetMarketingData();
+                Items.Instance.SetStaffData();
+                
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "400":

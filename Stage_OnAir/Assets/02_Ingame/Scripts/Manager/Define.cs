@@ -33,7 +33,7 @@
 
     public class RANKING
     {
-        public enum RANK 
+        public enum RANK
         {
             QUALITY = 1,
             AUDIENCE = 2,
@@ -93,7 +93,11 @@
             int Actors = GameManager.Instance.NowActor;                 // 시나리오 배우 수
 
             float result;
-            result = Scenario + (Scenario * Direction * 0.01f) + (Acting + (Acting * (Actors - 2) * 0.1f) / Actors);
+
+            if (Actors != 0)
+                result = Scenario + (Scenario * Direction * 0.01f) + (Acting + (Acting * (Actors - 2) * 0.1f) / Actors);
+            else
+                result = Scenario + (Scenario * Direction * 0.01f);
             //(시나리오 퀄리티) + (시나리오 퀄리티 * 스태프 기술력 * 0.01) + ((배우 연기력 총합 + 배우 연기력 총합 * (배우 수 - 2) * 0.1) / 배우 수)
 
             return result;
@@ -113,7 +117,8 @@
          */
         static public float RESULT()
         {
-            float Quality = GameManager.Instance.Play_Quality;
+            //float Quality = GameManager.Instance.Play_Quality;
+            float Quality = FINALQUALITY();
             float Marketing = MARKETING();
 
             float result;

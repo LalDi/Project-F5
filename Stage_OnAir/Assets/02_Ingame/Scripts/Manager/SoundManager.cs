@@ -27,6 +27,8 @@ public class SoundManager : Singleton<SoundManager>
 
     void Start()
     {
+        base.Start();
+
         StartCoroutine(Fade("in"));
         bgmPlayer.Play();
     }
@@ -35,7 +37,6 @@ public class SoundManager : Singleton<SoundManager>
     {
         if (!clipDic.ContainsKey(clipname))
         { Debug.Log("coludn't find sound"); return; }
-
         sfxPlayer.PlayOneShot(clipDic[clipname], volume * sfxVolume);
     }
 
@@ -61,6 +62,11 @@ public class SoundManager : Singleton<SoundManager>
     {
         StartCoroutine(Fade("out"));
         bgmPlayer.Stop();
+    }
+    public void PlayBGM()
+    {
+        StartCoroutine(Fade("In"));
+        bgmPlayer.Play();
     }
 
     public void SetSFX(float volume)
