@@ -322,9 +322,9 @@ public class GameManager : Singleton<GameManager>
     public void SetScenario(Scenario NextScenario)
     {
         NowScenario = NextScenario;
-        CostMoney(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Price);
-        SetMaxActor(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Actors);
-        Plus_Quality_Scenario(ScenarioData.Instance.ScenarioList[NextScenario.No - 1].Quality);
+        CostMoney(ScenarioData.Instance.FindScenario(NextScenario.Code).Price);
+        SetMaxActor(ScenarioData.Instance.FindScenario(NextScenario.Code).Actors);
+        Plus_Quality_Scenario(ScenarioData.Instance.FindScenario(NextScenario.Code).Quality);
         SetStep(Step.Cast_Actor);
     }
     public void SetMaxActor(int Num)
