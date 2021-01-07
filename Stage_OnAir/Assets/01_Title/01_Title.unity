@@ -3282,6 +3282,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ba8e5c2372d362f4284b119af33bdd41, type: 3}
   - {fileID: 8300000, guid: d15d2dbe42e36cf4fb27f94524e4ace1, type: 3}
   - {fileID: 8300000, guid: c9d9185a5e57b854b9b8553453d24564, type: 3}
+  - {fileID: 8300000, guid: 8e923a5f39865d04aa115c6f6ef90054, type: 3}
+  - {fileID: 8300000, guid: 7b1b67a0debf8834981c0e5ed9733b4b, type: 3}
 --- !u!82 &988059438
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4063,68 +4065,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170610954}
   m_CullTransparentMesh: 0
---- !u!1 &1200805548
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1200805550}
-  - component: {fileID: 1200805549}
-  m_Layer: 0
-  m_Name: Staff Data
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1200805549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200805548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78a4db2544d79bd44a3101cab3525470, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StaffIcon:
-  - {fileID: 21300000, guid: 2d7b613700599d94e91f834be6ed3c7d, type: 3}
-  - {fileID: 21300000, guid: fffc51df785f21845971aa77be13e19d, type: 3}
-  - {fileID: 21300000, guid: b6b8c2e331e2ae54da7d7a6ed2484a52, type: 3}
-  - {fileID: 21300000, guid: 5973830112421d04780ce8701c1b2e4f, type: 3}
-  - {fileID: 21300000, guid: 229aa946c7928d940ac2042e20cca356, type: 3}
-  - {fileID: 21300000, guid: 19740e56d0a531e4d92710c3d7ac4342, type: 3}
-  - {fileID: 21300000, guid: 8b12bf0af9311064fab510ede625af29, type: 3}
-  StaffImage:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!4 &1200805550
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200805548}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1232922752
 GameObject:
   m_ObjectHideFlags: 0
@@ -5235,52 +5175,42 @@ MonoBehaviour:
     name: "\uC804\uB2E8\uC9C0 \uD64D\uBCF4"
     score: 30
     pay: 30000
-    Icon: {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+    Icon: {fileID: 21300000, guid: 4463f935148cb854f9644d980e5c8547, type: 3}
   - no: 2
     name: "SNS \uD64D\uBCF4"
-    score: 40
-    pay: 40000
-    Icon: {fileID: 21300146, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - no: 3
-    name: "\uC9C0\uD558\uCCA0 \uD3EC\uC2A4\uD130 \uAD11\uACE0"
-    score: 100
-    pay: 100000
-    Icon: {fileID: 21300148, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - no: 4
-    name: "\uBC84\uC2A4 \uAD11\uACE0"
-    score: 150
+    score: 50
     pay: 150000
-    Icon: {fileID: 21300150, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+    Icon: {fileID: 21300000, guid: 0c1de4bf67a049c49b9a4ed8883e3c76, type: 3}
+  - no: 3
+    name: "\uC778\uD130\uB137 \uB77C\uC774\uBE0C \uBC29\uC1A1"
+    score: 110
+    pay: 250000
+    Icon: {fileID: 21300000, guid: 83a564de5de8ec149b3bb3ec01a045c3, type: 3}
+  - no: 4
+    name: "\uC9C0\uD558\uCCA0 \uD3EC\uC2A4\uD130 \uAD11\uACE0"
+    score: 150
+    pay: 325000
+    Icon: {fileID: 21300000, guid: 493268fa80f060740a1cab16904b0944, type: 3}
   - no: 5
-    name: "\uC720\uD29C\uBE0C \uAD11\uACE0"
+    name: "\uC720\uD29C\uBE0C \uCC44\uB110"
     score: 200
-    pay: 200000
-    Icon: {fileID: 21300152, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - no: 6
-    name: "TV \uAD11\uACE0"
-    score: 400
     pay: 400000
-    Icon: {fileID: 21300154, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+    Icon: {fileID: 21300000, guid: 81f4fadf3436e77438564d8deb3f89b9, type: 3}
+  - no: 6
+    name: "TV \uD504\uB85C\uADF8\uB7A8 \uCD9C\uC5F0"
+    score: 250
+    pay: 450000
+    Icon: {fileID: 21300000, guid: 8b185c8c62998004bbf431a3cb0cb724, type: 3}
   - no: 7
-    name: "\uC720\uD29C\uBE0C \uCC44\uB110 \uC6B4\uC601"
-    score: 600
-    pay: 600000
-    Icon: {fileID: 21300156, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - no: 8
     name: "\uBC31\uC2A4\uD14C\uC774\uC9C0 \uD22C\uC5B4"
-    score: 800
-    pay: 800000
-    Icon: {fileID: 21300158, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - no: 9
-    name: "SNS \uC774\uBCA4\uD2B8"
-    score: 900
-    pay: 900000
-    Icon: {fileID: 21300160, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - no: 10
-    name: "TV \uC608\uB2A5 \uCD9C\uC5F0"
-    score: 1000
-    pay: 1000000
-    Icon: {fileID: 21300162, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
+    score: 350
+    pay: 550000
+    Icon: {fileID: 21300000, guid: e14be9d116afbd74e875539c523b4ed9, type: 3}
+  - no: 8
+    name: "TV\uAD11\uACE0"
+    score: 500
+    pay: 750000
+    Icon: {fileID: 21300000, guid: 59c321a21f5165e43935ca00e31a35fb, type: 3}
   DevelopItems:
   - no: 1
     name: "\uBC1C\uC804 \uC0C1\uD488 1"
@@ -6165,7 +6095,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3279cbc978f99d40b522a942aebdd56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NickName: 
   DefaultSuccess: 0
   OnBGM: 0
   OnSFX: 0
@@ -6535,58 +6464,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908916938}
   m_CullTransparentMesh: 0
---- !u!1 &1950739666
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1950739668}
-  - component: {fileID: 1950739667}
-  m_Layer: 0
-  m_Name: Marketing Data
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1950739667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1950739666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b37a482ad73844591c824f16278045, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MarketingIcon:
-  - {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
-  - {fileID: 21300144, guid: 3a92eb2ef38080f48951f285ffb734c8, type: 3}
---- !u!4 &1950739668
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1950739666}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2004134384
 GameObject:
   m_ObjectHideFlags: 0
@@ -6646,8 +6523,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: <bounce>Touch to Start</bounce>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1778739348d09dd4b8d2f411934eedb8, type: 2}
-  m_sharedMaterial: {fileID: -6191263095044457269, guid: 1778739348d09dd4b8d2f411934eedb8,
+  m_fontAsset: {fileID: 11400000, guid: 4a3fbeeea12255640a9504257302b084, type: 2}
+  m_sharedMaterial: {fileID: -2313776809366385876, guid: 4a3fbeeea12255640a9504257302b084,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
