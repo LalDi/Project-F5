@@ -20,7 +20,10 @@ public class UIManager_01 : MonoBehaviour
     {
         SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
         Backend.Chart.GetAllChartAndSave(true);
+        Debug.Log(Backend.Chart.GetAllChartAndSave(true).GetReturnValue());
+
         ScenarioData.Instance.SetScenarioData();
+        MarketingData.Instance.SetMarketingData();
         ActorData.Instance.SetActorsData();
         Items.Instance.SetStaffData();
 
