@@ -200,8 +200,6 @@ public class GameManager : Singleton<GameManager>
 
         Backend.Chart.GetAllChartAndSave(true);
 
-        if (StaffData.Instance == null)
-            Debug.Log("이거 널뜸");
         Staffs = StaffData.Instance.SetStaffData();
         Debug.Log("스태프 데이터 생성");
     }
