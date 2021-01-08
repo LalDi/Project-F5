@@ -53,6 +53,9 @@ public class GameManager : Singleton<GameManager>
     // 스태프 정보 저장
     public List<Staff> Staffs = new List<Staff>();
 
+    // 발전 정보 저장
+    public List<Develop> Develops = new List<Develop>();
+
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };
     public Step NowStep { get; private set; }
 
@@ -110,6 +113,10 @@ public class GameManager : Singleton<GameManager>
 
         Actors.Clear();
         ActorData.Instance.SetActorsData();
+
+        Develops.Clear();
+        Develops = DevelopData.Instance.GetDevelopRandom();
+
         NowStep = Step.Select_Scenario;
     }
 
@@ -202,6 +209,13 @@ public class GameManager : Singleton<GameManager>
 
         Staffs = StaffData.Instance.SetStaffData();
         Debug.Log("스태프 데이터 생성");
+
+        DevelopData.Instance.SetDevelopData();
+
+        Develops.Clear();
+        Develops = DevelopData.Instance.GetDevelopRandom();
+
+        Debug.Log("발전 데이터 생성");
     }
 
     public void SetValue(MANAGERDATA.DATALIST data, float value, bool IsPlus = false)

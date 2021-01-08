@@ -893,39 +893,103 @@ public class UIManager_02 : MonoBehaviour
     }
     #endregion
 
-    #region Item
+    #region Develop
+
     public void SetDevelopItem()
     {
-        for (int i = 0; i < Items.Instance.DevelopItems.Count; i++)
+        foreach (var item in GameManager.Instance.Develops)
         {
-            GameObject item = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
+            GameObject Obj = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.DevelopItems[i].Icon;
-            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.DevelopItems[i].name;
-            int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Develop", j));
+            Obj.transform.GetChild(0).GetComponent<Image>().sprite = DevelopData.Instance.DevelopIcon[item.Effect_Code-1];
+            Obj.transform.GetChild(1).GetComponent<Text>().text = item.Name;
+            Obj.transform.GetComponent<Button>().onClick.AddListener(() => Open_Develop_Popup(item));
         }
-        double count = (Items.Instance.DevelopItems.Count / 2f);
+        double count = (GameManager.Instance.Develops.Count / 2f);
         Popup_Develop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
 
-    //public void SetStaffItem()
-    //{
-    //    for (int i = 0; i < Items.Instance.StaffItems.Count; i++)
-    //    {
-    //        GameObject item = ObjManager.SpawnPool("StaffItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
-    //
-    //        item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.Staff_Icons[i];
-    //        item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.StaffItems[i].name;
-    //        int j = i;
-    //        item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Staff", j));
-    //    }
-    //    double count = Items.Instance.StaffItems.Count / 2f;
-    //    Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
-    //        new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
-    //}
-    //
+    public void Open_Develop_Popup(Develop Data)
+    {
+        GameObject obj;
+        Sprite Icon;
+        string Name;
+        string Script;
+        string Pay;
+
+        Popup_On((int)PopupList.DevelopUp);
+        obj = Popup_DevelopUp;
+        Icon = DevelopData.Instance.DevelopIcon[Data.Effect_Code - 1];
+        Name = Data.Name;
+        obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+
+        switch (Data.Effect_Code)
+        {
+            case 1: Script = "시나리오 퀄리티: +" + Data.Effect.ToString("N0"); break;
+            case 2: Script = "공연 연출력: +" + Data.Effect.ToString("N0"); break;
+            case 3: Script = "배우 연기력: +" + Data.Effect.ToString("N0"); break;
+            case 4: Script = "성공률: +" + Data.Effect.ToString("N0"); break;
+            default: Script = "..."; break;
+        }
+
+        Pay = "가격: " + Data.Price.ToString("N0");
+        obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
+        obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Develop(Data));
+
+        obj.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = Icon;
+        obj.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = Name;
+        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
+        obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
+    }
+
+    public void Buy_Develop(Develop Data)
+    {
+        if (GameManager.Instance.Money < Data.Price)
+        {
+            Popup_On((int)PopupList.LoansCk);
+            Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
+                ((GameManager.Instance.Money <= 0) ?
+                Data.Price.ToString("N0") : ((GameManager.Instance.Money - Data.Price) * -1).ToString("N0"));
+
+            Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.RemoveAllListeners();
+            Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() =>
+            {
+                Popup_Quit((int)PopupList.LoansCk);
+                Effect_Develop(Data);
+            });
+        }
+        else
+        {
+            Effect_Develop(Data);
+        }
+    }
+
+    public void Effect_Develop(Develop Data)
+    {
+        switch (Data.Effect_Code)
+        {
+            case 1:
+                GameManager.Instance.SetValue(MANAGERDATA.DATALIST.SCENARIO, Data.Effect, true);
+                break;
+            case 2:
+                GameManager.Instance.SetValue(MANAGERDATA.DATALIST.DIRECTION, Data.Effect, true);
+                break;
+            case 3:
+                GameManager.Instance.SetValue(MANAGERDATA.DATALIST.ACTING, Data.Effect, true);
+                break;
+            case 4:
+                GameManager.Instance.SetValue(MANAGERDATA.DATALIST.SUCCESS, Data.Effect, true);
+                break;
+            default:    break;
+        }
+        GameManager.Instance.CostMoney(Data.Price);
+        Open_Develop_Popup(Data);
+    }
+    #endregion
+
+    #region Item
+
     public void SetShopItem()
     {
         for (int i = 0; i < Items.Instance.ShopItems.Count; i++)
