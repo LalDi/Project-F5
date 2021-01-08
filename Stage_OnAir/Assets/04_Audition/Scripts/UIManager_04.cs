@@ -10,6 +10,7 @@ public class UIManager_04 : MonoBehaviour
 
     public GameObject Popup_Balck;
     public GameObject Popup_Result;
+    public Text Text_Money;
     public GameObject Count;
     public GameObject Profile;
 
@@ -22,6 +23,7 @@ public class UIManager_04 : MonoBehaviour
     //오디션 완료한 배우들 수 카운트 (Preparation Actors)
     public int MaxActor;
     //오디션 보는 배우 수 (한명에서 7명정도)
+
     void Start()
     {
         Popup_Balck.SetActive(false);
@@ -33,6 +35,16 @@ public class UIManager_04 : MonoBehaviour
         PprActors = ActorData.Instance.RandomActors(MaxActor);
         Reroad_ActorProfile();
     }
+
+    void Update()
+    {
+        Text_Money.text = GameManager.Instance.Money.ToString("N0");
+        if (GameManager.Instance.Money <= 0)
+            Text_Money.color = Color.red;
+        else
+            Text_Money.color = Color.black;
+    }
+
     public void Reroad_ActorProfile()
     {
         ActorCount++;
@@ -90,6 +102,7 @@ public class UIManager_04 : MonoBehaviour
         SoundManager.Instance.PlaySound("Pop_3");
         Reroad_ActorProfile();
     }
+
     public void Pass_BT()
     {
         SoundManager.Instance.PlaySound("Pop_6");

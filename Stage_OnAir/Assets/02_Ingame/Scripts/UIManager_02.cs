@@ -1218,6 +1218,7 @@ public class UIManager_02 : MonoBehaviour
         Forder_UI.SetActive(true);
         Stat_UI.SetActive(true);
         SoundManager.Instance.PlayBGM();
+        SoundManager.Instance.SetBGM(GameManager.Instance.OnBGM ? 1f : 0f);
 
         Play.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0, 0, 0);
     }
