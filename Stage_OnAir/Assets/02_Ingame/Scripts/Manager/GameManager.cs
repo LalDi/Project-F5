@@ -172,6 +172,8 @@ public class GameManager : Singleton<GameManager>
             {
                 DefaultSuccess = int.Parse(data["DefaultSuccess"]["N"].ToString());
             }
+
+            Debug.Log("기존 데이터 불러오기");
         }
         else
         {
@@ -192,12 +194,16 @@ public class GameManager : Singleton<GameManager>
             Year = 2000;
             Month = 1;
             DefaultSuccess = 70;
+            
+            Debug.Log("새 데이터 생성");
         }
 
         Backend.Chart.GetAllChartAndSave(true);
 
-        Debug.Log(StaffData.Instance.SetStaffData());
+        if (StaffData.Instance == null)
+            Debug.Log("이거 널뜸");
         Staffs = StaffData.Instance.SetStaffData();
+        Debug.Log("스태프 데이터 생성");
     }
 
     public void SetValue(MANAGERDATA.DATALIST data, float value, bool IsPlus = false)

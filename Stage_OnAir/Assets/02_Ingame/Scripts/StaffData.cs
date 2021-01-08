@@ -183,6 +183,7 @@ public class StaffData : Singleton<StaffData>
         List<Staff> StaffsList = new List<Staff>();
 
         JsonData ChartJson = JsonMapper.ToObject(Backend.Chart.GetLocalChartData("Staff"));
+
         var row = ChartJson["rows"];
         StaffsList.Clear();
 

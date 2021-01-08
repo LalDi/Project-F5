@@ -25,7 +25,7 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 
-    void Start()
+    public new void Start()
     {
         base.Start();
 
