@@ -22,6 +22,7 @@ public class UIManager_01 : MonoBehaviour
         Backend.Chart.GetAllChartAndSave(true);
         ScenarioData.Instance.SetScenarioData();
         ActorData.Instance.SetActorsData();
+        MarketingData.Instance.SetMarketingData();
         Items.Instance.SetStaffData();
 
         LoadManager.LoaderCallback();

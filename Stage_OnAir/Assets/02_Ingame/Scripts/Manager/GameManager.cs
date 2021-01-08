@@ -33,7 +33,7 @@ public class GameManager : Singleton<GameManager>
     public int MaxActor { get; private set; }
 
     // 플레이어 데이터
-    private string NickName;
+    public string NickName;
     public int DefaultSuccess;
     public bool OnBGM;
     public bool OnSFX;
@@ -47,8 +47,11 @@ public class GameManager : Singleton<GameManager>
 
     // 오디션에서 고용된 배우들
     public List<Actor> Actors = new List<Actor>();
+
     //스탭 레벨 저장
     public int[] StaffLevel = new int[10];
+    // 스태프 정보 저장
+    public List<Staff> Staffs = new List<Staff>();
 
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };
     public Step NowStep { get; private set; }
@@ -67,7 +70,7 @@ public class GameManager : Singleton<GameManager>
                 Debug.Log("초기화 완료");
 
                 // 게임 디버깅 및 테스트를 위한 임시 로그인
-                var data = Backend.BMember.CustomLogin("test2", "1234");
+                var data = Backend.BMember.CustomLogin("jungjh0513", "1234");
                 Debug.Log("로그인 완료");
 
             }
@@ -78,25 +81,22 @@ public class GameManager : Singleton<GameManager>
             }
         });
 
-        //Backend.Chart.GetAllChartAndSave(true);
-
-        Year = 2000;
-        Month = 01;
-
-        Money = 5000000;
-
-        DefaultSuccess = 70;
-
-
         OnBGM = true;
         OnSFX = true;
         OnPush = true;
         IsBankrupt = false;
     }
+    public new void Start()
+    {
+        base.Start();
+
+        LoadData();
+    }
+
     public void Reset()
     {
         Play_Quality = 0;
-        Play_Marketing = 0;
+        Play_Marketing = 100;
         Play_Success = 0;
 
         Quality_Acting = 0;
@@ -112,6 +112,146 @@ public class GameManager : Singleton<GameManager>
         ActorData.Instance.SetActorsData();
         NowStep = Step.Select_Scenario;
     }
+
+    public void SaveData()
+    {
+        string InDate = Backend.BMember.GetUserInfo().GetInDate();
+
+        Param param = new Param();
+        param.Add("Money", Money);
+        param.Add("Year", Year);
+        param.Add("Month", Month);
+        param.Add("DefaultSuccess", DefaultSuccess);
+
+        var Info = Backend.GameSchemaInfo.Get("Player", InDate);
+        string InfoInDate;
+
+        if (Info.GetStatusCode() == "404")
+        {
+            Backend.GameSchemaInfo.Insert("Player", param); // 동기
+            Debug.LogError("새로운 데이터 생성");
+        }
+        else
+        {
+            InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
+            Backend.GameSchemaInfo.Update("Player", InfoInDate, param); // 동기
+            Debug.LogError("기존 데이터 갱신");
+        }
+
+        StaffData.SaveAllStaff();
+
+        Debug.LogError("데이터 저장 완료");
+    }
+
+    public void LoadData()
+    {
+        string InDate = Backend.BMember.GetUserInfo().GetInDate();
+        var Info = Backend.GameSchemaInfo.Get("Player", InDate);
+
+        NickName = Backend.BMember.GetUserInfo().GetReturnValuetoJSON()["row"]["nickname"].ToString();
+
+        if (Info.GetStatusCode() == "200")
+        {
+            BackendReturnObject contents = Backend.GameSchemaInfo.Get("Player", InDate);
+
+            JsonData data = contents.Rows()[0];
+
+            if (data.Keys.Contains("Money"))
+            {
+                Money = int.Parse(data["Money"]["N"].ToString());
+            }
+            if (data.Keys.Contains("Year"))
+            {
+                Year = int.Parse(data["Year"]["N"].ToString());
+            }
+            if (data.Keys.Contains("Month"))
+            {
+                Month = int.Parse(data["Month"]["N"].ToString());
+            }
+            if (data.Keys.Contains("DefaultSuccess"))
+            {
+                DefaultSuccess = int.Parse(data["DefaultSuccess"]["N"].ToString());
+            }
+        }
+        else
+        {
+            Param param = new Param();
+
+            param.Add("Money", 5000000);
+            param.Add("Year", 2000);
+            param.Add("Month", 01);
+            param.Add("DefaultSuccess", 70);
+
+            param.Add("BestQuality", 0);
+            param.Add("BestAudience", 0);
+            param.Add("BestProfit", 0);
+
+            Backend.GameSchemaInfo.Insert("Player", param); // 동기
+
+            Money = 5000000;
+            Year = 2000;
+            Month = 1;
+            DefaultSuccess = 70;
+        }
+
+        Backend.Chart.GetAllChartAndSave(true);
+
+        Debug.Log(StaffData.Instance.SetStaffData());
+        Staffs = StaffData.Instance.SetStaffData();
+    }
+
+    public void SetValue(MANAGERDATA.DATALIST data, float value, bool IsPlus = false)
+    {
+        if (IsPlus)
+        {
+            switch (data)
+            {
+                case MANAGERDATA.DATALIST.QUALITY:
+                    Play_Quality += value;
+                    break;
+                case MANAGERDATA.DATALIST.MARKETING:
+                    Play_Marketing += value;
+                    break;
+                case MANAGERDATA.DATALIST.SUCCESS:
+                    Play_Success += value;
+                    break;
+                case MANAGERDATA.DATALIST.ACTING:
+                    Quality_Acting += value;
+                    break;
+                case MANAGERDATA.DATALIST.SCENARIO:
+                    Quality_Scenario += value;
+                    break;
+                case MANAGERDATA.DATALIST.DIRECTION:
+                    Quality_Direction += value;
+                    break;
+            }
+        }
+        else
+        {
+            switch (data)
+            {
+                case MANAGERDATA.DATALIST.QUALITY:
+                    Play_Quality = value;
+                    break;
+                case MANAGERDATA.DATALIST.MARKETING:
+                    Play_Marketing = value;
+                    break;
+                case MANAGERDATA.DATALIST.SUCCESS:
+                    Play_Success = value;
+                    break;
+                case MANAGERDATA.DATALIST.ACTING:
+                    Quality_Acting = value;
+                    break;
+                case MANAGERDATA.DATALIST.SCENARIO:
+                    Quality_Scenario = value;
+                    break;
+                case MANAGERDATA.DATALIST.DIRECTION:
+                    Quality_Direction = value;
+                    break;
+            }
+        }
+    }
+
     public float GetSuccess()
     {
         float Success = 0;
@@ -162,19 +302,23 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Money n Day
+
     public void CostMoney(int value, bool Reduction = true)
     {
         Money = Reduction ? Money - value : Money + value;
     }
+
     public void SetPeriod()
     {
         Play_Success = GetSuccess();
         SetStep(Step.Prepare_Play);
     }
+
     public void SetPeriod(int value)
     {
         Period += value;
     }
+
     public void SetDefaultPeriod()
     {
         float Success = 0;
@@ -199,6 +343,7 @@ public class GameManager : Singleton<GameManager>
 
         Period = Count + 6;
     }
+
     public void GoNextMonth()
     {
         Month++;
@@ -212,16 +357,17 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Player Data
+
     public void ReStart()
     {
         Reset();
-        StaffLevel = Enumerable.Repeat<int>(0, 10).ToArray<int>();
         Year = 2000;
         Month = 01;
         Money = 5000000;
         DefaultSuccess = 70;
         IsBankrupt = false;
     }
+
     public void Is_Bankrupt(bool Is) 
     {
         IsBankrupt = Is;
@@ -229,6 +375,7 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Scenario n Actor n Staff
+
     public void SetScenario(Scenario NextScenario)
     {
         NowScenario = NextScenario;
@@ -237,14 +384,17 @@ public class GameManager : Singleton<GameManager>
         Plus_Quality_Scenario(ScenarioData.Instance.FindScenario(NextScenario.Code).Quality);
         SetStep(Step.Cast_Actor);
     }
+
     public void SetMaxActor(int Num)
     {
         MaxActor = Num;
     }
+
     public void PlusNowActor()
     {
         NowActor++;
     }
+
     public void SetStep(Step NextStep)
     {
         NowStep = NextStep;
