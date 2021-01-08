@@ -26,6 +26,8 @@ public class UIManager_01 : MonoBehaviour
         MarketingData.Instance.SetMarketingData();
         Items.Instance.SetStaffData();
 
+        GameManager.Instance.LoadData();
+
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
     }

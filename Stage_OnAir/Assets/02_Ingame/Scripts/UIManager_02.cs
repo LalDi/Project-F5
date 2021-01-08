@@ -802,6 +802,7 @@ public class UIManager_02 : MonoBehaviour
             {
                 Data.UpgradeStaff();
                 Open_Staff_Popup(Data);
+                SoundManager.Instance.PlaySound("Cash_Register");
             }
             else
                 Popup_On((int)PopupList.Warning);
@@ -811,6 +812,19 @@ public class UIManager_02 : MonoBehaviour
             if (GameManager.Instance.Money >= Data.Cost_Purchase)
             {
                 Data.BuyStaff();
+
+                SoundManager.Instance.PlaySound("Cash_Register");
+
+                Popup_StaffCk.transform.GetChild(1).GetComponent<Text>().text
+                = "『" + Data.Name + "』을\n고용하였습니다.";
+                Popup_StaffCk.transform.GetChild(2).GetComponent<Text>().text
+                    = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
+                    + (GameManager.Instance.Money - Data.Cost_Purchase).ToString("N0")
+                    + "\n개발력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
+                    + (GameManager.Instance.Quality_Direction + Data.Directing).ToString("N0");
+
+                Popup_On((int)PopupList.StaffCk);
+
                 Open_Staff_Popup(Data);
             }
             else
@@ -818,7 +832,6 @@ public class UIManager_02 : MonoBehaviour
         }
     }
     #endregion
-
 
     #region Marketing
     public void SetMarketingItem()
@@ -879,6 +892,17 @@ public class UIManager_02 : MonoBehaviour
             Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() =>
             {
                 Popup_Quit((int)PopupList.LoansCk);
+
+                SoundManager.Instance.PlaySound("Cash_Register");
+                Popup_MarketingCk.transform.GetChild(1).GetComponent<Text>().text
+                    = "『" + Data.Name + "』을\n구매하였습니다.";
+                Popup_MarketingCk.transform.GetChild(2).GetComponent<Text>().text
+                    = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
+                    + (GameManager.Instance.Money - Data.Price).ToString("N0")
+                    + "\n마케팅 점수: " + (GameManager.Instance.Play_Marketing.ToString("N0")) + " -> "
+                    + (GameManager.Instance.Play_Marketing + Data.Score).ToString("N0");
+                Popup_On((int)PopupList.MarketingCk);
+
                 GameManager.Instance.CostMoney(Data.Price);
                 GameManager.Instance.SetValue(MANAGERDATA.DATALIST.MARKETING, Data.Score, true);
                 Open_Marketing_Popup(Data);
@@ -886,8 +910,19 @@ public class UIManager_02 : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.PlaySound("Cash_Register");
+            Popup_MarketingCk.transform.GetChild(1).GetComponent<Text>().text
+                = "『" + Data.Name + "』을\n구매하였습니다.";
+            Popup_MarketingCk.transform.GetChild(2).GetComponent<Text>().text
+                = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
+                + (GameManager.Instance.Money - Data.Price).ToString("N0")
+                + "\n마케팅 점수: " + (GameManager.Instance.Play_Marketing.ToString("N0")) + " -> "
+                + (GameManager.Instance.Play_Marketing + Data.Score).ToString("N0");
+            Popup_On((int)PopupList.MarketingCk);
+
             GameManager.Instance.CostMoney(Data.Price);
             GameManager.Instance.SetValue(MANAGERDATA.DATALIST.MARKETING, Data.Score, true);
+
             Open_Marketing_Popup(Data);
         }
     }
@@ -956,11 +991,30 @@ public class UIManager_02 : MonoBehaviour
             Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() =>
             {
                 Popup_Quit((int)PopupList.LoansCk);
+
+                SoundManager.Instance.PlaySound("Cash_Register");
+                Popup_DevelopCk.transform.GetChild(1).GetComponent<Text>().text
+                    = "『" + Data.Name + "』을\n구매하였습니다.";
+                Popup_DevelopCk.transform.GetChild(2).GetComponent<Text>().text
+                    = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
+                    + (GameManager.Instance.Money - Data.Price).ToString("N0");
+
+                Popup_On((int)PopupList.DevelopCk);
+
                 Effect_Develop(Data);
             });
         }
         else
         {
+            SoundManager.Instance.PlaySound("Cash_Register");
+            Popup_DevelopCk.transform.GetChild(1).GetComponent<Text>().text
+                = "『" + Data.Name + "』을\n구매하였습니다.";
+            Popup_DevelopCk.transform.GetChild(2).GetComponent<Text>().text
+                = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
+                + (GameManager.Instance.Money - Data.Price).ToString("N0");
+
+            Popup_On((int)PopupList.DevelopCk);
+
             Effect_Develop(Data);
         }
     }

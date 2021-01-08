@@ -3121,7 +3121,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 752397102}
-        m_MethodName: To_Ingame
+        m_MethodName: OpenPopup_LogIn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6853,9 +6853,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DevelopIcon:
   - {fileID: 21300000, guid: 2cd601e194337e14999df78d6149afbf, type: 3}
-  - {fileID: 21300000, guid: 2cd601e194337e14999df78d6149afbf, type: 3}
-  - {fileID: 21300000, guid: 2cd601e194337e14999df78d6149afbf, type: 3}
-  - {fileID: 21300000, guid: 2cd601e194337e14999df78d6149afbf, type: 3}
+  - {fileID: 21300000, guid: fbab2f5bfc64db64b93e95929807259c, type: 3}
+  - {fileID: 21300000, guid: 565ba0e5fab54aa44a31b7a1626e7e4f, type: 3}
+  - {fileID: 21300000, guid: eff77f8c29d00ce45b34f6b27e7ccdd9, type: 3}
 --- !u!4 &2072093036
 Transform:
   m_ObjectHideFlags: 0

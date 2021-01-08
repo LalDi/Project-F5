@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     public float Quality_Acting { get; private set; }
     public float Quality_Scenario { get; private set; }
     public float Quality_Direction { get; private set; }
+    public float Plus_Direction { get; private set; }
 
     // 현재 보유 금액
     public int Money { get; private set; }
@@ -73,8 +74,8 @@ public class GameManager : Singleton<GameManager>
                 Debug.Log("초기화 완료");
 
                 // 게임 디버깅 및 테스트를 위한 임시 로그인
-                var data = Backend.BMember.CustomLogin("jungjh0513", "1234");
-                Debug.Log("로그인 완료");
+                // var data = Backend.BMember.CustomLogin("jungjh0513", "1234");
+                // Debug.Log("로그인 완료");
 
             }
             // 초기화 실패한 경우 실행
@@ -93,7 +94,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.Start();
 
-        LoadData();
+        //LoadData();
     }
 
     public void Reset()
@@ -104,7 +105,8 @@ public class GameManager : Singleton<GameManager>
 
         Quality_Acting = 0;
         Quality_Scenario = 0;
-        Quality_Direction = 0;
+        Plus_Direction = 0;
+        GetDirection();
 
         Period = 0;
 
@@ -240,7 +242,7 @@ public class GameManager : Singleton<GameManager>
                     Quality_Scenario += value;
                     break;
                 case MANAGERDATA.DATALIST.DIRECTION:
-                    Quality_Direction += value;
+                    Plus_Direction += value;
                     break;
             }
         }
@@ -264,10 +266,18 @@ public class GameManager : Singleton<GameManager>
                     Quality_Scenario = value;
                     break;
                 case MANAGERDATA.DATALIST.DIRECTION:
-                    Quality_Direction = value;
+                    Plus_Direction = value;
                     break;
             }
         }
+    }
+
+    public void GetDirection()
+    {
+        Quality_Direction = 0;
+        foreach (var item in Staffs)
+            Quality_Direction += item.Directing;
+        Quality_Direction += Plus_Direction;
     }
 
     public float GetSuccess()

@@ -98,6 +98,7 @@ public class Staff
         GameManager.Instance.CostMoney(Cost_Purchase);
         Level = 1;
         SetLevel();
+        GameManager.Instance.GetDirection();
         SaveStaff();
 
         IsPurchase = true;
@@ -117,6 +118,7 @@ public class Staff
         GameManager.Instance.CostMoney(Cost_Upgrade);
         Level++;
         SetLevel();
+        GameManager.Instance.GetDirection();
         SaveStaff();
     }
 

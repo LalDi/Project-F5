@@ -52,6 +52,7 @@ public class Login : MonoBehaviour
                 ActorData.Instance.SetActorsData();
                 MarketingData.Instance.SetMarketingData();
                 Items.Instance.SetStaffData();
+                GameManager.Instance.LoadData();
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "400":
@@ -128,6 +129,7 @@ public class Login : MonoBehaviour
                 ActorData.Instance.SetActorsData();
                 MarketingData.Instance.SetMarketingData();
                 Items.Instance.SetStaffData();
+                GameManager.Instance.LoadData();
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "400":
