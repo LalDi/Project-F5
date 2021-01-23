@@ -24,6 +24,8 @@ public class UIManager_04 : MonoBehaviour
     public int MaxActor;
     //오디션 보는 배우 수 (한명에서 7명정도)
 
+    public GameObject Bgm;
+
     void Start()
     {
         Popup_Balck.SetActive(false);
@@ -34,6 +36,9 @@ public class UIManager_04 : MonoBehaviour
 
         PprActors = ActorData.Instance.RandomActors(MaxActor);
         Reroad_ActorProfile();
+
+        SoundManager.Instance.StopBGM();
+        Bgm = SoundManager.Instance.LoopSound("Bgm_Audition");
     }
 
     void Update()
@@ -107,11 +112,16 @@ public class UIManager_04 : MonoBehaviour
     {
         SoundManager.Instance.PlaySound("Pop_6");
         PassActors.Add(PprActors[ActorCount - 1]);
+        GameManager.Instance.CostMoney(PprActors[ActorCount - 1].Price);
+
         Reroad_ActorProfile();
     }
 
     public void To_Ingame()
     {
+        Destroy(Bgm);
+        SoundManager.Instance.PlayBGM();
+
         SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
         LoadManager.LoaderCallback();
         LoadManager.Load(LoadManager.Scene.Ingame);
