@@ -51,6 +51,7 @@ public class UIManager_02 : MonoBehaviour
     [Space(10)]
     public GameObject Popup_Warning;
     public GameObject Popup_LoansCk;
+    public GameObject Popup_Tutorial;
 
     [Header("Period")]
     public Text Text_Period;
@@ -112,11 +113,15 @@ public class UIManager_02 : MonoBehaviour
         ShopCk,  //17
         Error,       //  18
         Warning, //   19
-        LoansCk   //20
+        LoansCk,   //20
+        Tutorial    //21
     }
 
     public delegate void ProgressDel();
     public ProgressDel Progress;
+
+    public List<Tutorial> Tutorials;
+    public Image TutorialSprite;
 
     private int CountMonth = 0;
 
@@ -133,7 +138,7 @@ public class UIManager_02 : MonoBehaviour
         }
 
         DOTween.To(() => Gauge_Progress.fillAmount, x => Gauge_Progress.fillAmount = x
-        , (float)(GameManager.Instance.NowStep+1) * 0.2f, 1);
+        , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
     }
 
     private void Update()
@@ -189,6 +194,7 @@ public class UIManager_02 : MonoBehaviour
 
         Stat_UI.transform.GetChild(1).GetComponent<Text>().text = StatText;
 
+        GameManager.Instance.GetDirection();
         string QualityStatText;
         QualityStatText = "연기: " + GameManager.Instance.Quality_Acting.ToString("N0")
             + "\n희곡: " + GameManager.Instance.Quality_Scenario.ToString("N0")
@@ -360,6 +366,9 @@ public class UIManager_02 : MonoBehaviour
             case PopupList.LoansCk:
                 Popup_LoansCk.SetActive(true);
                 break;
+            case PopupList.Tutorial:
+                Popup_Tutorial.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -394,6 +403,7 @@ public class UIManager_02 : MonoBehaviour
         Popup_Error.SetActive(false);
         Popup_Warning.SetActive(false);
         Popup_LoansCk.SetActive(false);
+        Popup_Tutorial.SetActive(false);
 
         Close_Item(Popup_Shop);
         Close_Item(Popup_Staff);
@@ -476,6 +486,9 @@ public class UIManager_02 : MonoBehaviour
                 break;
             case PopupList.LoansCk:
                 Popup_LoansCk.SetActive(false);
+                break;
+            case PopupList.Tutorial:
+                Popup_Tutorial.SetActive(false);
                 break;
             default:
                 break;
@@ -640,7 +653,6 @@ public class UIManager_02 : MonoBehaviour
 
     private IEnumerator StartPrepare()
     {
-        Debug.Log("개발 시작");
         switch (GameManager.Instance.Month)
         {
             case 2:
@@ -675,10 +687,7 @@ public class UIManager_02 : MonoBehaviour
             Debug.Log("개발 완료");
         }
         else
-        {
             StartCoroutine(StartPrepare());
-            Debug.Log("한달 개발함");
-        }
     }
     #endregion
 
@@ -969,7 +978,7 @@ public class UIManager_02 : MonoBehaviour
         {
             GameObject Obj = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            Obj.transform.GetChild(0).GetComponent<Image>().sprite = DevelopData.Instance.DevelopIcon[item.Effect_Code-1];
+            Obj.transform.GetChild(0).GetComponent<Image>().sprite = DevelopData.Instance.DevelopIcon[item.Effect_Code - 1];
             Obj.transform.GetChild(1).GetComponent<Text>().text = item.Name;
             Obj.transform.GetComponent<Button>().onClick.AddListener(() => Open_Develop_Popup(item));
         }
@@ -1068,7 +1077,7 @@ public class UIManager_02 : MonoBehaviour
             case 4:
                 GameManager.Instance.SetValue(MANAGERDATA.DATALIST.SUCCESS, Data.Effect, true);
                 break;
-            default:    break;
+            default: break;
         }
         GameManager.Instance.CostMoney(Data.Price);
         Open_Develop_Popup(Data);
@@ -1082,7 +1091,7 @@ public class UIManager_02 : MonoBehaviour
         for (int i = 0; i < Items.Instance.ShopItems.Count; i++)
         {
             GameObject item = ObjManager.SpawnPool("ShopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
-    
+
             item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
             item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
             item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.ShopItems[i].pay.ToString("N0")
@@ -1312,6 +1321,28 @@ public class UIManager_02 : MonoBehaviour
     }
     #endregion
 
+    public void TutorialBT(int sort)
+    {
+        TutorialSprite.gameObject.SetActive(true);
+        TutorialSprite.sprite = Tutorials[sort].Sprites[0];
+        TutorialSprite.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+        TutorialSprite.gameObject.GetComponent<Button>().onClick.AddListener(() => TutorialSpriteBT(sort, 1));
+    }
+
+    public void TutorialSpriteBT(int sort, int num)
+    {
+        if (Tutorials[sort].Sprites.Count <= num)
+            TutorialSprite.gameObject.SetActive(false);
+            //Debug.Log(Tutorials[sort].Sprites.Count +", "+ num);
+        else
+        {
+            SoundManager.Instance.PlaySound("Pop_6");
+            TutorialSprite.sprite = Tutorials[sort].Sprites[num];
+            TutorialSprite.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+            TutorialSprite.gameObject.GetComponent<Button>().onClick.AddListener(() => TutorialSpriteBT(sort, num + 1));
+        }
+    }
+
     public void Stat_UI_Anim()
     {
         SoundManager.Instance.PlaySound("Pop_6");
@@ -1351,7 +1382,7 @@ public class UIManager_02 : MonoBehaviour
     public IEnumerator Play_Anim()
     {
         Forder_UI.SetActive(false);
-        Stat_UI.SetActive(false); 
+        Stat_UI.SetActive(false);
         Popup_Quit();
         SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySound("Positive_6");

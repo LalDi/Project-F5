@@ -127,4 +127,9 @@
         }
     }
 
+    [System.Serializable]
+    public class Tutorial
+    {
+        public List<Sprite> Sprites;
+    }
 }

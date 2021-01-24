@@ -400,8 +400,11 @@ public class GameManager : Singleton<GameManager>
                 if (Day > 31) IsNext = true;
                 break;
         }
-        if (IsNext) { 
-            Month++;
+        if (IsNext) {
+            if (Month >= 12)
+                Month = 1;
+            else
+                Month++;
             Day = 1;
             // 스태프 연봉 지급하는 코드
 
@@ -416,6 +419,8 @@ public class GameManager : Singleton<GameManager>
     public void ReStart()
     {
         Reset();
+        for (int i = 0; i < StaffLevel.Length; i++)
+            StaffLevel[i] = 0;
         Month = 1;
         Day = 1;
         Money = 5000000;
