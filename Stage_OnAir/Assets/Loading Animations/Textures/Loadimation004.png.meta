@@ -1,0 +1,596 @@
+fileFormatVersion: 2
+guid: 3a92eb2ef38080f48951f285ffb734c8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Loading Animation 1_0
+  - first:
+      213: 21300002
+    second: Loading Animation 1_1
+  - first:
+      213: 21300004
+    second: Loading Animation 1_2
+  - first:
+      213: 21300006
+    second: Loading Animation 1_3
+  - first:
+      213: 21300008
+    second: Loading Animation 1_4
+  - first:
+      213: 21300010
+    second: Loading Animation 1_5
+  - first:
+      213: 21300012
+    second: Loading Animation 1_6
+  - first:
+      213: 21300014
+    second: Loading Animation 1_7
+  - first:
+      213: 21300016
+    second: Loading Animation 1_8
+  - first:
+      213: 21300018
+    second: Loading Animation 1_9
+  - first:
+      213: 21300020
+    second: Loading Animation 1_10
+  - first:
+      213: 21300022
+    second: Loading Animation 1_11
+  - first:
+      213: 21300024
+    second: Loading Animation 2_0
+  - first:
+      213: 21300026
+    second: Loading Animation 2_1
+  - first:
+      213: 21300028
+    second: Loading Animation 2_2
+  - first:
+      213: 21300030
+    second: Loading Animation 2_3
+  - first:
+      213: 21300032
+    second: Loading Animation 2_4
+  - first:
+      213: 21300034
+    second: Loading Animation 2_5
+  - first:
+      213: 21300036
+    second: Loading Animation 2_6
+  - first:
+      213: 21300038
+    second: Loading Animation 2_7
+  - first:
+      213: 21300040
+    second: Loading Animation 2_8
+  - first:
+      213: 21300042
+    second: Loading Animation 2_9
+  - first:
+      213: 21300044
+    second: Loading Animation 2_10
+  - first:
+      213: 21300046
+    second: Loading Animation 2_11
+  - first:
+      213: 21300048
+    second: Loadimation01v2_0
+  - first:
+      213: 21300050
+    second: Loadimation01v2_1
+  - first:
+      213: 21300052
+    second: Loadimation01v2_2
+  - first:
+      213: 21300054
+    second: Loadimation01v2_3
+  - first:
+      213: 21300056
+    second: Loadimation01v2_4
+  - first:
+      213: 21300058
+    second: Loadimation01v2_5
+  - first:
+      213: 21300060
+    second: Loadimation01v2_6
+  - first:
+      213: 21300062
+    second: Loadimation01v2_7
+  - first:
+      213: 21300064
+    second: Loadimation01v2_8
+  - first:
+      213: 21300066
+    second: Loadimation01v2_9
+  - first:
+      213: 21300068
+    second: Loadimation01v2_10
+  - first:
+      213: 21300070
+    second: Loadimation01v2_11
+  - first:
+      213: 21300072
+    second: Loadimation01v3_0
+  - first:
+      213: 21300074
+    second: Loadimation01v3_1
+  - first:
+      213: 21300076
+    second: Loadimation01v3_2
+  - first:
+      213: 21300078
+    second: Loadimation01v3_3
+  - first:
+      213: 21300080
+    second: Loadimation01v3_4
+  - first:
+      213: 21300082
+    second: Loadimation01v3_5
+  - first:
+      213: 21300084
+    second: Loadimation01v3_6
+  - first:
+      213: 21300086
+    second: Loadimation01v3_7
+  - first:
+      213: 21300088
+    second: Loadimation01v3_8
+  - first:
+      213: 21300090
+    second: Loadimation01v3_9
+  - first:
+      213: 21300092
+    second: Loadimation01v3_10
+  - first:
+      213: 21300094
+    second: Loadimation01v3_11
+  - first:
+      213: 21300096
+    second: Loadimation01v4_0
+  - first:
+      213: 21300098
+    second: Loadimation01v4_1
+  - first:
+      213: 21300100
+    second: Loadimation01v4_2
+  - first:
+      213: 21300102
+    second: Loadimation01v4_3
+  - first:
+      213: 21300104
+    second: Loadimation01v4_4
+  - first:
+      213: 21300106
+    second: Loadimation01v4_5
+  - first:
+      213: 21300108
+    second: Loadimation01v4_6
+  - first:
+      213: 21300110
+    second: Loadimation01v4_7
+  - first:
+      213: 21300112
+    second: Loadimation01v4_8
+  - first:
+      213: 21300114
+    second: Loadimation01v4_9
+  - first:
+      213: 21300116
+    second: Loadimation01v4_10
+  - first:
+      213: 21300118
+    second: Loadimation01v4_11
+  - first:
+      213: 21300120
+    second: Loadimation03_0
+  - first:
+      213: 21300122
+    second: Loadimation03_1
+  - first:
+      213: 21300124
+    second: Loadimation03_2
+  - first:
+      213: 21300126
+    second: Loadimation03_3
+  - first:
+      213: 21300128
+    second: Loadimation03_4
+  - first:
+      213: 21300130
+    second: Loadimation03_5
+  - first:
+      213: 21300132
+    second: Loadimation03_6
+  - first:
+      213: 21300134
+    second: Loadimation03_7
+  - first:
+      213: 21300136
+    second: Loadimation03_8
+  - first:
+      213: 21300138
+    second: Loadimation03_9
+  - first:
+      213: 21300140
+    second: Loadimation03_10
+  - first:
+      213: 21300142
+    second: Loadimation03_11
+  - first:
+      213: 21300144
+    second: Loadimation004_0
+  - first:
+      213: 21300146
+    second: Loadimation004_1
+  - first:
+      213: 21300148
+    second: Loadimation004_2
+  - first:
+      213: 21300150
+    second: Loadimation004_3
+  - first:
+      213: 21300152
+    second: Loadimation004_4
+  - first:
+      213: 21300154
+    second: Loadimation004_5
+  - first:
+      213: 21300156
+    second: Loadimation004_6
+  - first:
+      213: 21300158
+    second: Loadimation004_7
+  - first:
+      213: 21300160
+    second: Loadimation004_8
+  - first:
+      213: 21300162
+    second: Loadimation004_9
+  - first:
+      213: 21300164
+    second: Loadimation004_10
+  - first:
+      213: 21300166
+    second: Loadimation004_11
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 16
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Loadimation004_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b305410000000000800000000000000
+      internalID: 21300144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b305410000000000800000000000000
+      internalID: 21300146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b305410000000000800000000000000
+      internalID: 21300148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b305410000000000800000000000000
+      internalID: 21300150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b305410000000000800000000000000
+      internalID: 21300152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_5
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab305410000000000800000000000000
+      internalID: 21300154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_6
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb305410000000000800000000000000
+      internalID: 21300156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_7
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb305410000000000800000000000000
+      internalID: 21300158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c305410000000000800000000000000
+      internalID: 21300160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_9
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c305410000000000800000000000000
+      internalID: 21300162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_10
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c305410000000000800000000000000
+      internalID: 21300164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Loadimation004_11
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c305410000000000800000000000000
+      internalID: 21300166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
