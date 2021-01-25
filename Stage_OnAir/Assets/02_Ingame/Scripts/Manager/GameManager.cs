@@ -210,7 +210,7 @@ public class GameManager : Singleton<GameManager>
             Backend.GameSchemaInfo.Insert("Player", param); // 동기
 
             Money = PLAYER.DEFAULT_MONEY;
-            Year = PLAYER.DEFAULT_YEAR;
+            //Year = PLAYER.DEFAULT_YEAR;
             Month = PLAYER.DEFAULT_MONTH;
             DefaultSuccess = PLAYER.DEFAULT_SUCCESS;
             

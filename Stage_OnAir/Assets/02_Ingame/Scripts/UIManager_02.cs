@@ -406,7 +406,7 @@ public class UIManager_02 : MonoBehaviour
         Popup_LoansCk.SetActive(false);
         Popup_Tutorial.SetActive(false);
 
-        Close_Item(Popup_Shop);
+        //Close_Item(Popup_Shop);
         Close_Item(Popup_Staff);
         Close_Item(Popup_Marketing);
         Close_Item(Popup_Develop);
