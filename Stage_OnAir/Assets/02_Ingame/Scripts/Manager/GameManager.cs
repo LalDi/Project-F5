@@ -23,8 +23,8 @@ public class GameManager : Singleton<GameManager>
     public int Money { get; private set; }
 
     // 현재 날짜
-    public int Year { get; private set; }
     public int Month { get; private set; }
+    public int Day { get; private set; }
 
     // 설정된 연극 준비 기간
     public int Period { get; private set; }
@@ -133,8 +133,8 @@ public class GameManager : Singleton<GameManager>
 
         Param param = new Param();
         param.Add("Money", Money);
-        param.Add("Year", Year);
         param.Add("Month", Month);
+        param.Add("Day", Day);
         param.Add("DefaultSuccess", DefaultSuccess);
 
         var Info = Backend.GameSchemaInfo.Get("Player", InDate);
@@ -178,13 +178,13 @@ public class GameManager : Singleton<GameManager>
             {
                 Money = int.Parse(data["Money"]["N"].ToString());
             }
-            if (data.Keys.Contains("Year"))
-            {
-                Year = int.Parse(data["Year"]["N"].ToString());
-            }
             if (data.Keys.Contains("Month"))
             {
                 Month = int.Parse(data["Month"]["N"].ToString());
+            }
+            if (data.Keys.Contains("Day"))
+            {
+                Day = int.Parse(data["Day"]["N"].ToString());
             }
             if (data.Keys.Contains("DefaultSuccess"))
             {
@@ -439,15 +439,45 @@ public class GameManager : Singleton<GameManager>
         Period = Count + 6;
     }
 
-    public void GoNextMonth()
+    public bool GoNextMonth()
     {
-        Month++;
-        if (Month == 13)
+        Day++;
+
+        bool IsNext = false;
+        switch(Month)
         {
-            Year++;
-            Month = 1;
-            // 스태프 연봉 지급하는 코드
+            case 2:
+                if (Day > 28) IsNext = true;
+                break;
+
+            case 4: 
+            case 6: 
+            case 9: 
+            case 11:
+                if (Day > 30) IsNext = true;
+                break;
+
+            case 1: 
+            case 3: 
+            case 5: 
+            case 7: 
+            case 8: 
+            case 10: 
+            case 12:
+                if (Day > 31) IsNext = true;
+                break;
         }
+        if (IsNext) {
+            if (Month >= 12)
+                Month = 1;
+            else
+                Month++;
+            Day = 1;
+            // 스태프 연봉 지급하는 코드
+
+            return true;
+        }
+        return false;
     }
     #endregion
 
@@ -456,8 +486,10 @@ public class GameManager : Singleton<GameManager>
     public void ReStart()
     {
         Reset();
-        Year = 2000;
-        Month = 01;
+        for (int i = 0; i < StaffLevel.Length; i++)
+            StaffLevel[i] = 0;
+        Month = 1;
+        Day = 1;
         Money = 5000000;
         DefaultSuccess = 70;
         IsBankrupt = false;

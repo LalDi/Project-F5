@@ -18,9 +18,12 @@ public class UIManager_05 : MonoBehaviour
     public GameObject BlackBG;
     public GameObject ResultPU;
     public GameObject Bgm;
+    public GameObject SkipBT;
 
     public SpriteRenderer Character1;
     public SpriteRenderer Character2;
+
+    public IEnumerator DelayCrt;
 
     void Start()
     {
@@ -28,7 +31,7 @@ public class UIManager_05 : MonoBehaviour
 
         SoundManager.Instance.StopBGM();
         Bgm = SoundManager.Instance.LoopSound(Scrs.scripts[GameManager.Instance.NowScenario.No - 1].Bgm 
-            ? "Casual_Game_Music_14" : "Casual_Game_Music_09");
+            ? "Bgm_Play2" : "Bgm_Play1");
 
         //시나리오에 맞는 배경 켜기
         foreach (var Obj in Backgrounds)
@@ -42,12 +45,8 @@ public class UIManager_05 : MonoBehaviour
         Character1.sprite = ActorData.Instance.ActorImage[GameManager.Instance.Actors[1].No];
         Character2.sprite = ActorData.Instance.ActorImage[GameManager.Instance.Actors[2].No];
 
-        StartCoroutine(StartDelay());
-    }
-
-    void Update()
-    {
-
+        DelayCrt = StartDelay();
+        StartCoroutine(DelayCrt);
     }
 
     public IEnumerator StartDelay()
@@ -59,14 +58,25 @@ public class UIManager_05 : MonoBehaviour
 
         Script Scr = Scrs.scripts[GameManager.Instance.NowScenario.No - 1];
 
-
         for (int i = 0; i < Scr.script.Count; i++)
         {
             tmp.text = Scr.script[i];
             Script_Image.transform.localScale = new Vector3((Scr.Direction[i] ? 1 : -1), 1, 1);
             yield return new WaitForSeconds(4f);
         }
+        SkipBT.SetActive(false);
+        StartCoroutine(Result());
+    }
 
+    public void Skip()
+    {
+        SkipBT.SetActive(false);
+        StopCoroutine(DelayCrt);
+        StartCoroutine(Result());
+    }
+
+    public IEnumerator Result()
+    {
         BlackBG.SetActive(true);
         BlackBG.GetComponent<Image>().DOFade(0.5f, 2);
         yield return new WaitForSeconds(2f);
