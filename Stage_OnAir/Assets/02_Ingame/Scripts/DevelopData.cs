@@ -45,7 +45,14 @@ public class DevelopData : Singleton<DevelopData>
         foreach (JsonData item in rows)
         {
             Develop develop = new Develop(item);
-            DevelopList.Add(develop);
+            int count = int.Parse(item["Count"]["S"].ToString());
+            Debug.Log(develop.Name + ":"+ count+"개");
+            
+            for (int i = 0; i < count; i++)
+            {
+                DevelopList.Add(develop);
+                Debug.Log(develop.Name + "추가됨");
+            }
         }
     }
 
