@@ -30,6 +30,11 @@ public class UIManager_05 : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.Instance.Adblock == false)
+        {
+            GoogleAdsManager.Instance.IntersAdsShow();
+        }
+
         SoundManager.Instance.StopBGM();
         Bgm = SoundManager.Instance.LoopSound(Scrs.scripts[GameManager.Instance.NowScenario.No - 1].Bgm 
             ? "Bgm_Play2" : "Bgm_Play1");

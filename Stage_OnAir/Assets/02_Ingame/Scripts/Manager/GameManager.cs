@@ -39,6 +39,11 @@ public class GameManager : Singleton<GameManager>
     public bool OnBGM;
     public bool OnSFX;
     public bool OnPush;
+
+    // 상점 데이터 구매 여부
+    public bool Adblock { get; private set; }
+    public bool StartPackage { get; private set; }
+
     [SerializeField]
     public bool IsBankrupt;
 
@@ -74,8 +79,8 @@ public class GameManager : Singleton<GameManager>
                 Debug.Log("초기화 완료");
 
                 // 게임 디버깅 및 테스트를 위한 임시 로그인
-                // var data = Backend.BMember.CustomLogin("jungjh0513", "1234");
-                // Debug.Log("로그인 완료");
+                var data = Backend.BMember.CustomLogin("jungjh0513", "1234");
+                Debug.Log("로그인 완료");
 
             }
             // 초기화 실패한 경우 실행
@@ -94,7 +99,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.Start();
 
-        //LoadData();
+        LoadData();
     }
 
     public void Reset()
@@ -154,11 +159,15 @@ public class GameManager : Singleton<GameManager>
 
     public void LoadData()
     {
+        // 플레이어 InDate
         string InDate = Backend.BMember.GetUserInfo().GetInDate();
+
+        // 서버에서 Player테이블의 데이터를 받아옴
         var Info = Backend.GameSchemaInfo.Get("Player", InDate);
 
         NickName = Backend.BMember.GetUserInfo().GetReturnValuetoJSON()["row"]["nickname"].ToString();
 
+        // Player테이블의 데이터를 받아오는데 성공
         if (Info.GetStatusCode() == "200")
         {
             BackendReturnObject contents = Backend.GameSchemaInfo.Get("Player", InDate);
@@ -184,14 +193,15 @@ public class GameManager : Singleton<GameManager>
 
             Debug.Log("기존 데이터 불러오기");
         }
+        // Player테이블의 데이터를 받아오는데 실패
         else
         {
             Param param = new Param();
 
-            param.Add("Money", 5000000);
-            param.Add("Year", 2000);
-            param.Add("Month", 01);
-            param.Add("DefaultSuccess", 70);
+            param.Add("Money", PLAYER.DEFAULT_MONEY);
+            param.Add("Year", PLAYER.DEFAULT_YEAR);
+            param.Add("Month", PLAYER.DEFAULT_MONTH);
+            param.Add("DefaultSuccess", PLAYER.DEFAULT_SUCCESS);
 
             param.Add("BestQuality", 0);
             param.Add("BestAudience", 0);
@@ -199,12 +209,48 @@ public class GameManager : Singleton<GameManager>
 
             Backend.GameSchemaInfo.Insert("Player", param); // 동기
 
-            Money = 5000000;
-            Month = 1;
-            Day = 1;
-            DefaultSuccess = 70;
+            Money = PLAYER.DEFAULT_MONEY;
+            //Year = PLAYER.DEFAULT_YEAR;
+            Month = PLAYER.DEFAULT_MONTH;
+            DefaultSuccess = PLAYER.DEFAULT_SUCCESS;
             
             Debug.Log("새 데이터 생성");
+        }
+
+        // 서버로부터 Shop테이블의 데이터를 받아옴
+        Info = Backend.GameSchemaInfo.Get("Shop", InDate);
+
+        // Shop테이블의 데이터를 받아오는데 성공
+        if (Info.GetStatusCode() == "200")
+        {
+            BackendReturnObject contents = Backend.GameSchemaInfo.Get("Shop", InDate);
+
+            JsonData data = contents.Rows()[0];
+
+            if (data.Keys.Contains("Adblock"))
+            {
+                var temp = (bool)data["Adblock"]["BOOL"];
+                Adblock = temp;
+            }
+            if (data.Keys.Contains("StartPackage"))
+            {
+                var temp = (bool)data["StartPackage"]["BOOL"];
+                StartPackage = temp;
+            }
+        }
+        // Shop테이블의 데이터를 받아오는데 실패
+        else
+        {
+            Param param = new Param();
+
+            param.Add("Adblock", false);
+            param.Add("StartPackage", false);
+
+            // 서버에 새로운 데이터 삽입
+            Backend.GameSchemaInfo.Insert("Shop", param); // 동기
+
+            Adblock = false;
+            StartPackage = false;
         }
 
         Backend.Chart.GetAllChartAndSave(true);
@@ -295,6 +341,27 @@ public class GameManager : Singleton<GameManager>
         float temp = Success * 0.1f;
 
         return Success + (temp * (Period - 6));
+    }
+
+    public void SetShopData()
+    {
+        // 플레이어 InDate
+        string InDate = Backend.BMember.GetUserInfo().GetInDate();
+
+        BackendReturnObject contents = Backend.GameSchemaInfo.Get("Shop", InDate);
+
+        JsonData data = contents.Rows()[0];
+
+        if (data.Keys.Contains("Adblock"))
+        {
+            var temp = (bool)data["Adblock"]["BOOL"];
+            Adblock = temp;
+        }
+        if (data.Keys.Contains("StartPackage"))
+        {
+            var temp = (bool)data["StartPackage"]["BOOL"];
+            StartPackage = temp;
+        }
     }
 
     #region Play n Quality
