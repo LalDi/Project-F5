@@ -7,6 +7,8 @@ using TMPro;
 
 public class UIManager_05 : MonoBehaviour
 {
+    public bool Success = false;
+
     public List<GameObject> Backgrounds;
     public GameObject Light;
 
@@ -19,6 +21,7 @@ public class UIManager_05 : MonoBehaviour
     public GameObject ResultPU;
     public GameObject Bgm;
     public GameObject SkipBT;
+    public GameObject EndingUI;
 
     public SpriteRenderer Character1;
     public SpriteRenderer Character2;
@@ -75,14 +78,36 @@ public class UIManager_05 : MonoBehaviour
 
     public IEnumerator Result()
     {
+        //성공여부 판단
+        int Rand = UnityEngine.Random.Range(1, 101);
+        Success = (Rand <= GameManager.Instance.Play_Success);
+        Debug.Log("결과" + Success);
+
+        EndingUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text 
+            = (Success)? "<bounce>공연 성공!</bounce>" : "공연 실패...";
+        EndingUI.transform.GetChild(0).DOLocalMoveY(-35, 1.5f).SetEase(Ease.Linear);
+        EndingUI.transform.GetChild(1).DOLocalMoveY(-500, 0.5f);
+        yield return new WaitForSeconds(1f);
+
         BlackBG.SetActive(true);
         BlackBG.GetComponent<Image>().DOFade(0.5f, 2);
         yield return new WaitForSeconds(2f);
         SoundManager.Instance.PlaySound("Positive_3");
         SoundManager.Instance.PlaySound("Special&Powerup_35");
-        ResultPU.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "수익: " + Define.Math.RESULT().ToString("N0");
-        ResultPU.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
-            = "관객수: " + (GameManager.Instance.Play_Quality * GameManager.Instance.Play_Marketing).ToString("N0");
+        if (Success)
+        {
+            ResultPU.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
+                = "수익: " + Define.Math.RESULT().ToString("N0");
+            ResultPU.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
+                = "관객수: " + (GameManager.Instance.Play_Marketing * 10).ToString("N0");
+        }
+        else
+        {
+            ResultPU.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
+                = "수익: " + (Define.Math.RESULT() / 2).ToString("N0");
+            ResultPU.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
+                = "관객수: " + ((GameManager.Instance.Play_Marketing / 10) * 20).ToString("N0");
+        }
         ResultPU.SetActive(true);
     }
 
@@ -91,7 +116,7 @@ public class UIManager_05 : MonoBehaviour
         Destroy(Bgm);
         SoundManager.Instance.PlayBGM();
 
-        GameManager.Instance.CostMoney((int)Define.Math.RESULT(), false);
+        GameManager.Instance.CostMoney((Success) ? (int)Define.Math.RESULT() : (int)Define.Math.RESULT() / 2, false);
         if (GameManager.Instance.Money < 0) //파산
             GameManager.Instance.Is_Bankrupt(true);
 
