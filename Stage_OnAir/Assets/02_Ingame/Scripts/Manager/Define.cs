@@ -4,6 +4,31 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    public class PLAYER
+    {
+        public const int DEFAULT_MONEY = 5000000;
+        public const int DEFAULT_YEAR = 2000;
+        public const int DEFAULT_MONTH = 1;
+        public const int DEFAULT_SUCCESS = 70;
+    }
+
+    public class AD
+    {
+        public const string APPID = "ca-app-pub-5708876822263347~1141167025";
+
+        public const string INTERSAD = "ca-app-pub-5708876822263347/3693525789";
+        public const string REWARDAD = "ca-app-pub-5708876822263347/1351267624";
+
+        public const string TEST_INTERS = "ca-app-pub-3940256099942544/1033173712";
+        public const string TEST_REWARD = "ca-app-pub-3940256099942544/5224354917";
+    }
+
+
+    public class PLAYERPREFSLIST
+    {
+        public const string AD = "Ad";
+    }
+
     public class ERROR_MESSAGE
     {
         public const string LOGIN_EMPTY = "모든 항목을 빠짐없이 입력하여주십시오.";
