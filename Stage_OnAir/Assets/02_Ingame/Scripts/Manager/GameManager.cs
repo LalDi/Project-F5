@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
 
     // 설정된 연극 준비 기간
     public int Period { get; private set; }
+    public float LeftDays {get; private set; }
 
     // 배우의 수
     public int NowActor { get; private set; }
@@ -408,6 +409,10 @@ public class GameManager : Singleton<GameManager>
         Play_Success = GetSuccess();
         SetStep(Step.Prepare_Play);
     }
+    public void SetLeftDays(int value)
+    {
+        LeftDays = value;
+    }
 
     public void SetPeriod(int value)
     {
@@ -442,6 +447,7 @@ public class GameManager : Singleton<GameManager>
     public bool GoNextMonth()
     {
         Day++;
+        LeftDays--;
 
         bool IsNext = false;
         switch(Month)

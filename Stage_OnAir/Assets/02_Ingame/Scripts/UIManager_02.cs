@@ -1,13 +1,12 @@
-﻿using System;
+﻿using BackEnd;
+using Define;
+using DG.Tweening;
+using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using BackEnd;
-using LitJson;
-using Define;
-using DG.Tweening;
-using System.Globalization;
 
 public class UIManager_02 : MonoBehaviour
 {
@@ -78,6 +77,8 @@ public class UIManager_02 : MonoBehaviour
 
     public List<Sprite> Progress_Btn_Sprites;
 
+    public bool MonthorDate = true; //false = Month, true = Date
+
     [Header("BG")]
     public GameObject Background_1;
     public GameObject Background_2;
@@ -125,6 +126,7 @@ public class UIManager_02 : MonoBehaviour
     public Image TutorialSprite;
 
     private int CountMonth = 0;
+    private float MaxLeftDays = 0;
 
     #endregion
 
@@ -134,12 +136,12 @@ public class UIManager_02 : MonoBehaviour
             StartCoroutine(GameOver_Anim());
         SetProgress();
         if (GameManager.Instance.NowStep == GameManager.Step.Prepare_Play)
-        {
             StartCoroutine(StartPrepare());
+        else
+        {
+            DOTween.To(() => Gauge_Progress.fillAmount, x => Gauge_Progress.fillAmount = x
+            , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
         }
-
-        DOTween.To(() => Gauge_Progress.fillAmount, x => Gauge_Progress.fillAmount = x
-        , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
     }
 
     private void Update()
@@ -149,8 +151,25 @@ public class UIManager_02 : MonoBehaviour
             Text_Money.color = Color.red;
         else
             Text_Money.color = Color.black;
-        Text_Month.text = GameManager.Instance.Month.ToString("D2");
-        Text_Day.text = GameManager.Instance.Day.ToString("D2");
+
+        if (MonthorDate)
+        {
+            Text_Month.text = GameManager.Instance.Month.ToString("D2");
+            Text_Day.text = GameManager.Instance.Day.ToString("D2");
+        }
+        else
+        {
+            Text_Month.text = "남은 일 수"; 
+            //준비기간 중일 때
+            if (GameManager.Instance.NowStep == GameManager.Step.Prepare_Play)
+                Text_Day.text = GameManager.Instance.LeftDays.ToString();
+            //준비기간이 끝났을 때
+            else if (GameManager.Instance.NowStep == GameManager.Step.Start_Play)
+                Text_Day.text = "D-Day";
+            //준비기간이 정해지지 않았을 때
+            else
+                Text_Day.text = "0";
+        }
 
         string StatText;
         //진행 단계
@@ -168,9 +187,13 @@ public class UIManager_02 : MonoBehaviour
                 break;
             case GameManager.Step.Prepare_Play:
                 StatText += "공연 준비";
+                Gauge_Progress.fillAmount = 0.8f + (MaxLeftDays - GameManager.Instance.LeftDays) / MaxLeftDays * 0.2f;
+                //float value = (MaxLeftDays - GameManager.Instance.LeftDays) / MaxLeftDays;
+                //Debug.Log("어엄" + value.ToString("F3"));
                 break;
             case GameManager.Step.Start_Play:
                 StatText += "연극 공연 개시";
+                Gauge_Progress.fillAmount = 1f;
                 break;
             default:
                 break;
@@ -614,6 +637,35 @@ public class UIManager_02 : MonoBehaviour
 
         DOTween.To(() => Gauge_Progress.fillAmount, x => Gauge_Progress.fillAmount = x
         , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
+
+        MaxLeftDays = 0;
+        for (int i = 0; i < GameManager.Instance.Period; i++)
+        {
+            switch ((GameManager.Instance.Month + i) % 12 + 1)
+            {
+                case 2:
+                    MaxLeftDays += 28;
+                    break;
+
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    MaxLeftDays += 30;
+                    break;
+
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    MaxLeftDays += 31;
+                    break;
+            }
+        }
+        GameManager.Instance.SetLeftDays((int)MaxLeftDays);
     }
 
     public void Progress_Play()
@@ -677,7 +729,11 @@ public class UIManager_02 : MonoBehaviour
                 break;
         }
         if (GameManager.Instance.GoNextMonth())
+        {
+            Debug.Log("한달 개발");
             CountMonth++;
+
+        }
 
         if (CountMonth == GameManager.Instance.Period)
         {
@@ -1108,12 +1164,12 @@ public class UIManager_02 : MonoBehaviour
 
         switch (ItemCode)
         {
-            case 0: 
+            case 0:
                 Script = "현재 보유 금액의 10% 획득";
                 Pay = "광고 시청";
                 obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_1());
                 break;
-            case 1: 
+            case 1:
                 Script = "공연 후 광고가 더 이상 나오지 않는다.";
                 Pay = "₩20,000";
                 obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_2());
@@ -1122,7 +1178,7 @@ public class UIManager_02 : MonoBehaviour
                 Script = "+ 10,000,000원\n"
                     + "+ 첫 수익 획득량 100% 증가\n"
                     + "+ 1회에 한해 성공률 100% 증가\n";
-                Pay = "₩5,000"; 
+                Pay = "₩5,000";
                 obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_3());
                 break;
             case 3:
@@ -1145,7 +1201,7 @@ public class UIManager_02 : MonoBehaviour
                 Pay = "₩50,000";
                 obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_7());
                 break;
-            default: 
+            default:
                 Script = "...";
                 Pay = "...";
                 break;
@@ -1538,7 +1594,6 @@ public class UIManager_02 : MonoBehaviour
     {
         if (Tutorials[sort].Sprites.Count <= num)
             TutorialSprite.gameObject.SetActive(false);
-            //Debug.Log(Tutorials[sort].Sprites.Count +", "+ num);
         else
         {
             SoundManager.Instance.PlaySound("Pop_6");
@@ -1568,6 +1623,11 @@ public class UIManager_02 : MonoBehaviour
         GameOver.transform.GetChild(3).GetComponent<Text>().color = new Color(255, 255, 255, 0);
         GameOver.transform.GetChild(4).GetComponent<Button>().image.color = new Color(255, 255, 255, 0);
         GameOver.transform.GetChild(4).GetChild(0).GetComponent<Text>().color = new Color(255, 255, 255, 0);
+    }
+
+    public void MonthBT()
+    {
+        MonthorDate = !MonthorDate;
     }
 
     public IEnumerator GameOver_Anim()
