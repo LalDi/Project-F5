@@ -77,7 +77,7 @@ public class UIManager_02 : MonoBehaviour
 
     public List<Sprite> Progress_Btn_Sprites;
 
-    public bool MonthorDate = true; //false = Month, true = Date
+    public bool MonthorDate; //false = Month, true = Date
 
     [Header("BG")]
     public GameObject Background_1;
@@ -142,6 +142,8 @@ public class UIManager_02 : MonoBehaviour
             DOTween.To(() => Gauge_Progress.fillAmount, x => Gauge_Progress.fillAmount = x
             , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
         }
+
+        MonthorDate = true;
     }
 
     private void Update()
@@ -188,8 +190,6 @@ public class UIManager_02 : MonoBehaviour
             case GameManager.Step.Prepare_Play:
                 StatText += "공연 준비";
                 Gauge_Progress.fillAmount = 0.8f + (MaxLeftDays - GameManager.Instance.LeftDays) / MaxLeftDays * 0.2f;
-                //float value = (MaxLeftDays - GameManager.Instance.LeftDays) / MaxLeftDays;
-                //Debug.Log("어엄" + value.ToString("F3"));
                 break;
             case GameManager.Step.Start_Play:
                 StatText += "연극 공연 개시";
@@ -732,7 +732,6 @@ public class UIManager_02 : MonoBehaviour
         {
             Debug.Log("한달 개발");
             CountMonth++;
-
         }
 
         if (CountMonth == GameManager.Instance.Period)
