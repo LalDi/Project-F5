@@ -157,76 +157,22 @@
     {
         public List<Sprite> Sprites;
     }
-
-    public class Date
+    public class StaffMonthly
     {
-        static public int Day(int CurseMonth)
+        //스태프 월급 계산
+        static public int MONTHLY()
         {
-            if (GameManager.Instance.NowStep != GameManager.Step.Prepare_Play)
-                return 0;
+            //Icon = StaffData.Instance.StaffIcon[Data.Code - 1];
 
-            int Preparation = 30; //총 준비기간
-            int Curse = 0; //현재 지난 준비기간
-
-            //GameManager.Instance.Period
-            //for (int i = GameManager.Instance.Period; i < 1; i--)
-            //{
-            //    switch (GameManager.Instance.Month - CurseMonth + i) //현재 달 - 지난 달 + 진행 예정 달
-            //    {
-            //        case 2:
-            //            Preparation += 28;
-            //            break;
-
-            //        case 4:
-            //        case 6:
-            //        case 9:
-            //        case 11:
-            //            Preparation += 30;
-            //            break;
-
-            //        case 1:
-            //        case 3:
-            //        case 5:
-            //        case 7:
-            //        case 8:
-            //        case 10:
-            //        case 12:
-            //            Preparation += 31;
-            //            break;
-            //    }
-            //}
-
-            //for (int i = CurseMonth; i < 1; i--)
-            //{
-            //    switch (GameManager.Instance.Month - CurseMonth + i)
-            //    {
-            //        case 2:
-            //            Curse += 28;
-            //            break;
-
-            //        case 4:
-            //        case 6:
-            //        case 9:
-            //        case 11:
-            //            Curse += 30;
-            //            break;
-
-            //        case 1:
-            //        case 3:
-            //        case 5:
-            //        case 7:
-            //        case 8:
-            //        case 10:
-            //        case 12:
-            //            Curse += 31;
-            //            break;
-            //    }
-            //}
-            //Curse += GameManager.Instance.Day;
-
-            return (Preparation - Curse);
+            int Pay = 0;
+            foreach (Staff item in GameManager.Instance.Staffs)
+            {
+                if(item.IsPurchase)
+                {
+                    Pay += item.Pay;
+                }
+            }
+            return Pay;
         }
-
     }
-
 }

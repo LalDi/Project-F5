@@ -52,6 +52,7 @@ public class UIManager_02 : MonoBehaviour
     public GameObject Popup_Warning;
     public GameObject Popup_LoansCk;
     public GameObject Popup_Tutorial;
+    public GameObject Popup_Monthly;
 
     [Header("Period")]
     public Text Text_Period;
@@ -116,7 +117,8 @@ public class UIManager_02 : MonoBehaviour
         Error,       //  18
         Warning, //   19
         LoansCk,   //20
-        Tutorial    //21
+        Tutorial,    //21
+        Monthly    //22
     }
 
     public delegate void ProgressDel();
@@ -393,6 +395,9 @@ public class UIManager_02 : MonoBehaviour
             case PopupList.Tutorial:
                 Popup_Tutorial.SetActive(true);
                 break;
+            case PopupList.Monthly:
+                Popup_Monthly.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -428,6 +433,7 @@ public class UIManager_02 : MonoBehaviour
         Popup_Warning.SetActive(false);
         Popup_LoansCk.SetActive(false);
         Popup_Tutorial.SetActive(false);
+        Popup_Monthly.SetActive(false);
 
         //Close_Item(Popup_Shop);
         Close_Item(Popup_Staff);
@@ -513,6 +519,9 @@ public class UIManager_02 : MonoBehaviour
                 break;
             case PopupList.Tutorial:
                 Popup_Tutorial.SetActive(false);
+                break;
+            case PopupList.Monthly:
+                Popup_Monthly.SetActive(false);
                 break;
             default:
                 break;
@@ -732,6 +741,12 @@ public class UIManager_02 : MonoBehaviour
         {
             Debug.Log("한달 개발");
             CountMonth++;
+
+            Popup_Monthly.transform.GetChild(2).GetComponent<Text>().text
+                = "총 금액: " + StaffMonthly.MONTHLY() +
+                "\n보유금액: " + GameManager.Instance.Money + " -> " + (GameManager.Instance.Money - StaffMonthly.MONTHLY());
+            GameManager.Instance.CostMoney(StaffMonthly.MONTHLY());
+            Popup_On(22);
         }
 
         if (CountMonth == GameManager.Instance.Period)
