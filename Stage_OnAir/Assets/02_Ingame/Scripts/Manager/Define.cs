@@ -18,9 +18,11 @@
 
         public const string INTERSAD = "ca-app-pub-5708876822263347/3693525789";
         public const string REWARDAD = "ca-app-pub-5708876822263347/1351267624";
+        public const string BANNERAD = "ca-app-pub-5708876822263347/5714085828";
 
         public const string TEST_INTERS = "ca-app-pub-3940256099942544/1033173712";
         public const string TEST_REWARD = "ca-app-pub-3940256099942544/5224354917";
+        public const string TEST_BANNER = "ca-app-pub-3940256099942544/6300978111";
     }
 
 
@@ -104,6 +106,14 @@
             }
 
             return RandomList;
+        }
+
+        static public float DPToPixel(float fFixedResoulutionHeight, float fdpHeight)
+        {
+            float fNowDpi = (Screen.dpi * fFixedResoulutionHeight) / Screen.height;
+            float scale = fNowDpi / 160;
+            float pixel = fdpHeight * scale;
+            return pixel;
         }
 
         /**

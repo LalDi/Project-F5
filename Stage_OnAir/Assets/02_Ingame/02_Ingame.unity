@@ -3707,6 +3707,7 @@ MonoBehaviour:
   Text_Day: {fileID: 1254395695}
   Forder_UI: {fileID: 1471779918}
   Stat_UI: {fileID: 293285324}
+  Bottom_UI: {fileID: 1953567411}
   Buttom_Progress: {fileID: 874340411}
   Gauge_Progress: {fileID: 756778813}
   Image_Progress:
@@ -23754,9 +23755,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 960}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 1920}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1969042407
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class UIManager_02 : MonoBehaviour
     public GameObject Stat_UI;
 
     [Header("Bottom UI")]
+    public RectTransform Bottom_UI;
     public Image Buttom_Progress;
     public Image Gauge_Progress;
     public Sprite[] Image_Progress = new Sprite[4];
@@ -140,6 +141,9 @@ public class UIManager_02 : MonoBehaviour
 
         DOTween.To(() => Gauge_Progress.fillAmount, x => Gauge_Progress.fillAmount = x
         , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
+
+        Bottom_UI.SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+        GoogleAdsManager.Instance.ShowBanner();
     }
 
     private void Update()
