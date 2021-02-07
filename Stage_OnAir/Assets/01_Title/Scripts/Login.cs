@@ -130,7 +130,6 @@ public class Login : MonoBehaviour
                 MarketingData.Instance.SetMarketingData();
                 Items.Instance.SetStaffData();
                 GameManager.Instance.LoadData();
-                GameManager.Instance.Tutorial = false;
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "400":
