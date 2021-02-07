@@ -113,7 +113,6 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
         AdRequest request = new AdRequest.Builder().Build();
         RewardedInterstitialAd.LoadAd(adUnitId, request, adLoadCallback);
     }
-
     private void adLoadCallback(RewardedInterstitialAd ad, string error)
     {
         if (error == null)
@@ -160,7 +159,7 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
         MonoBehaviour.print(
             "Rewarded interstitial ad has received a paid event.");
     }
-    ///////
+///////
 
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
