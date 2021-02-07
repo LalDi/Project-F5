@@ -88,7 +88,7 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     // 보상형 광고
     private void RequestRewardedAd()
     {
-        // string adUnitId = AD.TEST_REWARD;
+        string adUnitId = AD.TEST_REWARD;
         // 
         // this.RewardAd = new RewardedAd(adUnitId);
         // 
@@ -110,12 +110,9 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
         // // Load the rewarded ad with the request.
         // this.RewardAd.LoadAd(request);
 
-        string adUnitId = AD.TEST_REWARD;
-
         AdRequest request = new AdRequest.Builder().Build();
         RewardedInterstitialAd.LoadAd(adUnitId, request, adLoadCallback);
     }
-
     private void adLoadCallback(RewardedInterstitialAd ad, string error)
     {
         if (error == null)
@@ -211,22 +208,21 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
 
     public void RewardAdsShow()
     {
-        //if (this.RewardAd.IsLoaded())
-        //{
-        //    this.RewardAd.Show();
-        //}
-        //else
-        //{
-        //    Debug.Log("NOT Loaded RewardedAd");
-        //    RequestRewardedAd();
-        //}
+        // if (this.RewardAd.IsLoaded())
+        // {
+        //     this.RewardAd.Show();
+        // }
+        // else
+        // {
+        //     Debug.Log("NOT Loaded RewardedAd");
+        //     RequestRewardedAd();
+        // }
 
         if (RewardInterAd != null)
         {
             RewardInterAd.Show(userEarnedRewardCallback);
         }
     }
-
 
     // 배너 광고
     private void RequestBanner()
@@ -304,6 +300,5 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     {
         MonoBehaviour.print("HandleAdLeavingApplication event received_banner");
     }
-
 }
 
