@@ -46,6 +46,7 @@ public class GameManager : Singleton<GameManager>
     public bool StartPackage { get; private set; }
 
     [SerializeField]
+    public bool Tutorial;
     public bool IsBankrupt;
 
     //시나리오
