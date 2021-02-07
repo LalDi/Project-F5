@@ -157,4 +157,22 @@
     {
         public List<Sprite> Sprites;
     }
+    public class StaffMonthly
+    {
+        //스태프 월급 계산
+        static public int MONTHLY()
+        {
+            //Icon = StaffData.Instance.StaffIcon[Data.Code - 1];
+
+            int Pay = 0;
+            foreach (Staff item in GameManager.Instance.Staffs)
+            {
+                if(item.IsPurchase)
+                {
+                    Pay += item.Pay;
+                }
+            }
+            return Pay;
+        }
+    }
 }
