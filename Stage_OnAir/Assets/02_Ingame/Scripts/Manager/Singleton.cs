@@ -9,7 +9,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     public static T Instance;
 
-    public void Start()
+    public void Awake()
     {
         if (Instance != null)
         {
