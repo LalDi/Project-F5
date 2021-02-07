@@ -13,8 +13,10 @@ public class SoundManager : Singleton<SoundManager>
     float sfxVolume = 1f;
     float bgmVolume = 1f;
 
-    void Awake()
+    new void Awake()
     {
+        base.Awake();
+
         sfxPlayer = GetComponent<AudioSource>();
         bgmPlayer = transform.GetChild(0).GetComponent<AudioSource>();
         clipDic = new Dictionary<string, AudioClip>();
@@ -25,10 +27,8 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 
-    public new void Start()
+    public void Start()
     {
-        base.Start();
-
         StartCoroutine(Fade("in"));
         bgmPlayer.Play();
     }

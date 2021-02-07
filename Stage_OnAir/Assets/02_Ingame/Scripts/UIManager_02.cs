@@ -19,6 +19,7 @@ public class UIManager_02 : MonoBehaviour
     public GameObject Stat_UI;
 
     [Header("Bottom UI")]
+    public RectTransform Bottom_UI;
     public Image Buttom_Progress;
     public Image Gauge_Progress;
     public Sprite[] Image_Progress = new Sprite[4];
@@ -148,6 +149,9 @@ public class UIManager_02 : MonoBehaviour
         }
 
         MonthorDate = true;
+
+        Bottom_UI.SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+        GoogleAdsManager.Instance.ShowBanner();
     }
 
     private void Update()
@@ -1187,13 +1191,13 @@ public class UIManager_02 : MonoBehaviour
                 break;
             case 1:
                 Script = "공연 후 광고가 더 이상 나오지 않는다.";
-                Pay = "₩20,000";
+                Pay = "₩2,500";
                 obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_2());
                 break;
             case 2:
                 Script = "+ 10,000,000원\n"
                     + "+ 첫 수익 획득량 100% 증가\n"
-                    + "+ 1회에 한해 성공률 100% 증가\n";
+                    + "+ 첫 공연 성공률 100% 증가\n";
                 Pay = "₩5,000";
                 obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_3());
                 break;

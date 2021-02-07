@@ -67,8 +67,10 @@ public class GameManager : Singleton<GameManager>
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };
     public Step NowStep { get; private set; }
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
+
         Screen.SetResolution(Screen.width, Screen.width * 16 / 9, true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.targetFrameRate = 144;
@@ -97,10 +99,8 @@ public class GameManager : Singleton<GameManager>
         OnPush = true;
         IsBankrupt = false;
     }
-    public new void Start()
+    public void Start()
     {
-        base.Start();
-
         LoadData();
     }
 
