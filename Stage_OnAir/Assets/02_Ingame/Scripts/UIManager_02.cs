@@ -123,6 +123,8 @@ public class UIManager_02 : MonoBehaviour
 
     public List<Tutorial> Tutorials;
     public Image TutorialSprite;
+    public GameObject TutorialBG;
+    public GameObject TutorialMessage;
 
     private int CountMonth = 0;
 
@@ -1516,7 +1518,13 @@ public class UIManager_02 : MonoBehaviour
     }
 
     #endregion
+    public void Tutorial(int Sequence)
+    {
+        switch(Sequence)
+        {
 
+        }
+    }
     public void Close_Item(GameObject Obj)
     {
         for (int i = 0; i < Obj.transform.GetChild(2).GetChild(0).childCount; i++)
