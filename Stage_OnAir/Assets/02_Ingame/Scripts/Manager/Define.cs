@@ -18,9 +18,11 @@
 
         public const string INTERSAD = "ca-app-pub-5708876822263347/3693525789";
         public const string REWARDAD = "ca-app-pub-5708876822263347/1351267624";
+        public const string BANNERAD = "ca-app-pub-5708876822263347/5714085828";
 
         public const string TEST_INTERS = "ca-app-pub-3940256099942544/1033173712";
         public const string TEST_REWARD = "ca-app-pub-3940256099942544/5224354917";
+        public const string TEST_BANNER = "ca-app-pub-3940256099942544/6300978111";
     }
 
 
@@ -106,6 +108,14 @@
             return RandomList;
         }
 
+        static public float DPToPixel(float fFixedResoulutionHeight, float fdpHeight)
+        {
+            float fNowDpi = (Screen.dpi * fFixedResoulutionHeight) / Screen.height;
+            float scale = fNowDpi / 160;
+            float pixel = fdpHeight * scale;
+            return pixel;
+        }
+
         /**
          *  @return  최종 Quality점수를 계산
          */
@@ -156,5 +166,23 @@
     public class Tutorial
     {
         public List<Sprite> Sprites;
+    }
+    public class StaffMonthly
+    {
+        //스태프 월급 계산
+        static public int MONTHLY()
+        {
+            //Icon = StaffData.Instance.StaffIcon[Data.Code - 1];
+
+            int Pay = 0;
+            foreach (Staff item in GameManager.Instance.Staffs)
+            {
+                if(item.IsPurchase)
+                {
+                    Pay += item.Pay;
+                }
+            }
+            return Pay;
+        }
     }
 }

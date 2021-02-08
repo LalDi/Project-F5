@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
 
     // 설정된 연극 준비 기간
     public int Period { get; private set; }
+    public float LeftDays {get; private set; }
 
     // 배우의 수
     public int NowActor { get; private set; }
@@ -45,6 +46,7 @@ public class GameManager : Singleton<GameManager>
     public bool StartPackage { get; private set; }
 
     [SerializeField]
+    public bool Tutorial;
     public bool IsBankrupt;
 
     //시나리오
@@ -65,8 +67,10 @@ public class GameManager : Singleton<GameManager>
     public enum Step { Select_Scenario, Cast_Actor, Set_Period, Prepare_Play, Start_Play };
     public Step NowStep { get; private set; }
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
+
         Screen.SetResolution(Screen.width, Screen.width * 16 / 9, true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.targetFrameRate = 144;
@@ -95,10 +99,8 @@ public class GameManager : Singleton<GameManager>
         OnPush = true;
         IsBankrupt = false;
     }
-    public new void Start()
+    public void Start()
     {
-        base.Start();
-
         LoadData();
     }
 
@@ -408,6 +410,10 @@ public class GameManager : Singleton<GameManager>
         Play_Success = GetSuccess();
         SetStep(Step.Prepare_Play);
     }
+    public void SetLeftDays(int value)
+    {
+        LeftDays = value;
+    }
 
     public void SetPeriod(int value)
     {
@@ -442,6 +448,7 @@ public class GameManager : Singleton<GameManager>
     public bool GoNextMonth()
     {
         Day++;
+        LeftDays--;
 
         bool IsNext = false;
         switch(Month)

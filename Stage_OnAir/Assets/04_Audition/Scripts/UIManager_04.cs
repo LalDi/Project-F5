@@ -68,7 +68,7 @@ public class UIManager_04 : MonoBehaviour
             Profile.transform.GetChild(1).GetComponent<Text>().text =
                 "연기력 : " + PprActors[ActorCount - 1].Acting + "\n" +
                 "경험 : " + PprActors[ActorCount - 1].Experience + "\n" +
-                "가격 : " + PprActors[ActorCount - 1].Price.ToString();
+                "가격 : " + PprActors[ActorCount - 1].Price.ToString("N0");
             Profile.transform.GetChild(5).GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].No];
             Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].No];
         }
