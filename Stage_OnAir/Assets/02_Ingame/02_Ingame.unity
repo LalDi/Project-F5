@@ -8242,8 +8242,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "<bounce>\uACF5\uC5F0 \uAC1C\uC2DC \uC900\uBE44 \uC644\uB8CC!</bounce>"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1778739348d09dd4b8d2f411934eedb8, type: 2}
-  m_sharedMaterial: {fileID: -6191263095044457269, guid: 1778739348d09dd4b8d2f411934eedb8,
+  m_fontAsset: {fileID: 11400000, guid: 4a3fbeeea12255640a9504257302b084, type: 2}
+  m_sharedMaterial: {fileID: -2313776809366385876, guid: 4a3fbeeea12255640a9504257302b084,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
