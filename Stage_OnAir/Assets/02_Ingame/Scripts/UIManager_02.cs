@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
 public class UIManager_02 : MonoBehaviour
@@ -148,9 +149,6 @@ public class UIManager_02 : MonoBehaviour
             , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
         }
 
-        Bottom_UI.SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
-        GoogleAdsManager.Instance.ShowBanner();
-        
         MonthorDate = true;
 
         Bottom_UI.SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
@@ -895,7 +893,7 @@ public class UIManager_02 : MonoBehaviour
         {
             Script = "월급: " + Data.Pay.ToString("N0")
             + "\n -> " + (Data.Pay + Data.Plus_Pay).ToString("N0")
-            + "\n개발력: " + Data.Directing.ToString("N0")
+            + "\n연출력: " + Data.Directing.ToString("N0")
             + "\n -> " + (Data.Directing + Data.Plus_Directing).ToString("N0");
             Pay = "가격: " + Data.Cost_Upgrade.ToString("N0");
             obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "업그레이드";
@@ -904,7 +902,7 @@ public class UIManager_02 : MonoBehaviour
         else
         {
             Script = "월급: " + Data.Pay.ToString("N0")
-                    + "\n개발력: " + Data.Directing.ToString("N0");
+                    + "\n연출력: " + Data.Directing.ToString("N0");
             Pay = "가격: " + Data.Cost_Purchase.ToString("N0");
             obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
             obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
@@ -942,7 +940,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_StaffCk.transform.GetChild(2).GetComponent<Text>().text
                     = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                     + (GameManager.Instance.Money - Data.Cost_Purchase).ToString("N0")
-                    + "\n개발력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
+                    + "\n연출력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
                     + (GameManager.Instance.Quality_Direction + Data.Directing).ToString("N0");
 
                 Popup_On((int)PopupList.StaffCk);
@@ -1252,6 +1250,14 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_2()
     {
+        IAPManager.Instance.Purchase(IAPManager.Product_RemoveAd);
+
+        if (IAPManager.Instance.IsSuccessPurchase == false)
+        { 
+            Shop_FailPurchasing(IAPManager.Instance.FailReason);
+            return;
+        }
+
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
             = "성공적으로 \n『광고 제거』를\n구매하였습니다.";
@@ -1277,6 +1283,14 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_3()
     {
+        IAPManager.Instance.Purchase(IAPManager.Product_PackageStart);
+
+        if (IAPManager.Instance.IsSuccessPurchase == false)
+        {
+            Shop_FailPurchasing(IAPManager.Instance.FailReason);
+            return;
+        }
+
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
             = "성공적으로 \n『스타트 패키지』를\n구매하였습니다.";
@@ -1304,6 +1318,14 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_4()
     {
+        IAPManager.Instance.Purchase(IAPManager.Product_Money500);
+
+        if (IAPManager.Instance.IsSuccessPurchase == false)
+        {
+            Shop_FailPurchasing(IAPManager.Instance.FailReason);
+            return;
+        }
+
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
             = "성공적으로 \n『5,000,000원』을\n구매하였습니다.";
@@ -1320,6 +1342,14 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_5()
     {
+        IAPManager.Instance.Purchase(IAPManager.Product_Money1000);
+
+        if (IAPManager.Instance.IsSuccessPurchase == false)
+        {
+            Shop_FailPurchasing(IAPManager.Instance.FailReason);
+            return;
+        }
+
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
             = "성공적으로 \n『10,000,000원』을\n구매하였습니다.";
@@ -1336,6 +1366,14 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_6()
     {
+        IAPManager.Instance.Purchase(IAPManager.Product_Money5000);
+
+        if (IAPManager.Instance.IsSuccessPurchase == false)
+        {
+            Shop_FailPurchasing(IAPManager.Instance.FailReason);
+            return;
+        }
+
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
             = "성공적으로 \n『50,000,000원』을\n구매하였습니다.";
@@ -1352,6 +1390,14 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_7()
     {
+        IAPManager.Instance.Purchase(IAPManager.Product_Money10000);
+
+        if (IAPManager.Instance.IsSuccessPurchase == false)
+        {
+            Shop_FailPurchasing(IAPManager.Instance.FailReason);
+            return;
+        }
+
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
             = "성공적으로 \n『100,000,000원』을\n구매하였습니다.";
@@ -1364,6 +1410,42 @@ public class UIManager_02 : MonoBehaviour
         GameManager.Instance.CostMoney(100000000, false);
 
         Popup_Quit((int)PopupList.ShopUp);
+    }
+
+    public void Shop_FailPurchasing(PurchaseFailureReason reason)
+    {
+        switch (reason)
+        {
+            case PurchaseFailureReason.PurchasingUnavailable:
+                Error_Message = ERROR_MESSAGE.PURCHASING_FAIL;
+                break;
+            case PurchaseFailureReason.ExistingPurchasePending:
+                Error_Message = ERROR_MESSAGE.PURCHASING_FAIL;
+                break;
+            case PurchaseFailureReason.ProductUnavailable:
+                Error_Message = ERROR_MESSAGE.PURCHASING_FAIL;
+                break;
+            case PurchaseFailureReason.SignatureInvalid:
+                Error_Message = ERROR_MESSAGE.PURCHASING_FAIL;
+                break;
+            case PurchaseFailureReason.UserCancelled:
+                Error_Message = ERROR_MESSAGE.PURCHASING_CANCEL;
+                break;
+            case PurchaseFailureReason.PaymentDeclined:
+                Error_Message = ERROR_MESSAGE.PURCHASING_CANCEL;
+                break;
+            case PurchaseFailureReason.DuplicateTransaction:
+                Error_Message = ERROR_MESSAGE.PURCHASING_FAIL;
+                break;
+            case PurchaseFailureReason.Unknown:
+                Error_Message = ERROR_MESSAGE.PURCHASING_NULL;
+                break;
+            default:
+                Error_Message = ERROR_MESSAGE.PURCHASING_NULL;
+                break;
+        }
+
+        Popup_On((int)PopupList.Error);
     }
     #endregion
 
@@ -1423,7 +1505,7 @@ public class UIManager_02 : MonoBehaviour
             if (GameManager.Instance.StaffLevel[num] == 0)
             {
                 Script = "월급: " + Items.Instance.StaffItems[num].pay
-                    + "\n개발력" + Items.Instance.StaffItems[num].directing;
+                    + "\n연출력" + Items.Instance.StaffItems[num].directing;
                 Pay = "가격: " + Items.Instance.StaffItems[num].cost_purchass.ToString("N0");
                 obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
             }
@@ -1431,7 +1513,7 @@ public class UIManager_02 : MonoBehaviour
             {
                 Script = "월급: " + Items.Instance.Staff_MathPay("Pay", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
                     + "\n -> " + Items.Instance.Staff_MathPay("Pay", num, GameManager.Instance.StaffLevel[num] + 1).ToString("N0")
-                    + "\n개발력" + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
+                    + "\n연출력" + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
                     + "\n -> " + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num] + 1).ToString("N0");
                 Pay = "가격: " + Items.Instance.Staff_MathPay("Cost", num, GameManager.Instance.StaffLevel[num]).ToString("N0");
                 obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "업그레이드";
@@ -1558,7 +1640,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_StaffCk.transform.GetChild(2).GetComponent<Text>().text
                     = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                     + (GameManager.Instance.Money - Items.Instance.StaffItems[num].cost_purchass).ToString("N0")
-                    + "\n개발력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
+                    + "\n연출력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
                     + (GameManager.Instance.Quality_Direction + Items.Instance.StaffItems[num].directing).ToString("N0");
 
                 GameManager.Instance.CostMoney(Items.Instance.StaffItems[num].cost_purchass);

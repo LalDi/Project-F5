@@ -917,6 +917,7 @@ GameObject:
   - component: {fileID: 350110133}
   - component: {fileID: 350110132}
   - component: {fileID: 350110131}
+  - component: {fileID: 350110135}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1008,6 +1009,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &350110135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350110130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97afc556caea1c44969477eb7ddec74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConformX: 1
+  ConformY: 1
+  Logging: 0
 --- !u!1 &516532093
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,7 +1480,7 @@ GameObject:
   - component: {fileID: 885269067}
   - component: {fileID: 885269066}
   m_Layer: 0
-  m_Name: dummy BG
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1840,9 +1856,11 @@ MonoBehaviour:
   Text_Money: {fileID: 273059157}
   Count: {fileID: 692161112}
   Profile: {fileID: 1638428421}
+  Background: {fileID: 885269065}
   Character: {fileID: 2114354588}
   ActorCount: 0
   MaxActor: 0
+  Bgm: {fileID: 0}
 --- !u!4 &1141770229
 Transform:
   m_ObjectHideFlags: 0
@@ -2109,11 +2127,11 @@ RectTransform:
   m_Father: {fileID: 350110134}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -638}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 800.00024, y: 940}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1638428423
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,9 @@ public class UIManager_03 : MonoBehaviour
 
     public GameObject Scroll;
 
+    public RectTransform Bottom_Button;
+    public RectTransform Bottom_Scroll;
+
     void Awake()
     {
         GameObject Popups = GameObject.Find("Popup").gameObject;
@@ -34,20 +37,6 @@ public class UIManager_03 : MonoBehaviour
 
     void Start()
     {
-        //for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
-        //{
-        //    GameObject scenario = ObjManager.SpawnPool("Scenario", Vector3.zero, Quaternion.Euler(0, 0, 0));
-        //
-        //    int j = i;
-        //    scenario.transform.GetComponent<Button>().onClick.AddListener(() => { Popup_Scenario(j); });
-        //
-        //    scenario.transform.GetChild(0).GetComponent<Text>().text =
-        //        ScenarioData.Instance.ScenarioList[i].Name;
-        //    scenario.transform.gameObject.SetActive(true);
-        //}
-        //Scroll.GetComponent<RectTransform>().sizeDelta =
-        //    new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 250);
-
         foreach (var item in ScenarioData.Instance.ScenarioList)
         {
             GameObject scenario = ObjManager.SpawnPool("Scenario", Vector3.zero, Quaternion.Euler(0, 0, 0));
@@ -59,6 +48,9 @@ public class UIManager_03 : MonoBehaviour
         Scroll.GetComponent<RectTransform>().sizeDelta =
             new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 250);
 
+        Bottom_Button.SetY(125 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+        Bottom_Scroll.SetBottom(250 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+        GoogleAdsManager.Instance.ShowBanner();
     }
 
     void Update()

@@ -871,7 +871,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370037118}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -45}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2126337645}
@@ -880,7 +880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 113}
+  m_AnchoredPosition: {x: 0, y: 125}
   m_SizeDelta: {x: 450, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &370037120
@@ -2551,6 +2551,8 @@ MonoBehaviour:
   Popup_Buy_Checking: {fileID: 1869974426}
   Popup_LoansCk: {fileID: 1332884121}
   Scroll: {fileID: 418871539}
+  Bottom_Button: {fileID: 370037119}
+  Bottom_Scroll: {fileID: 1707413450}
 --- !u!4 &1513324321
 Transform:
   m_ObjectHideFlags: 0
@@ -3470,6 +3472,7 @@ GameObject:
   - component: {fileID: 1969690007}
   - component: {fileID: 1969690006}
   - component: {fileID: 1969690005}
+  - component: {fileID: 1969690008}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3561,6 +3564,21 @@ Canvas:
   m_SortingLayerID: 1347534903
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!114 &1969690008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969690003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97afc556caea1c44969477eb7ddec74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConformX: 1
+  ConformY: 1
+  Logging: 0
 --- !u!1 &2048432655
 GameObject:
   m_ObjectHideFlags: 0
