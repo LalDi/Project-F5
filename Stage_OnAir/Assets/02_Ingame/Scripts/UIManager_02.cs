@@ -892,7 +892,7 @@ public class UIManager_02 : MonoBehaviour
         {
             Script = "월급: " + Data.Pay.ToString("N0")
             + "\n -> " + (Data.Pay + Data.Plus_Pay).ToString("N0")
-            + "\n개발력: " + Data.Directing.ToString("N0")
+            + "\n연출력: " + Data.Directing.ToString("N0")
             + "\n -> " + (Data.Directing + Data.Plus_Directing).ToString("N0");
             Pay = "가격: " + Data.Cost_Upgrade.ToString("N0");
             obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "업그레이드";
@@ -901,7 +901,7 @@ public class UIManager_02 : MonoBehaviour
         else
         {
             Script = "월급: " + Data.Pay.ToString("N0")
-                    + "\n개발력: " + Data.Directing.ToString("N0");
+                    + "\n연출력: " + Data.Directing.ToString("N0");
             Pay = "가격: " + Data.Cost_Purchase.ToString("N0");
             obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
             obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
@@ -939,7 +939,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_StaffCk.transform.GetChild(2).GetComponent<Text>().text
                     = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                     + (GameManager.Instance.Money - Data.Cost_Purchase).ToString("N0")
-                    + "\n개발력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
+                    + "\n연출력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
                     + (GameManager.Instance.Quality_Direction + Data.Directing).ToString("N0");
 
                 Popup_On((int)PopupList.StaffCk);
@@ -1420,7 +1420,7 @@ public class UIManager_02 : MonoBehaviour
             if (GameManager.Instance.StaffLevel[num] == 0)
             {
                 Script = "월급: " + Items.Instance.StaffItems[num].pay
-                    + "\n개발력" + Items.Instance.StaffItems[num].directing;
+                    + "\n연출력" + Items.Instance.StaffItems[num].directing;
                 Pay = "가격: " + Items.Instance.StaffItems[num].cost_purchass.ToString("N0");
                 obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
             }
@@ -1428,7 +1428,7 @@ public class UIManager_02 : MonoBehaviour
             {
                 Script = "월급: " + Items.Instance.Staff_MathPay("Pay", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
                     + "\n -> " + Items.Instance.Staff_MathPay("Pay", num, GameManager.Instance.StaffLevel[num] + 1).ToString("N0")
-                    + "\n개발력" + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
+                    + "\n연출력" + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
                     + "\n -> " + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num] + 1).ToString("N0");
                 Pay = "가격: " + Items.Instance.Staff_MathPay("Cost", num, GameManager.Instance.StaffLevel[num]).ToString("N0");
                 obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "업그레이드";
@@ -1555,7 +1555,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_StaffCk.transform.GetChild(2).GetComponent<Text>().text
                     = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                     + (GameManager.Instance.Money - Items.Instance.StaffItems[num].cost_purchass).ToString("N0")
-                    + "\n개발력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
+                    + "\n연출력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
                     + (GameManager.Instance.Quality_Direction + Items.Instance.StaffItems[num].directing).ToString("N0");
 
                 GameManager.Instance.CostMoney(Items.Instance.StaffItems[num].cost_purchass);
