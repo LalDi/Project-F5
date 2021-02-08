@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
 
     // 설정된 연극 준비 기간
     public int Period { get; private set; }
-    public float LeftDays {get; private set; }
+    public float LeftDays { get; private set; }
 
     // 배우의 수
     public int NowActor { get; private set; }
@@ -43,7 +43,9 @@ public class GameManager : Singleton<GameManager>
 
     // 상점 데이터 구매 여부
     public bool Adblock { get; private set; }
-    public bool StartPackage { get; private set; }
+    public bool OnPackage { get; private set; }
+    //public bool OnPackage { get; private set; }
+    public bool UsePackage { get; private set; }
 
     [SerializeField]
     public bool Tutorial;
@@ -101,7 +103,21 @@ public class GameManager : Singleton<GameManager>
     }
     public void Start()
     {
+        Init();
+    }
+
+    private void Init()
+    {
+        Backend.Chart.GetAllChartAndSave(true);
+
+        DevelopData.Instance.SetDevelopData();
+        Debug.Log("발전 데이터 생성");
+
+        Staffs = StaffData.Instance.SetStaffData();
+        Debug.Log("스태프 데이터 생성");
+
         LoadData();
+        CreateDevelop();
     }
 
     public void Reset()
@@ -123,8 +139,7 @@ public class GameManager : Singleton<GameManager>
         Actors.Clear();
         ActorData.Instance.SetActorsData();
 
-        Develops.Clear();
-        Develops = DevelopData.Instance.GetDevelopRandom();
+        CreateDevelop();
 
         NowStep = Step.Select_Scenario;
     }
@@ -190,7 +205,8 @@ public class GameManager : Singleton<GameManager>
             }
             if (data.Keys.Contains("DefaultSuccess"))
             {
-                DefaultSuccess = int.Parse(data["DefaultSuccess"]["N"].ToString());
+                DefaultSuccess = PlayerPrefs.GetInt(PLAYERPREFSLIST.DEFAULT_SUCCESS,
+                    int.Parse(data["DefaultSuccess"]["N"].ToString()));
             }
 
             Debug.Log("기존 데이터 불러오기");
@@ -237,7 +253,12 @@ public class GameManager : Singleton<GameManager>
             if (data.Keys.Contains("StartPackage"))
             {
                 var temp = (bool)data["StartPackage"]["BOOL"];
-                StartPackage = temp;
+                OnPackage = temp;
+            }
+            if (data.Keys.Contains("UseStartPackage"))
+            {
+                var temp = (bool)data["UseStartPackage"]["BOOL"];
+                UsePackage = temp;
             }
         }
         // Shop테이블의 데이터를 받아오는데 실패
@@ -247,25 +268,23 @@ public class GameManager : Singleton<GameManager>
 
             param.Add("Adblock", false);
             param.Add("StartPackage", false);
+            param.Add("UseStartPackage", false);
 
             // 서버에 새로운 데이터 삽입
             Backend.GameSchemaInfo.Insert("Shop", param); // 동기
 
             Adblock = false;
-            StartPackage = false;
+            OnPackage = false;
+            UsePackage = false;
         }
+    }
 
-        Backend.Chart.GetAllChartAndSave(true);
-
-        Staffs = StaffData.Instance.SetStaffData();
-        Debug.Log("스태프 데이터 생성");
-
-        DevelopData.Instance.SetDevelopData();
-
+    public void CreateDevelop()
+    {
         Develops.Clear();
         Develops = DevelopData.Instance.GetDevelopRandom();
 
-        Debug.Log("발전 데이터 생성");
+        Debug.Log("발전 데이터 재생성");
     }
 
     public void SetValue(MANAGERDATA.DATALIST data, float value, bool IsPlus = false)
@@ -362,8 +381,28 @@ public class GameManager : Singleton<GameManager>
         if (data.Keys.Contains("StartPackage"))
         {
             var temp = (bool)data["StartPackage"]["BOOL"];
-            StartPackage = temp;
+            OnPackage = temp;
         }
+        if (data.Keys.Contains("UseStartPackage"))
+        {
+            var temp = (bool)data["UseStartPackage"]["BOOL"];
+            UsePackage = temp;
+        }
+    }
+
+    public void UsedStartPackage()
+    {
+        UsePackage = false;
+
+        string InDate = Backend.BMember.GetUserInfo().GetInDate();
+        var Info = Backend.GameSchemaInfo.Get("Shop", InDate);
+
+        Param param = new Param();
+        param.Add("StartPackage", true);
+        param.Add("UseStartPackage", false);
+
+        string InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
+        Backend.GameSchemaInfo.Update("Shop", InfoInDate, param); // 동기
     }
 
     #region Play n Quality

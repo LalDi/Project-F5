@@ -29,6 +29,8 @@
     public class PLAYERPREFSLIST
     {
         public const string AD = "Ad";
+        public const string DEFAULT_SUCCESS = "Default_Success";
+        public const string DEVELOPLIST = "DevelopListLocal";
     }
 
     public class ERROR_MESSAGE
@@ -46,6 +48,7 @@
 
         public const string PURCHASING_CANCEL = "결제가 취소되었습니다.";
         public const string PURCHASING_FAIL = "결제가 실패하였습니다.";
+        public const string PURCHASING_DUPLICATE = "이미 구매한 상품입니다.";
         public const string PURCHASING_NULL = "알 수 없는 이유로 \n결제가 실패하였습니다.";
     }
 

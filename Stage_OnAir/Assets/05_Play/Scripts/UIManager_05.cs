@@ -8,7 +8,8 @@ using Coffee.UIExtensions;
 
 public class UIManager_05 : MonoBehaviour
 {
-    public bool Success = false;
+    private bool Success = false;
+    private int ResultMoney;
 
     public List<GameObject> Backgrounds;
     public GameObject Light;
@@ -87,9 +88,16 @@ public class UIManager_05 : MonoBehaviour
 
     public IEnumerator Result()
     {
+        // 패키지 사용 중일 경우, 성공 확정
+        if (GameManager.Instance.OnPackage == true && GameManager.Instance.UsePackage == true)
+            Success = true;
         //성공여부 판단
-        int Rand = UnityEngine.Random.Range(1, 101);
-        Success = (Rand <= GameManager.Instance.Play_Success);
+        else
+        {
+            int Rand = UnityEngine.Random.Range(1, 101);
+            Success = (Rand <= GameManager.Instance.Play_Success);
+        }
+
         Debug.Log("결과" + Success);
 
         EndingUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text
@@ -102,20 +110,38 @@ public class UIManager_05 : MonoBehaviour
         BlackBG.GetComponent<Image>().DOFade(0.5f, 2);
         yield return new WaitForSeconds(2f);
         Popup_Result.SetActive(true);
+
+        ResultMoney = Success ? (int)Define.Math.RESULT() : (int)(Define.Math.RESULT() / 2);
+
+        // 패키지 사용중일 경우, 보상 금액 2배
+        if (GameManager.Instance.OnPackage == true && GameManager.Instance.UsePackage == true)
+            ResultMoney *= 2;
+
         if (Success)
         {
             SoundManager.Instance.PlaySound("Positive_3");
             SoundManager.Instance.PlaySound("Special&Powerup_35");
             Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
-                = "수익: " + Define.Math.RESULT().ToString("N0");
+                = "수익: " + ResultMoney.ToString("N0");
             Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
                 = "관객수: " + (GameManager.Instance.Play_Marketing * 10).ToString("N0");
+        }
+        else if (Success && GameManager.Instance.OnPackage == true && GameManager.Instance.UsePackage == true)
+        {
+            SoundManager.Instance.PlaySound("Positive_3");
+            SoundManager.Instance.PlaySound("Special&Powerup_35");
+            Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
+                = "수익: " + (ResultMoney/2).ToString("N0") + "<color=#ff0000><bounce>X 2</bounce></color>";
+            Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
+                = "관객수: " + (GameManager.Instance.Play_Marketing * 10).ToString("N0");
+
+            Debug.Log("스타트 패키지 적용 결과");
         }
         else
         {
             SoundManager.Instance.PlaySound("Negative_6");
             Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
-                = "수익: " + (Define.Math.RESULT() / 2).ToString("N0");
+                = "수익: " + ResultMoney.ToString("N0");
             Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
                 = "관객수: " + ((GameManager.Instance.Play_Marketing / 10) * 20).ToString("N0");
         }
@@ -150,10 +176,13 @@ public class UIManager_05 : MonoBehaviour
         Destroy(Bgm);
         SoundManager.Instance.PlayBGM();
 
-        GameManager.Instance.CostMoney(
-            (Success) ? (int)Define.Math.RESULT() : (int)Define.Math.RESULT() / 2, false);
+        if (GameManager.Instance.OnPackage == true && GameManager.Instance.UsePackage == true)
+            GameManager.Instance.UsedStartPackage();
+
+        GameManager.Instance.CostMoney(ResultMoney, false);
         if (GameManager.Instance.Money < 0) //파산
             GameManager.Instance.Is_Bankrupt(true);
+
 
         GameManager.Instance.Reset();
         LoadManager.LoaderCallback();

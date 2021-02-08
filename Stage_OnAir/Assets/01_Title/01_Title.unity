@@ -6154,6 +6154,7 @@ MonoBehaviour:
   OnBGM: 0
   OnSFX: 0
   OnPush: 0
+  Tutorial: 0
   IsBankrupt: 0
   ScenarioIllust: 00000000000000000000
   StaffLevel: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -6854,10 +6855,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DevelopIcon:
-  - {fileID: 21300000, guid: 2cd601e194337e14999df78d6149afbf, type: 3}
-  - {fileID: 21300000, guid: fbab2f5bfc64db64b93e95929807259c, type: 3}
-  - {fileID: 21300000, guid: 565ba0e5fab54aa44a31b7a1626e7e4f, type: 3}
-  - {fileID: 21300000, guid: eff77f8c29d00ce45b34f6b27e7ccdd9, type: 3}
+  - {fileID: 21300000, guid: 45d45e583e9de0b4fbf1b6dd5a7fd80c, type: 3}
+  - {fileID: 21300000, guid: dbd71b62d0ee3934f90e20c6b95dba8c, type: 3}
+  - {fileID: 21300000, guid: 5c6a6c6d0df90274382821fb5723ddbb, type: 3}
+  - {fileID: 21300000, guid: 9cec06a79c474934e90bb7548fafd11f, type: 3}
+  - {fileID: 21300000, guid: 1eedf67d2a8f9574e87dba3906a27d1a, type: 3}
+  - {fileID: 21300000, guid: 6d17f718ddba9e44b9462e1e3e0802da, type: 3}
+  - {fileID: 21300000, guid: b01830d7b0374c349b6ef2225542b186, type: 3}
+  - {fileID: 21300000, guid: 211d3f98d834a034199322327ae2dc92, type: 3}
+  - {fileID: 21300000, guid: ca194c8d80844734389db05abc275ca5, type: 3}
+  - {fileID: 21300000, guid: 3683f163438837546ba18088d0a7212b, type: 3}
+  - {fileID: 21300000, guid: b6d69a305d7188b4fb0ef2612558b0ed, type: 3}
+  - {fileID: 21300000, guid: 3af93b4210ab16e43aae91040790f7d2, type: 3}
 --- !u!4 &2072093036
 Transform:
   m_ObjectHideFlags: 0

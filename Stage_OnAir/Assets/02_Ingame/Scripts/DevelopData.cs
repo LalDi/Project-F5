@@ -82,6 +82,17 @@ public class DevelopData : Singleton<DevelopData>
         return result;
     }
 
+    public void SaveDevelopListLocal(List<Develop> list)
+    {
+        string name = "";
+
+        foreach (var item in list)
+        {
+            string temp = item.Effect_Code.ToString() + item.Month.ToString() + " ";
+            name += temp; 
+        }
+    }
+
     public void OffDevelop()
     {
         foreach (var item in DevelopList)

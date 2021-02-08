@@ -645,6 +645,10 @@ public class UIManager_02 : MonoBehaviour
 
     public void Progress_Period()
     {
+        // 스타트 패키지 사용 시 성공률 100% 증가
+        if (GameManager.Instance.OnPackage == true && GameManager.Instance.UsePackage == true)
+            GameManager.Instance.SetValue(MANAGERDATA.DATALIST.SUCCESS, 100, true);
+
         GameManager.Instance.SetPeriod();
         SetProgress();
         CountMonth = 0;
@@ -1056,7 +1060,9 @@ public class UIManager_02 : MonoBehaviour
         {
             GameObject Obj = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
 
-            Obj.transform.GetChild(0).GetComponent<Image>().sprite = DevelopData.Instance.DevelopIcon[item.Effect_Code - 1];
+            int SpriteCode = item.Effect_Code - 1 + (item.Month - 1) * 4;
+
+            Obj.transform.GetChild(0).GetComponent<Image>().sprite = DevelopData.Instance.DevelopIcon[SpriteCode];
             Obj.transform.GetChild(1).GetComponent<Text>().text = item.Name;
             Obj.transform.GetComponent<Button>().onClick.AddListener(() => Open_Develop_Popup(item));
         }
@@ -1072,10 +1078,12 @@ public class UIManager_02 : MonoBehaviour
         string Name;
         string Script;
         string Pay;
+        int SpriteCode;
 
         Popup_On((int)PopupList.DevelopUp);
         obj = Popup_DevelopUp;
-        Icon = DevelopData.Instance.DevelopIcon[Data.Effect_Code - 1];
+        SpriteCode = Data.Effect_Code - 1 + (Data.Month - 1) * 4;
+        Icon = DevelopData.Instance.DevelopIcon[SpriteCode];
         Name = Data.Name;
         obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
 
@@ -1250,6 +1258,14 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_2()
     {
+        if (IAPManager.Instance.HadPruchased(IAPManager.Product_RemoveAd))
+        {
+            Debug.Log("이미 구매한 상품입니다.");
+            Error_Message = ERROR_MESSAGE.PURCHASING_DUPLICATE;
+            Popup_On((int)PopupList.Error);
+            return;
+        }
+
         IAPManager.Instance.Purchase(IAPManager.Product_RemoveAd);
 
         if (IAPManager.Instance.IsSuccessPurchase == false)
@@ -1283,6 +1299,14 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_3()
     {
+        if (IAPManager.Instance.HadPruchased(IAPManager.Product_PackageStart))
+        {
+            Debug.Log("이미 구매한 상품입니다.");
+            Error_Message = ERROR_MESSAGE.PURCHASING_DUPLICATE;
+            Popup_On((int)PopupList.Error);
+            return;
+        }
+
         IAPManager.Instance.Purchase(IAPManager.Product_PackageStart);
 
         if (IAPManager.Instance.IsSuccessPurchase == false)
@@ -1307,11 +1331,15 @@ public class UIManager_02 : MonoBehaviour
 
         Param param = new Param();
         param.Add("StartPackage", true);
+        param.Add("UseStartPackage", true);
 
         string InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
         Backend.GameSchemaInfo.Update("Shop", InfoInDate, param); // 동기
 
         GameManager.Instance.SetShopData();
+
+        Debug.Log(GameManager.Instance.OnPackage);
+        Debug.Log(GameManager.Instance.UsePackage);
 
         Popup_Quit((int)PopupList.ShopUp);
     }

@@ -131,14 +131,13 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
     public void OnPurchaseFailed(Product product, PurchaseFailureReason reason)
     {
         Debug.LogWarning($"구매 실패 - {product.definition.id}, {reason}");
+        IsSuccessPurchase = false;
         FailReason = reason;
     }
 
     public void Purchase(string productId)
     {
         if (!IsInitialized) return;
-
-        IsSuccessPurchase = false;
 
         var product = storeController.products.WithID(productId);
 
