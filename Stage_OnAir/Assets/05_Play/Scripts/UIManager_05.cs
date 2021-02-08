@@ -18,7 +18,7 @@ public class UIManager_05 : MonoBehaviour
     [SerializeField]
     public ScriptS Scrs = new ScriptS();
     public Sprite[] Illusts = new Sprite[10];
-    
+
     public GameObject BlackBG;
     public GameObject Popup_Result;
     public GameObject Popup_Illust;
@@ -39,7 +39,7 @@ public class UIManager_05 : MonoBehaviour
         }
 
         SoundManager.Instance.StopBGM();
-        Bgm = SoundManager.Instance.LoopSound(Scrs.scripts[GameManager.Instance.NowScenario.No - 1].Bgm 
+        Bgm = SoundManager.Instance.LoopSound(Scrs.scripts[GameManager.Instance.NowScenario.No - 1].Bgm
             ? "Bgm_Play2" : "Bgm_Play1");
 
         //시나리오에 맞는 배경 켜기
@@ -123,10 +123,12 @@ public class UIManager_05 : MonoBehaviour
 
     public void Illust()
     {
-        if (GameManager.Instance.Play_Success >= 90) //일정 성공률 이상이면 일러스트 해금
+        if (GameManager.Instance.Play_Success >= 10 && Success) //일정 성공률 이상이면 일러스트 해금
             GameManager.Instance.ScenarioIllust[GameManager.Instance.NowScenario.No - 1] = true;
-        else 
+        else { 
             To_Ingame();
+            return;
+        }
 
         BlackBG.SetActive(true);
         Popup_Result.SetActive(false);
@@ -136,7 +138,7 @@ public class UIManager_05 : MonoBehaviour
 
         IllustSeq.Append(Popup_Illust.transform.GetChild(1).DOScale(new Vector3(0.7f, 0.7f), 0.3f));
         IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(2).GetComponent<UIParticle>().Play());
-        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(1).GetComponent<Image>().sprite 
+        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(1).GetComponent<Image>().sprite
         = Illusts[GameManager.Instance.NowScenario.No - 1]);
         IllustSeq.Append(Popup_Illust.transform.GetChild(1).DOScale(new Vector3(1f, 1f), 0.3f));
         IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(3).GetComponent<UIParticle>().Play());

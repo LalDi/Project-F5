@@ -9,6 +9,7 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     private RewardedInterstitialAd RewardInterAd;
     private InterstitialAd IntersAd;
     private BannerView BannerAd;
+    private bool isTest = false;
 
     new void Awake()                                                                                                                                                                                                                
     {
@@ -24,7 +25,7 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     // 전면 광고 
     private void RequestInterstitial()
     {
-        string adUnitId = AD.TEST_INTERS; //테스트 아이디 
+        string adUnitId = isTest ? AD.TEST_INTERS : AD.INTERSAD; //테스트 아이디
 
         // Initialize an InterstitialAd.
         this.IntersAd = new InterstitialAd(adUnitId);
@@ -88,8 +89,8 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     // 보상형 광고
     private void RequestRewardedAd()
     {
-        string adUnitId = AD.TEST_REWARD;
-        
+        string adUnitId = isTest ? AD.TEST_REWARD : AD.REWARDAD;
+
         this.RewardAd = new RewardedAd(adUnitId);
         
         // Called when an ad request has successfully loaded.
@@ -228,7 +229,7 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     private void RequestBanner()
     {
         //string adUnitId = AD.BANNERAD;
-        string adUnitId = AD.TEST_BANNER;
+        string adUnitId = isTest ? AD.TEST_BANNER : AD.BANNERAD;
 
         AdSize adaptiveSize =
             AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
