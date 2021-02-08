@@ -148,9 +148,6 @@ public class UIManager_02 : MonoBehaviour
             , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
         }
 
-        Bottom_UI.SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
-        GoogleAdsManager.Instance.ShowBanner();
-        
         MonthorDate = true;
 
         Bottom_UI.SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
