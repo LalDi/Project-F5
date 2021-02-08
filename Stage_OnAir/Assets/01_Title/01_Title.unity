@@ -6719,7 +6719,7 @@ MonoBehaviour:
   scriptable_globalBehaviorsValues: {fileID: 0}
   scriptable_globalAppearancesValues: {fileID: 0}
   useDynamicScaling: 0
-  referenceFontSize: -1
+  referenceFontSize: 50
   timeScale: 0
 --- !u!1001 &2028597126
 PrefabInstance:

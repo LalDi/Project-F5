@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
+using Coffee.UIExtensions;
 
 public class UIManager_05 : MonoBehaviour
 {
@@ -16,9 +17,11 @@ public class UIManager_05 : MonoBehaviour
     public Text tmp;
     [SerializeField]
     public ScriptS Scrs = new ScriptS();
+    public Sprite[] Illusts = new Sprite[10];
     
     public GameObject BlackBG;
-    public GameObject ResultPU;
+    public GameObject Popup_Result;
+    public GameObject Popup_Illust;
     public GameObject Bgm;
     public GameObject SkipBT;
     public GameObject EndingUI;
@@ -98,24 +101,46 @@ public class UIManager_05 : MonoBehaviour
         BlackBG.SetActive(true);
         BlackBG.GetComponent<Image>().DOFade(0.5f, 2);
         yield return new WaitForSeconds(2f);
-        ResultPU.SetActive(true);
+        Popup_Result.SetActive(true);
         if (Success)
         {
             SoundManager.Instance.PlaySound("Positive_3");
             SoundManager.Instance.PlaySound("Special&Powerup_35");
-            ResultPU.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
+            Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
                 = "수익: " + Define.Math.RESULT().ToString("N0");
-            ResultPU.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
+            Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
                 = "관객수: " + (GameManager.Instance.Play_Marketing * 10).ToString("N0");
         }
         else
         {
             SoundManager.Instance.PlaySound("Negative_6");
-            ResultPU.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
+            Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
                 = "수익: " + (Define.Math.RESULT() / 2).ToString("N0");
-            ResultPU.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
+            Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
                 = "관객수: " + ((GameManager.Instance.Play_Marketing / 10) * 20).ToString("N0");
         }
+    }
+
+    public void Illust()
+    {
+        if (GameManager.Instance.Play_Success >= 90) //일정 성공률 이상이면 일러스트 해금
+            GameManager.Instance.ScenarioIllust[GameManager.Instance.NowScenario.No - 1] = true;
+        else 
+            To_Ingame();
+
+        BlackBG.SetActive(true);
+        Popup_Result.SetActive(false);
+        Popup_Illust.SetActive(true);
+
+        Sequence IllustSeq = DOTween.Sequence();
+
+        IllustSeq.Append(Popup_Illust.transform.GetChild(1).DOScale(new Vector3(0.7f, 0.7f), 0.3f));
+        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(2).GetComponent<UIParticle>().Play());
+        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(1).GetComponent<Image>().sprite 
+        = Illusts[GameManager.Instance.NowScenario.No - 1]);
+        IllustSeq.Append(Popup_Illust.transform.GetChild(1).DOScale(new Vector3(1f, 1f), 0.3f));
+        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(3).GetComponent<UIParticle>().Play());
+        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "<bounce>일러스트 획득!</bounce>");
     }
 
     public void To_Ingame()
@@ -127,9 +152,6 @@ public class UIManager_05 : MonoBehaviour
             (Success) ? (int)Define.Math.RESULT() : (int)Define.Math.RESULT() / 2, false);
         if (GameManager.Instance.Money < 0) //파산
             GameManager.Instance.Is_Bankrupt(true);
-
-        if (GameManager.Instance.Play_Success >= 90) //일정 성공률 이상이면 일러스트 해금
-            GameManager.Instance.ScenarioIllust[GameManager.Instance.NowScenario.No - 1] = true;
 
         GameManager.Instance.Reset();
         LoadManager.LoaderCallback();
