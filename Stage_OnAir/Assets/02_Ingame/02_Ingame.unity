@@ -3989,6 +3989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text_Money: {fileID: 1430924148}
+  DeductText: {fileID: 2601012154614379557, guid: e16f411d2aa851149a2861951995c453,
+    type: 3}
   Text_Month: {fileID: 915305337}
   Text_Day: {fileID: 1254395695}
   Forder_UI: {fileID: 1471779918}
@@ -17829,7 +17831,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 46.399994, y: 0}
-  m_SizeDelta: {x: -123.61868, y: 0}
+  m_SizeDelta: {x: -123.61865, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1430924148
 MonoBehaviour:

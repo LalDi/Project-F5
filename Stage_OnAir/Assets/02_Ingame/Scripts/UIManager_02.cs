@@ -13,6 +13,7 @@ public class UIManager_02 : MonoBehaviour
     #region Definition
     [Header("Top UI")]
     public Text Text_Money;
+    public GameObject DeductText;
     public Text Text_Month;
     public Text Text_Day;
     public GameObject Forder_UI;
@@ -172,7 +173,7 @@ public class UIManager_02 : MonoBehaviour
         }
         else
         {
-            Text_Month.text = "남은 일 수"; 
+            Text_Month.text = "남은 일 수";
             //준비기간 중일 때
             if (GameManager.Instance.NowStep == GameManager.Step.Prepare_Play)
                 Text_Day.text = GameManager.Instance.LeftDays.ToString();
@@ -754,7 +755,7 @@ public class UIManager_02 : MonoBehaviour
             Popup_Monthly.transform.GetChild(2).GetComponent<Text>().text
                 = "총 금액: " + StaffMonthly.MONTHLY() +
                 "\n보유금액: " + GameManager.Instance.Money + " -> " + (GameManager.Instance.Money - StaffMonthly.MONTHLY());
-            GameManager.Instance.CostMoney(StaffMonthly.MONTHLY());
+            Deduct_Text(StaffMonthly.MONTHLY());
             Popup_On(22);
         }
 
@@ -906,7 +907,7 @@ public class UIManager_02 : MonoBehaviour
             Script = "월급: " + Data.Pay.ToString("N0")
                     + "\n개발력: " + Data.Directing.ToString("N0");
             Pay = "가격: " + Data.Cost_Purchase.ToString("N0");
-            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
+            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "고용";
             obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
         }
 
@@ -1252,6 +1253,25 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_2()
     {
+<<<<<<< Updated upstream
+=======
+        if (IAPManager.Instance.HadPruchased(IAPManager.Product_RemoveAd))
+        {
+            Debug.Log("이미 구매한 상품입니다.");
+            Error_Message = ERROR_MESSAGE.PURCHASING_DUPLICATE;
+            Popup_On((int)PopupList.Error);
+            return;
+        }
+
+        IAPManager.Instance.Purchase(IAPManager.Product_RemoveAd);
+
+        if (IAPManager.Instance.IsSuccessPurchase == false)
+        {
+            Shop_FailPurchasing(IAPManager.Instance.FailReason);
+            return;
+        }
+
+>>>>>>> Stashed changes
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
             = "성공적으로 \n『광고 제거』를\n구매하였습니다.";
@@ -1597,7 +1617,7 @@ public class UIManager_02 : MonoBehaviour
     #endregion
     public void Tutorial(int Sequence)
     {
-        switch(Sequence)
+        switch (Sequence)
         {
 
         }
@@ -1703,4 +1723,18 @@ public class UIManager_02 : MonoBehaviour
         , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
     }
 
+    public void Deduct_Text(int value, bool Reduction = true)
+    {
+        GameManager.Instance.CostMoney(value, Reduction);
+
+        GameObject DeductObj = Instantiate(DeductText);
+        DeductObj.transform.parent = Text_Money.transform.parent;
+
+        DeductObj.GetComponent<Text>().text
+            = Reduction ? "<color=#ff0000>-" : "<color=#00ff00>+" + value.ToString("N0");
+
+        DeductObj.SetActive(true);
+        DeductObj.transform.DOLocalMoveY(0, 1f).OnComplete(() => Destroy(DeductObj));
+        DeductObj.GetComponent<Text>().DOFade(0, 0.8f);
+    }
 }
