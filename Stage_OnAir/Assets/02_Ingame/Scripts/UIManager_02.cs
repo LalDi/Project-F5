@@ -151,8 +151,15 @@ public class UIManager_02 : MonoBehaviour
 
         MonthorDate = true;
 
+        Debug.LogWarning($"Before Botttom_UI.Y : {Bottom_UI.anchoredPosition.y}");
+
         Bottom_UI.SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+        //Bottom_UI.SetY(GoogleAdsManager.Instance.GetBannerHeight());
         GoogleAdsManager.Instance.ShowBanner();
+        
+        Debug.LogWarning($"GetBannerHeight : {GoogleAdsManager.Instance.GetBannerHeight()}\n" +
+            $"SetY : {Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight())}\n" +
+            $"Bottom_UI.Y : {Bottom_UI.anchoredPosition.y}");
     }
 
     private void Update()

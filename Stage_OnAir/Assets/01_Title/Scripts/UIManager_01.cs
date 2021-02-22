@@ -14,6 +14,8 @@ public class UIManager_01 : MonoBehaviour
         Popup_Black.SetActive(false);
         Popup_LogIn.SetActive(false);
         Popup_SignUp.SetActive(false);
+
+        GoogleAdsManager.Instance.HideBanner();
     }
 
     public void To_Ingame()

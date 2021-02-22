@@ -50,7 +50,6 @@ public class UIManager_03 : MonoBehaviour
 
         Bottom_Button.SetY(125 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
         Bottom_Scroll.SetBottom(250 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
-        GoogleAdsManager.Instance.ShowBanner();
     }
 
     void Update()

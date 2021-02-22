@@ -120,7 +120,17 @@
             float fNowDpi = (Screen.dpi * fFixedResoulutionHeight) / Screen.height;
             float scale = fNowDpi / 160;
             float pixel = fdpHeight * scale;
-            return pixel;
+
+            float NowHeight = 1920f / Screen.height;
+
+            Debug.Log($"Dpi : {Screen.dpi}   fNowDpi : {fNowDpi}   Height : {fFixedResoulutionHeight}\n" +
+                $"Pixel : {pixel}  DP : {fdpHeight}");
+
+            Debug.Log($"NowHeight : {NowHeight}");
+
+            //return pixel;
+
+            return fdpHeight * NowHeight;
         }
 
         /**

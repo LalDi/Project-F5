@@ -9,9 +9,10 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     private RewardedInterstitialAd RewardInterAd;
     private InterstitialAd IntersAd;
     private BannerView BannerAd;
+
     private bool isTest = true;
 
-    new void Awake()                                                                                                                                                                                                                
+    new void Awake()
     {
         base.Awake();
 
@@ -234,7 +235,8 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
         AdSize adaptiveSize =
             AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
 
-        BannerAd = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Bottom);
+        //BannerAd = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Bottom);
+        BannerAd = new BannerView(adUnitId, adaptiveSize, AdPosition.Bottom);
 
         // Called when an ad request has successfully loaded.
         BannerAd.OnAdLoaded += HandleOnAdLoaded_banner;
