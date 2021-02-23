@@ -2553,6 +2553,7 @@ MonoBehaviour:
   Scroll: {fileID: 418871539}
   Bottom_Button: {fileID: 370037119}
   Bottom_Scroll: {fileID: 1707413450}
+  TutorialObj: {fileID: 0}
 --- !u!4 &1513324321
 Transform:
   m_ObjectHideFlags: 0

@@ -157,7 +157,8 @@ public class UIManager_02 : MonoBehaviour
 
         //if (GameManager.Instance.Tutorial == true)
         //{
-            TutorialObj.Tutorial(0);
+        TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
+        TutorialObj.Tutorial();
         //}
     }
 
@@ -759,11 +760,7 @@ public class UIManager_02 : MonoBehaviour
             Debug.Log("한달 개발");
             CountMonth++;
 
-            Popup_Monthly.transform.GetChild(2).GetComponent<Text>().text
-                = "총 금액: " + StaffMonthly.MONTHLY() +
-                "\n보유금액: " + GameManager.Instance.Money + " -> " + (GameManager.Instance.Money - StaffMonthly.MONTHLY());
             DeductMoney(StaffMonthly.MONTHLY());
-            //Popup_On(22);
         }
 
         if (CountMonth == GameManager.Instance.Period)

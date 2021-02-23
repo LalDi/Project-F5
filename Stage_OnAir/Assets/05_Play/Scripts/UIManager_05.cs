@@ -26,6 +26,7 @@ public class UIManager_05 : MonoBehaviour
     public GameObject Bgm;
     public GameObject SkipBT;
     public GameObject EndingUI;
+    public TutorialScript TutorialObj;
 
     public SpriteRenderer Character1;
     public SpriteRenderer Character2;
@@ -57,6 +58,9 @@ public class UIManager_05 : MonoBehaviour
 
         DelayCrt = StartDelay();
         StartCoroutine(DelayCrt);
+
+        TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
+        TutorialObj.Tutorial();
     }
 
     public IEnumerator StartDelay()
