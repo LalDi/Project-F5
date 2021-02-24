@@ -115,18 +115,18 @@ public class Login : MonoBehaviour
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "401":
-                //Popup_Black.SetActive(true);
-                //Popup_Login.SetActive(true);
-                Debug.LogError("다른 기기에서 로그인하여 토큰이 사라짐");
-                Error_Message = "다른 기기에서 로그인하여 토큰이 사라짐";
-                Control_Error(true);
+                Popup_Black.SetActive(true);
+                Popup_Login.SetActive(true);
+                //Debug.LogError("다른 기기에서 로그인하여 토큰이 사라짐");
+                //Error_Message = "다른 기기에서 로그인하여 토큰이 사라짐";
+                //Control_Error(true);
                 break;
             case "400":
-                //Popup_Black.SetActive(true);
-                //Popup_Login.SetActive(true);
-                Debug.LogError("토큰 없음");
-                Error_Message = "토큰 없음";
-                Control_Error(true);
+                Popup_Black.SetActive(true);
+                Popup_Login.SetActive(true);
+                //Debug.LogError("토큰 없음");
+                //Error_Message = "토큰 없음";
+                //Control_Error(true);
                 break;
             case "403":
                 Error_Message = Login.GetErrorCode();
