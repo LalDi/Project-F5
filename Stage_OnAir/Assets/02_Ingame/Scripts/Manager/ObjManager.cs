@@ -63,7 +63,7 @@ public class ObjManager : MonoBehaviour
         //print("Is full");
         GameObject newObject = Instantiate(poolDictionary[tag].Peek());
 
-        newObject.transform.parent = poolDictionary[tag].Peek().transform.parent;
+        newObject.transform.SetParent(poolDictionary[tag].Peek().transform.parent);
 
         newObject.SetActive(true);
 

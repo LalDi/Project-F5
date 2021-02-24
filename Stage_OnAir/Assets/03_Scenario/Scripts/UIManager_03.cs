@@ -21,6 +21,8 @@ public class UIManager_03 : MonoBehaviour
     public RectTransform Bottom_Button;
     public RectTransform Bottom_Scroll;
 
+    public TutorialScript TutorialObj;
+
     void Awake()
     {
         GameObject Popups = GameObject.Find("Popup").gameObject;
@@ -50,6 +52,14 @@ public class UIManager_03 : MonoBehaviour
 
         Bottom_Button.SetY(125 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
         Bottom_Scroll.SetBottom(250 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+
+        GoogleAdsManager.Instance.ShowBanner();
+
+        if (GameManager.Instance.Tutorial == true)
+        {
+            TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
+            TutorialObj.Tutorial();
+        }
     }
 
     void Update()

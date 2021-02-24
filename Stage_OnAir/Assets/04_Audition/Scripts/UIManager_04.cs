@@ -25,6 +25,7 @@ public class UIManager_04 : MonoBehaviour
     //오디션 보는 배우 수 (한명에서 7명정도)
 
     public GameObject Bgm;
+    public TutorialScript TutorialObj;
 
     void Start()
     {
@@ -42,6 +43,12 @@ public class UIManager_04 : MonoBehaviour
 
         SoundManager.Instance.StopBGM();
         Bgm = SoundManager.Instance.LoopSound("Bgm_Audition");
+
+        if (GameManager.Instance.Tutorial == true)
+        {
+            TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
+            TutorialObj.Tutorial();
+        }
     }
 
     void Update()
@@ -67,12 +74,12 @@ public class UIManager_04 : MonoBehaviour
         {
             Count.GetComponent<Text>().text =
                 ActorCount.ToString() + " / " + MaxActor;
-            Profile.transform.GetChild(0).GetComponent<Text>().text = PprActors[ActorCount - 1].Name;
-            Profile.transform.GetChild(1).GetComponent<Text>().text =
+            Profile.transform.Find("Profile Name Text").GetComponent<Text>().text = PprActors[ActorCount - 1].Name;
+            Profile.transform.Find("Profile Stats Text").GetComponent<Text>().text =
                 "연기력 : " + PprActors[ActorCount - 1].Acting + "\n" +
                 "경험 : " + PprActors[ActorCount - 1].Experience + "\n" +
                 "가격 : " + PprActors[ActorCount - 1].Price.ToString("N0");
-            Profile.transform.GetChild(5).GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].No];
+            Profile.transform.Find("Profile Character Image").GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].No];
             Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].No];
         }
         else
