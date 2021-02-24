@@ -155,11 +155,11 @@ public class UIManager_02 : MonoBehaviour
         Bottom_UI.SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
         GoogleAdsManager.Instance.ShowBanner();
 
-        //if (GameManager.Instance.Tutorial == true)
-        //{
-        TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
-        TutorialObj.Tutorial();
-        //}
+        if (GameManager.Instance.Tutorial == true)
+        {
+            TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
+            TutorialObj.Tutorial();
+        }
     }
 
     private void Update()

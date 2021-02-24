@@ -486,6 +486,7 @@ public class TutorialScript : MonoBehaviour
             case 43:
                 if (!UIM_4.Popup_Result.activeSelf)
                     return;
+                IsAdd = false;
                 LowerUI.GetChild(2).GetComponent<Button>().enabled = true;
                 SetParent(PopupUI);
 
@@ -494,11 +495,11 @@ public class TutorialScript : MonoBehaviour
                 Message.GetChild(0).GetComponent<Text>().text
                     = "오디션이 끝나면 결과창을 통해 합격한 인원을 확인할 수 있습니다.\n진행 버튼을 통해 다시 메인화면으로 돌아갈수 있습니다.";
                 Num++;
-                break;
-            case 44:
                 if (GameManager.Instance.MaxActor == GameManager.Instance.NowActor)
                     Num = 48;
 
+                break;
+            case 44:
                 //UI 지정
                 UIM_2 = GameObject.Find("UIManager").GetComponent<UIManager_02>();
 
@@ -569,6 +570,7 @@ public class TutorialScript : MonoBehaviour
             case 47:
                 if (!UIM_4.Popup_Result.activeSelf)
                     return;
+                IsAdd = false;
                 LowerUI.GetChild(2).GetComponent<Button>().enabled = true;
                 SetParent(PopupUI);
 
@@ -576,7 +578,10 @@ public class TutorialScript : MonoBehaviour
                     = "";
                 Num++;
                 if (GameManager.Instance.MaxActor > GameManager.Instance.NowActor)
+                {
                     Num = 44;
+                    Tutorial();
+                }
                 break;
             case 48:
                 //UI 지정
@@ -593,7 +598,6 @@ public class TutorialScript : MonoBehaviour
                 Message.localPosition = new Vector3(0, 0);
                 Message.GetChild(0).GetComponent<Text>().text
                     = "배우를 필요한 만큼 캐스팅을 했으니 다음은 연극을 위한 준비기간입니다.";
-                Debug.Log("했어!");
                 Num++;
                 break;
             case 49:
@@ -619,6 +623,7 @@ public class TutorialScript : MonoBehaviour
                 break;
             case 50:
                 SetParent(PopupUI.Find("Period PU"));
+                tutoObj.GetChild(6).GetComponent<Button>().enabled = false;
 
                 Message.localPosition = new Vector3(0, -500);
                 Message.GetChild(0).GetComponent<Text>().text
@@ -626,16 +631,13 @@ public class TutorialScript : MonoBehaviour
                 Num++;
                 break;
             case 51:
-                tutoObj.GetChild(6).GetComponent<Button>().enabled = false;
-
                 Message.GetChild(0).GetComponent<Text>().text
                     = "준비기간을 적당한 2개월에 맞춰줍니다.";
-                Num++;
+                if (GameManager.Instance.Period == 2)
+                    Num++;
                 break;
             case 52:
-                if (GameManager.Instance.Period != 2)
-                    return;
-
+                tutoObj.GetChild(6).GetComponent<Button>().onClick.AddListener(Tutorial);
                 tutoObj.GetChild(6).GetComponent<Button>().enabled = true;
                 Message.localPosition = new Vector3(0, 0);
                 Message.GetChild(0).GetComponent<Text>().text
@@ -644,14 +646,6 @@ public class TutorialScript : MonoBehaviour
                 break;
             case 53:
                 SetParent(LowerUI.transform.Find("Progress BT"));
-
-                EventTrigger eventTrigger_4 = tutoObj.gameObject.AddComponent<EventTrigger>();
-
-                EventTrigger.Entry entry_PointerEnter_4 = new EventTrigger.Entry();
-                entry_PointerEnter_4.eventID = EventTriggerType.PointerClick;
-                entry_PointerEnter_4.callback.AddListener((data) => { Tutorial(); });
-                eventTrigger_4.triggers.Add(entry_PointerEnter_4);
-
                 IsAdd = false;
 
                 Message.localPosition = new Vector3(0, -450);
@@ -673,6 +667,7 @@ public class TutorialScript : MonoBehaviour
                 break;
             case 56:
                 SetParent(GameObject.Find("Canvas").transform.GetChild(4));
+                UIM_2.Popup_Quit();
 
                 Message.localPosition = new Vector3(0, 0);
                 Message.GetChild(0).GetComponent<Text>().text
@@ -688,14 +683,6 @@ public class TutorialScript : MonoBehaviour
                 break;
             case 58:
                 SetParent(LowerUI.transform.Find("Progress BT"));
-
-                EventTrigger eventTrigger_5 = tutoObj.gameObject.AddComponent<EventTrigger>();
-
-                EventTrigger.Entry entry_PointerEnter_5 = new EventTrigger.Entry();
-                entry_PointerEnter_5.eventID = EventTriggerType.PointerClick;
-                entry_PointerEnter_5.callback.AddListener((data) => { Tutorial(); });
-                eventTrigger_5.triggers.Add(entry_PointerEnter_5);
-
                 IsAdd = false;
 
                 Message.localPosition = new Vector3(0, 1500);
@@ -704,23 +691,43 @@ public class TutorialScript : MonoBehaviour
                 Num++;
                 break;
             case 59:
-                SetParent(LowerUI.transform.Find("Progress BT").GetChild(4));
+                SetParent(PopupUI.transform.Find("Prepare PU").Find("Play BT"));
+
                 tutoObj.GetComponent<Button>().onClick.AddListener(Tutorial);
                 IsAdd = false;
 
                 Message.GetChild(0).GetComponent<Text>().text
-                    = "공연버튼을 눌러서 바로 공연을 시작할 수 있습니다.";
+                    = "";
                 Num++;
                 break;
             case 60:
+                SetParent(PopupUI.transform.Find("Play PU"));
+
+                IsAdd = false;
+
+                Message.localPosition = new Vector3(0, -450);
+                Message.GetChild(0).GetComponent<Text>().text
+                    = "공연버튼을 눌러서 바로 공연을 시작할 수 있습니다.";
+                Num++;
+                break;
+            case 61:
                 //UI 지정
                 UIM_5 = GameObject.Find("UIManager").GetComponent<UIManager_05>();
 
+                TopUI = GameObject.Find("Canvas").transform.GetChild(2);
                 EndingUI = GameObject.Find("Canvas").transform.GetChild(3);
-                PopupUI = GameObject.Find("Canvas").transform.GetChild(4);
+                PopupUI = GameObject.Find("Canvas").transform.GetChild(4).GetChild(1);
 
                 BackGround = Instantiate(Prefab, GameObject.Find("Canvas").transform).transform;
                 Message = BackGround.GetChild(0);
+
+                tutoObj = TopUI;
+                TutoParent = tutoObj.parent;
+                TutoObjNum = tutoObj.GetSiblingIndex();
+
+                tutoObj.SetParent(BackGround);
+                tutoObj.SetSiblingIndex(0);
+                tutoObj.GetComponent<Button>().onClick.AddListener(Tutorial);
 
                 BackGround.GetComponent<Image>().color = new Color(0, 0, 0, 0);
                 Message.localPosition = new Vector3(0, -500);
@@ -728,35 +735,47 @@ public class TutorialScript : MonoBehaviour
                     = "화면 상단에 있는 스킵버튼을 통해 공연 스킵이 가능합니다.";
                 Num++;
                 break;
-            case 61:
+            case 62:
                 if (!PopupUI.gameObject.activeSelf)
                     return;
                 SetParent(PopupUI);
+                tutoObj.GetChild(3).GetComponent<Button>().enabled = false;
 
-                BackGround.GetComponent<Image>().color = new Color(0, 0, 0, 168f);
+                BackGround.GetComponent<Image>().color = new Color(0, 0, 0, 168/255f);
                 Message.localPosition = new Vector3(0, -450);
                 Message.GetChild(0).GetComponent<Text>().text
                     = "공연이 끝나게되면 공연의 성공여부와 함께 결과창이 뜹니다.";
                 Num++;
                 break;
-            case 62:
+            case 63:
                 Message.GetChild(0).GetComponent<Text>().text
                     = "또한 일정 조건을 클리어시 해당 시나리오의 일러스트를 얻을 수 있습니다.";
                 Num++;
                 break;
-            case 63:
+            case 64:
+                IsAdd = false;
+
+                tutoObj.GetChild(3).GetComponent<Button>().enabled = true;
                 Message.GetChild(0).GetComponent<Text>().text
                     = "확인 버튼을 눌러 메인화면으로 돌아갈 수 있습니다.";
                 Num++;
                 break;
-            case 64:
+            case 65:
+                //UI 지정
+                UIM_2 = GameObject.Find("UIManager").GetComponent<UIManager_02>();
+
+                BackGround = Instantiate(Prefab, GameObject.Find("Canvas").transform).transform;
+                Message = BackGround.GetChild(0);
+
                 Message.localPosition = new Vector3(0, 0);
                 Message.GetChild(0).GetComponent<Text>().text
                     = "여기까지 튜토리얼이었습니다. 수고하셨습니다.";
                 Num++;
                 break;
-            case 65:
+            case 66:
+                Destroy(BackGround.gameObject);
                 Destroy(gameObject);
+                GameManager.Instance.Tutorial = false;
                 break;
                 #endregion
         }

@@ -45,8 +45,11 @@ public class UIManager_04 : MonoBehaviour
         SoundManager.Instance.StopBGM();
         Bgm = SoundManager.Instance.LoopSound("Bgm_Audition");
 
-        TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
-        TutorialObj.Tutorial();
+        if (GameManager.Instance.Tutorial == true)
+        {
+            TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
+            TutorialObj.Tutorial();
+        }
     }
 
     void Update()

@@ -1586,7 +1586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &465391688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1617,6 +1617,7 @@ MonoBehaviour:
   ForderUI: {fileID: 0}
   ScrollRect: {fileID: 0}
   CountUI: {fileID: 0}
+  EndingUI: {fileID: 0}
 --- !u!4 &465391689
 Transform:
   m_ObjectHideFlags: 0
@@ -2645,6 +2646,7 @@ MonoBehaviour:
   Popup_Black: {fileID: 1050554960}
   Popup_LogIn: {fileID: 814023229}
   Popup_SignUp: {fileID: 313330653}
+  TutorialObj: {fileID: 465391687}
 --- !u!1 &775243261
 GameObject:
   m_ObjectHideFlags: 0
@@ -6011,6 +6013,7 @@ MonoBehaviour:
   Popup_Loading: {fileID: 975941271}
   Popup_Error: {fileID: 294168704}
   Error_Text: {fileID: 84183907}
+  TutorialObj: {fileID: 465391687}
 --- !u!4 &1716838174
 Transform:
   m_ObjectHideFlags: 0

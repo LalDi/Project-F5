@@ -54,8 +54,11 @@ public class UIManager_03 : MonoBehaviour
         Bottom_Scroll.SetBottom(250 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
         GoogleAdsManager.Instance.ShowBanner();
 
-        TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
-        TutorialObj.Tutorial();
+        if (GameManager.Instance.Tutorial == true)
+        {
+            TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
+            TutorialObj.Tutorial();
+        }
     }
 
     void Update()

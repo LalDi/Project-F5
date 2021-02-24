@@ -12740,6 +12740,7 @@ MonoBehaviour:
   Bgm: {fileID: 0}
   SkipBT: {fileID: 226253007}
   EndingUI: {fileID: 1599530626}
+  TutorialObj: {fileID: 0}
   Character1: {fileID: 1222414607}
   Character2: {fileID: 147493552}
 --- !u!4 &1973949643

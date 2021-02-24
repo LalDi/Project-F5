@@ -8,6 +8,7 @@ public class UIManager_01 : MonoBehaviour
     public GameObject Popup_Black;
     public GameObject Popup_LogIn;
     public GameObject Popup_SignUp;
+    public GameObject TutorialObj;
 
     void Start()
     {
@@ -18,6 +19,8 @@ public class UIManager_01 : MonoBehaviour
 
     public void To_Ingame()
     {
+        TutorialObj.SetActive(false);
+
         SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
         Backend.Chart.GetAllChartAndSave(true);
 

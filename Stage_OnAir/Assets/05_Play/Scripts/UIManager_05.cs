@@ -59,8 +59,11 @@ public class UIManager_05 : MonoBehaviour
         DelayCrt = StartDelay();
         StartCoroutine(DelayCrt);
 
-        TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
-        TutorialObj.Tutorial();
+        if (GameManager.Instance.Tutorial == true)
+        {
+            TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
+            TutorialObj.Tutorial();
+        }
     }
 
     public IEnumerator StartDelay()
@@ -153,7 +156,7 @@ public class UIManager_05 : MonoBehaviour
 
     public void Illust()
     {
-        if (GameManager.Instance.Play_Success >= 10 && Success) //일정 성공률 이상이면 일러스트 해금
+        if (GameManager.Instance.Play_Success >= 90 && Success) //일정 성공률 이상이면 일러스트 해금
             GameManager.Instance.ScenarioIllust[GameManager.Instance.NowScenario.No - 1] = true;
         else { 
             To_Ingame();
