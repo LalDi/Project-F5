@@ -20,8 +20,10 @@ public class Login : MonoBehaviour
     public GameObject Nickname_Popup;
     public InputField Nickname_Nickname;
 
-    [Header("Loading")]
+    [Header("GameObject")]
     public GameObject Popup_Loading;
+    public GameObject Popup_Login;
+    public GameObject Popup_Black;
 
     [Header("Error")]
     public GameObject Popup_Error;
@@ -38,37 +40,102 @@ public class Login : MonoBehaviour
 
     public void Try_Login()
     {
+        SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
         Popup_Loading.SetActive(true);
-        var Login = Backend.BMember.CustomLogin(Login_ID.text, Login_Password.text);
-        Popup_Loading.SetActive(false);
+        Backend.BMember.CustomLogin(Login_ID.text, Login_Password.text, callback =>
+        {
+            Debug.Log(callback);
+        
+            Popup_Loading.SetActive(false);
+        
+            switch (callback.GetStatusCode())
+            {
+                case "200":
+                    SetDataInit();
+                    LoadManager.Load(LoadManager.Scene.Ingame);
+                    break;
+                case "400":
+                    Error_Message = ERROR_MESSAGE.LOGIN_EMPTY;
+                    Control_Error(true);
+                    break;
+                case "401":
+                    Error_Message = ERROR_MESSAGE.LOGIN_DUPLICATE;
+                    Control_Error(true);
+                    break;
+                case "403":
+                    Error_Message = callback.GetErrorCode();
+                    Control_Error(true);
+                    break;
+                default:
+                    Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
+                    Control_Error(true);
+                    break;
+            }
+        });
 
-        Debug.Log(Login);
+        //var Login = Backend.BMember.CustomLogin(Login_ID.text, Login_Password.text);
+        //Debug.Log(Login);
+        //Popup_Loading.SetActive(false);
+        //
+        //switch (Login.GetStatusCode())
+        //{
+        //    case "200":
+        //        SetDataInit();
+        //        LoadManager.Load(LoadManager.Scene.Ingame);
+        //        break;
+        //    case "400":
+        //        Error_Message = ERROR_MESSAGE.LOGIN_EMPTY;
+        //        Control_Error(true);
+        //        break;
+        //    case "401":
+        //        Error_Message = ERROR_MESSAGE.LOGIN_DUPLICATE;
+        //        Control_Error(true);
+        //        break;
+        //    case "403":
+        //        Error_Message = Login.GetErrorCode();
+        //        Control_Error(true);
+        //        break;
+        //    default:
+        //        Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
+        //        Control_Error(true);
+        //        break;
+        //}
+    }
+
+    public void Try_Login_WithToken()
+    {
+        Popup_Loading.SetActive(true);
+        var Login = Backend.BMember.LoginWithTheBackendToken();
+        Popup_Loading.SetActive(false);
 
         switch (Login.GetStatusCode())
         {
-            case "200":
+            case "201":
                 SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
-                Backend.Chart.GetAllChartAndSave(true);
-                ScenarioData.Instance.SetScenarioData();
-                ActorData.Instance.SetActorsData();
-                MarketingData.Instance.SetMarketingData();
-                Items.Instance.SetStaffData();
-                GameManager.Instance.LoadData();
+                SetDataInit();
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
-            case "400":
-                Error_Message = ERROR_MESSAGE.LOGIN_EMPTY;
-                Control_Error(true);
-                break;
             case "401":
-                Error_Message = ERROR_MESSAGE.LOGIN_DUPLICATE;
-                Control_Error(true);
+                Popup_Black.SetActive(true);
+                Popup_Login.SetActive(true);
+                //Debug.LogError("다른 기기에서 로그인하여 토큰이 사라짐");
+                //Error_Message = "다른 기기에서 로그인하여 토큰이 사라짐";
+                //Control_Error(true);
+                break;
+            case "400":
+                Popup_Black.SetActive(true);
+                Popup_Login.SetActive(true);
+                //Debug.LogError("토큰 없음");
+                //Error_Message = "토큰 없음";
+                //Control_Error(true);
                 break;
             case "403":
                 Error_Message = Login.GetErrorCode();
                 Control_Error(true);
                 break;
             default:
+                Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
+                Control_Error(true);
                 break;
         }
     }
@@ -125,12 +192,7 @@ public class Login : MonoBehaviour
         {
             case "204":
                 SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
-                Backend.Chart.GetAllChartAndSave(true);
-                ScenarioData.Instance.SetScenarioData();
-                ActorData.Instance.SetActorsData();
-                MarketingData.Instance.SetMarketingData();
-                Items.Instance.SetStaffData();
-                GameManager.Instance.LoadData();
+                SetDataInit();
                 GameManager.Instance.Tutorial = true;
                 TutorialObj.SetActive(true);
                 LoadManager.Load(LoadManager.Scene.Ingame);
@@ -153,6 +215,17 @@ public class Login : MonoBehaviour
                 Control_Error(true);
                 break;
         }
+    }
 
+    public void SetDataInit()
+    {
+        //Backend.BMember.RefreshTheBackendToken((callback) => { });
+
+        Backend.Chart.GetAllChartAndSave(true);
+        ScenarioData.Instance.SetScenarioData();
+        ActorData.Instance.SetActorsData();
+        MarketingData.Instance.SetMarketingData();
+        Items.Instance.SetStaffData();
+        GameManager.Instance.Init();
     }
 }
