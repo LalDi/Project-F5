@@ -19,6 +19,11 @@ public class GameManager : Singleton<GameManager>
     public float Quality_Direction { get; private set; }
     public float Plus_Direction { get; private set; }
 
+    // 연극의 최고 점수
+    public float Best_Quality { get; private set; }
+    public float Best_Audience { get; private set; }
+    public float Best_Profit { get; private set; }
+
     // 현재 보유 금액
     public int Money { get; private set; }
 
@@ -44,7 +49,6 @@ public class GameManager : Singleton<GameManager>
     // 상점 데이터 구매 여부
     public bool Adblock { get; private set; }
     public bool OnPackage { get; private set; }
-    //public bool OnPackage { get; private set; }
     public bool UsePackage { get; private set; }
 
     [SerializeField]
@@ -73,9 +77,14 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
+#if UNITY_EDITOR
+        Debug.unityLogger.logEnabled = true;
+#else
+        Debug.unityLogger.logEnabled = false;
+#endif
         Screen.SetResolution(Screen.width, Screen.width * 16 / 9, true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Application.targetFrameRate = 144;
+        //Application.targetFrameRate = 144;
 
         Backend.Initialize(() =>
         {
@@ -85,14 +94,13 @@ public class GameManager : Singleton<GameManager>
                 Debug.Log("초기화 완료");
 
                 // 게임 디버깅 및 테스트를 위한 임시 로그인
-                var data = Backend.BMember.CustomLogin("jungjh0513", "1234");
-                Debug.Log("로그인 완료");
-
+                //var data = Backend.BMember.CustomLogin("jungjh0513", "1234");
+                //Debug.Log("로그인 완료");
             }
             // 초기화 실패한 경우 실행
             else
             {
-        
+                
             }
         });
 
@@ -103,12 +111,12 @@ public class GameManager : Singleton<GameManager>
     }
     public void Start()
     {
-        Init();
+        //Init();
     }
 
-    private void Init()
+    public void Init()
     {
-        Backend.Chart.GetAllChartAndSave(true);
+        //Backend.Chart.GetAllChartAndSave(true);
 
         DevelopData.Instance.SetDevelopData();
         Debug.Log("발전 데이터 생성");
@@ -136,6 +144,8 @@ public class GameManager : Singleton<GameManager>
         NowActor = 0;
         MaxActor = 0;
 
+        NowScenario = null;
+
         Actors.Clear();
         ActorData.Instance.SetActorsData();
 
@@ -148,7 +158,9 @@ public class GameManager : Singleton<GameManager>
     {
         string InDate = Backend.BMember.GetUserInfo().GetInDate();
 
+        // Player 저장
         Param param = new Param();
+
         param.Add("Money", Money);
         param.Add("Month", Month);
         param.Add("Day", Day);
@@ -160,14 +172,107 @@ public class GameManager : Singleton<GameManager>
         if (Info.GetStatusCode() == "404")
         {
             Backend.GameSchemaInfo.Insert("Player", param); // 동기
-            Debug.LogError("새로운 데이터 생성");
+            Debug.LogError("Player -> 새로운 데이터 생성");
         }
         else
         {
             InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
             Backend.GameSchemaInfo.Update("Player", InfoInDate, param); // 동기
-            Debug.LogError("기존 데이터 갱신");
+            Debug.LogError("Player -> 기존 데이터 갱신");
         }
+
+        // PlayData 저장
+        param = new Param();
+
+        if (NowScenario == null)
+            param.AddNull("Scenario");
+        else
+            param.Add("Scenario", NowScenario.No);
+        param.Add("NowStep", (int)NowStep);
+
+        param.Add("Play_Quality", Play_Quality);
+        param.Add("Play_Marketing", Play_Marketing);
+        param.Add("Play_Success", Play_Success);
+
+        param.Add("Quality_Acting", Quality_Acting);
+        param.Add("Quality_Scenario", Quality_Scenario);
+        param.Add("Quality_Direction", Quality_Direction);
+
+        param.Add("Plus_Direction", Plus_Direction);
+
+        param.Add("Period", Period);
+        param.Add("LeftDays", LeftDays);
+
+        Info = Backend.GameInfo.GetPrivateContents("PlayData");
+
+        if (Info.GetStatusCode() == "200")
+        {
+            if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+            {
+                InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
+                Backend.GameInfo.Update("PlayData", InfoInDate, param);
+                Debug.Log("PlayData -> 기존 데이터 갱신");
+            }
+            else
+            {
+                Backend.GameInfo.Insert("PlayData", param);
+                Debug.Log("PlayData -> 새로운 데이터 생성");
+            }
+        }
+
+        // Actors 저장
+        param = new Param();
+
+        for (int i = 0; i < Actors.Count; i++)
+        {
+            int item = Actors[i].No;
+            param.Add("Actor" + i, item);
+        }
+
+        Info = Backend.GameInfo.GetPrivateContents("Actors");
+
+        if (Info.GetStatusCode() == "200")
+        {
+            if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+            {
+                InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
+                Backend.GameInfo.Delete("Actors", InfoInDate);
+                Backend.GameInfo.Insert("Actors", param);
+                Debug.Log("Actors -> 기존 데이터 갱신");
+            }
+            else
+            {
+                Backend.GameInfo.Insert("Actors", param);
+                Debug.Log("Actors -> 새로운 데이터 생성");
+            }
+        }
+
+        // Develops 저장
+        param = new Param();
+
+        for (int i = 0; i < Develops.Count; i++)
+        {
+            Develop item = Develops[i];
+            param.Add("Develop" + i, item);
+        }
+
+        //Info = Backend.GameInfo.GetPrivateContents("Develops");
+        //
+        //if (Info.GetStatusCode() == "200")
+        //{
+        //    if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+        //    {
+        //        InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
+        //        Backend.GameInfo.Delete("Develops", InfoInDate);
+        //        Backend.GameInfo.Insert("Develops", param);
+        //        Debug.Log("Develops -> 기존 데이터 갱신");
+        //    }
+        //    else
+        //    {
+        //        Backend.GameInfo.Insert("Develops", param);
+        //        Debug.Log("Develops -> 새로운 데이터 생성");
+        //    }
+        //}
 
         StaffData.SaveAllStaff();
 
@@ -207,6 +312,18 @@ public class GameManager : Singleton<GameManager>
             {
                 DefaultSuccess = PlayerPrefs.GetInt(PLAYERPREFSLIST.DEFAULT_SUCCESS,
                     int.Parse(data["DefaultSuccess"]["N"].ToString()));
+            }
+            if (data.Keys.Contains("BestQuality"))
+            {
+                Best_Quality = int.Parse(data["BestQuality"]["N"].ToString());
+            }
+            if (data.Keys.Contains("BestAudience"))
+            {
+                Best_Audience = int.Parse(data["BestAudience"]["N"].ToString());
+            }
+            if (data.Keys.Contains("BestProfit"))
+            {
+                Best_Profit = int.Parse(data["BestProfit"]["N"].ToString());
             }
 
             Debug.Log("기존 데이터 불러오기");
@@ -277,6 +394,178 @@ public class GameManager : Singleton<GameManager>
             OnPackage = false;
             UsePackage = false;
         }
+
+        // 서버로부터 PlayData테이블의 데이터를 받아옴
+        Info = Backend.GameInfo.GetPrivateContents("PlayData");
+
+        if (Info.GetStatusCode() == "200")
+        {
+            Debug.Log("PlayData 테이블의 데이터를 받아오는데 성공");
+
+            // PlayData테이블의 데이터를 받아오는데 성공
+            if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+            {
+                Debug.Log("PlayData테이블 데이터 있음");
+
+                var data = BackendReturnObject.Flatten(Info.Rows());
+                var Json = Info.Rows()[0];
+
+                if (Json.Keys.Contains("Scenario"))
+                {
+                    if (Json["Scenario"].Keys.Contains("NULL"))
+                    {
+                        NowScenario = null;
+                        MaxActor = 0;
+                    }
+                    else
+                    {
+                        int code = int.Parse(Json["Scenario"]["N"].ToString());
+                        NowScenario = ScenarioData.Instance.FindScenario(code);
+                        MaxActor = NowScenario.Actors;
+                    }
+                }
+                if (Json.Keys.Contains("NowStep"))
+                {
+                    SetStep((Step)int.Parse(Json["NowStep"]["N"].ToString()));
+                }
+                if (Json.Keys.Contains("Play_Quality"))
+                {
+                    Play_Quality = int.Parse(Json["Play_Quality"]["N"].ToString());
+                }
+                if (Json.Keys.Contains("Play_Marketing"))
+                {
+                    Play_Marketing = int.Parse(Json["Play_Marketing"]["N"].ToString());
+                }
+                if (Json.Keys.Contains("Play_Success"))
+                {
+                    Play_Success = int.Parse(Json["Play_Success"]["N"].ToString());
+                }
+                if (Json.Keys.Contains("Quality_Acting"))
+                {
+                    Quality_Acting = int.Parse(Json["Quality_Acting"]["N"].ToString());
+                }
+                if (Json.Keys.Contains("Quality_Scenario"))
+                {
+                    Quality_Scenario = int.Parse(Json["Quality_Scenario"]["N"].ToString());
+                }
+                if (Json.Keys.Contains("Quality_Direction"))
+                {
+                    Quality_Direction = int.Parse(Json["Quality_Direction"]["N"].ToString());
+                }
+                if (Json.Keys.Contains("Plus_Direction"))
+                {
+                    Plus_Direction = int.Parse(Json["Plus_Direction"]["N"].ToString());
+                }
+                if (Json.Keys.Contains("Period"))
+                {
+                    Period = int.Parse(Json["Period"]["N"].ToString());
+                }
+                if (Json.Keys.Contains("LeftDays"))
+                {
+                    LeftDays = int.Parse(Json["LeftDays"]["N"].ToString());
+                }
+            }
+            // PlayData테이블의 데이터를 받아오는데 실패
+            else
+            {
+                Debug.Log("PlayData테이블의 데이터를 받아오는데 실패");
+
+                Reset();
+
+                Param param = new Param();
+
+                if (NowScenario == null)
+                    param.AddNull("Scenario");
+                else
+                    param.Add("Scenario", NowScenario.No);
+                param.Add("NowStep", (int)NowStep);
+
+                param.Add("Play_Quality", Play_Quality);
+                param.Add("Play_Marketing", Play_Marketing);
+                param.Add("Play_Success", Play_Success);
+
+                param.Add("Quality_Acting", Quality_Acting);
+                param.Add("Quality_Scenario", Quality_Scenario);
+                param.Add("Quality_Direction", Quality_Direction);
+
+                param.Add("Plus_Direction", Plus_Direction);
+
+                param.Add("Period", Period);
+                param.Add("LeftDays", LeftDays);
+
+                Backend.GameInfo.Insert("PlayData", param);
+                Debug.Log("PlayData -> 새로운 데이터 생성");
+            }
+        }
+
+        // 서버로부터 Actors테이블의 데이터를 받아옴
+        Info = Backend.GameInfo.GetPrivateContents("Actors");
+
+        if (Info.GetStatusCode() == "200")
+        {
+            Debug.Log("Actors 테이블의 데이터를 받아오는데 성공");
+
+            // Actors 테이블의 데이터를 받아오는데 성공
+            if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+            {
+                Debug.Log("Actors 테이블 데이터 있음");
+
+                var Data = Info.Rows()[0];
+
+                for (int i = 0; i < MaxActor; i++)
+                {
+                    if (Data.Keys.Contains("Actor"+i))
+                    {
+                        int No = int.Parse(Data["Actor" + i]["N"].ToString());
+                        var temp = ActorData.Instance.FindActor(No);
+                        Actors.Add(temp);
+                    }
+                }
+
+                NowActor = Actors.Count();
+            }
+            // Actors 테이블의 데이터를 받아오는데 실패
+            else
+            {
+                Debug.Log("Actors 테이블 데이터 없음");
+
+                Actors.Clear();
+            }
+        }
+        
+
+        //// 서버로부터 Develops테이블의 데이터를 받아옴
+        //Info = Backend.GameInfo.GetPrivateContents("Develops");
+        //
+        //if (Info.GetStatusCode() == "200")
+        //{
+        //    Debug.Log("Develops 테이블의 데이터를 받아오는데 성공");
+        //
+        //    // Develops 테이블의 데이터를 받아오는데 성공
+        //    if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+        //    {
+        //        Debug.Log("Develops 테이블 데이터 있음");
+        //
+        //        Develops.Clear();
+        //
+        //        var Data = Info.Rows()[0];
+        //
+        //        var json = BackendReturnObject.Flatten(Info.Rows());
+        //        for (int i = 0; i < json.Count; i++)
+        //        {
+        //            var item = JsonMapper.ToObject<Develop>(json[i].ToJson());
+        //            Develops.Add(item);
+        //        }
+        //
+        //    }
+        //    // Develops 테이블의 데이터를 받아오는데 실패
+        //    else
+        //    {
+        //        Debug.Log("Develops 테이블 데이터 없음");
+        //
+        //        CreateDevelop();
+        //    }
+        //}
     }
 
     public void CreateDevelop()
@@ -405,7 +694,33 @@ public class GameManager : Singleton<GameManager>
         Backend.GameSchemaInfo.Update("Shop", InfoInDate, param); // 동기
     }
 
-    #region Play n Quality
+    public void CheckBestScore(float Quality, float Audience, float Profit)
+    {
+        string InDate = Backend.BMember.GetUserInfo().GetInDate();
+        var Info = Backend.GameSchemaInfo.Get("Player", InDate);
+        string InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
+        Param param = new Param();
+
+        if (Quality > Best_Quality)
+        {
+            Best_Quality = Quality;
+            param.Add("BestQuality", Quality);
+        }
+        if (Audience > Best_Audience)
+        {
+            Best_Audience = Audience;
+            param.Add("BestAudience", Audience);
+        }
+        if (Profit > Best_Profit)
+        {
+            Best_Profit = Profit;
+            param.Add("BestProfit", Profit);
+        }
+
+        Backend.GameSchemaInfo.Update("Player", InfoInDate, param, (callback) => { }); // 비동기
+    }
+
+#region Play n Quality
     // 연극의 3가지 점수 요소
     public void Plus_Play_Quality(int value)
     {
@@ -435,9 +750,9 @@ public class GameManager : Singleton<GameManager>
         Quality_Direction += value;
         Plus_Play_Quality(value);
     }
-    #endregion
+#endregion
 
-    #region Money n Day
+#region Money n Day
 
     public void CostMoney(int value, bool Reduction = true)
     {
@@ -525,9 +840,9 @@ public class GameManager : Singleton<GameManager>
         }
         return false;
     }
-    #endregion
+#endregion
 
-    #region Player Data
+#region Player Data
 
     public void ReStart()
     {
@@ -545,9 +860,9 @@ public class GameManager : Singleton<GameManager>
     {
         IsBankrupt = Is;
     }
-    #endregion
+#endregion
 
-    #region Scenario n Actor n Staff
+#region Scenario n Actor n Staff
 
     public void SetScenario(Scenario NextScenario)
     {
@@ -572,5 +887,5 @@ public class GameManager : Singleton<GameManager>
     {
         NowStep = NextStep;
     }
-    #endregion
+#endregion
 }

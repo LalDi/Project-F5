@@ -61,7 +61,6 @@ public class DevelopData : Singleton<DevelopData>
         List<Develop> result = new List<Develop>();
 
         int rand = Random.Range(3, 6);
-        Debug.Log(rand);
 
         while (result.Count != rand)
         {

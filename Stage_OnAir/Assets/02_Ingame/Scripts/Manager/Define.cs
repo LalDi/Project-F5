@@ -37,6 +37,7 @@
     {
         public const string LOGIN_EMPTY = "모든 항목을 빠짐없이 입력하여주십시오.";
         public const string LOGIN_DUPLICATE = "존재하지 않는 계정입니다.\n아이디 혹은 비밀번호를 확인해주세요.";
+        public const string LOGIN_UNKNOWN = "알 수 없는 오류로 로그인에 실패햐였습니다.";
 
         public const string SIGNUP_EMPTY = "모든 항목을 빠짐없이 입력하여주십시오.";
         public const string SIGNUP_DUPLICATE = "이미 존재하는 아이디입니다.\n아이디를 바꿔주십시오.";
@@ -121,7 +122,7 @@
             float scale = fNowDpi / 160;
             float pixel = fdpHeight * scale;
 
-            float NowHeight = 1920f / Screen.height;
+            float NowHeight = 1920f / (Screen.width * 16 / 9);
 
             Debug.Log($"Dpi : {Screen.dpi}   fNowDpi : {fNowDpi}   Height : {fFixedResoulutionHeight}\n" +
                 $"Pixel : {pixel}  DP : {fdpHeight}");
@@ -131,6 +132,7 @@
             //return pixel;
 
             return fdpHeight * NowHeight;
+            //return fdpHeight;
         }
 
         /**
