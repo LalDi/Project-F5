@@ -1856,11 +1856,11 @@ MonoBehaviour:
   Text_Money: {fileID: 273059157}
   Count: {fileID: 692161112}
   Profile: {fileID: 1638428421}
-  Background: {fileID: 885269065}
   Character: {fileID: 2114354588}
   ActorCount: 0
   MaxActor: 0
   Bgm: {fileID: 0}
+  TutorialObj: {fileID: 0}
 --- !u!4 &1141770229
 Transform:
   m_ObjectHideFlags: 0

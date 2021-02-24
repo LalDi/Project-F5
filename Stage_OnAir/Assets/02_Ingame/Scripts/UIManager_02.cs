@@ -5,6 +5,7 @@ using LitJson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
@@ -16,12 +17,13 @@ public class UIManager_02 : MonoBehaviour
     public Text Text_Money;
     public Text Text_Month;
     public Text Text_Day;
+    public GameObject Deduct_Money;
     public GameObject Forder_UI;
     public GameObject Stat_UI;
 
     [Header("Bottom UI")]
     public RectTransform Bottom_UI;
-    public Image Buttom_Progress;
+    public Image Bottom_Progress;
     public Image Gauge_Progress;
     public Sprite[] Image_Progress = new Sprite[4];
 
@@ -126,10 +128,9 @@ public class UIManager_02 : MonoBehaviour
     public delegate void ProgressDel();
     public ProgressDel Progress;
 
+    public TutorialScript TutorialObj;
     public List<Tutorial> Tutorials;
     public Image TutorialSprite;
-    public GameObject TutorialBG;
-    public GameObject TutorialMessage;
 
     private int CountMonth = 0;
     private float MaxLeftDays = 0;
@@ -153,6 +154,12 @@ public class UIManager_02 : MonoBehaviour
 
         Bottom_UI.SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
         GoogleAdsManager.Instance.ShowBanner();
+
+        if (GameManager.Instance.Tutorial == true)
+        {
+            TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
+            TutorialObj.Tutorial();
+        }
     }
 
     private void Update()
@@ -564,7 +571,7 @@ public class UIManager_02 : MonoBehaviour
                     DOTween.PauseAll();
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
-                Buttom_Progress.sprite = Image_Progress[0];
+                Bottom_Progress.sprite = Image_Progress[0];
                 Background_3.SetActive(false);
                 Background_1.SetActive(true);
                 break;
@@ -573,7 +580,7 @@ public class UIManager_02 : MonoBehaviour
                 {
                     Popup_On((int)PopupList.Audition);
                 };
-                Buttom_Progress.sprite = Image_Progress[1];
+                Bottom_Progress.sprite = Image_Progress[1];
                 Background_1.SetActive(false);
                 Background_2.SetActive(true);
                 break;
@@ -584,7 +591,7 @@ public class UIManager_02 : MonoBehaviour
                     GameManager.Instance.SetDefaultPeriod();
                     Set_Period_Text();
                 };
-                Buttom_Progress.sprite = Image_Progress[2];
+                Bottom_Progress.sprite = Image_Progress[2];
                 Background_1.SetActive(false);
                 Background_2.SetActive(true);
                 break;
@@ -594,7 +601,7 @@ public class UIManager_02 : MonoBehaviour
                     Popup_On((int)PopupList.Prepare);
                     Popup_Prepare.transform.Find("Play BT").GetComponent<Button>().interactable = false;
                 };
-                Buttom_Progress.sprite = Image_Progress[3];
+                Bottom_Progress.sprite = Image_Progress[3];
                 break;
             case GameManager.Step.Start_Play:
                 Progress = () =>
@@ -753,11 +760,7 @@ public class UIManager_02 : MonoBehaviour
             Debug.Log("한달 개발");
             CountMonth++;
 
-            Popup_Monthly.transform.GetChild(2).GetComponent<Text>().text
-                = "총 금액: " + StaffMonthly.MONTHLY() +
-                "\n보유금액: " + GameManager.Instance.Money + " -> " + (GameManager.Instance.Money - StaffMonthly.MONTHLY());
-            GameManager.Instance.CostMoney(StaffMonthly.MONTHLY());
-            Popup_On(22);
+            DeductMoney(StaffMonthly.MONTHLY());
         }
 
         if (CountMonth == GameManager.Instance.Period)
@@ -1705,13 +1708,6 @@ public class UIManager_02 : MonoBehaviour
     }
 
     #endregion
-    public void Tutorial(int Sequence)
-    {
-        switch(Sequence)
-        {
-
-        }
-    }
     public void Close_Item(GameObject Obj)
     {
         for (int i = 0; i < Obj.transform.GetChild(2).GetChild(0).childCount; i++)
@@ -1767,6 +1763,19 @@ public class UIManager_02 : MonoBehaviour
     public void MonthBT()
     {
         MonthorDate = !MonthorDate;
+    }
+
+    public void DeductMoney(int value, bool Reduction = true)
+    {
+        GameManager.Instance.CostMoney(value, Reduction);
+
+        GameObject DeductObj = Instantiate(Deduct_Money, Text_Money.transform.parent);
+        DeductObj.GetComponent<TextMeshProUGUI>().text 
+            = (Reduction ? "<color=#ff0000>-" : "<color=#00ff00>+") + value.ToString("N0") + "</color>";
+        DeductObj.transform.DOLocalMoveY(0f, 1.5f)
+            .SetEase(Ease.Linear)
+            .OnComplete(() => Destroy(DeductObj));
+        DeductObj.GetComponent<TextMeshProUGUI>().DOFade(0f, 1.3f);
     }
 
     public IEnumerator GameOver_Anim()

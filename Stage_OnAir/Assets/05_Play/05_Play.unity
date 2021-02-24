@@ -12580,7 +12580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f9977a11bc242d43b4c5af188727b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Success: 0
   Backgrounds:
   - {fileID: 597627410}
   - {fileID: 597627410}
@@ -12741,6 +12740,7 @@ MonoBehaviour:
   Bgm: {fileID: 0}
   SkipBT: {fileID: 226253007}
   EndingUI: {fileID: 1599530626}
+  TutorialObj: {fileID: 0}
   Character1: {fileID: 1222414607}
   Character2: {fileID: 147493552}
 --- !u!4 &1973949643
