@@ -918,7 +918,7 @@ public class UIManager_02 : MonoBehaviour
             Script = "월급: " + Data.Pay.ToString("N0")
                     + "\n연출력: " + Data.Directing.ToString("N0");
             Pay = "가격: " + Data.Cost_Purchase.ToString("N0");
-            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
+            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "고용";
             obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
         }
 
