@@ -13,6 +13,8 @@ public class ShopCooldown : MonoBehaviour
 
     private void Start()
     {
+        string st = DateTime.Now.ToString("yyyyMMddHHmmss"); // string 으로 변환
+
         string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD);
         OldTime = DateTime.ParseExact(Time, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
     }

@@ -81,7 +81,7 @@ public class UIManager_03 : MonoBehaviour
             "연출력 : " + Data.Quality;
         Popup_Scenario_Select.transform.Find("need Actor Image").GetChild(0).GetComponent<Text>().text =
             "필요 배우 : " + Data.Actors;
-        Popup_Scenario_Select.transform.Find("Buy BT").Find("Pay Text").GetComponent<Text>().text =
+        Popup_Scenario_Select.transform.Find("Pay Image").Find("Pay Text").GetComponent<Text>().text =
             "가격 " + Data.Price.ToString("N0");
 
         Popup_Black.SetActive(true);
