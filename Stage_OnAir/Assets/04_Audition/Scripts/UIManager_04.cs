@@ -22,7 +22,7 @@ public class UIManager_04 : MonoBehaviour
     public int ActorCount;
     //오디션 완료한 배우들 수 카운트 (Preparation Actors)
     public int MaxActor;
-    //오디션 보는 배우 수 (한명에서 7명정도)
+    //오디션 보는 배우 수 (3명에서 10명정도)
 
     public GameObject Bgm;
     public TutorialScript TutorialObj;
@@ -33,10 +33,10 @@ public class UIManager_04 : MonoBehaviour
         Popup_Result.SetActive(false);
 
         ActorCount = 0;
-        MaxActor = Random.Range(1, 8 - GameManager.Instance.NowActor);
+        MaxActor = Random.Range(3, 11 - GameManager.Instance.NowActor);
 
         PprActors = ActorData.Instance.RandomActors(MaxActor);
-        Reroad_ActorProfile();
+        Reload_ActorProfile();
 
         Profile.GetComponent<RectTransform>().
             SetY(-150 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
@@ -60,7 +60,7 @@ public class UIManager_04 : MonoBehaviour
             Text_Money.color = Color.black;
     }
 
-    public void Reroad_ActorProfile()
+    public void Reload_ActorProfile()
     {
         ActorCount++;
         if (GameManager.Instance.NowActor + PassActors.Count >= GameManager.Instance.MaxActor)
@@ -79,8 +79,8 @@ public class UIManager_04 : MonoBehaviour
                 "연기력 : " + PprActors[ActorCount - 1].Acting + "\n" +
                 "경험 : " + PprActors[ActorCount - 1].Experience + "\n" +
                 "가격 : " + PprActors[ActorCount - 1].Price.ToString("N0");
-            Profile.transform.Find("Profile Character Image").GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].No];
-            Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].No];
+            Profile.transform.Find("Profile Character Image").GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].Sprite - 1];
+            Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].Sprite-1];
         }
         else
         {
@@ -102,7 +102,7 @@ public class UIManager_04 : MonoBehaviour
             ActorObj.transform.GetChild(1).GetComponent<Text>().text =
                 PassActors[i].Name;
             ActorObj.transform.GetChild(0).GetComponent<Image>().sprite = 
-                ActorData.Instance.ActorProfileImage[PassActors[i].No];
+                ActorData.Instance.ActorProfileImage[PassActors[i].Sprite-1];
             ActorData.Instance.ActorsList[PassActors[i].No].SetIsCasting(true);
             GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
             GameManager.Instance.PlusNowActor();
@@ -115,7 +115,7 @@ public class UIManager_04 : MonoBehaviour
     public void Out_BT()
     {
         SoundManager.Instance.PlaySound("Pop_3");
-        Reroad_ActorProfile();
+        Reload_ActorProfile();
     }
 
     public void Pass_BT()
@@ -124,7 +124,7 @@ public class UIManager_04 : MonoBehaviour
         PassActors.Add(PprActors[ActorCount - 1]);
         GameManager.Instance.CostMoney(PprActors[ActorCount - 1].Price);
 
-        Reroad_ActorProfile();
+        Reload_ActorProfile();
     }
 
     public void To_Ingame()

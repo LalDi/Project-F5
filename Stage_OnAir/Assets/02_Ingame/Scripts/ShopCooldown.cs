@@ -15,7 +15,7 @@ public class ShopCooldown : MonoBehaviour
     {
         string st = DateTime.Now.ToString("yyyyMMddHHmmss"); // string 으로 변환
 
-        string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD);
+        string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD, "20000101010101");
         OldTime = DateTime.ParseExact(Time, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
     }
 
@@ -33,7 +33,7 @@ public class ShopCooldown : MonoBehaviour
         //}
         //else
         //{
-        //    string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD);
+        //    string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD, "20000101010101");
         //    OldTime = DateTime.ParseExact(Time, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
         //
         //    btn.interactable = true;
@@ -49,7 +49,7 @@ public class ShopCooldown : MonoBehaviour
         }
         else
         {
-            string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD);
+            string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD, "20000101010101");
             OldTime = DateTime.ParseExact(Time, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
 
             btn.interactable = true;

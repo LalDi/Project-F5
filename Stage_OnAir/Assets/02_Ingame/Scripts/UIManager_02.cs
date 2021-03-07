@@ -600,6 +600,8 @@ public class UIManager_02 : MonoBehaviour
                     Popup_Prepare.transform.Find("Play BT").GetComponent<Button>().interactable = false;
                 };
                 Bottom_Progress.sprite = Image_Progress[3];
+                Background_1.SetActive(false);
+                Background_2.SetActive(true);
                 break;
             case GameManager.Step.Start_Play:
                 Progress = () =>
@@ -775,7 +777,6 @@ public class UIManager_02 : MonoBehaviour
     #endregion
 
     #region Option
-
     public void OnOption()
     {
         BGM.isOn = GameManager.Instance.OnBGM;
@@ -1192,12 +1193,12 @@ public class UIManager_02 : MonoBehaviour
         switch (ItemCode)
         {
             case 0:
-                Script = "현재 보유 금액의 10% 획득"
+                Script = "현재 보유 금액의 10% 획득\n"
                         + "광고 시청";
                 obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_1());
                 break;
             case 1:
-                Script = "공연 후 광고가 더 이상 나오지 않는다."
+                Script = "공연 후 광고가 더 이상 나오지 않는다.\n"
                         + "₩2,500";
                 obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_2());
                 break;
@@ -1209,27 +1210,27 @@ public class UIManager_02 : MonoBehaviour
                 obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_3());
                 break;
             case 3:
-                Script = "+ 5,000,000원"
+                Script = "+ 5,000,000원\n"
                         + "₩5,000";
                 obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_4());
                 break;
             case 4:
-                Script = "+ 10,000,000원"
+                Script = "+ 10,000,000원\n"
                         + "₩10,000";
                 obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_5());
                 break;
             case 5:
-                Script = "+ 50,000,000원"
+                Script = "+ 50,000,000원\n"
                         + "₩30,000";
                 obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_6());
                 break;
             case 6:
-                Script = "+ 100,000,000원"
+                Script = "+ 100,000,000원\n"
                         + "₩50,000";
                 obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_7());
                 break;
             default:
-                Script = "...";
+                Script = "게임에 벌레가 날아다닌다~";
                 break;
         }
 

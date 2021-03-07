@@ -24,8 +24,11 @@ public class UIManager_Quit : MonoBehaviour
 
     public void QuitApplication()
     {
-        GameManager.Instance.SaveData();
-        Application.Quit();
+        Application.CancelQuit();
+
+#if !UNITY_EDTIOR
+        System.Diagnostics.Process.GetCurrentProcess().Kill();
+#endif
     }
 
     public void QuitPopup()

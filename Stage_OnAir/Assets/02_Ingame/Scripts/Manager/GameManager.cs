@@ -115,6 +115,11 @@ public class GameManager : Singleton<GameManager>
         //Init();
     }
 
+    private void OnApplicationQuit()
+    {
+        SaveData();
+    }
+
     public void Init()
     {
         //Backend.Chart.GetAllChartAndSave(true);
