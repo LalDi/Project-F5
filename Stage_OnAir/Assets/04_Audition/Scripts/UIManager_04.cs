@@ -106,8 +106,7 @@ public class UIManager_04 : MonoBehaviour
             ActorData.Instance.ActorsList[PassActors[i].No].SetIsCasting(true);
             GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
             GameManager.Instance.PlusNowActor();
-            GameManager.Instance.Plus_Quality_Acting(PassActors[i].Acting);
-            //GameManager.Instance.SetValue(Define.MANAGERDATA.DATALIST.ACTING, PassActors[i].Acting, true);
+            GameManager.Instance.SetValue(Define.MANAGERDATA.DATALIST.ACTING, PassActors[i].Acting, true);
         }
         Popup_Result.transform.GetChild(2).GetChild(0).
             GetComponent<RectTransform>().sizeDelta = new Vector2(Width, 940.4614f);

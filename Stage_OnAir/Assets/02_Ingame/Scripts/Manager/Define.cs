@@ -179,6 +179,17 @@
 
             return result;
         }
+
+        static public int AUDIENCE()
+        {
+            float Quality = FINALQUALITY();
+            float Marketing = GameManager.Instance.Play_Marketing;
+
+            int result;
+            result = Mathf.FloorToInt((Quality / 1000f) * Marketing);
+
+            return result;
+        }
     }
 
     [System.Serializable]

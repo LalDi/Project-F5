@@ -131,11 +131,11 @@ public class UIManager_05 : MonoBehaviour
             Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
                 = "수익: " + ResultMoney.ToString("N0");
             Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
-                = "관객수: " + (GameManager.Instance.Play_Marketing * 10).ToString("N0");
+                = "관객수: " + Define.Math.AUDIENCE().ToString("N0");
 
             GameManager.Instance.CheckBestScore(
                 GameManager.Instance.Play_Quality,
-                GameManager.Instance.Play_Marketing * 10,
+                Define.Math.AUDIENCE(),
                 ResultMoney); // 연극의 최종 결과의 값을 가지고 최고기록을 갱신하는 함수 
         }
         else if (Success && GameManager.Instance.OnPackage == true && GameManager.Instance.UsePackage == true)
@@ -145,7 +145,7 @@ public class UIManager_05 : MonoBehaviour
             Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
                 = "수익: " + (ResultMoney/2).ToString("N0") + "<color=#ff0000><bounce>X 2</bounce></color>";
             Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
-                = "관객수: " + (GameManager.Instance.Play_Marketing * 10).ToString("N0");
+                = "관객수: " + Define.Math.AUDIENCE().ToString("N0");
 
             Debug.Log("스타트 패키지 적용 결과");
         }
@@ -155,7 +155,7 @@ public class UIManager_05 : MonoBehaviour
             Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
                 = "수익: " + ResultMoney.ToString("N0");
             Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
-                = "관객수: " + ((GameManager.Instance.Play_Marketing / 10) * 20).ToString("N0");
+                = "관객수: " + (Define.Math.AUDIENCE() / 10).ToString("N0");
         }
     }
 

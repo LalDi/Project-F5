@@ -1640,7 +1640,7 @@ public class UIManager_02 : MonoBehaviour
 
             Popup_On(7);
             GameManager.Instance.CostMoney(Items.Instance.MarketingItems[num].pay);
-            GameManager.Instance.Plus_Play_Marketing(Items.Instance.MarketingItems[num].score);
+            GameManager.Instance.SetValue(MANAGERDATA.DATALIST.MARKETING, Items.Instance.MarketingItems[num].score, true);
             //marketing아이템을 구매했을 때 나타나는 효과.
         }
         else if (sort == "Develop" && GameManager.Instance.Money >= Items.Instance.DevelopItems[num].pay)
@@ -1670,13 +1670,13 @@ public class UIManager_02 : MonoBehaviour
                     + (GameManager.Instance.Quality_Direction + Items.Instance.StaffItems[num].directing).ToString("N0");
 
                 GameManager.Instance.CostMoney(Items.Instance.StaffItems[num].cost_purchass);
-                GameManager.Instance.Plus_Quality_Direction(Items.Instance.StaffItems[num].directing);
+                GameManager.Instance.SetValue(MANAGERDATA.DATALIST.DIRECTION, Items.Instance.StaffItems[num].directing, true);
                 Popup_On(14);
             }
             else
             {
                 GameManager.Instance.CostMoney(Items.Instance.Staff_MathPay("Cost", num, GameManager.Instance.StaffLevel[num]));
-                GameManager.Instance.Plus_Quality_Direction(Items.Instance.StaffItems[num].plus_directing);
+                GameManager.Instance.SetValue(MANAGERDATA.DATALIST.DIRECTION, Items.Instance.StaffItems[num].plus_directing, true);
             }
             GameManager.Instance.StaffLevel[num]++;
             Open_Item_Popup("Staff", num);

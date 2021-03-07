@@ -631,6 +631,8 @@ public class GameManager : Singleton<GameManager>
                     break;
             }
         }
+
+        Play_Quality = Define.Math.FINALQUALITY();
     }
 
     public void GetDirection()
@@ -725,38 +727,6 @@ public class GameManager : Singleton<GameManager>
 
         Backend.GameSchemaInfo.Update("Player", InfoInDate, param, (callback) => { }); // 비동기
     }
-
-#region Play n Quality
-    // 연극의 3가지 점수 요소
-    public void Plus_Play_Quality(int value)
-    {
-        Play_Quality += value;
-    }
-    public void Plus_Play_Marketing(int value)
-    {
-        Play_Marketing += value;
-    }
-    public void Plus_Play_Success(int value)
-    {
-        Play_Success += value;
-    }
-    // 연극의 퀄리티 점수를 결정하는 3가지 수치
-    public void Plus_Quality_Acting(int value)
-    {
-        Quality_Acting += value;
-        Plus_Play_Quality(value);
-    }
-    public void Plus_Quality_Scenario(int value)
-    {
-        Quality_Scenario += value;
-        Plus_Play_Quality(value);
-    }
-    public void Plus_Quality_Direction(int value)
-    {
-        Quality_Direction += value;
-        Plus_Play_Quality(value);
-    }
-#endregion
 
 #region Money n Day
 
@@ -875,7 +845,7 @@ public class GameManager : Singleton<GameManager>
         NowScenario = NextScenario;
         CostMoney(ScenarioData.Instance.FindScenario(NextScenario.Code).Price);
         SetMaxActor(ScenarioData.Instance.FindScenario(NextScenario.Code).Actors);
-        Plus_Quality_Scenario(ScenarioData.Instance.FindScenario(NextScenario.Code).Quality);
+        SetValue(MANAGERDATA.DATALIST.SCENARIO, ScenarioData.Instance.FindScenario(NextScenario.Code).Quality, true);
         SetStep(Step.Cast_Actor);
     }
 
