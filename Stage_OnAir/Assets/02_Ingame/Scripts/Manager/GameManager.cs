@@ -131,7 +131,6 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("스태프 데이터 생성");
 
         LoadData();
-        CreateDevelop();
     }
 
     public void Reset()
