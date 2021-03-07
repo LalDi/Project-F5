@@ -10059,7 +10059,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC624\uB514\uC158 \uC9C4\uD589 \uBE44\uC6A9\uC740\r\n50,000\uC785\uB2C8\uB2E4.\r\n\uC9C4\uD589\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?\r"
+  m_Text: "\uC624\uB514\uC158 \uC9C4\uD589 \uBE44\uC6A9\uC740\r\n50,000\uC6D0 \uC785\uB2C8\uB2E4.\r\n\uC9C4\uD589\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?\r"
 --- !u!222 &760888859
 CanvasRenderer:
   m_ObjectHideFlags: 0
