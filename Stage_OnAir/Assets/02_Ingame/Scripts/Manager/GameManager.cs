@@ -258,27 +258,27 @@ public class GameManager : Singleton<GameManager>
 
         for (int i = 0; i < Develops.Count; i++)
         {
-            Develop item = Develops[i];
+            int item = Develops[i].Code;
             param.Add("Develop" + i, item);
         }
 
-        //Info = Backend.GameInfo.GetPrivateContents("Develops");
-        //
-        //if (Info.GetStatusCode() == "200")
-        //{
-        //    if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
-        //    {
-        //        InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
-        //        Backend.GameInfo.Delete("Develops", InfoInDate);
-        //        Backend.GameInfo.Insert("Develops", param);
-        //        Debug.Log("Develops -> 기존 데이터 갱신");
-        //    }
-        //    else
-        //    {
-        //        Backend.GameInfo.Insert("Develops", param);
-        //        Debug.Log("Develops -> 새로운 데이터 생성");
-        //    }
-        //}
+        Info = Backend.GameInfo.GetPrivateContents("Develops");
+        
+        if (Info.GetStatusCode() == "200")
+        {
+            if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+            {
+                InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
+                Backend.GameInfo.Delete("Develops", InfoInDate);
+                Backend.GameInfo.Insert("Develops", param);
+                Debug.Log("Develops -> 기존 데이터 갱신");
+            }
+            else
+            {
+                Backend.GameInfo.Insert("Develops", param);
+                Debug.Log("Develops -> 새로운 데이터 생성");
+            }
+        }
 
         StaffData.SaveAllStaff();
 
@@ -540,38 +540,38 @@ public class GameManager : Singleton<GameManager>
         }
         
 
-        //// 서버로부터 Develops테이블의 데이터를 받아옴
-        //Info = Backend.GameInfo.GetPrivateContents("Develops");
-        //
-        //if (Info.GetStatusCode() == "200")
-        //{
-        //    Debug.Log("Develops 테이블의 데이터를 받아오는데 성공");
-        //
-        //    // Develops 테이블의 데이터를 받아오는데 성공
-        //    if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
-        //    {
-        //        Debug.Log("Develops 테이블 데이터 있음");
-        //
-        //        Develops.Clear();
-        //
-        //        var Data = Info.Rows()[0];
-        //
-        //        var json = BackendReturnObject.Flatten(Info.Rows());
-        //        for (int i = 0; i < json.Count; i++)
-        //        {
-        //            var item = JsonMapper.ToObject<Develop>(json[i].ToJson());
-        //            Develops.Add(item);
-        //        }
-        //
-        //    }
-        //    // Develops 테이블의 데이터를 받아오는데 실패
-        //    else
-        //    {
-        //        Debug.Log("Develops 테이블 데이터 없음");
-        //
-        //        CreateDevelop();
-        //    }
-        //}
+        // 서버로부터 Develops테이블의 데이터를 받아옴
+        Info = Backend.GameInfo.GetPrivateContents("Develops");
+        
+        if (Info.GetStatusCode() == "200")
+        {
+            Debug.Log("Develops 테이블의 데이터를 받아오는데 성공");
+        
+            // Develops 테이블의 데이터를 받아오는데 성공
+            if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+            {
+                Debug.Log("Develops 테이블 데이터 있음");
+        
+                Develops.Clear();
+        
+                var Data = Info.Rows()[0];
+        
+                for (int i = 0; Data.Keys.Contains("Develop" + i); i++)
+                {
+                    int Code = int.Parse(Data["Develop" + i]["N"].ToString());
+                    var temp = DevelopData.Instance.FindDevelop(Code);
+                    Develops.Add(temp);
+                }
+
+            }
+            // Develops 테이블의 데이터를 받아오는데 실패
+            else
+            {
+                Debug.Log("Develops 테이블 데이터 없음");
+        
+                CreateDevelop();
+            }
+        }
     }
 
     public void CreateDevelop()
@@ -638,7 +638,8 @@ public class GameManager : Singleton<GameManager>
     {
         Quality_Direction = 0;
         foreach (var item in Staffs)
-            Quality_Direction += item.Directing;
+            if (item.Level != 0)
+                Quality_Direction += item.Directing;
         Quality_Direction += Plus_Direction;
     }
 
