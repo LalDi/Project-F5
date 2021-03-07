@@ -45,6 +45,8 @@ public class UIManager_06 : MonoBehaviour
 
     public void Push_IllustBT(int num)
     {
+        if (!GameManager.Instance.ScenarioIllust[num])
+            return;
         SoundManager.Instance.PlaySound("Pop_6");
         Popup_Illust.GetComponent<Image>().sprite = Illusts[num];
         Popup_Black.SetActive(true);
