@@ -29,7 +29,6 @@ public class UIManager_01 : MonoBehaviour
         ScenarioData.Instance.SetScenarioData();
         ActorData.Instance.SetActorsData();
         MarketingData.Instance.SetMarketingData();
-        Items.Instance.SetStaffData();
 
         GameManager.Instance.LoadData();
 

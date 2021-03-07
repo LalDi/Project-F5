@@ -130,7 +130,7 @@ public class UIManager_02 : MonoBehaviour
     public List<Tutorial> Tutorials;
     public Image TutorialSprite;
 
-    private int CountMonth = 0;
+    private int CountMonth;
     private float MaxLeftDays = 0;
 
     #endregion
@@ -149,6 +149,8 @@ public class UIManager_02 : MonoBehaviour
         }
 
         MonthorDate = true;
+
+        CountMonth = PlayerPrefs.GetInt(PLAYERPREFSLIST.COUNTMONTH, 0);
 
         Debug.LogWarning($"Before Botttom_UI.Y : {Bottom_UI.anchoredPosition.y}");
 
@@ -759,6 +761,7 @@ public class UIManager_02 : MonoBehaviour
         {
             Debug.Log("한달 개발");
             CountMonth++;
+            PlayerPrefs.SetInt(PLAYERPREFSLIST.COUNTMONTH, CountMonth);
 
             DeductMoney(StaffMonthly.MONTHLY());
         }
@@ -767,6 +770,7 @@ public class UIManager_02 : MonoBehaviour
         {
             GameManager.Instance.SetStep(GameManager.Step.Start_Play);
             CountMonth = 0;
+            PlayerPrefs.SetInt(PLAYERPREFSLIST.COUNTMONTH, CountMonth);
             SetProgress();
             StartCoroutine(Play_Anim());
             Debug.Log("개발 완료");
@@ -1475,234 +1479,6 @@ public class UIManager_02 : MonoBehaviour
     }
     #endregion
 
-    #region Item
-
-    public void SetShopItem()
-    {
-        for (int i = 0; i < Items.Instance.ShopItems.Count; i++)
-        {
-            GameObject item = ObjManager.SpawnPool("ShopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
-
-            item.transform.GetChild(0).GetComponent<Image>().sprite = Items.Instance.ShopItems[i].Icon;
-            item.transform.GetChild(1).GetComponent<Text>().text = Items.Instance.ShopItems[i].name;
-            item.transform.GetChild(2).GetComponent<Text>().text = "비용: " + Items.Instance.ShopItems[i].pay.ToString("N0")
-                + "\n점수: +" + Items.Instance.ShopItems[i].score.ToString("N0");
-            int j = i;
-            item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Shop", j));
-        }
-        double count = (Items.Instance.ShopItems.Count / 2f);
-        Popup_Shop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
-            new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
-    }
-
-    public void Open_Item_Popup(string sort, int num)
-    {
-        GameObject obj;
-        Sprite Icon;
-        string Name;
-        string Script;
-        string Pay;
-
-        if (sort == "Marketing")
-        {
-            Popup_On(6);
-            obj = Popup_MarketingUp;
-            Icon = Items.Instance.MarketingItems[num].Icon;
-            Name = Items.Instance.MarketingItems[num].name;
-            Script = "마케팅점수: +" + Items.Instance.MarketingItems[num].score.ToString("N0");
-            Pay = "가격: " + Items.Instance.MarketingItems[num].pay.ToString("N0");
-
-        }
-        else if (sort == "Develop")
-        {
-            Popup_On(9);
-            obj = Popup_DevelopUp;
-            Icon = Items.Instance.DevelopItems[num].Icon;
-            Name = Items.Instance.DevelopItems[num].name;
-            Script = Items.Instance.DevelopItems[num].script;
-            Pay = "가격: " + Items.Instance.DevelopItems[num].pay.ToString("N0");
-        }
-        else if (sort == "Staff")
-        {
-            Popup_On(13);
-            obj = Popup_StaffUp;
-            Icon = Items.Instance.Staff_Icons[num];
-            Name = Items.Instance.StaffItems[num].name;
-            if (GameManager.Instance.StaffLevel[num] == 0)
-            {
-                Script = "월급: " + Items.Instance.StaffItems[num].pay
-                    + "\n연출력" + Items.Instance.StaffItems[num].directing;
-                Pay = "가격: " + Items.Instance.StaffItems[num].cost_purchass.ToString("N0");
-                obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
-            }
-            else
-            {
-                Script = "월급: " + Items.Instance.Staff_MathPay("Pay", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
-                    + "\n -> " + Items.Instance.Staff_MathPay("Pay", num, GameManager.Instance.StaffLevel[num] + 1).ToString("N0")
-                    + "\n연출력" + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
-                    + "\n -> " + Items.Instance.Staff_MathPay("Directing", num, GameManager.Instance.StaffLevel[num] + 1).ToString("N0");
-                Pay = "가격: " + Items.Instance.Staff_MathPay("Cost", num, GameManager.Instance.StaffLevel[num]).ToString("N0");
-                obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "업그레이드";
-            }
-        }
-        else if (sort == "Shop")
-        {
-            Popup_On(16);
-            obj = Popup_ShopUp;
-            Icon = Items.Instance.ShopItems[num].Icon;
-            Name = Items.Instance.ShopItems[num].name;
-            Script = "점수: +" + Items.Instance.ShopItems[num].score.ToString("N0");
-            Pay = "가격: " + Items.Instance.ShopItems[num].pay.ToString("N0");
-        }
-        else
-        {
-            obj = new GameObject();
-            Icon = null;
-            Name = null;
-            Script = null;
-            Pay = null;
-        }
-
-        obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
-        obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Loans_Item(sort, num));
-
-        obj.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = Icon;
-        obj.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = Name;
-        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
-        obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
-    }
-
-    public void Loans_Item(string sort, int num)
-    {
-        if (sort == "Marketing" && (GameManager.Instance.Money < Items.Instance.MarketingItems[num].pay))
-        {
-            Popup_On(20);
-            Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
-                ((GameManager.Instance.Money <= 0) ?
-                        Items.Instance.MarketingItems[num].pay.ToString("N0")
-                        : ((GameManager.Instance.Money - Items.Instance.MarketingItems[num].pay) * -1).ToString("N0"));
-        }
-        else if (sort == "Staff")
-        {
-            if (GameManager.Instance.StaffLevel[num] == 0)
-            {
-                if (GameManager.Instance.Money < Items.Instance.StaffItems[num].cost_purchass)
-                {
-                    Popup_On(20);
-                    Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
-                        ((GameManager.Instance.Money <= 0) ?
-                                Items.Instance.StaffItems[num].cost_purchass.ToString("N0")
-                                : ((GameManager.Instance.Money - Items.Instance.StaffItems[num].cost_purchass) * -1).ToString("N0"));
-                }
-                else Buy_Item(sort, num);
-            }
-            else
-            {
-                if (GameManager.Instance.Money < Items.Instance.Staff_MathPay("Cost", num, GameManager.Instance.StaffLevel[num]))
-                {
-                    Popup_On(20);
-                    Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
-                        ((GameManager.Instance.Money <= 0) ?
-                                 Items.Instance.Staff_MathPay("Cost", num, GameManager.Instance.StaffLevel[num]).ToString("N0")
-                                : ((GameManager.Instance.Money - Items.Instance.Staff_MathPay("Cost", num, GameManager.Instance.StaffLevel[num])) * -1).ToString("N0"));
-                }
-                else Buy_Item(sort, num);
-            }
-        }
-        else if (sort == "Shop" && (GameManager.Instance.Money < Items.Instance.ShopItems[num].pay))
-        {
-            Popup_On(20);
-            Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
-                ((GameManager.Instance.Money <= 0) ?
-                        Items.Instance.ShopItems[num].pay.ToString("N0")
-                        : ((GameManager.Instance.Money - Items.Instance.ShopItems[num].pay) * -1).ToString("N0"));
-        }
-        else Buy_Item(sort, num);
-
-        Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.RemoveAllListeners();
-        Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy_Item(sort, num));
-        Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Popup_Quit(20));
-    }
-
-    public void Buy_Item(string sort, int num)
-    {
-        Popup_Quit(20);
-        if (sort == "Marketing")
-        {
-            SoundManager.Instance.PlaySound("Cash_Register");
-            Popup_MarketingCk.transform.GetChild(1).GetComponent<Text>().text
-                = "『" + Items.Instance.MarketingItems[num].name + "』을\n구매하였습니다.";
-            Popup_MarketingCk.transform.GetChild(2).GetComponent<Text>().text
-                = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
-                + (GameManager.Instance.Money - Items.Instance.DevelopItems[num].pay).ToString("N0")
-                + "\n마케팅 점수: " + (GameManager.Instance.Play_Marketing.ToString("N0")) + " -> "
-                + (GameManager.Instance.Play_Marketing + Items.Instance.MarketingItems[num].score).ToString("N0");
-
-            Popup_On(7);
-            GameManager.Instance.CostMoney(Items.Instance.MarketingItems[num].pay);
-            GameManager.Instance.SetValue(MANAGERDATA.DATALIST.MARKETING, Items.Instance.MarketingItems[num].score, true);
-            //marketing아이템을 구매했을 때 나타나는 효과.
-        }
-        else if (sort == "Develop" && GameManager.Instance.Money >= Items.Instance.DevelopItems[num].pay)
-        {
-            SoundManager.Instance.PlaySound("Cash_Register");
-            Popup_DevelopCk.transform.GetChild(1).GetComponent<Text>().text
-                = "『" + Items.Instance.DevelopItems[num].name + "』을\n구매하였습니다.";
-            Popup_DevelopCk.transform.GetChild(2).GetComponent<Text>().text
-                = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
-                + (GameManager.Instance.Money - Items.Instance.DevelopItems[num].pay).ToString("N0");
-
-            Popup_On(10);
-            GameManager.Instance.CostMoney(Items.Instance.DevelopItems[num].pay);
-            //develop아이템을 구매했을 때 나타나는 효과.
-        }
-        else if (sort == "Staff")
-        {
-            SoundManager.Instance.PlaySound("Cash_Register");
-            if (GameManager.Instance.StaffLevel[num] == 0)
-            {
-                Popup_StaffCk.transform.GetChild(1).GetComponent<Text>().text
-                = "『" + Items.Instance.StaffItems[num].name + "』을\n구매하였습니다.";
-                Popup_StaffCk.transform.GetChild(2).GetComponent<Text>().text
-                    = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
-                    + (GameManager.Instance.Money - Items.Instance.StaffItems[num].cost_purchass).ToString("N0")
-                    + "\n연출력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
-                    + (GameManager.Instance.Quality_Direction + Items.Instance.StaffItems[num].directing).ToString("N0");
-
-                GameManager.Instance.CostMoney(Items.Instance.StaffItems[num].cost_purchass);
-                GameManager.Instance.SetValue(MANAGERDATA.DATALIST.DIRECTION, Items.Instance.StaffItems[num].directing, true);
-                Popup_On(14);
-            }
-            else
-            {
-                GameManager.Instance.CostMoney(Items.Instance.Staff_MathPay("Cost", num, GameManager.Instance.StaffLevel[num]));
-                GameManager.Instance.SetValue(MANAGERDATA.DATALIST.DIRECTION, Items.Instance.StaffItems[num].plus_directing, true);
-            }
-            GameManager.Instance.StaffLevel[num]++;
-            Open_Item_Popup("Staff", num);
-        }
-        else if (sort == "Shop")
-        {
-            SoundManager.Instance.PlaySound("Cash_Register");
-            Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
-                = "『" + Items.Instance.ShopItems[num].name + "』을\n구매하였습니다.";
-            Popup_ShopCk.transform.GetChild(2).GetComponent<Text>().text
-                = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
-                + (GameManager.Instance.Money - Items.Instance.ShopItems[num].pay).ToString("N0");
-            //+ "\n점수: " + (GameManager.Instance.ShopItems.ToString("N0")) + " -> "
-            //+ (GameManager.Instance.ShopItems + Items.Instance.MarketingItems[num].score).ToString("N0");
-
-            Popup_On(17);
-            GameManager.Instance.CostMoney(Items.Instance.ShopItems[num].pay);
-            //Shop아이템을 구매했을 때 나타나는 효과.
-        }
-        else
-        {
-            Popup_On(19);
-        }
-    }
-
-    #endregion
     public void Close_Item(GameObject Obj)
     {
         for (int i = 0; i < Obj.transform.GetChild(3).GetChild(0).childCount; i++)

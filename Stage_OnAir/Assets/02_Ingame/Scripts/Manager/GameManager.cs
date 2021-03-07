@@ -810,7 +810,6 @@ public class GameManager : Singleton<GameManager>
             else
                 Month++;
             Day = 1;
-            // 스태프 연봉 지급하는 코드
 
             return true;
         }
