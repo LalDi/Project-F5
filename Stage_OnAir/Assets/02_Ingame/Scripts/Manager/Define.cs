@@ -32,6 +32,7 @@
         public const string DEFAULT_SUCCESS = "Default_Success";
         public const string DEVELOPLIST = "DevelopListLocal";
         public const string COUNTMONTH = "CountMonth";
+        public const string REDUCETIME = "ReduceTime";
     }
 
     public class ERROR_MESSAGE

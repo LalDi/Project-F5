@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Define;
@@ -48,8 +49,14 @@ public class GameManager : Singleton<GameManager>
 
     // 상점 데이터 구매 여부
     public bool Adblock { get; private set; }
-    public bool OnPackage { get; private set; }
-    public bool UsePackage { get; private set; }
+    public bool OnPackage { get; private set; } // 패키지 구매 여부
+    public bool UsePackage { get; private set; } // 패키지 적용 중 인지 여부
+    public delegate void SetPackageUi();
+    public SetPackageUi PackageCallback = null;
+
+    // OnPackage == true, UsePackage == true -> 패키지 사용 중
+    // OnPackage == true, UsePackage == false -> 패키지 사용 완료
+    // OnPackage == false -> 패키지 미구매
 
     [SerializeField]
     public bool Tutorial;
@@ -101,7 +108,7 @@ public class GameManager : Singleton<GameManager>
             // 초기화 실패한 경우 실행
             else
             {
-                
+
             }
         });
 
@@ -118,6 +125,8 @@ public class GameManager : Singleton<GameManager>
     private void OnApplicationQuit()
     {
         SaveData();
+        if (NowStep == Step.Prepare_Play)
+            PlayerPrefs.SetString(PLAYERPREFSLIST.REDUCETIME, DateTime.Now.ToString("yyyyMMddHHmmss"));
     }
 
     public void Init()
@@ -131,6 +140,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("스태프 데이터 생성");
 
         LoadData();
+        ReduceDay();
     }
 
     public void Reset()
@@ -262,7 +272,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         Info = Backend.GameInfo.GetPrivateContents("Develops");
-        
+
         if (Info.GetStatusCode() == "200")
         {
             if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
@@ -353,7 +363,7 @@ public class GameManager : Singleton<GameManager>
             //Year = PLAYER.DEFAULT_YEAR;
             Month = PLAYER.DEFAULT_MONTH;
             DefaultSuccess = PLAYER.DEFAULT_SUCCESS;
-            
+
             Debug.Log("새 데이터 생성");
         }
 
@@ -519,7 +529,7 @@ public class GameManager : Singleton<GameManager>
 
                 for (int i = 0; i < MaxActor; i++)
                 {
-                    if (Data.Keys.Contains("Actor"+i))
+                    if (Data.Keys.Contains("Actor" + i))
                     {
                         int No = int.Parse(Data["Actor" + i]["N"].ToString());
                         var temp = ActorData.Instance.FindActor(No);
@@ -537,24 +547,24 @@ public class GameManager : Singleton<GameManager>
                 Actors.Clear();
             }
         }
-        
+
 
         // 서버로부터 Develops테이블의 데이터를 받아옴
         Info = Backend.GameInfo.GetPrivateContents("Develops");
-        
+
         if (Info.GetStatusCode() == "200")
         {
             Debug.Log("Develops 테이블의 데이터를 받아오는데 성공");
-        
+
             // Develops 테이블의 데이터를 받아오는데 성공
             if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
             {
                 Debug.Log("Develops 테이블 데이터 있음");
-        
+
                 Develops.Clear();
-        
+
                 var Data = Info.Rows()[0];
-        
+
                 for (int i = 0; Data.Keys.Contains("Develop" + i); i++)
                 {
                     int Code = int.Parse(Data["Develop" + i]["N"].ToString());
@@ -567,10 +577,72 @@ public class GameManager : Singleton<GameManager>
             else
             {
                 Debug.Log("Develops 테이블 데이터 없음");
-        
+
                 CreateDevelop();
             }
         }
+    }
+
+    public void ReduceDay()
+    {
+        if (NowStep != Step.Prepare_Play)
+            return;
+
+        string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.REDUCETIME, "null");
+        if (Time == "null")
+            return;
+
+        DateTime OldTime = DateTime.ParseExact(Time, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+
+        TimeSpan time = DateTime.Now - OldTime;
+
+        float Term = (float)time.TotalSeconds;
+        int day = Mathf.FloorToInt(Term / 20f);
+        int countMonth = PlayerPrefs.GetInt(PLAYERPREFSLIST.COUNTMONTH, 0);
+
+        for (int i = 0; i < day; i++)
+        {
+            switch (Month)
+            {
+                case 2:
+                    if (Day > 28)
+                    {
+                        countMonth++;
+                        CostMoney(StaffMonthly.MONTHLY());
+                    }
+                    break;
+
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    if (Day > 30)
+                    {
+                        countMonth++;
+                        CostMoney(StaffMonthly.MONTHLY());
+                    }
+                    break;
+
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    if (Day > 31)
+                    {
+                        countMonth++;
+                        CostMoney(StaffMonthly.MONTHLY());
+                    }
+                    break;
+            }
+            GoNextMonth();
+            if (countMonth == Period)
+                break;
+        }
+
+        PlayerPrefs.SetInt(PLAYERPREFSLIST.COUNTMONTH, countMonth);
     }
 
     public void CreateDevelop()

@@ -139,9 +139,25 @@ public class UIManager_02 : MonoBehaviour
     {
         if (GameManager.Instance.IsBankrupt == true)
             StartCoroutine(GameOver_Anim());
+
         SetProgress();
+
+        CountMonth = PlayerPrefs.GetInt(PLAYERPREFSLIST.COUNTMONTH, 0);
+
         if (GameManager.Instance.NowStep == GameManager.Step.Prepare_Play)
-            StartCoroutine(StartPrepare());
+        {
+            if (CountMonth == GameManager.Instance.Period)
+            {
+                GameManager.Instance.SetStep(GameManager.Step.Start_Play);
+                CountMonth = 0;
+                PlayerPrefs.SetInt(PLAYERPREFSLIST.COUNTMONTH, CountMonth);
+                SetProgress();
+                StartCoroutine(Play_Anim());
+                Debug.Log("개발 완료");
+            }
+            else
+                StartCoroutine(StartPrepare());
+        }
         else
         {
             DOTween.To(() => Gauge_Progress.fillAmount, x => Gauge_Progress.fillAmount = x
@@ -149,8 +165,6 @@ public class UIManager_02 : MonoBehaviour
         }
 
         MonthorDate = true;
-
-        CountMonth = PlayerPrefs.GetInt(PLAYERPREFSLIST.COUNTMONTH, 0);
 
         Debug.LogWarning($"Before Botttom_UI.Y : {Bottom_UI.anchoredPosition.y}");
 
@@ -1339,6 +1353,7 @@ public class UIManager_02 : MonoBehaviour
         Backend.GameSchemaInfo.Update("Shop", InfoInDate, param); // 동기
 
         GameManager.Instance.SetShopData();
+        GameManager.Instance.PackageCallback();
 
         Debug.Log(GameManager.Instance.OnPackage);
         Debug.Log(GameManager.Instance.UsePackage);
