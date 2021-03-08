@@ -155,6 +155,7 @@ public class GameManager : Singleton<GameManager>
         GetDirection();
 
         Period = 0;
+        LeftDays = 0;
 
         NowActor = 0;
         MaxActor = 0;
@@ -445,15 +446,15 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (Json.Keys.Contains("Play_Quality"))
                 {
-                    Play_Quality = int.Parse(Json["Play_Quality"]["N"].ToString());
+                    Play_Quality = float.Parse(Json["Play_Quality"]["N"].ToString());
                 }
                 if (Json.Keys.Contains("Play_Marketing"))
                 {
-                    Play_Marketing = int.Parse(Json["Play_Marketing"]["N"].ToString());
+                    Play_Marketing = float.Parse(Json["Play_Marketing"]["N"].ToString());
                 }
                 if (Json.Keys.Contains("Play_Success"))
                 {
-                    Play_Success = int.Parse(Json["Play_Success"]["N"].ToString());
+                    Play_Success = float.Parse(Json["Play_Success"]["N"].ToString());
                 }
                 if (Json.Keys.Contains("Quality_Acting"))
                 {
@@ -461,15 +462,15 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (Json.Keys.Contains("Quality_Scenario"))
                 {
-                    Quality_Scenario = int.Parse(Json["Quality_Scenario"]["N"].ToString());
+                    Quality_Scenario = float.Parse(Json["Quality_Scenario"]["N"].ToString());
                 }
                 if (Json.Keys.Contains("Quality_Direction"))
                 {
-                    Quality_Direction = int.Parse(Json["Quality_Direction"]["N"].ToString());
+                    Quality_Direction = float.Parse(Json["Quality_Direction"]["N"].ToString());
                 }
                 if (Json.Keys.Contains("Plus_Direction"))
                 {
-                    Plus_Direction = int.Parse(Json["Plus_Direction"]["N"].ToString());
+                    Plus_Direction = float.Parse(Json["Plus_Direction"]["N"].ToString());
                 }
                 if (Json.Keys.Contains("Period"))
                 {
@@ -477,7 +478,7 @@ public class GameManager : Singleton<GameManager>
                 }
                 if (Json.Keys.Contains("LeftDays"))
                 {
-                    LeftDays = int.Parse(Json["LeftDays"]["N"].ToString());
+                    LeftDays = float.Parse(Json["LeftDays"]["N"].ToString());
                 }
             }
             // PlayData테이블의 데이터를 받아오는데 실패
@@ -596,8 +597,8 @@ public class GameManager : Singleton<GameManager>
 
         TimeSpan time = DateTime.Now - OldTime;
 
-        float Term = (float)time.TotalSeconds;
-        int day = Mathf.FloorToInt(Term / 20f);
+        var Term = time.TotalSeconds;
+        int day = Mathf.FloorToInt((float)(Term / 20.0));
         int countMonth = PlayerPrefs.GetInt(PLAYERPREFSLIST.COUNTMONTH, 0);
 
         for (int i = 0; i < day; i++)
@@ -605,7 +606,7 @@ public class GameManager : Singleton<GameManager>
             switch (Month)
             {
                 case 2:
-                    if (Day > 28)
+                    if (Day == 28)
                     {
                         countMonth++;
                         CostMoney(StaffMonthly.MONTHLY());
@@ -616,7 +617,7 @@ public class GameManager : Singleton<GameManager>
                 case 6:
                 case 9:
                 case 11:
-                    if (Day > 30)
+                    if (Day == 30)
                     {
                         countMonth++;
                         CostMoney(StaffMonthly.MONTHLY());
@@ -630,7 +631,7 @@ public class GameManager : Singleton<GameManager>
                 case 8:
                 case 10:
                 case 12:
-                    if (Day > 31)
+                    if (Day == 31)
                     {
                         countMonth++;
                         CostMoney(StaffMonthly.MONTHLY());
@@ -729,8 +730,9 @@ public class GameManager : Singleton<GameManager>
         Success = Success / Count;
 
         float temp = Success * 0.1f;
+        float result = Mathf.Round((Success + (temp * (Period - 6))) * 10) * 0.1f;
 
-        return Success + (temp * (Period - 6));
+        return result;
     }
 
     public void SetShopData()

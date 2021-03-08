@@ -24,10 +24,11 @@ public class UIManager_Quit : MonoBehaviour
 
     public void QuitApplication()
     {
-        Application.CancelQuit();
-
-#if !UNITY_EDTIOR
-        System.Diagnostics.Process.GetCurrentProcess().Kill();
+        //GameManager.Instance.SaveData();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
 #endif
     }
 

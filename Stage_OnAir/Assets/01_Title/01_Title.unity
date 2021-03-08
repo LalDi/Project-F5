@@ -3526,7 +3526,7 @@ Transform:
   m_Children:
   - {fileID: 1047959568}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989198422
 GameObject:
@@ -3569,7 +3569,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047072885
 GameObject:
@@ -4334,7 +4334,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1245224780
 GameObject:
@@ -4836,7 +4836,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1351957819
 GameObject:
@@ -5354,200 +5354,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468392992}
   m_CullTransparentMesh: 0
---- !u!1 &1495915208
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1495915210}
-  - component: {fileID: 1495915209}
-  m_Layer: 0
-  m_Name: ItemData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1495915209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495915208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fbd7253dc485b541a5cee440208020c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShopItems:
-  - no: 1
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 1"
-    score: 10
-    pay: 1000000
-    Icon: {fileID: 21300120, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  - no: 2
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 2"
-    score: 20
-    pay: 2000000
-    Icon: {fileID: 21300122, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  - no: 3
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 3"
-    score: 30
-    pay: 3000000
-    Icon: {fileID: 21300124, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  - no: 4
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 4"
-    score: 40
-    pay: 4000000
-    Icon: {fileID: 21300126, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  - no: 5
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 5"
-    score: 50
-    pay: 5000000
-    Icon: {fileID: 21300128, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  - no: 6
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 6"
-    score: 60
-    pay: 6000000
-    Icon: {fileID: 21300130, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  - no: 7
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 7"
-    score: 70
-    pay: 7000000
-    Icon: {fileID: 21300132, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  - no: 8
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 8"
-    score: 80
-    pay: 8000000
-    Icon: {fileID: 21300134, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  - no: 9
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 9"
-    score: 90
-    pay: 9000000
-    Icon: {fileID: 21300136, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  - no: 10
-    name: "\uC0C1\uC810 \uC544\uC774\uD15C 10"
-    score: 100
-    pay: 10000000
-    Icon: {fileID: 21300138, guid: 27f8f0fa692e2db40ad04507836049f2, type: 3}
-  MarketingItems:
-  - no: 1
-    name: "\uC804\uB2E8\uC9C0 \uD64D\uBCF4"
-    score: 30
-    pay: 30000
-    Icon: {fileID: 21300000, guid: 4463f935148cb854f9644d980e5c8547, type: 3}
-  - no: 2
-    name: "SNS \uD64D\uBCF4"
-    score: 50
-    pay: 150000
-    Icon: {fileID: 21300000, guid: 0c1de4bf67a049c49b9a4ed8883e3c76, type: 3}
-  - no: 3
-    name: "\uC778\uD130\uB137 \uB77C\uC774\uBE0C \uBC29\uC1A1"
-    score: 110
-    pay: 250000
-    Icon: {fileID: 21300000, guid: 83a564de5de8ec149b3bb3ec01a045c3, type: 3}
-  - no: 4
-    name: "\uC9C0\uD558\uCCA0 \uD3EC\uC2A4\uD130 \uAD11\uACE0"
-    score: 150
-    pay: 325000
-    Icon: {fileID: 21300000, guid: 493268fa80f060740a1cab16904b0944, type: 3}
-  - no: 5
-    name: "\uC720\uD29C\uBE0C \uCC44\uB110"
-    score: 200
-    pay: 400000
-    Icon: {fileID: 21300000, guid: 81f4fadf3436e77438564d8deb3f89b9, type: 3}
-  - no: 6
-    name: "TV \uD504\uB85C\uADF8\uB7A8 \uCD9C\uC5F0"
-    score: 250
-    pay: 450000
-    Icon: {fileID: 21300000, guid: 8b185c8c62998004bbf431a3cb0cb724, type: 3}
-  - no: 7
-    name: "\uBC31\uC2A4\uD14C\uC774\uC9C0 \uD22C\uC5B4"
-    score: 350
-    pay: 550000
-    Icon: {fileID: 21300000, guid: e14be9d116afbd74e875539c523b4ed9, type: 3}
-  - no: 8
-    name: "TV\uAD11\uACE0"
-    score: 500
-    pay: 750000
-    Icon: {fileID: 21300000, guid: 59c321a21f5165e43935ca00e31a35fb, type: 3}
-  DevelopItems:
-  - no: 1
-    name: "\uBC1C\uC804 \uC0C1\uD488 1"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 100000
-    Icon: {fileID: 21300564, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  - no: 2
-    name: "\uBC1C\uC804 \uC0C1\uD488 2"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 200000
-    Icon: {fileID: 21300566, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  - no: 3
-    name: "\uBC1C\uC804 \uC0C1\uD488 3"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 300000
-    Icon: {fileID: 21300568, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  - no: 4
-    name: "\uBC1C\uC804 \uC0C1\uD488 4"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 400000
-    Icon: {fileID: 21300570, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  - no: 5
-    name: "\uBC1C\uC804 \uC0C1\uD488 5"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 500000
-    Icon: {fileID: 21300572, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  - no: 6
-    name: "\uBC1C\uC804 \uC0C1\uD488 6"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 600000
-    Icon: {fileID: 21300574, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  - no: 7
-    name: "\uBC1C\uC804 \uC0C1\uD488 7"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 700000
-    Icon: {fileID: 21300576, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  - no: 8
-    name: "\uBC1C\uC804 \uC0C1\uD488 8"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 800000
-    Icon: {fileID: 21300578, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  - no: 9
-    name: "\uBC1C\uC804 \uC0C1\uD488 9"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 900000
-    Icon: {fileID: 21300580, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  - no: 10
-    name: "\uBC1C\uC804 \uC0C1\uD488 10"
-    script: "\uBC1C\uC804 \uC0C1\uD488"
-    pay: 1000000
-    Icon: {fileID: 21300582, guid: de3b39a90f58e994a90301d1293d0f47, type: 3}
-  Staff_Icons:
-  - {fileID: 21300000, guid: 2d7b613700599d94e91f834be6ed3c7d, type: 3}
-  - {fileID: 21300000, guid: fffc51df785f21845971aa77be13e19d, type: 3}
-  - {fileID: 21300000, guid: b6b8c2e331e2ae54da7d7a6ed2484a52, type: 3}
-  - {fileID: 21300000, guid: 5973830112421d04780ce8701c1b2e4f, type: 3}
-  - {fileID: 21300000, guid: 229aa946c7928d940ac2042e20cca356, type: 3}
-  - {fileID: 21300000, guid: 19740e56d0a531e4d92710c3d7ac4342, type: 3}
-  - {fileID: 21300000, guid: 8b12bf0af9311064fab510ede625af29, type: 3}
---- !u!4 &1495915210
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495915208}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1532309065
 GameObject:
   m_ObjectHideFlags: 0
@@ -6987,7 +6793,7 @@ RectTransform:
   m_Children:
   - {fileID: 1606981815}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7303,7 +7109,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1836187270
 GameObject:
@@ -8202,7 +8008,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2106403401
 GameObject:
@@ -8391,5 +8197,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

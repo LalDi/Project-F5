@@ -101,7 +101,7 @@ public class UIManager_05 : MonoBehaviour
         //성공여부 판단
         else
         {
-            int Rand = UnityEngine.Random.Range(1, 101);
+            float Rand = UnityEngine.Random.Range(0f, 100f);
             Success = (Rand <= GameManager.Instance.Play_Success);
         }
 
