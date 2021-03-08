@@ -106,9 +106,9 @@ public class UIManager_03 : MonoBehaviour
     public void Popup_ScenarioBuy()
     {
         SoundManager.Instance.PlaySound("Cash_Register");
-        Popup_Buy_Checking.transform.GetChild(1).GetComponent<Text>().text =
+        Popup_Buy_Checking.transform.GetChild(3).GetComponent<Text>().text =
            " 『" + Data.Name + "』 \n을 구매하였습니다.";
-        Popup_Buy_Checking.transform.GetChild(2).GetComponent<Text>().text =
+        Popup_Buy_Checking.transform.GetChild(4).GetComponent<Text>().text =
             "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> " +
             (GameManager.Instance.Money - Data.Price).ToString("N0");
         GameManager.Instance.SetScenario(Data);

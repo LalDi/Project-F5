@@ -1739,7 +1739,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614509943}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1749,7 +1749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -168}
+  m_AnchoredPosition: {x: 0, y: -275}
   m_SizeDelta: {x: 340.51746, y: 91.96457}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &614509945
@@ -2211,7 +2211,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716296382}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2221,7 +2221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -287}
+  m_AnchoredPosition: {x: 0, y: -156}
   m_SizeDelta: {x: 340.51746, y: 91.96457}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &716296384
@@ -3745,7 +3745,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -7099,11 +7099,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Login_ID: {fileID: 1245224782}
   Login_Password: {fileID: 956731728}
-  SignUp_ID: {fileID: 0}
-  SignUp_Password: {fileID: 0}
-  SignUp_PWCheck: {fileID: 0}
+  SignUp_ID: {fileID: 1468392994}
+  SignUp_Password: {fileID: 874918909}
+  SignUp_PWCheck: {fileID: 1580971391}
   Nickname_Popup: {fileID: 1113866208}
-  Nickname_Nickname: {fileID: 0}
+  Nickname_Nickname: {fileID: 1652821873}
   Popup_Loading: {fileID: 975941271}
   Popup_Login: {fileID: 814023229}
   Popup_Black: {fileID: 1050554960}
