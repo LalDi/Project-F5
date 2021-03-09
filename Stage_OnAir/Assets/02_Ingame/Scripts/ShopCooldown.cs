@@ -15,7 +15,7 @@ public class ShopCooldown : MonoBehaviour
     {
         string st = DateTime.Now.ToString("yyyyMMddHHmmss"); // string 으로 변환
 
-        string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD);
+        string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD, "20000101010101");
         OldTime = DateTime.ParseExact(Time, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
     }
 
@@ -24,23 +24,25 @@ public class ShopCooldown : MonoBehaviour
         DateTime NowTime = DateTime.Now;
 
         TimeSpan time = NowTime - OldTime;
-        //
-        //if (time.TotalMinutes < 30)
-        //{
-        //    btn.interactable = false;
-        //
-        //    Cooldown.fillAmount = 1 - ((float)time.TotalMinutes / 30f);
-        //}
-        //else
-        //{
-        //    string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD);
-        //    OldTime = DateTime.ParseExact(Time, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
-        //
-        //    btn.interactable = true;
-        //
-        //    Cooldown.fillAmount = 0;
-        //}
+        
+        if (time.TotalMinutes < 30)
+        {
+            btn.interactable = false;
+        
+            Cooldown.fillAmount = 1 - ((float)time.TotalMinutes / 30f);
+        }
+        else
+        {
+            string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD, "20000101010101");
+            OldTime = DateTime.ParseExact(Time, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
+        
+            btn.interactable = true;
+        
+            Cooldown.fillAmount = 0;
+        }
 
+        /*
+        // 테스트를 위한 30초 대기
         if (time.TotalSeconds < 30)
         {
             btn.interactable = false;
@@ -49,12 +51,13 @@ public class ShopCooldown : MonoBehaviour
         }
         else
         {
-            string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD);
+            string Time = PlayerPrefs.GetString(PLAYERPREFSLIST.AD, "20000101010101");
             OldTime = DateTime.ParseExact(Time, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
 
             btn.interactable = true;
 
             Cooldown.fillAmount = 0;
         }
+        */
     }
 }

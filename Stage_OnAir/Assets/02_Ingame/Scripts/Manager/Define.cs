@@ -31,6 +31,8 @@
         public const string AD = "Ad";
         public const string DEFAULT_SUCCESS = "Default_Success";
         public const string DEVELOPLIST = "DevelopListLocal";
+        public const string COUNTMONTH = "CountMonth";
+        public const string REDUCETIME = "ReduceTime";
     }
 
     public class ERROR_MESSAGE
@@ -179,6 +181,17 @@
 
             return result;
         }
+
+        static public int AUDIENCE()
+        {
+            float Quality = FINALQUALITY();
+            float Marketing = GameManager.Instance.Play_Marketing;
+
+            int result;
+            result = Mathf.FloorToInt((Quality / 1000f) * Marketing);
+
+            return result;
+        }
     }
 
     [System.Serializable]
@@ -191,8 +204,6 @@
         //스태프 월급 계산
         static public int MONTHLY()
         {
-            //Icon = StaffData.Instance.StaffIcon[Data.Code - 1];
-
             int Pay = 0;
             foreach (Staff item in GameManager.Instance.Staffs)
             {

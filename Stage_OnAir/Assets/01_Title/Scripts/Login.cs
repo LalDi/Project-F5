@@ -229,7 +229,6 @@ public class Login : MonoBehaviour
         ScenarioData.Instance.SetScenarioData();
         ActorData.Instance.SetActorsData();
         MarketingData.Instance.SetMarketingData();
-        Items.Instance.SetStaffData();
         GameManager.Instance.Init();
     }
 }
