@@ -98,7 +98,7 @@ public class UIManager_04 : MonoBehaviour
             Width += 325;
 
             GameObject ActorObj = Instantiate(ActorPrefab);
-            ActorObj.transform.SetParent(Popup_Result.transform.GetChild(2).GetChild(0));
+            ActorObj.transform.SetParent(Popup_Result.transform.GetChild(3).GetChild(0));
             ActorObj.transform.GetChild(1).GetComponent<Text>().text =
                 PassActors[i].Name;
             ActorObj.transform.GetChild(0).GetComponent<Image>().sprite = 
@@ -108,7 +108,7 @@ public class UIManager_04 : MonoBehaviour
             GameManager.Instance.PlusNowActor();
             GameManager.Instance.SetValue(Define.MANAGERDATA.DATALIST.ACTING, PassActors[i].Acting, true);
         }
-        Popup_Result.transform.GetChild(2).GetChild(0).
+        Popup_Result.transform.GetChild(3).GetChild(0).
             GetComponent<RectTransform>().sizeDelta = new Vector2(Width, 940.4614f);
     }
 
