@@ -79,8 +79,8 @@ public class UIManager_04 : MonoBehaviour
                 "연기력 : " + PprActors[ActorCount - 1].Acting + "\n" +
                 "경험 : " + PprActors[ActorCount - 1].Experience + "\n" +
                 "가격 : " + PprActors[ActorCount - 1].Price.ToString("N0");
-            Profile.transform.Find("Profile Character Image").GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].No];
-            Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].No];
+            Profile.transform.Find("Profile Character Image").GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[(PprActors[ActorCount - 1].No) % 8];
+            Character.sprite = ActorData.Instance.ActorImage[(PprActors[ActorCount - 1].No) % 8];
         }
         else
         {
@@ -98,17 +98,17 @@ public class UIManager_04 : MonoBehaviour
             Width += 325;
 
             GameObject ActorObj = Instantiate(ActorPrefab);
-            ActorObj.transform.SetParent(Popup_Result.transform.GetChild(2).GetChild(0));
+            ActorObj.transform.SetParent(Popup_Result.transform.GetChild(3).GetChild(0));
             ActorObj.transform.GetChild(1).GetComponent<Text>().text =
                 PassActors[i].Name;
             ActorObj.transform.GetChild(0).GetComponent<Image>().sprite = 
-                ActorData.Instance.ActorProfileImage[PassActors[i].No];
+                ActorData.Instance.ActorProfileImage[(PassActors[i].No) % 8];
             ActorData.Instance.ActorsList[PassActors[i].No].SetIsCasting(true);
             GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
             GameManager.Instance.PlusNowActor();
             GameManager.Instance.Plus_Quality_Acting(PassActors[i].Acting);
         }
-        Popup_Result.transform.GetChild(2).GetChild(0).
+        Popup_Result.transform.GetChild(3).GetChild(0).
             GetComponent<RectTransform>().sizeDelta = new Vector2(Width, 940.4614f);
     }
 
