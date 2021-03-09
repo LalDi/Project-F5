@@ -98,6 +98,9 @@ public class UIManager_02 : MonoBehaviour
     public GameObject GameOver;
     public GameObject Play;
 
+    [Header("NPC")]
+    public NPCManager NPCManager;
+    
     public enum PopupList
     {
         Option = 0, //  0
@@ -128,6 +131,7 @@ public class UIManager_02 : MonoBehaviour
     public delegate void ProgressDel();
     public ProgressDel Progress;
 
+    [Header("Tutorial")]
     public TutorialScript TutorialObj;
     public List<Tutorial> Tutorials;
     public Image TutorialSprite;
@@ -177,6 +181,8 @@ public class UIManager_02 : MonoBehaviour
         Debug.LogWarning($"GetBannerHeight : {GoogleAdsManager.Instance.GetBannerHeight()}\n" +
             $"SetY : {Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight())}\n" +
             $"Bottom_UI.Y : {Bottom_UI.anchoredPosition.y}");
+
+        NPCManager.Summon();
 
         if (GameManager.Instance.Tutorial == true)
         {
@@ -657,14 +663,14 @@ public class UIManager_02 : MonoBehaviour
         if (GameManager.Instance.Money < AUDITION.AUDITION_PRICE)
         {
             Popup_On(20);
-            Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
+            Popup_LoansCk.transform.GetChild(4).GetComponent<Text>().text = "필요금액: " +
                 ((GameManager.Instance.Money <= 0) ?
                         AUDITION.AUDITION_PRICE.ToString("N0")
                         : ((GameManager.Instance.Money - AUDITION.AUDITION_PRICE) * -1).ToString("N0"));
 
-            Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.RemoveAllListeners();
-            Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Progress_Audition());
-            Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Popup_Quit(20));
+            Popup_LoansCk.transform.GetChild(7).GetComponent<Button>().onClick.RemoveAllListeners();
+            Popup_LoansCk.transform.GetChild(7).GetComponent<Button>().onClick.AddListener(() => Progress_Audition());
+            Popup_LoansCk.transform.GetChild(7).GetComponent<Button>().onClick.AddListener(() => Popup_Quit(20));
         }
         else
             Progress_Audition();
@@ -1041,12 +1047,12 @@ public class UIManager_02 : MonoBehaviour
         if (GameManager.Instance.Money < Data.Price)
         {
             Popup_On((int)PopupList.LoansCk);
-            Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
+            Popup_LoansCk.transform.GetChild(4).GetComponent<Text>().text = "필요금액: " +
                 ((GameManager.Instance.Money <= 0) ?
                 Data.Price.ToString("N0") : ((GameManager.Instance.Money - Data.Price) * -1).ToString("N0"));
 
-            Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.RemoveAllListeners();
-            Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() =>
+            Popup_LoansCk.transform.GetChild(7).GetComponent<Button>().onClick.RemoveAllListeners();
+            Popup_LoansCk.transform.GetChild(7).GetComponent<Button>().onClick.AddListener(() =>
             {
                 Popup_Quit((int)PopupList.LoansCk);
 
@@ -1143,7 +1149,7 @@ public class UIManager_02 : MonoBehaviour
         if (GameManager.Instance.Money < Data.Price)
         {
             Popup_On((int)PopupList.LoansCk);
-            Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
+            Popup_LoansCk.transform.GetChild(4).GetComponent<Text>().text = "필요금액: " +
                 ((GameManager.Instance.Money <= 0) ?
                 Data.Price.ToString("N0") : ((GameManager.Instance.Money - Data.Price) * -1).ToString("N0"));
 

@@ -20,8 +20,6 @@ public class NPC : MonoBehaviour
             waitTime = Random.Range(5, 8);
             workDistance= Random.Range(100, 801);
 
-            Debug.Log(Distance + ", " + workTime + ", " + waitTime + ", " + workDistance);
-
             if (transform.localPosition.x + (workDistance * Distance) > 800)
                 workDistance = 800 - transform.localPosition.x;
             if (transform.localPosition.x + (workDistance * Distance) < -800)

@@ -95,7 +95,7 @@ public class UIManager_03 : MonoBehaviour
         {
             Popup_LoansCk.SetActive(true);
 
-            Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
+            Popup_LoansCk.transform.GetChild(4).GetComponent<Text>().text = "필요금액: " +
                 ((GameManager.Instance.Money <= 0) ?
                          Data.Price.ToString("N0")
                         : ((GameManager.Instance.Money - Data.Price) * -1).ToString("N0"));

@@ -8,14 +8,14 @@ public class NPCManager : MonoBehaviour
 {
     public Transform Parent;
 
-    public int[] Actors = new int[3]; //화면에 그려줄 배우 NPC 데이터
-    public int[] Staffs = new int[3]; //화면에 그려줄 스탭 NPC 데이터
+    public List<int> Actors = new List<int>(); //화면에 그려줄 배우 NPC 데이터
+    public List<int> Staffs = new List<int>(); //화면에 그려줄 스탭 NPC 데이터
     public int StaffCnt = 0;
 
-    public GameObject[] Actor = new GameObject[8];
-    public GameObject[] Staff = new GameObject[7];
+    public List<GameObject> Actor = new List<GameObject>();
+    public List<GameObject> Staff = new List<GameObject>();
 
-    void Start()
+    public void Summon()
     {
         Actors = RandomActor(GameManager.Instance.NowActor);
 
@@ -34,28 +34,33 @@ public class NPCManager : MonoBehaviour
         }
     }
 
-    public int[] RandomActor(int count)
+    public List<int> RandomActor(int count)
     {
         if (count > 3) count = 3;
 
-        int[] RandomActor = new int[count];
+        List<int> RandomActor = new List<int>();
         List<Actor> Select = new List<Actor>();
 
-        Select = GameManager.Instance.Actors;
+        Select = GameManager.Instance.Actors.ToList();
         Select = Math.ShuffleList(Select);
+
+        foreach(var item in Select)
+        {
+            Debug.Log("캐스팅 된 배우: " + item.Name);
+        }
 
         for (int i = 0; i < count; i++)
         {
-            RandomActor[i] = Select[i].No;
+            RandomActor.Add(Select[i].No % 8);
         }
 
         return RandomActor;
     }
-    public int[] RandomStaff(int count)
+    public List<int> RandomStaff(int count)
     {
         if (count > 3) count = 3;
 
-        int[] RandomStaff = new int[count];
+        List<int> RandomStaff = new List<int>();
         List<Staff> Select = new List<Staff>();
 
         int value = 0;
@@ -70,7 +75,7 @@ public class NPCManager : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            RandomStaff[i] = Select[i].Code;
+            RandomStaff.Add(Select[i].Code);
         }
 
         return RandomStaff;
