@@ -40,7 +40,6 @@ public class Login : MonoBehaviour
 
     public void Try_Login()
     {
-        SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
         Popup_Loading.SetActive(true);
         Backend.BMember.CustomLogin(Login_ID.text, Login_Password.text, callback =>
         {
@@ -52,21 +51,26 @@ public class Login : MonoBehaviour
             {
                 case "200":
                     SetDataInit();
+                    SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
                     LoadManager.Load(LoadManager.Scene.Ingame);
                     break;
                 case "400":
+                    SoundManager.Instance.PlaySound("Pop_6");
                     Error_Message = ERROR_MESSAGE.LOGIN_EMPTY;
                     Control_Error(true);
                     break;
                 case "401":
+                    SoundManager.Instance.PlaySound("Pop_6");
                     Error_Message = ERROR_MESSAGE.LOGIN_DUPLICATE;
                     Control_Error(true);
                     break;
                 case "403":
+                    SoundManager.Instance.PlaySound("Pop_6");
                     Error_Message = callback.GetErrorCode();
                     Control_Error(true);
                     break;
                 default:
+                    SoundManager.Instance.PlaySound("Pop_6");
                     Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
                     Control_Error(true);
                     break;

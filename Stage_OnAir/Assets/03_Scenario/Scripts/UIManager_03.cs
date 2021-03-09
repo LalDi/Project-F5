@@ -81,7 +81,7 @@ public class UIManager_03 : MonoBehaviour
             "연출력 : " + Data.Quality;
         Popup_Scenario_Select.transform.Find("need Actor Image").GetChild(0).GetComponent<Text>().text =
             "필요 배우 : " + Data.Actors;
-        Popup_Scenario_Select.transform.Find("Buy BT").Find("Pay Text").GetComponent<Text>().text =
+        Popup_Scenario_Select.transform.Find("Pay Image").Find("Pay Text").GetComponent<Text>().text =
             "가격 " + Data.Price.ToString("N0");
 
         Popup_Black.SetActive(true);
@@ -106,9 +106,9 @@ public class UIManager_03 : MonoBehaviour
     public void Popup_ScenarioBuy()
     {
         SoundManager.Instance.PlaySound("Cash_Register");
-        Popup_Buy_Checking.transform.GetChild(1).GetComponent<Text>().text =
+        Popup_Buy_Checking.transform.GetChild(3).GetComponent<Text>().text =
            " 『" + Data.Name + "』 \n을 구매하였습니다.";
-        Popup_Buy_Checking.transform.GetChild(2).GetComponent<Text>().text =
+        Popup_Buy_Checking.transform.GetChild(4).GetComponent<Text>().text =
             "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> " +
             (GameManager.Instance.Money - Data.Price).ToString("N0");
         GameManager.Instance.SetScenario(Data);

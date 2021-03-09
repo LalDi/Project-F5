@@ -56,7 +56,7 @@ public class UIManager_02 : MonoBehaviour
     public GameObject Popup_Warning;
     public GameObject Popup_LoansCk;
     public GameObject Popup_Tutorial;
-    public GameObject Popup_Monthly;
+    public GameObject Popup_Reset;
 
     [Header("Period")]
     public Text Text_Period;
@@ -122,7 +122,7 @@ public class UIManager_02 : MonoBehaviour
         Warning, //   19
         LoansCk,   //20
         Tutorial,    //21
-        Monthly    //22
+        Reset //22
     }
 
     public delegate void ProgressDel();
@@ -342,7 +342,6 @@ public class UIManager_02 : MonoBehaviour
         switch (Select)
         {
             case PopupList.Option:
-                Popup_Black.SetActive(false);
                 Popup_Option.SetActive(true);
                 OnOption();
                 break;
@@ -414,10 +413,12 @@ public class UIManager_02 : MonoBehaviour
                 Popup_LoansCk.SetActive(true);
                 break;
             case PopupList.Tutorial:
+                Popup_Option.SetActive(false);
                 Popup_Tutorial.SetActive(true);
                 break;
-            case PopupList.Monthly:
-                Popup_Monthly.SetActive(true);
+            case PopupList.Reset:
+                Popup_Option.SetActive(false);
+                Popup_Reset.SetActive(true);
                 break;
             default:
                 break;
@@ -454,7 +455,7 @@ public class UIManager_02 : MonoBehaviour
         Popup_Warning.SetActive(false);
         Popup_LoansCk.SetActive(false);
         Popup_Tutorial.SetActive(false);
-        Popup_Monthly.SetActive(false);
+        Popup_Reset.SetActive(false);
 
         //Close_Item(Popup_Shop);
         Close_Item(Popup_Staff);
@@ -539,10 +540,12 @@ public class UIManager_02 : MonoBehaviour
                 Popup_LoansCk.SetActive(false);
                 break;
             case PopupList.Tutorial:
+                Popup_Option.SetActive(true);
                 Popup_Tutorial.SetActive(false);
                 break;
-            case PopupList.Monthly:
-                Popup_Monthly.SetActive(false);
+            case PopupList.Reset:
+                Popup_Option.SetActive(true);
+                Popup_Reset.SetActive(false);
                 break;
             default:
                 break;
@@ -868,7 +871,11 @@ public class UIManager_02 : MonoBehaviour
 
     public void ResetBT()
     {
-        StartCoroutine(GameOver_Anim());
+        GameManager.Instance.ReStart();
+        GameManager.Instance.Staffs = StaffData.Instance.ResetStaffData();
+
+        LoadManager.Load(LoadManager.Scene.Ingame);
+        //StartCoroutine(GameOver_Anim());
     }
     #endregion
 
@@ -886,7 +893,7 @@ public class UIManager_02 : MonoBehaviour
             StaffItem.transform.GetComponent<Button>().onClick.AddListener(() => Open_Staff_Popup(item));
         }
         double count = GameManager.Instance.Staffs.Count / 2f;
-        Popup_Staff.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+        Popup_Staff.transform.GetChild(3).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
 
@@ -896,36 +903,34 @@ public class UIManager_02 : MonoBehaviour
         Sprite Icon;
         string Name;
         string Script;
-        string Pay;
 
         Popup_On((int)PopupList.StaffUp);
         obj = Popup_StaffUp;
         Icon = StaffData.Instance.StaffIcon[Data.Code - 1];
         Name = Data.Name;
-        obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+        obj.transform.GetChild(6).GetComponent<Button>().onClick.RemoveAllListeners();
         if (Data.IsPurchase)
         {
             Script = "월급: " + Data.Pay.ToString("N0")
-            + "\n -> " + (Data.Pay + Data.Plus_Pay).ToString("N0")
-            + "\n연출력: " + Data.Directing.ToString("N0")
-            + "\n -> " + (Data.Directing + Data.Plus_Directing).ToString("N0");
-            Pay = "가격: " + Data.Cost_Upgrade.ToString("N0");
-            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "업그레이드";
-            obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
+                    + "\n -> " + (Data.Pay + Data.Plus_Pay).ToString("N0")
+                    + "\n연출력: " + Data.Directing.ToString("N0")
+                    + "\n -> " + (Data.Directing + Data.Plus_Directing).ToString("N0")
+                    + "\n가격: " + Data.Cost_Upgrade.ToString("N0");
+            obj.transform.GetChild(6).GetChild(0).GetComponent<Text>().text = "업그레이드";
+            obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
         }
         else
         {
             Script = "월급: " + Data.Pay.ToString("N0")
-                    + "\n연출력: " + Data.Directing.ToString("N0");
-            Pay = "가격: " + Data.Cost_Purchase.ToString("N0");
-            obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
-            obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
+                    + "\n연출력: " + Data.Directing.ToString("N0")
+                    + "\n가격: " + Data.Cost_Purchase.ToString("N0");
+            obj.transform.GetChild(6).GetChild(0).GetComponent<Text>().text = "고용";
+            obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Buy_Staff(Data));
         }
 
-        obj.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = Icon;
-        obj.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = Name;
-        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
-        obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
+        obj.transform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = Icon;
+        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Name;
+        obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = Script;
     }
 
     public void Buy_Staff(Staff Data)
@@ -949,9 +954,9 @@ public class UIManager_02 : MonoBehaviour
 
                 SoundManager.Instance.PlaySound("Cash_Register");
 
-                Popup_StaffCk.transform.GetChild(1).GetComponent<Text>().text
+                Popup_StaffCk.transform.GetChild(3).GetComponent<Text>().text
                 = "『" + Data.Name + "』을\n고용하였습니다.";
-                Popup_StaffCk.transform.GetChild(2).GetComponent<Text>().text
+                Popup_StaffCk.transform.GetChild(4).GetComponent<Text>().text
                     = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                     + (GameManager.Instance.Money - Data.Cost_Purchase).ToString("N0")
                     + "\n연출력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
@@ -984,7 +989,7 @@ public class UIManager_02 : MonoBehaviour
         }
 
         double count = (MarketingData.Instance.MarketingList.Count / 2f);
-        Popup_Marketing.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+        Popup_Marketing.transform.GetChild(3).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
 
@@ -1000,17 +1005,16 @@ public class UIManager_02 : MonoBehaviour
         obj = Popup_MarketingUp;
         Icon = MarketingData.Instance.MarketingIcon[Data.Code - 1];
         Name = Data.Name;
-        obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+        obj.transform.GetChild(6).GetComponent<Button>().onClick.RemoveAllListeners();
 
-        Script = "마케팅 점수: +" + Data.Score.ToString("N0");
-        Pay = "가격: " + Data.Price.ToString("N0");
-        obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
-        obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Marketing(Data));
+        Script = "마케팅 점수: +" + Data.Score.ToString("N0")
+                + "\n가격: " + Data.Price.ToString("N0");
+        obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Buy_Marketing(Data));
+        obj.transform.GetChild(6).GetChild(0).GetComponent<Text>().text = "구매";
 
-        obj.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = Icon;
-        obj.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = Name;
-        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
-        obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
+        obj.transform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = Icon;
+        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Name;
+        obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = Script;
     }
 
     public void Buy_Marketing(Marketing Data)
@@ -1045,9 +1049,9 @@ public class UIManager_02 : MonoBehaviour
         else
         {
             SoundManager.Instance.PlaySound("Cash_Register");
-            Popup_MarketingCk.transform.GetChild(1).GetComponent<Text>().text
+            Popup_MarketingCk.transform.GetChild(3).GetComponent<Text>().text
                 = "『" + Data.Name + "』을\n구매하였습니다.";
-            Popup_MarketingCk.transform.GetChild(2).GetComponent<Text>().text
+            Popup_MarketingCk.transform.GetChild(4).GetComponent<Text>().text
                 = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                 + (GameManager.Instance.Money - Data.Price).ToString("N0")
                 + "\n마케팅 점수: " + (GameManager.Instance.Play_Marketing.ToString("N0")) + " -> "
@@ -1077,7 +1081,7 @@ public class UIManager_02 : MonoBehaviour
             Obj.transform.GetComponent<Button>().onClick.AddListener(() => Open_Develop_Popup(item));
         }
         double count = (GameManager.Instance.Develops.Count / 2f);
-        Popup_Develop.transform.GetChild(2).GetChild(0).GetComponent<RectTransform>().sizeDelta =
+        Popup_Develop.transform.GetChild(3).GetChild(0).GetComponent<RectTransform>().sizeDelta =
             new Vector2(690f, (float)(System.Math.Ceiling(count) * 450) + 50);
     }
 
@@ -1095,7 +1099,7 @@ public class UIManager_02 : MonoBehaviour
         SpriteCode = Data.Effect_Code - 1 + (Data.Month - 1) * 4;
         Icon = DevelopData.Instance.DevelopIcon[SpriteCode];
         Name = Data.Name;
-        obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+        obj.transform.GetChild(6).GetComponent<Button>().onClick.RemoveAllListeners();
 
         switch (Data.Effect_Code)
         {
@@ -1106,14 +1110,13 @@ public class UIManager_02 : MonoBehaviour
             default: Script = "..."; break;
         }
 
-        Pay = "가격: " + Data.Price.ToString("N0");
-        obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
-        obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Buy_Develop(Data));
+        Script += "\n가격: " + Data.Price.ToString("N0");
+        obj.transform.GetChild(6).GetChild(0).GetComponent<Text>().text = "구매";
+        obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Buy_Develop(Data));
 
-        obj.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = Icon;
-        obj.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = Name;
-        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
-        obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
+        obj.transform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = Icon;
+        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Name;
+        obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = Script;
     }
 
     public void Buy_Develop(Develop Data)
@@ -1125,15 +1128,15 @@ public class UIManager_02 : MonoBehaviour
                 ((GameManager.Instance.Money <= 0) ?
                 Data.Price.ToString("N0") : ((GameManager.Instance.Money - Data.Price) * -1).ToString("N0"));
 
-            Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.RemoveAllListeners();
-            Popup_LoansCk.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() =>
+            Popup_LoansCk.transform.GetChild(7).GetComponent<Button>().onClick.RemoveAllListeners();
+            Popup_LoansCk.transform.GetChild(7).GetComponent<Button>().onClick.AddListener(() =>
             {
                 Popup_Quit((int)PopupList.LoansCk);
 
                 SoundManager.Instance.PlaySound("Cash_Register");
-                Popup_DevelopCk.transform.GetChild(1).GetComponent<Text>().text
+                Popup_DevelopCk.transform.GetChild(3).GetComponent<Text>().text
                     = "『" + Data.Name + "』을\n구매하였습니다.";
-                Popup_DevelopCk.transform.GetChild(2).GetComponent<Text>().text
+                Popup_DevelopCk.transform.GetChild(4).GetComponent<Text>().text
                     = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                     + (GameManager.Instance.Money - Data.Price).ToString("N0");
 
@@ -1145,9 +1148,9 @@ public class UIManager_02 : MonoBehaviour
         else
         {
             SoundManager.Instance.PlaySound("Cash_Register");
-            Popup_DevelopCk.transform.GetChild(1).GetComponent<Text>().text
+            Popup_DevelopCk.transform.GetChild(3).GetComponent<Text>().text
                 = "『" + Data.Name + "』을\n구매하였습니다.";
-            Popup_DevelopCk.transform.GetChild(2).GetComponent<Text>().text
+            Popup_DevelopCk.transform.GetChild(4).GetComponent<Text>().text
                 = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                 + (GameManager.Instance.Money - Data.Price).ToString("N0");
 
@@ -1192,66 +1195,63 @@ public class UIManager_02 : MonoBehaviour
         Sprite Icon;
         string Name;
         string Script;
-        string Pay;
 
         Popup_On((int)PopupList.ShopUp);
         obj = Popup_ShopUp;
-        Item = Popup_Shop.transform.GetChild(2).GetChild(0).GetChild(ItemCode).gameObject;
+        Item = Popup_Shop.transform.GetChild(3).GetChild(0).GetChild(ItemCode).gameObject;
         Icon = Item.transform.Find("Image").GetComponent<Image>().sprite;
         Name = Item.transform.Find("Name").GetComponent<Text>().text;
-        obj.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+        obj.transform.GetChild(6).GetComponent<Button>().onClick.RemoveAllListeners();
 
         switch (ItemCode)
         {
             case 0:
-                Script = "현재 보유 금액의 10% 획득";
-                Pay = "광고 시청";
-                obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_1());
+                Script = "현재 보유 금액의 10% 획득"
+                        + "광고 시청";
+                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_1());
                 break;
             case 1:
-                Script = "공연 후 광고가 더 이상 나오지 않는다.";
-                Pay = "₩2,500";
-                obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_2());
+                Script = "공연 후 광고가 더 이상 나오지 않는다."
+                        + "₩2,500";
+                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_2());
                 break;
             case 2:
                 Script = "+ 10,000,000원\n"
-                    + "+ 첫 수익 획득량 100% 증가\n"
-                    + "+ 첫 공연 성공률 100% 증가\n";
-                Pay = "₩5,000";
-                obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_3());
+                        + "+ 첫 수익 획득량 100% 증가\n"
+                        + "+ 첫 공연 성공률 100% 증가\n"
+                        + "₩5,000";
+                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_3());
                 break;
             case 3:
-                Script = "+ 5,000,000원";
-                Pay = "₩5,000";
-                obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_4());
+                Script = "+ 5,000,000원"
+                        + "₩5,000";
+                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_4());
                 break;
             case 4:
-                Script = "+ 10,000,000원";
-                Pay = "₩10,000";
-                obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_5());
+                Script = "+ 10,000,000원"
+                        + "₩10,000";
+                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_5());
                 break;
             case 5:
-                Script = "+ 50,000,000원";
-                Pay = "₩30,000";
-                obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_6());
+                Script = "+ 50,000,000원"
+                        + "₩30,000";
+                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_6());
                 break;
             case 6:
-                Script = "+ 100,000,000원";
-                Pay = "₩50,000";
-                obj.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => Shop_Item_7());
+                Script = "+ 100,000,000원"
+                        + "₩50,000";
+                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_7());
                 break;
             default:
                 Script = "...";
-                Pay = "...";
                 break;
         }
 
-        obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = "구매";
+        obj.transform.GetChild(6).GetChild(0).GetComponent<Text>().text = "구매";
 
-        obj.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = Icon;
-        obj.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = Name;
-        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Script;
-        obj.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = Pay;
+        obj.transform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = Icon;
+        obj.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = Name;
+        obj.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = Script;
     }
 
     public void Shop_Item_1()
@@ -1260,6 +1260,7 @@ public class UIManager_02 : MonoBehaviour
 
         DateTime OldTime = DateTime.Now;
         string st = OldTime.ToString("yyyyMMddHHmmss"); // string 으로 변환
+        Debug.LogError(st);
 
         PlayerPrefs.SetString(PLAYERPREFSLIST.AD, st);
 
@@ -1717,10 +1718,10 @@ public class UIManager_02 : MonoBehaviour
     #endregion
     public void Close_Item(GameObject Obj)
     {
-        for (int i = 0; i < Obj.transform.GetChild(2).GetChild(0).childCount; i++)
+        for (int i = 0; i < Obj.transform.GetChild(3).GetChild(0).childCount; i++)
         {
-            Obj.transform.GetChild(2).GetChild(0).GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
-            Obj.transform.GetChild(2).GetChild(0).GetChild(i).gameObject.SetActive(false);
+            Obj.transform.GetChild(3).GetChild(0).GetChild(i).GetComponent<Button>().onClick.RemoveAllListeners();
+            Obj.transform.GetChild(3).GetChild(0).GetChild(i).gameObject.SetActive(false);
         }
     }
 
@@ -1769,6 +1770,7 @@ public class UIManager_02 : MonoBehaviour
 
     public void MonthBT()
     {
+        SoundManager.Instance.PlaySound("Pop_6");
         MonthorDate = !MonthorDate;
     }
 
@@ -1790,7 +1792,7 @@ public class UIManager_02 : MonoBehaviour
         SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySound("Negative_6");
         GameOver.SetActive(true);
-        GameOver.transform.GetChild(0).GetComponent<Image>().DOFade(1, 1f);
+        GameOver.transform.GetChild(0).GetComponent<Image>().DOFade(168/255, 1f);
         GameOver.transform.GetChild(2).DOScale(3, 0.7f).From().SetEase(Ease.OutExpo);
         yield return new WaitForSeconds(0.5f);
         GameOver.transform.GetChild(1).GetComponent<Text>().DOFade(1, 0.5f);
