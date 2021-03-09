@@ -1311,9 +1311,9 @@ public class UIManager_02 : MonoBehaviour
         }
 
         SoundManager.Instance.PlaySound("Cash_Register");
-        Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
             = "성공적으로 \n『광고 제거』를\n구매하였습니다.";
-        Popup_ShopCk.transform.GetChild(2).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(4).GetComponent<Text>().text
             = "이제 공연 개시 전에 광고가 나오지 않습니다.";
 
         Popup_On((int)PopupList.ShopCk);
@@ -1352,9 +1352,9 @@ public class UIManager_02 : MonoBehaviour
         }
 
         SoundManager.Instance.PlaySound("Cash_Register");
-        Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
             = "성공적으로 \n『스타트 패키지』를\n구매하였습니다.";
-        Popup_ShopCk.transform.GetChild(2).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(4).GetComponent<Text>().text
             = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
             + (GameManager.Instance.Money + 10000000).ToString("N0");
 
@@ -1392,9 +1392,9 @@ public class UIManager_02 : MonoBehaviour
         }
 
         SoundManager.Instance.PlaySound("Cash_Register");
-        Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
             = "성공적으로 \n『5,000,000원』을\n구매하였습니다.";
-        Popup_ShopCk.transform.GetChild(2).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(4).GetComponent<Text>().text
             = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
             + (GameManager.Instance.Money + 5000000).ToString("N0");
 
@@ -1416,9 +1416,9 @@ public class UIManager_02 : MonoBehaviour
         }
 
         SoundManager.Instance.PlaySound("Cash_Register");
-        Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
             = "성공적으로 \n『10,000,000원』을\n구매하였습니다.";
-        Popup_ShopCk.transform.GetChild(2).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(4).GetComponent<Text>().text
             = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
             + (GameManager.Instance.Money + 10000000).ToString("N0");
 
@@ -1440,9 +1440,9 @@ public class UIManager_02 : MonoBehaviour
         }
 
         SoundManager.Instance.PlaySound("Cash_Register");
-        Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
             = "성공적으로 \n『50,000,000원』을\n구매하였습니다.";
-        Popup_ShopCk.transform.GetChild(2).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(4).GetComponent<Text>().text
             = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
             + (GameManager.Instance.Money + 50000000).ToString("N0");
 
@@ -1464,9 +1464,9 @@ public class UIManager_02 : MonoBehaviour
         }
 
         SoundManager.Instance.PlaySound("Cash_Register");
-        Popup_ShopCk.transform.GetChild(1).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
             = "성공적으로 \n『100,000,000원』을\n구매하였습니다.";
-        Popup_ShopCk.transform.GetChild(2).GetComponent<Text>().text
+        Popup_ShopCk.transform.GetChild(4).GetComponent<Text>().text
             = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
             + (GameManager.Instance.Money + 100000000).ToString("N0");
 
