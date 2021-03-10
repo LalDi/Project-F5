@@ -24,7 +24,7 @@ public class NPCManager : MonoBehaviour
             GameObject actorObj = Instantiate(ActorPre[Actors[i]], Parent);
             actorObj.transform.localPosition = new Vector3(-800 * (i - 1), -800);
         }
-
+        
         if (Staffs != -1)
         {
             GameObject staffObj = Instantiate(StaffPre[Staffs], Parent);
@@ -57,7 +57,7 @@ public class NPCManager : MonoBehaviour
         foreach (var item in GameManager.Instance.Staffs)
         {
             if (item.IsPurchase)
-                RandomStaff.Add(item.Code);
+                RandomStaff.Add(item.Code-1);
         }
 
         if (RandomStaff.Count == 0)
