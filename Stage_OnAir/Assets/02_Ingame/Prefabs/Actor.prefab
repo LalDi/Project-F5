@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 4197953504727099888}
   - component: {fileID: 4188675900805479205}
   - component: {fileID: 331054383143984354}
+  - component: {fileID: 1036203914479530641}
   m_Layer: 0
   m_Name: Actor
   m_TagString: Untagged
@@ -218,6 +219,34 @@ MonoBehaviour:
   workTime: 0
   waitTime: 0
   workDistance: 0
+  Sprite:
+  - {fileID: 8880099512267609536}
+  - {fileID: 6330935912345579589}
+  - {fileID: 4736908959561744576}
+  - {fileID: 4647957942813130582}
+  - {fileID: 6126307266015205485}
+  - {fileID: 2596484119447205540}
+  - {fileID: 8770985053926095288}
+  - {fileID: 4219903601796749867}
+  - {fileID: 6334568554996817831}
+  - {fileID: 6191884129186147388}
+  - {fileID: 1899907162442634742}
+  - {fileID: 4044002892962972678}
+  - {fileID: 6148124504115515574}
+  - {fileID: 204696823603518034}
+  - {fileID: 8809184253203373550}
+  Sort: 1
+--- !u!210 &1036203914479530641
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273281743340331204}
+  m_Enabled: 1
+  m_SortingLayerID: -1847315511
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1 &416692368335863011
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,9 +24,12 @@ public class NPCManager : MonoBehaviour
             GameObject actorObj = Instantiate(ActorPre[Actors[i]], Parent);
             actorObj.transform.localPosition = new Vector3(-800 * (i - 1), -800);
         }
-        
+
+        if (Staffs != -1)
+        {
             GameObject staffObj = Instantiate(StaffPre[Staffs], Parent);
-        staffObj.transform.localPosition = new Vector3(0, -1100);
+            staffObj.transform.localPosition = new Vector3(0, -1100);
+        }
     }
 
     public List<int> RandomActor(int count)
@@ -46,15 +49,19 @@ public class NPCManager : MonoBehaviour
 
         return RandomActor;
     }
+
     public int RandomStaff()
     {
         List<int> RandomStaff = new List<int>();
 
         foreach (var item in GameManager.Instance.Staffs)
         {
-            if (item.Level >= 1)
+            if (item.IsPurchase)
                 RandomStaff.Add(item.Code);
         }
+
+        if (RandomStaff.Count == 0)
+            return -1;
 
         RandomStaff = Math.ShuffleList(RandomStaff);
 

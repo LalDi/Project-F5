@@ -103,29 +103,29 @@ public class UIManager_02 : MonoBehaviour
     
     public enum PopupList
     {
-        Option = 0, //  0
-        Rank,       //  1
-        Audition,   //  2
-        Period,     //  3
-        Prepare,    //  4
-        Marketing,  //  5
-        MarketingUp, //6
-        MarketingCk,//  7
-        Develop,    //  8
-        DevelopUp,  //  9
-        DevelopCk,  //  10
-        Play,       //  11
-        Staff,      //  12
-        StaffUp,    //  13
-        StaffCk,   //  14
-        Shop,       //  15
-        ShopUp,  //16
-        ShopCk,  //17
+        Option = 0,  //  0
+        Rank,        //  1
+        Audition,    //  2
+        Period,      //  3
+        Prepare,     //  4
+        Marketing,   //  5
+        MarketingUp, //  6
+        MarketingCk, //  7
+        Develop,     //  8
+        DevelopUp,   //  9
+        DevelopCk,   //  10
+        Play,        //  11
+        Staff,       //  12
+        StaffUp,     //  13
+        StaffCk,     //  14
+        Shop,        //  15
+        ShopUp,      //  16
+        ShopCk,      //  17
         Error,       //  18
-        Warning, //   19
-        LoansCk,   //20
-        Tutorial,    //21
-        Reset //22
+        Warning,     //  19
+        LoansCk,     //  20
+        Tutorial,    //  21
+        Reset        //  22
     }
 
     public delegate void ProgressDel();
@@ -738,11 +738,11 @@ public class UIManager_02 : MonoBehaviour
 
     public void Play_Popup()
     {
-        Popup_Play.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
-            = "퀄리티 : " + Define.Math.FINALQUALITY().ToString("N0");
         Popup_Play.transform.GetChild(3).GetChild(0).GetComponent<Text>().text
-            = "마케팅 : " + GameManager.Instance.Play_Marketing.ToString("N0");
+            = "퀄리티 : " + Define.Math.FINALQUALITY().ToString("N0");
         Popup_Play.transform.GetChild(4).GetChild(0).GetComponent<Text>().text
+            = "마케팅 : " + GameManager.Instance.Play_Marketing.ToString("N0");
+        Popup_Play.transform.GetChild(5).GetChild(0).GetComponent<Text>().text
             = "성공률 : " + GameManager.Instance.Play_Success + "%";
         Popup_On(11);
     }
