@@ -1623,6 +1623,7 @@ public class UIManager_02 : MonoBehaviour
         SoundManager.Instance.PlaySound("Positive_6");
         Play.SetActive(true);
         Play.transform.GetChild(1).DOLocalMoveY(-35, 1.2f).SetEase(Ease.OutExpo);
+        NPCManager.DisSummon();
         yield return new WaitForSeconds(1.2f);
         Play.transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.5f);
         yield return new WaitForSeconds(1.0f);
