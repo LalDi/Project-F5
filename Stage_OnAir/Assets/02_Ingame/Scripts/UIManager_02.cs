@@ -604,8 +604,10 @@ public class UIManager_02 : MonoBehaviour
                     LoadManager.Load(LoadManager.Scene.Scenario);
                 };
                 Bottom_Progress.sprite = Image_Progress[0];
-                Background_3.SetActive(false);
+
                 Background_1.SetActive(true);
+                Background_2.SetActive(false);
+                Background_3.SetActive(false);
                 break;
             case GameManager.Step.Cast_Actor:
                 Progress = () =>
@@ -615,6 +617,7 @@ public class UIManager_02 : MonoBehaviour
                 Bottom_Progress.sprite = Image_Progress[1];
                 Background_1.SetActive(false);
                 Background_2.SetActive(true);
+                Background_3.SetActive(false);
                 break;
             case GameManager.Step.Set_Period:
                 Progress = () =>
@@ -626,6 +629,7 @@ public class UIManager_02 : MonoBehaviour
                 Bottom_Progress.sprite = Image_Progress[2];
                 Background_1.SetActive(false);
                 Background_2.SetActive(true);
+                Background_3.SetActive(false);
                 break;
             case GameManager.Step.Prepare_Play:
                 Progress = () =>
@@ -636,6 +640,7 @@ public class UIManager_02 : MonoBehaviour
                 Bottom_Progress.sprite = Image_Progress[3];
                 Background_1.SetActive(false);
                 Background_2.SetActive(true);
+                Background_3.SetActive(false);
                 break;
             case GameManager.Step.Start_Play:
                 Progress = () =>
@@ -644,10 +649,11 @@ public class UIManager_02 : MonoBehaviour
                     Popup_Prepare.transform.Find("Play BT").GetComponent<Button>().interactable = true;
                 };
                 Btn_Progress.GetComponent<Image>().sprite = Progress_Btn_Sprites[3];
-                Background_2.SetActive(false);
 
                 Background_3.GetComponent<SpriteRenderer>().sprite =
                     ScenarioData.Instance.scenarioBGs[GameManager.Instance.NowScenario.Code - 1].Ingame;
+                Background_1.SetActive(false);
+                Background_2.SetActive(false);
                 Background_3.SetActive(true);
                 break;
             default:

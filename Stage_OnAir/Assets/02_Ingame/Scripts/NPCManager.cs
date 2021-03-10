@@ -25,8 +25,11 @@ public class NPCManager : MonoBehaviour
             actorObj.transform.localPosition = new Vector3(-800 * (i - 1), -800);
         }
         
+        if (Staffs < 8)
+        {
             GameObject staffObj = Instantiate(StaffPre[Staffs], Parent);
-        staffObj.transform.localPosition = new Vector3(0, -1100);
+            staffObj.transform.localPosition = new Vector3(0, -1100);
+        }
     }
 
     public List<int> RandomActor(int count)
@@ -53,8 +56,10 @@ public class NPCManager : MonoBehaviour
         foreach (var item in GameManager.Instance.Staffs)
         {
             if (item.Level >= 1)
-                RandomStaff.Add(item.Code);
+                RandomStaff.Add(item.Code-1);
         }
+
+        if (RandomStaff.Count() <= 0) return 8;
 
         RandomStaff = Math.ShuffleList(RandomStaff);
 
