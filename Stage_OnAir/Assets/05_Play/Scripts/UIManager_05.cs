@@ -174,13 +174,13 @@ public class UIManager_05 : MonoBehaviour
 
         Sequence IllustSeq = DOTween.Sequence();
 
-        IllustSeq.Append(Popup_Illust.transform.GetChild(1).DOScale(new Vector3(0.7f, 0.7f), 0.3f));
-        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(2).GetComponent<UIParticle>().Play());
-        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(1).GetComponent<Image>().sprite
-        = Illusts[GameManager.Instance.NowScenario.No - 1]);
-        IllustSeq.Append(Popup_Illust.transform.GetChild(1).DOScale(new Vector3(1f, 1f), 0.3f));
+        IllustSeq.Append(Popup_Illust.transform.GetChild(2).DOScale(new Vector3(0.7f, 0.7f), 0.3f));
         IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(3).GetComponent<UIParticle>().Play());
-        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "<bounce>일러스트 획득!</bounce>");
+        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(2).GetComponent<Image>().sprite
+        = Illusts[GameManager.Instance.NowScenario.No - 1]);
+        IllustSeq.Append(Popup_Illust.transform.GetChild(2).DOScale(new Vector3(1f, 1f), 0.3f));
+        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(4).GetComponent<UIParticle>().Play());
+        IllustSeq.AppendCallback(() => Popup_Illust.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = "<bounce>일러스트 획득!</bounce>");
     }
 
     public void To_Ingame()

@@ -331,7 +331,7 @@ public class GameManager : Singleton<GameManager>
             }
             if (data.Keys.Contains("BestQuality"))
             {
-                Best_Quality = int.Parse(data["BestQuality"]["N"].ToString());
+                Best_Quality = float.Parse(data["BestQuality"]["N"].ToString());
             }
             if (data.Keys.Contains("BestAudience"))
             {

@@ -1072,9 +1072,9 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Quit((int)PopupList.LoansCk);
 
                 SoundManager.Instance.PlaySound("Cash_Register");
-                Popup_MarketingCk.transform.GetChild(1).GetComponent<Text>().text
+                Popup_MarketingCk.transform.GetChild(3).GetComponent<Text>().text
                     = "『" + Data.Name + "』을\n구매하였습니다.";
-                Popup_MarketingCk.transform.GetChild(2).GetComponent<Text>().text
+                Popup_MarketingCk.transform.GetChild(4).GetComponent<Text>().text
                     = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                     + (GameManager.Instance.Money - Data.Price).ToString("N0")
                     + "\n마케팅 점수: " + (GameManager.Instance.Play_Marketing.ToString("N0")) + " -> "
