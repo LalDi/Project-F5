@@ -9,45 +9,35 @@ public class NPCManager : MonoBehaviour
     public Transform Parent;
 
     public List<int> Actors = new List<int>(); //화면에 그려줄 배우 NPC 데이터
-    public List<int> Staffs = new List<int>(); //화면에 그려줄 스탭 NPC 데이터
-    public int StaffCnt = 0;
+    public int Staffs; //화면에 그려줄 스탭 NPC 데이터
 
-    public List<GameObject> Actor = new List<GameObject>();
-    public List<GameObject> Staff = new List<GameObject>();
+    public List<GameObject> ActorPre = new List<GameObject>();
+    public List<GameObject> StaffPre = new List<GameObject>();
 
     public void Summon()
     {
         Actors = RandomActor(GameManager.Instance.NowActor);
 
-        foreach (var item in GameManager.Instance.Staffs)
-            if (item.Level >= 1) StaffCnt++;
-        Staffs = RandomStaff(StaffCnt);
+        Staffs = RandomStaff();
 
         for (int i = 0; i < Actors.Count(); i++) {
-            GameObject obj = Instantiate(Actor[Actors[i]], Parent);
-            obj.transform.localPosition = new Vector3(-800 * (i - 1), -800);
+            GameObject actorObj = Instantiate(ActorPre[Actors[i]], Parent);
+            actorObj.transform.localPosition = new Vector3(-800 * (i - 1), -800);
         }
-        for (int i = 0; i < Staffs.Count(); i++)
-        {
-            GameObject obj = Instantiate(Staff[Staffs[i]], Parent);
-            obj.transform.localPosition = new Vector3(-800 * (i - 1), -1100);
-        }
+        
+            GameObject staffObj = Instantiate(StaffPre[Staffs], Parent);
+        staffObj.transform.localPosition = new Vector3(0, -1100);
     }
 
     public List<int> RandomActor(int count)
     {
-        if (count > 3) count = 3;
+        if (count > 2) count = 2;
 
         List<int> RandomActor = new List<int>();
         List<Actor> Select = new List<Actor>();
 
         Select = GameManager.Instance.Actors.ToList();
         Select = Math.ShuffleList(Select);
-
-        foreach(var item in Select)
-        {
-            Debug.Log("캐스팅 된 배우: " + item.Name);
-        }
 
         for (int i = 0; i < count; i++)
         {
@@ -56,28 +46,18 @@ public class NPCManager : MonoBehaviour
 
         return RandomActor;
     }
-    public List<int> RandomStaff(int count)
+    public int RandomStaff()
     {
-        if (count > 3) count = 3;
-
         List<int> RandomStaff = new List<int>();
-        List<Staff> Select = new List<Staff>();
-
-        int value = 0;
 
         foreach (var item in GameManager.Instance.Staffs)
         {
             if (item.Level >= 1)
-                Select.Add(item);
+                RandomStaff.Add(item.Code);
         }
 
-        Select = Math.ShuffleList(Select);
+        RandomStaff = Math.ShuffleList(RandomStaff);
 
-        for (int i = 0; i < count; i++)
-        {
-            RandomStaff.Add(Select[i].Code);
-        }
-
-        return RandomStaff;
+        return RandomStaff[0];
     }
 }
