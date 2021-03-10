@@ -14,6 +14,9 @@ public class NPCManager : MonoBehaviour
     public List<GameObject> ActorPre = new List<GameObject>();
     public List<GameObject> StaffPre = new List<GameObject>();
 
+    public GameObject[] ActorObj = new GameObject[2];
+    public GameObject StaffObj;
+
     public void Summon()
     {
         Actors = RandomActor(GameManager.Instance.NowActor);
@@ -21,14 +24,37 @@ public class NPCManager : MonoBehaviour
         Staffs = RandomStaff();
 
         for (int i = 0; i < Actors.Count(); i++) {
-            GameObject actorObj = Instantiate(ActorPre[Actors[i]], Parent);
-            actorObj.transform.localPosition = new Vector3(-800 * (i - 1), -800);
+            //GameObject actorObj = Instantiate(ActorPre[Actors[i]], Parent);
+            //actorObj.transform.localPosition = new Vector3(-800 * (i - 1), -800);
+
+            ActorObj[i] = Instantiate(ActorPre[Actors[i]], Parent);
+            ActorObj[i].transform.localPosition = new Vector3(-800 * (i - 1), -800);
         }
         
         if (Staffs != -1)
         {
-            GameObject staffObj = Instantiate(StaffPre[Staffs], Parent);
-            staffObj.transform.localPosition = new Vector3(0, -1100);
+            //GameObject staffObj = Instantiate(StaffPre[Staffs], Parent);
+            //staffObj.transform.localPosition = new Vector3(0, -1100);
+
+            StaffObj = Instantiate(StaffPre[Staffs], Parent);
+            StaffObj.transform.localPosition = new Vector3(0, -1100);
+        }
+    }
+
+    public void DisSummon()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (ActorObj[i] != null)
+            { 
+                ActorObj[i].SetActive(false);
+                ActorObj[i] = null;
+            }
+        }
+        if (StaffObj != null)
+        {
+            StaffObj.SetActive(false);
+            StaffObj = null;
         }
     }
 

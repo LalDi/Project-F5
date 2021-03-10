@@ -182,7 +182,16 @@ public class UIManager_02 : MonoBehaviour
             $"SetY : {Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight())}\n" +
             $"Bottom_UI.Y : {Bottom_UI.anchoredPosition.y}");
 
-        NPCManager.Summon();
+        switch (GameManager.Instance.NowStep)
+        {
+            case GameManager.Step.Cast_Actor:
+            case GameManager.Step.Set_Period:
+            case GameManager.Step.Prepare_Play:
+                NPCManager.Summon();
+                break;
+            default:
+                break;
+        }
 
         if (GameManager.Instance.Tutorial == true)
         {

@@ -53,8 +53,8 @@ public class UIManager_05 : MonoBehaviour
 
         Light.GetComponent<SpriteRenderer>().DOFade(0, 2).SetLoops(-1, LoopType.Yoyo);
 
-        Character1.sprite = ActorData.Instance.ActorImage[GameManager.Instance.Actors[1].No];
-        Character2.sprite = ActorData.Instance.ActorImage[GameManager.Instance.Actors[2].No];
+        Character1.sprite = ActorData.Instance.ActorImage[GameManager.Instance.Actors[1].Sprite-1];
+        Character2.sprite = ActorData.Instance.ActorImage[GameManager.Instance.Actors[2].Sprite-1];
 
         DelayCrt = StartDelay();
         StartCoroutine(DelayCrt);
@@ -128,9 +128,9 @@ public class UIManager_05 : MonoBehaviour
         {
             SoundManager.Instance.PlaySound("Positive_3");
             SoundManager.Instance.PlaySound("Special&Powerup_35");
-            Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
-                = "수익: " + ResultMoney.ToString("N0");
             Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
+                = "수익: " + ResultMoney.ToString("N0");
+            Popup_Result.transform.GetChild(3).GetChild(0).GetComponent<Text>().text
                 = "관객수: " + Define.Math.AUDIENCE().ToString("N0");
 
             GameManager.Instance.CheckBestScore(
@@ -142,9 +142,9 @@ public class UIManager_05 : MonoBehaviour
         {
             SoundManager.Instance.PlaySound("Positive_3");
             SoundManager.Instance.PlaySound("Special&Powerup_35");
-            Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
-                = "수익: " + (ResultMoney/2).ToString("N0") + "<color=#ff0000><bounce>X 2</bounce></color>";
             Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
+                = "수익: " + (ResultMoney/2).ToString("N0") + "<color=#ff0000><bounce>X 2</bounce></color>";
+            Popup_Result.transform.GetChild(3).GetChild(0).GetComponent<Text>().text
                 = "관객수: " + Define.Math.AUDIENCE().ToString("N0");
 
             Debug.Log("스타트 패키지 적용 결과");
@@ -152,9 +152,9 @@ public class UIManager_05 : MonoBehaviour
         else
         {
             SoundManager.Instance.PlaySound("Negative_6");
-            Popup_Result.transform.GetChild(1).GetChild(0).GetComponent<Text>().text
-                = "수익: " + ResultMoney.ToString("N0");
             Popup_Result.transform.GetChild(2).GetChild(0).GetComponent<Text>().text
+                = "수익: " + ResultMoney.ToString("N0");
+            Popup_Result.transform.GetChild(3).GetChild(0).GetComponent<Text>().text
                 = "관객수: " + (Define.Math.AUDIENCE() / 10).ToString("N0");
         }
     }
