@@ -200,7 +200,8 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
         string type = args.Type;
         double amount = args.Amount;
 
-        int Result = Mathf.CeilToInt(GameManager.Instance.Money * 0.1f);
+        int Money = Mathf.CeilToInt(GameManager.Instance.Money * 0.1f);
+        int Result = Mathf.Abs(Money);
         GameManager.Instance.CostMoney(Result, false);
 
         MonoBehaviour.print(
