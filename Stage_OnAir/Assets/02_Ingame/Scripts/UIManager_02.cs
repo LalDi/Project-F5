@@ -314,7 +314,6 @@ public class UIManager_02 : MonoBehaviour
 
     public void SetRank()
     {
-        SoundManager.Instance.PlaySound("Pop_6");
         JsonData Rank = new JsonData();
         JsonData MyRank = new JsonData();
 
@@ -347,7 +346,7 @@ public class UIManager_02 : MonoBehaviour
 
             string rank = int.Parse(Rank[i]["rank"]["N"].ToString()).ToString("D2");
             string nickname = Rank[i]["nickname"]["S"].ToString();
-            string score = Rank[i]["score"]["N"].ToString();
+            string score = float.Parse(Rank[i]["score"]["N"].ToString()).ToString("N1");
 
             Text.GetComponent<RectTransform>().localScale = Vector3.one;
             Text.GetComponent<Text>().text = rank + "." + nickname + " : " + score;
@@ -355,7 +354,7 @@ public class UIManager_02 : MonoBehaviour
 
         string Myrank = int.Parse(MyRank[0]["rank"]["N"].ToString()).ToString("D2");
         string Mynickname = MyRank[0]["nickname"]["S"].ToString();
-        string Myscore = MyRank[0]["score"]["N"].ToString();
+        string Myscore = float.Parse(MyRank[0]["score"]["N"].ToString()).ToString("N1");
 
         Text_MyRank.text = Myrank + "." + Mynickname + " : " + Myscore;
     }
@@ -394,6 +393,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Marketing.SetActive(true);
                 break;
             case PopupList.MarketingUp:
+                Popup_Quit((int)PopupList.Marketing);
                 Popup_MarketingUp.SetActive(true);
                 break;
             case PopupList.MarketingCk:
@@ -404,6 +404,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Develop.SetActive(true);
                 break;
             case PopupList.DevelopUp:
+                Popup_Quit((int)PopupList.Develop);
                 Popup_DevelopUp.SetActive(true);
                 break;
             case PopupList.DevelopCk:
@@ -417,8 +418,8 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Staff.SetActive(true);
                 break;
             case PopupList.StaffUp:
+                Popup_Quit((int)PopupList.Staff);
                 Popup_StaffUp.SetActive(true);
-                Close_Item(Popup_Staff);
                 break;
             case PopupList.StaffCk:
                 Popup_StaffCk.SetActive(true);
@@ -428,6 +429,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Shop.SetActive(true);
                 break;
             case PopupList.ShopUp:
+                Popup_Quit((int)PopupList.Shop);
                 Popup_ShopUp.SetActive(true);
                 break;
             case PopupList.ShopCk:
@@ -521,6 +523,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Marketing.SetActive(false);
                 break;
             case PopupList.MarketingUp:
+                Popup_On((int)PopupList.Marketing);
                 Popup_MarketingUp.SetActive(false);
                 break;
             case PopupList.MarketingCk:
@@ -531,6 +534,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Develop.SetActive(false);
                 break;
             case PopupList.DevelopUp:
+                Popup_On((int)PopupList.Develop);
                 Popup_DevelopUp.SetActive(false);
                 break;
             case PopupList.DevelopCk:
@@ -556,6 +560,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Shop.SetActive(false);
                 break;
             case PopupList.ShopUp:
+                Popup_On((int)PopupList.Shop);
                 Popup_ShopUp.SetActive(false);
                 break;
             case PopupList.ShopCk:
