@@ -39,7 +39,7 @@ public class UIManager_04 : MonoBehaviour
         Reload_ActorProfile();
 
         Profile.GetComponent<RectTransform>().
-            SetY(-150 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+            SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
 
         SoundManager.Instance.StopBGM();
         Bgm = SoundManager.Instance.LoopSound("Bgm_Audition");
