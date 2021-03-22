@@ -51,7 +51,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: daebf30be3f9db442a59e4bce8ea8f8f, type: 3}
     - {fileID: 2800000, guid: 2455916ab969a894d992b256dd4e09ed, type: 3}
     - {fileID: 2800000, guid: fa7e9db3dd4eff540b743c5a1991c383, type: 3}
-    totalSpriteSurfaceArea: 32204952
+    totalSpriteSurfaceArea: 32157272
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -59,7 +59,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b6d69a305d7188b4fb0ef2612558b0ed, type: 3}
   - {fileID: 21300000, guid: 2c78789053731f145a4195e2f202bfe4, type: 3}
   - {fileID: 21300000, guid: ad735cc0f9abd51478686211a16c9806, type: 3}
-  - {fileID: 21300000, guid: b5fb5ee069ab5af479ac15400d4331c3, type: 3}
   - {fileID: 21300000, guid: 58ef25f0cad2ede4eaa8d1bc7579d964, type: 3}
   - {fileID: 21300000, guid: d2eff9217d1367d4cac1ee9c964c9247, type: 3}
   - {fileID: 21300000, guid: 566b67915841eb341a72f8675fbdc7c4, type: 3}
@@ -155,7 +154,6 @@ SpriteAtlas:
   - Ingame_UI_Develop_educationLv3
   - Ingame_UI_Toggle_NonPush
   - Ingame_UI_Dropdown_Button
-  - Audition_UI_Progress_Background
   - Ingame_UI_Image_Success
   - Ingame_UI_Button_plus
   - Ingame_UI_Button_Shop
@@ -178,7 +176,7 @@ SpriteAtlas:
   - Ingame_UI_Button_Minus
   - Ingame_UI_Button_skip
   - button_label_yes
-  - progressbar_foreground2_gray
+  - Audition_UI_Progress_Background
   - Gameover_UI_attachment
   - Ingame_UI_hongbo_print flyers
   - Ingame_UI_Button_Prepare
