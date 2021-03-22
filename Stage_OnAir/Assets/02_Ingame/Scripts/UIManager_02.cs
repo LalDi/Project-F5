@@ -346,7 +346,17 @@ public class UIManager_02 : MonoBehaviour
 
             string rank = int.Parse(Rank[i]["rank"]["N"].ToString()).ToString("D2");
             string nickname = Rank[i]["nickname"]["S"].ToString();
-            string score = float.Parse(Rank[i]["score"]["N"].ToString()).ToString("N1");
+            string score = null;
+            switch (NowRank)
+            {
+                case RANKING.RANK.QUALITY:
+                    score = float.Parse(Rank[i]["score"]["N"].ToString()).ToString("N1");
+                    break;
+                case RANKING.RANK.AUDIENCE:
+                case RANKING.RANK.PROFIT:
+                    score = float.Parse(Rank[i]["score"]["N"].ToString()).ToString("N0");
+                    break;
+            }
 
             Text.GetComponent<RectTransform>().localScale = Vector3.one;
             Text.GetComponent<Text>().text = rank + "." + nickname + " : " + score;
@@ -354,7 +364,17 @@ public class UIManager_02 : MonoBehaviour
 
         string Myrank = int.Parse(MyRank[0]["rank"]["N"].ToString()).ToString("D2");
         string Mynickname = MyRank[0]["nickname"]["S"].ToString();
-        string Myscore = float.Parse(MyRank[0]["score"]["N"].ToString()).ToString("N1");
+        string Myscore = null;
+        switch (NowRank)
+        {
+            case RANKING.RANK.QUALITY:
+                Myscore = float.Parse(MyRank[0]["score"]["N"].ToString()).ToString("N1");
+                break;
+            case RANKING.RANK.AUDIENCE:
+            case RANKING.RANK.PROFIT:
+                Myscore = float.Parse(MyRank[0]["score"]["N"].ToString()).ToString("N0");
+                break;
+        }
 
         Text_MyRank.text = Myrank + "." + Mynickname + " : " + Myscore;
     }

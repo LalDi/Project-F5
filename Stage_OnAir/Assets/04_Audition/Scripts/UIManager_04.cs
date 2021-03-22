@@ -14,6 +14,9 @@ public class UIManager_04 : MonoBehaviour
     public GameObject Count;
     public GameObject Profile;
 
+    public GameObject Progbar;
+    public Image Progbar_Gauge;
+
     public SpriteRenderer Character;
 
     public List<Actor> PprActors = null;
@@ -27,6 +30,10 @@ public class UIManager_04 : MonoBehaviour
     public GameObject Bgm;
     public TutorialScript TutorialObj;
 
+    private bool onTimer;
+    private float nowTime;
+    [SerializeField] private float TimeLimit;
+
     void Start()
     {
         Popup_Balck.SetActive(false);
@@ -39,7 +46,7 @@ public class UIManager_04 : MonoBehaviour
         Reload_ActorProfile();
 
         Profile.GetComponent<RectTransform>().
-            SetY(Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+            SetY(-165f + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
 
         SoundManager.Instance.StopBGM();
         Bgm = SoundManager.Instance.LoopSound("Bgm_Audition");
@@ -58,6 +65,17 @@ public class UIManager_04 : MonoBehaviour
             Text_Money.color = Color.red;
         else
             Text_Money.color = Color.black;
+
+        if (onTimer)
+        {
+            nowTime += Time.deltaTime;
+            Progbar_Gauge.fillAmount = (TimeLimit - nowTime) / TimeLimit;
+            if (nowTime >= TimeLimit)
+            {
+                SetProgbarActive(false);
+                Reload_ActorProfile();
+            }
+        }
     }
 
     public void Reload_ActorProfile()
@@ -72,6 +90,8 @@ public class UIManager_04 : MonoBehaviour
         }
         else if (ActorCount <= MaxActor)
         {
+            SetProgbarActive(true);
+
             Count.GetComponent<Text>().text =
                 ActorCount.ToString() + " / " + MaxActor;
             Profile.transform.Find("Profile Name Text").GetComponent<Text>().text = PprActors[ActorCount - 1].Name;
@@ -88,6 +108,17 @@ public class UIManager_04 : MonoBehaviour
             Popup_Result.SetActive(true);
             Result();
         }
+    }
+
+    public void SetProgbarActive(bool isActive)
+    {
+        if (isActive)
+        {
+            nowTime = 0;
+            Progbar_Gauge.fillAmount = 1f;
+        }
+        onTimer = isActive;
+        Progbar.SetActive(isActive);
     }
 
     public void Result()
