@@ -185,7 +185,6 @@ public class Staff
 public class StaffData : Singleton<StaffData>
 {
     public List<Sprite> StaffIcon = new List<Sprite>();
-    public List<Sprite> StaffImage = new List<Sprite>();
 
     public List<Staff> SetStaffData()
     {

@@ -48,10 +48,9 @@ SpriteAtlas:
     - {fileID: 2800000, guid: e8b129af597044e4f9a32d8adbb183a7, type: 3}
     - {fileID: 102900000, guid: 490318daa73f88f4391232986738f921, type: 3}
     - {fileID: 2800000, guid: fce7cd94c51da734aa36520a020bcac3, type: 3}
-    - {fileID: 2800000, guid: daebf30be3f9db442a59e4bce8ea8f8f, type: 3}
     - {fileID: 2800000, guid: 2455916ab969a894d992b256dd4e09ed, type: 3}
     - {fileID: 2800000, guid: fa7e9db3dd4eff540b743c5a1991c383, type: 3}
-    totalSpriteSurfaceArea: 32109112
+    totalSpriteSurfaceArea: 31876112
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -95,6 +94,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 77298e07c78028846a9bf568fa718b1a, type: 3}
   - {fileID: 21300000, guid: 2115d237ecf67704d9e11baee39e36ff, type: 3}
   - {fileID: 21300000, guid: 1ef480671fad43548a1b0cf0668ee00a, type: 3}
+  - {fileID: 21300000, guid: 3c49f477ff135a74fa58c7d837eb3711, type: 3}
   - {fileID: 21300000, guid: 9cec06a79c474934e90bb7548fafd11f, type: 3}
   - {fileID: 21300000, guid: 041d7cb7c4581424892aa14c73f37326, type: 3}
   - {fileID: 21300000, guid: f51f3fb7dc5a75841a6f6802f9c11c0a, type: 3}
@@ -112,10 +112,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4742cd3a668eb4b469df1e5932ac8fcd, type: 3}
   - {fileID: 21300000, guid: 2455916ab969a894d992b256dd4e09ed, type: 3}
   - {fileID: 21300000, guid: 086676aa2d1491f42af4fa994f07ea44, type: 3}
+  - {fileID: 21300000, guid: e995e2da316c40746be42555cad8f31a, type: 3}
   - {fileID: 21300000, guid: fe8e33eada30a814faf0f6ef898a7af3, type: 3}
   - {fileID: 21300000, guid: 673d61fa16e732f44a66ce465266e21e, type: 3}
   - {fileID: 21300000, guid: 493268fa80f060740a1cab16904b0944, type: 3}
-  - {fileID: 21300000, guid: daebf30be3f9db442a59e4bce8ea8f8f, type: 3}
   - {fileID: 21300000, guid: e866cd0b233320b499ce88e2a0839c02, type: 3}
   - {fileID: 21300000, guid: cd66d51b052b99b49a2618f2ebf16598, type: 3}
   - {fileID: 21300000, guid: 793b3c1b46c760947b439b1111b4a843, type: 3}
@@ -188,6 +188,7 @@ SpriteAtlas:
   - Title_UI_Button_SignUp
   - Ingame_UI_Button_Scenario
   - Ingame_UI_Toggle_BgmMute
+  - Ingame_UI_Tipbubble
   - Ingame_UI_Develop_successLv1
   - Ingame_UI_Image_Gold
   - Ingame_UI_Button_Play
@@ -205,10 +206,10 @@ SpriteAtlas:
   - button_label_no
   - "\uB9D0\uD48D\uC120"
   - Ingame_UI_Cash_100,000,000
+  - Ingame_UI_Tipbubble_up
   - Ingame_UI_Button_MinusSuccess
   - Ingame_UI_Cash_clear
   - Ingame_UI_hongbo_subway
-  - Play_Skip
   - Ingame_UI_Image_Background_Top_
   - Ingame_UI_Toggle_Bgm
   - Ingame_UI_Button_PrepareSelect
