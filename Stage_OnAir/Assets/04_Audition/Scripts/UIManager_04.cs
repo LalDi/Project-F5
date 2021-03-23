@@ -100,7 +100,7 @@ public class UIManager_04 : MonoBehaviour
                 "경험 : " + PprActors[ActorCount - 1].Experience + "\n" +
                 "가격 : " + PprActors[ActorCount - 1].Price.ToString("N0");
             Profile.transform.Find("Profile Character Image").GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].Sprite - 1];
-            Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].Sprite-1];
+            Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].Sprite - 1];
         }
         else
         {
