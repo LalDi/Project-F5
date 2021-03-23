@@ -190,7 +190,6 @@ public class UIManager_02 : MonoBehaviour
             case GameManager.Step.Set_Period:
             case GameManager.Step.Prepare_Play:
                 NPCManager.Summon();
-                StartCoroutine( NPCManager.Scr_Timer(5));
                 break;
             default:
                 break;
