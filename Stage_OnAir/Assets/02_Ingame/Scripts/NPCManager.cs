@@ -54,7 +54,7 @@ public class NPCManager : MonoBehaviour
 
         ScrObj_1.SetActive(false);
         ScrObj_2.SetActive(false);
-        StartCoroutine(Scr_Timer(10));
+        StartCoroutine(Scr_Timer(30));
     }
 
     public void DisSummon()
@@ -126,7 +126,7 @@ public class NPCManager : MonoBehaviour
     {
         string text;
         if (ScrChr.GetComponent<NPC>().Code >= 10)
-            text = Scripts[Random.Range(0, 7 + 1)];
+            text = Scripts[Random.Range(0, 7)];
         else
             text = Scripts[7 + (ScrChr.GetComponent<NPC>().Code * 2) + Random.Range(0, 2)];
         ScrObj_2.transform.Find("Text").GetComponent<Text>().text = text;
@@ -135,7 +135,7 @@ public class NPCManager : MonoBehaviour
 
         GameManager.Instance.CostMoney(Random.Range(1000, 5000));
         ParticleObj.Play();
-        StartCoroutine(Scr_Timer(Random.Range(5, 10)));
+        StartCoroutine(Scr_Timer(Random.Range(10, 30)));
     }
 
     public IEnumerator Scr_Timer(int time)

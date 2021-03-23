@@ -2371,7 +2371,7 @@ RectTransform:
   - {fileID: 1183335626}
   - {fileID: 370885324}
   m_Father: {fileID: 434436986}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6686,10 +6686,10 @@ RectTransform:
   m_Children:
   - {fileID: 1039640916}
   - {fileID: 1953567411}
+  - {fileID: 867919324}
   - {fileID: 964297630}
   - {fileID: 157884999}
   - {fileID: 1170215184}
-  - {fileID: 867919324}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11293,7 +11293,7 @@ RectTransform:
   - {fileID: 943357678}
   - {fileID: 1965466626}
   m_Father: {fileID: 434436986}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13631,7 +13631,7 @@ RectTransform:
   - {fileID: 1074094433}
   - {fileID: 212322868}
   m_Father: {fileID: 434436986}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16575,7 +16575,7 @@ RectTransform:
   - {fileID: 754407419}
   - {fileID: 688452773}
   m_Father: {fileID: 434436986}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18716,19 +18716,19 @@ MonoBehaviour:
   - "\uC774 \uBD80\uBD84 \uD0C0\uC774\uBC0D \uB9DE\uCDB0\uBCF4\uC790."
   - "\uC557 \uBC29\uAE08 \uC5C4\uCCAD \uC88B\uC558\uB294\uB370?"
   - "\uC544~ \uC5EC\uAE30\uC11C \uC790\uAFB8 \uB9D0\uC774 \uAF2C\uC774\uB124."
-  - "\uB9C8\uC774\uD06C\uD14C\uC2A4\uD2B8 \uAC08\uAC8C\uC694~"
-  - "\uC544, \uC5EC\uAE30\uC120 \uC74C\uC545\uC744 \uD0A4\uC6CC\uC57C\uACA0\uB2E4."
-  - "\uC5B4? \uC5EC\uAE30\uC788\uB358 \uB9BD \uD558\uB098 \uC5B4\uB514\uAC14\uC9C0?"
-  - "\uBC30\uC6B0\uBD84\uB4E4 \uBA54\uC774\uD06C\uC5C5 \uC2DC\uC791\uD569\uB2C8\uB2E4~"
-  - "\uC5EC\uAE30 \uBC30\uACBD\uC601\uC0C1 \uB2E4\uC2DC \uD2C0\uC5B4\uC8FC\uC138\uC694."
-  - "\uC5EC\uAE30\uB294 \uC774\uB807\uAC8C \uAE30\uC6B8\uD14C\uB2C8\uAE4C..."
-  - "\uB3D9\uC120\uC744 \uB2E4\uC2DC \uB9DE\uCDB0\uBCFC\uAE4C\uC694?"
-  - "\uADF8\uB807\uC9C0, \uC774\uB54C \uC55E\uC73C\uB85C \uB098\uC640\uC8FC\uACE0!"
   - "10\uBD84 \uD6C4 \uB4DC\uB808\uC2A4 \uB9AC\uD5C8\uC124 \uC2DC\uC791\uD569\uB2C8\uB2E4!"
   - "\uC758\uC0C1\uC218\uC120 \uB05D\uB0AC\uC2B5\uB2C8\uB2E4~"
+  - "\uB3D9\uC120\uC744 \uB2E4\uC2DC \uB9DE\uCDB0\uBCFC\uAE4C\uC694?"
+  - "\uADF8\uB807\uC9C0, \uC774\uB54C \uC55E\uC73C\uB85C \uB098\uC640\uC8FC\uACE0!"
+  - "\uC5B4? \uC5EC\uAE30\uC788\uB358 \uB9BD \uD558\uB098 \uC5B4\uB514\uAC14\uC9C0?"
+  - "\uBC30\uC6B0\uBD84\uB4E4 \uBA54\uC774\uD06C\uC5C5 \uC2DC\uC791\uD569\uB2C8\uB2E4."
+  - "\uB9C8\uC774\uD06C\uD14C\uC2A4\uD2B8 \uAC08\uAC8C\uC694~"
+  - "\uC544, \uC5EC\uAE30\uC120 \uC74C\uC545\uC744 \uD0A4\uC6CC\uC57C\uACA0\uB2E4."
   - "\uC5EC\uAE30\uC120 \uC870\uBA85\uC774 \uC774\uB807\uAC8C \uC6C0\uC9C1\uC5EC\uC57C\uACA0\uB124\uC694?"
   - "\uC774 \uC870\uBA85\uC740 \uC870\uAE08 \uB354 \uB0AE\uCDB0\uB3C4 \uB420 \uAC83
     \uAC19\uC544\uC694."
+  - "\uC5EC\uAE30 \uBC30\uACBD\uC601\uC0C1 \uB2E4\uC2DC \uD2C0\uC5B4\uC8FC\uC138\uC694."
+  - "\uC5EC\uAE30\uB294 \uC774\uB807\uAC8C \uAE30\uC6B8\uD14C\uB2C8\uAE4C..."
   ScrChr: {fileID: 0}
   ScrObj_1: {fileID: 372668579}
   ScrObj_2: {fileID: 943357677}
