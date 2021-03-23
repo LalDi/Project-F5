@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class NPC : MonoBehaviour
 {
+    public int Code = 0;
     public int Distance = 0; // -1  = 왼쪽, 1 = 오른쪽
     public float workTime = 0f;
     public float waitTime = 0f;

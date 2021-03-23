@@ -57,6 +57,7 @@ public class UIManager_02 : MonoBehaviour
     public GameObject Popup_LoansCk;
     public GameObject Popup_Tutorial;
     public GameObject Popup_Reset;
+    public GameObject Popup_AD;
 
     [Header("Period")]
     public Text Text_Period;
@@ -125,7 +126,8 @@ public class UIManager_02 : MonoBehaviour
         Warning,     //  19
         LoansCk,     //  20
         Tutorial,    //  21
-        Reset        //  22
+        Reset,        //  22
+        AD         //23
     }
 
     public delegate void ProgressDel();
@@ -281,6 +283,7 @@ public class UIManager_02 : MonoBehaviour
         Stat_UI.transform.GetChild(2).GetComponent<Text>().text = QualityStatText;
 
         SetProgress();
+        NPCManager.Scr_Bt_On();
     }
 
     #region Rank
@@ -473,6 +476,9 @@ public class UIManager_02 : MonoBehaviour
                 Popup_Option.SetActive(false);
                 Popup_Reset.SetActive(true);
                 break;
+            case PopupList.AD:
+                Popup_AD.SetActive(true);
+                break;
             default:
                 break;
         }
@@ -509,6 +515,7 @@ public class UIManager_02 : MonoBehaviour
         Popup_LoansCk.SetActive(false);
         Popup_Tutorial.SetActive(false);
         Popup_Reset.SetActive(false);
+        Popup_AD.SetActive(false);
 
         //Close_Item(Popup_Shop);
         Close_Item(Popup_Staff);
@@ -576,7 +583,7 @@ public class UIManager_02 : MonoBehaviour
                 Popup_StaffCk.SetActive(false);
                 break;
             case PopupList.Shop:
-                Close_Item(Popup_Shop);
+                //Close_Item(Popup_Shop);
                 Popup_Shop.SetActive(false);
                 break;
             case PopupList.ShopUp:
@@ -602,6 +609,9 @@ public class UIManager_02 : MonoBehaviour
             case PopupList.Reset:
                 Popup_Option.SetActive(true);
                 Popup_Reset.SetActive(false);
+                break;
+            case PopupList.AD:
+                Popup_AD.SetActive(false);
                 break;
             default:
                 break;
@@ -1040,7 +1050,6 @@ public class UIManager_02 : MonoBehaviour
     #region Marketing
     public void SetMarketingItem()
     {
-        //item.transform.GetComponent<Button>().onClick.AddListener(() => Open_Item_Popup("Marketing", j));
         foreach (var item in MarketingData.Instance.MarketingList)
         {
             GameObject Obj = ObjManager.SpawnPool("MarketingItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
@@ -1273,7 +1282,7 @@ public class UIManager_02 : MonoBehaviour
             case 0:
                 Script = "현재 보유 금액의 10% 획득\n"
                         + "광고 시청";
-                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_1());
+                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Popup_On(23));
                 break;
             case 1:
                 Script = "공연 후 광고가 더 이상 나오지 않는다.\n"
@@ -1330,6 +1339,7 @@ public class UIManager_02 : MonoBehaviour
         PlayerPrefs.SetString(PLAYERPREFSLIST.AD, st);
 
         Popup_Quit((int)PopupList.ShopUp);
+        Popup_Quit((int)PopupList.AD);
     }
 
     public void Shop_Item_2()
