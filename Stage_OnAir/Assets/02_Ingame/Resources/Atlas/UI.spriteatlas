@@ -50,7 +50,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: fce7cd94c51da734aa36520a020bcac3, type: 3}
     - {fileID: 2800000, guid: 2455916ab969a894d992b256dd4e09ed, type: 3}
     - {fileID: 2800000, guid: fa7e9db3dd4eff540b743c5a1991c383, type: 3}
-    totalSpriteSurfaceArea: 29744480
+    totalSpriteSurfaceArea: 32157272
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -80,11 +80,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0f740b947a38167459606ea9de5fae7b, type: 3}
   - {fileID: 21300000, guid: fce7cd94c51da734aa36520a020bcac3, type: 3}
   - {fileID: 21300000, guid: 53b9a8f4be95a44489f7a8bf92bbb126, type: 3}
+  - {fileID: 21300000, guid: 9db7f405f6d61bc44893ae6570d99b4b, type: 3}
   - {fileID: 21300000, guid: 3643d335e8a7be74682304f57c777a14, type: 3}
   - {fileID: 21300000, guid: 4463f935148cb854f9644d980e5c8547, type: 3}
   - {fileID: 21300000, guid: 580c284588f96dd42b5ef5ba7f8fea5a, type: 3}
   - {fileID: 21300000, guid: 144e5c45029bba848a862d0cea46fc23, type: 3}
   - {fileID: 21300000, guid: c47f29d58d9fb2a448f830ca030d5341, type: 3}
+  - {fileID: 21300000, guid: 90ccad56d14ca0b4d85309a162361d8e, type: 3}
   - {fileID: 21300000, guid: faaaf7668c2fc604188eaed0872a15b5, type: 3}
   - {fileID: 21300000, guid: 583b1d86a2c88e24694e0c35d4855ec7, type: 3}
   - {fileID: 21300000, guid: 9141fe8690eedbe4f84237cff04b2927, type: 3}
@@ -174,11 +176,13 @@ SpriteAtlas:
   - Ingame_UI_Button_Minus
   - Ingame_UI_Button_skip
   - button_label_yes
+  - Audition_UI_Progress_Background
   - Gameover_UI_attachment
   - Ingame_UI_hongbo_print flyers
   - Ingame_UI_Button_Prepare
   - Ingame_UI_Image_PlayInfo
   - Audition_UI_Button_Out
+  - Audition_UI_Progress_Foreground
   - dialog_background3
   - Ingame_UI_Toggle_Sfx
   - Ingame_UI_Button_Option
