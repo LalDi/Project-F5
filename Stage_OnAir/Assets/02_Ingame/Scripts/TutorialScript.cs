@@ -55,7 +55,7 @@ public class TutorialScript : MonoBehaviour
 
                 TopUI = GameObject.Find("Canvas").transform.GetChild(0);
                 LowerUI = GameObject.Find("Canvas").transform.GetChild(1);
-                PopupUI = GameObject.Find("Canvas").transform.GetChild(2);
+                PopupUI = GameObject.Find("Canvas").transform.GetChild(3);
                 ForderUI = TopUI.Find("Forder UI");
 
                 BackGround = Instantiate(Prefab, GameObject.Find("Canvas").transform).transform;

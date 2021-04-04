@@ -52,6 +52,8 @@ public class Login : MonoBehaviour
                 case "200":
                     SetDataInit();
                     SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
+                    GameManager.Instance.Tutorial = true;
+                    TutorialObj.SetActive(true);
                     LoadManager.Load(LoadManager.Scene.Ingame);
                     break;
                 case "400":
@@ -117,6 +119,8 @@ public class Login : MonoBehaviour
             case "201":
                 SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
                 SetDataInit();
+                GameManager.Instance.Tutorial = true;
+                TutorialObj.SetActive(true);
                 LoadManager.Load(LoadManager.Scene.Ingame);
                 break;
             case "401":

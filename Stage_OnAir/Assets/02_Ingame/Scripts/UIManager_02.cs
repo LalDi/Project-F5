@@ -324,7 +324,8 @@ public class UIManager_02 : MonoBehaviour
         {
             case RANKING.RANK.QUALITY:
                 Rank = Backend.Rank.GetRankByUuid(RANKING.QUALITY_UUID).GetReturnValuetoJSON()["rows"];
-                MyRank = Backend.Rank.GetMyRank(RANKING.QUALITY_UUID).GetReturnValuetoJSON()["rows"];
+                if (Backend.Rank.GetMyRank(RANKING.QUALITY_UUID).GetReturnValuetoJSON()["rows"].GetHashCode() != 404);
+                    MyRank = Backend.Rank.GetMyRank(RANKING.QUALITY_UUID).GetReturnValuetoJSON()["rows"];
                 break;
             case RANKING.RANK.AUDIENCE:
                 Rank = Backend.Rank.GetRankByUuid(RANKING.AUDIENCE_UUID).GetReturnValuetoJSON()["rows"];
@@ -1073,7 +1074,7 @@ public class UIManager_02 : MonoBehaviour
         Sprite Icon;
         string Name;
         string Script;
-        string Pay;
+        //string Pay;
 
         Popup_On((int)PopupList.MarketingUp);
         obj = Popup_MarketingUp;
@@ -1165,7 +1166,7 @@ public class UIManager_02 : MonoBehaviour
         Sprite Icon;
         string Name;
         string Script;
-        string Pay;
+        //string Pay;
         int SpriteCode;
 
         Popup_On((int)PopupList.DevelopUp);
