@@ -29,12 +29,17 @@
     public class PLAYERPREFSLIST
     {
         public const string AD = "Ad";
+        public const string DEFAULT_SUCCESS = "Default_Success";
+        public const string DEVELOPLIST = "DevelopListLocal";
+        public const string COUNTMONTH = "CountMonth";
+        public const string REDUCETIME = "ReduceTime";
     }
 
     public class ERROR_MESSAGE
     {
         public const string LOGIN_EMPTY = "모든 항목을 빠짐없이 입력하여주십시오.";
         public const string LOGIN_DUPLICATE = "존재하지 않는 계정입니다.\n아이디 혹은 비밀번호를 확인해주세요.";
+        public const string LOGIN_UNKNOWN = "알 수 없는 오류로 로그인에 실패햐였습니다.";
 
         public const string SIGNUP_EMPTY = "모든 항목을 빠짐없이 입력하여주십시오.";
         public const string SIGNUP_DUPLICATE = "이미 존재하는 아이디입니다.\n아이디를 바꿔주십시오.";
@@ -43,6 +48,11 @@
         public const string SETNICK_EMPTY = "닉네임은 공백으로 설정할 수 없습니다.";
         public const string SETNICK_BAD = "닉네임은 20자를 넘기거나\n앞,뒤에 공백을 넣을 수 없습니다.\n(닉네임의 중간에는 공백을 포함할 수 있습니다.)";
         public const string SETNICK_DUPLICATE = "중복된 닉네임입니다.\n다른 닉네임을 설정해주십시오.";
+
+        public const string PURCHASING_CANCEL = "결제가 취소되었습니다.";
+        public const string PURCHASING_FAIL = "결제가 실패하였습니다.";
+        public const string PURCHASING_DUPLICATE = "이미 구매한 상품입니다.";
+        public const string PURCHASING_NULL = "알 수 없는 이유로 \n결제가 실패하였습니다.";
     }
 
     public class MANAGERDATA
@@ -113,7 +123,18 @@
             float fNowDpi = (Screen.dpi * fFixedResoulutionHeight) / Screen.height;
             float scale = fNowDpi / 160;
             float pixel = fdpHeight * scale;
-            return pixel;
+
+            float NowHeight = 1920f / (Screen.width * 16 / 9);
+
+            Debug.Log($"Dpi : {Screen.dpi}   fNowDpi : {fNowDpi}   Height : {fFixedResoulutionHeight}\n" +
+                $"Pixel : {pixel}  DP : {fdpHeight}");
+
+            Debug.Log($"NowHeight : {NowHeight}");
+
+            //return pixel;
+
+            return fdpHeight * NowHeight;
+            //return fdpHeight;
         }
 
         /**
@@ -160,6 +181,17 @@
 
             return result;
         }
+
+        static public int AUDIENCE()
+        {
+            float Quality = FINALQUALITY();
+            float Marketing = GameManager.Instance.Play_Marketing;
+
+            int result;
+            result = Mathf.FloorToInt((Quality / 1000f) * Marketing);
+
+            return result;
+        }
     }
 
     [System.Serializable]
@@ -172,8 +204,6 @@
         //스태프 월급 계산
         static public int MONTHLY()
         {
-            //Icon = StaffData.Instance.StaffIcon[Data.Code - 1];
-
             int Pay = 0;
             foreach (Staff item in GameManager.Instance.Staffs)
             {

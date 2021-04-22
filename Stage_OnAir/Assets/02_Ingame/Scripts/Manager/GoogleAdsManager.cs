@@ -10,7 +10,9 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     private InterstitialAd IntersAd;
     private BannerView BannerAd;
 
-    new void Awake()                                                                                                                                                                                                                
+    private bool isTest = true;
+
+    new void Awake()
     {
         base.Awake();
 
@@ -24,7 +26,7 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     // 전면 광고 
     private void RequestInterstitial()
     {
-        string adUnitId = AD.TEST_INTERS; //테스트 아이디 
+        string adUnitId = isTest ? AD.TEST_INTERS : AD.INTERSAD; //테스트 아이디
 
         // Initialize an InterstitialAd.
         this.IntersAd = new InterstitialAd(adUnitId);
@@ -88,30 +90,30 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     // 보상형 광고
     private void RequestRewardedAd()
     {
-        string adUnitId = AD.TEST_REWARD;
-        // 
-        // this.RewardAd = new RewardedAd(adUnitId);
-        // 
-        // // Called when an ad request has successfully loaded.
-        // this.RewardAd.OnAdLoaded += HandleRewardedAdLoaded;
-        // // Called when an ad request failed to load.
-        // this.RewardAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
-        // // Called when an ad is shown.
-        // this.RewardAd.OnAdOpening += HandleRewardedAdOpening;
-        // // Called when an ad request failed to show.
-        // this.RewardAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
-        // // Called when the user should be rewarded for interacting with the ad.
-        // this.RewardAd.OnUserEarnedReward += HandleUserEarnedReward;
-        // // Called when the ad is closed.
-        // this.RewardAd.OnAdClosed += HandleRewardedAdClosed;
-        // 
-        // // Create an empty ad request.
-        // AdRequest request = new AdRequest.Builder().Build();
-        // // Load the rewarded ad with the request.
-        // this.RewardAd.LoadAd(request);
+        string adUnitId = isTest ? AD.TEST_REWARD : AD.REWARDAD;
 
+        this.RewardAd = new RewardedAd(adUnitId);
+        
+        // Called when an ad request has successfully loaded.
+        this.RewardAd.OnAdLoaded += HandleRewardedAdLoaded;
+        // Called when an ad request failed to load.
+        this.RewardAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+        // Called when an ad is shown.
+        this.RewardAd.OnAdOpening += HandleRewardedAdOpening;
+        // Called when an ad request failed to show.
+        this.RewardAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+        // Called when the user should be rewarded for interacting with the ad.
+        this.RewardAd.OnUserEarnedReward += HandleUserEarnedReward;
+        // Called when the ad is closed.
+        this.RewardAd.OnAdClosed += HandleRewardedAdClosed;
+        
+        // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
-        RewardedInterstitialAd.LoadAd(adUnitId, request, adLoadCallback);
+        // Load the rewarded ad with the request.
+        this.RewardAd.LoadAd(request);
+
+        AdRequest request2 = new AdRequest.Builder().Build();
+        RewardedInterstitialAd.LoadAd(adUnitId, request2, adLoadCallback);
     }
     private void adLoadCallback(RewardedInterstitialAd ad, string error)
     {
@@ -198,7 +200,8 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
         string type = args.Type;
         double amount = args.Amount;
 
-        int Result = Mathf.CeilToInt(GameManager.Instance.Money * 0.1f);
+        int Money = Mathf.CeilToInt(GameManager.Instance.Money * 0.1f);
+        int Result = Mathf.Abs(Money);
         GameManager.Instance.CostMoney(Result, false);
 
         MonoBehaviour.print(
@@ -208,32 +211,33 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
 
     public void RewardAdsShow()
     {
-        // if (this.RewardAd.IsLoaded())
-        // {
-        //     this.RewardAd.Show();
-        // }
-        // else
-        // {
-        //     Debug.Log("NOT Loaded RewardedAd");
-        //     RequestRewardedAd();
-        // }
-
-        if (RewardInterAd != null)
+        if (this.RewardAd.IsLoaded())
         {
-            RewardInterAd.Show(userEarnedRewardCallback);
+            this.RewardAd.Show();
         }
+        else
+        {
+            Debug.Log("NOT Loaded RewardedAd");
+            RequestRewardedAd();
+        }
+
+        //if (RewardInterAd != null)
+        //{
+        //    RewardInterAd.Show(userEarnedRewardCallback);
+        //}
     }
 
     // 배너 광고
     private void RequestBanner()
     {
         //string adUnitId = AD.BANNERAD;
-        string adUnitId = AD.TEST_BANNER;
+        string adUnitId = isTest ? AD.TEST_BANNER : AD.BANNERAD;
 
         AdSize adaptiveSize =
             AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
 
-        BannerAd = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Bottom);
+        //BannerAd = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Bottom);
+        BannerAd = new BannerView(adUnitId, adaptiveSize, AdPosition.Bottom);
 
         // Called when an ad request has successfully loaded.
         BannerAd.OnAdLoaded += HandleOnAdLoaded_banner;

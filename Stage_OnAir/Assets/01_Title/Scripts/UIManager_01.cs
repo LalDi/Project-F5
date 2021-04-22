@@ -8,23 +8,27 @@ public class UIManager_01 : MonoBehaviour
     public GameObject Popup_Black;
     public GameObject Popup_LogIn;
     public GameObject Popup_SignUp;
+    public GameObject TutorialObj;
 
     void Start()
     {
         Popup_Black.SetActive(false);
         Popup_LogIn.SetActive(false);
         Popup_SignUp.SetActive(false);
+
+        GoogleAdsManager.Instance.HideBanner();
     }
 
     public void To_Ingame()
     {
+        TutorialObj.SetActive(false);
+
         SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
         Backend.Chart.GetAllChartAndSave(true);
 
         ScenarioData.Instance.SetScenarioData();
         ActorData.Instance.SetActorsData();
         MarketingData.Instance.SetMarketingData();
-        Items.Instance.SetStaffData();
 
         GameManager.Instance.LoadData();
 
