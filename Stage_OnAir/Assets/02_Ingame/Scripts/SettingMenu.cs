@@ -9,8 +9,7 @@ public class SettingMenu : MonoBehaviour
     public bool IsOpen = false;
     public GameObject MainBT;
     public GameObject[] Icons = new GameObject[3];
-
-
+    
     public void Anim()
     {
         SoundManager.Instance.PlaySound("Pop_6");

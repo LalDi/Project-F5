@@ -150,13 +150,6 @@ public class Staff
         IsPurchase = Level == 0 ? false : true;
     }
 
-    public void ResetStaff()
-    {
-        Level = 0;
-        IsPurchase = false;
-        SetLevel();
-    }
-
     public void SaveStaff()
     {
         string Name = "Staff" + Code.ToString();
@@ -185,6 +178,7 @@ public class Staff
 public class StaffData : Singleton<StaffData>
 {
     public List<Sprite> StaffIcon = new List<Sprite>();
+    public List<Sprite> StaffImage = new List<Sprite>();
 
     public List<Staff> SetStaffData()
     {
@@ -208,10 +202,14 @@ public class StaffData : Singleton<StaffData>
     {
         List<Staff> StaffsList = SetStaffData();
 
-        foreach (var item in StaffsList)
+        JsonData ChartJson = JsonMapper.ToObject(Backend.Chart.GetLocalChartData("Staff"));
+
+        for (int i = 0; i < StaffsList.Count; i++)
         {
-            item.ResetStaff();
-            item.SaveStaff();
+            foreach (JsonData item in ChartJson)
+            {
+                StaffsList[i].SetStaff(item);
+            }
         }
 
         return StaffsList;

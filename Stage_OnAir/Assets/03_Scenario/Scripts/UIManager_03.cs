@@ -18,11 +18,6 @@ public class UIManager_03 : MonoBehaviour
 
     public GameObject Scroll;
 
-    public RectTransform Bottom_Button;
-    public RectTransform Bottom_Scroll;
-
-    public TutorialScript TutorialObj;
-
     void Awake()
     {
         GameObject Popups = GameObject.Find("Popup").gameObject;
@@ -39,6 +34,20 @@ public class UIManager_03 : MonoBehaviour
 
     void Start()
     {
+        //for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
+        //{
+        //    GameObject scenario = ObjManager.SpawnPool("Scenario", Vector3.zero, Quaternion.Euler(0, 0, 0));
+        //
+        //    int j = i;
+        //    scenario.transform.GetComponent<Button>().onClick.AddListener(() => { Popup_Scenario(j); });
+        //
+        //    scenario.transform.GetChild(0).GetComponent<Text>().text =
+        //        ScenarioData.Instance.ScenarioList[i].Name;
+        //    scenario.transform.gameObject.SetActive(true);
+        //}
+        //Scroll.GetComponent<RectTransform>().sizeDelta =
+        //    new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 250);
+
         foreach (var item in ScenarioData.Instance.ScenarioList)
         {
             GameObject scenario = ObjManager.SpawnPool("Scenario", Vector3.zero, Quaternion.Euler(0, 0, 0));
@@ -50,16 +59,6 @@ public class UIManager_03 : MonoBehaviour
         Scroll.GetComponent<RectTransform>().sizeDelta =
             new Vector2(911.0076f, ScenarioData.Instance.ScenarioList.Count * 250);
 
-        Bottom_Button.SetY(125 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
-        Bottom_Scroll.SetBottom(250 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
-
-        GoogleAdsManager.Instance.ShowBanner();
-
-        if (GameManager.Instance.Tutorial == true)
-        {
-            TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
-            TutorialObj.Tutorial();
-        }
     }
 
     void Update()
@@ -81,7 +80,7 @@ public class UIManager_03 : MonoBehaviour
             "연출력 : " + Data.Quality;
         Popup_Scenario_Select.transform.Find("need Actor Image").GetChild(0).GetComponent<Text>().text =
             "필요 배우 : " + Data.Actors;
-        Popup_Scenario_Select.transform.Find("Pay Image").Find("Pay Text").GetComponent<Text>().text =
+        Popup_Scenario_Select.transform.Find("Buy BT").Find("Pay Text").GetComponent<Text>().text =
             "가격 " + Data.Price.ToString("N0");
 
         Popup_Black.SetActive(true);
@@ -95,7 +94,7 @@ public class UIManager_03 : MonoBehaviour
         {
             Popup_LoansCk.SetActive(true);
 
-            Popup_LoansCk.transform.GetChild(4).GetComponent<Text>().text = "필요금액: " +
+            Popup_LoansCk.transform.GetChild(2).GetComponent<Text>().text = "필요금액: " +
                 ((GameManager.Instance.Money <= 0) ?
                          Data.Price.ToString("N0")
                         : ((GameManager.Instance.Money - Data.Price) * -1).ToString("N0"));
@@ -106,9 +105,9 @@ public class UIManager_03 : MonoBehaviour
     public void Popup_ScenarioBuy()
     {
         SoundManager.Instance.PlaySound("Cash_Register");
-        Popup_Buy_Checking.transform.GetChild(3).GetComponent<Text>().text =
+        Popup_Buy_Checking.transform.GetChild(1).GetComponent<Text>().text =
            " 『" + Data.Name + "』 \n을 구매하였습니다.";
-        Popup_Buy_Checking.transform.GetChild(4).GetComponent<Text>().text =
+        Popup_Buy_Checking.transform.GetChild(2).GetComponent<Text>().text =
             "보유금액 : " + GameManager.Instance.Money.ToString("N0") + " -> " +
             (GameManager.Instance.Money - Data.Price).ToString("N0");
         GameManager.Instance.SetScenario(Data);

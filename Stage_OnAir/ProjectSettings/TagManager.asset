@@ -59,9 +59,6 @@ TagManager:
   - name: UI
     uniqueID: 1347534903
     locked: 0
-  - name: UI Particle
-    uniqueID: 1236028565
-    locked: 0
   - name: GameOver
     uniqueID: 3895202591
     locked: 0

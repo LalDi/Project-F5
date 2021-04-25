@@ -154,17 +154,4 @@ public class ActorData : Singleton<ActorData>
             item.RiseActor(IsSuccess);
         }
     }
-
-    public Actor FindActor(int Code)
-    {
-        Actor result = null;
-
-        foreach (var item in ActorsList)
-        {
-            if (item.No == Code)
-                result = item;
-        }
-
-        return result;
-    }
 }

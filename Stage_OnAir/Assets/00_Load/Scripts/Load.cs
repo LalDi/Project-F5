@@ -6,7 +6,6 @@ public class Load : MonoBehaviour
 {
     void Start()
     {
-        GameManager.Instance.SaveData();
         LoadManager.LoaderCallback();
     }
 }

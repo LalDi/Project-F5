@@ -7,7 +7,6 @@ using Define;
 
 public class Develop
 {
-    public int Code { get; private set; }
     public string Name { get; private set; }
     public int Price { get; private set; }
     public int Effect { get; private set; }
@@ -17,7 +16,6 @@ public class Develop
 
     public Develop(JsonData Data)
     {
-        Code = int.Parse(Data["num"]["S"].ToString());
         Name = Data["Name"]["S"].ToString();
         Price = int.Parse(Data["Price"]["S"].ToString());
         Effect = int.Parse(Data["Effect"]["S"].ToString());
@@ -62,9 +60,8 @@ public class DevelopData : Singleton<DevelopData>
     {
         List<Develop> result = new List<Develop>();
 
-        OffDevelop();
-
         int rand = Random.Range(3, 6);
+        Debug.Log(rand);
 
         while (result.Count != rand)
         {
@@ -91,17 +88,5 @@ public class DevelopData : Singleton<DevelopData>
         {
             item.SetOn(false);
         }
-    }
-
-    public Develop FindDevelop(int code)
-    {
-        foreach (var item in DevelopList)
-        {
-            if (item.Code == code)
-                return item;
-        }
-
-        Debug.LogError("없는 코드의 Develop을 찾으려 시도함");
-        return null;
     }
 }

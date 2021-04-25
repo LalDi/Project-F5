@@ -14,9 +14,6 @@ public class UIManager_04 : MonoBehaviour
     public GameObject Count;
     public GameObject Profile;
 
-    public GameObject Progbar;
-    public Image Progbar_Gauge;
-
     public SpriteRenderer Character;
 
     public List<Actor> PprActors = null;
@@ -25,14 +22,9 @@ public class UIManager_04 : MonoBehaviour
     public int ActorCount;
     //오디션 완료한 배우들 수 카운트 (Preparation Actors)
     public int MaxActor;
-    //오디션 보는 배우 수 (3명에서 10명정도)
+    //오디션 보는 배우 수 (한명에서 7명정도)
 
     public GameObject Bgm;
-    public TutorialScript TutorialObj;
-
-    private bool onTimer;
-    private float nowTime;
-    [SerializeField] private float TimeLimit;
 
     void Start()
     {
@@ -40,22 +32,13 @@ public class UIManager_04 : MonoBehaviour
         Popup_Result.SetActive(false);
 
         ActorCount = 0;
-        MaxActor = Random.Range(3, 11 - GameManager.Instance.NowActor);
+        MaxActor = Random.Range(1, 8 - GameManager.Instance.NowActor);
 
         PprActors = ActorData.Instance.RandomActors(MaxActor);
-        Reload_ActorProfile();
-
-        Profile.GetComponent<RectTransform>().
-            SetY(-165f + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+        Reroad_ActorProfile();
 
         SoundManager.Instance.StopBGM();
         Bgm = SoundManager.Instance.LoopSound("Bgm_Audition");
-
-        if (GameManager.Instance.Tutorial == true)
-        {
-            TutorialObj = GameObject.Find("TutorialObj").GetComponent<TutorialScript>();
-            TutorialObj.Tutorial();
-        }
     }
 
     void Update()
@@ -65,20 +48,9 @@ public class UIManager_04 : MonoBehaviour
             Text_Money.color = Color.red;
         else
             Text_Money.color = Color.black;
-
-        if (onTimer)
-        {
-            nowTime += Time.deltaTime;
-            Progbar_Gauge.fillAmount = (TimeLimit - nowTime) / TimeLimit;
-            if (nowTime >= TimeLimit)
-            {
-                SetProgbarActive(false);
-                Reload_ActorProfile();
-            }
-        }
     }
 
-    public void Reload_ActorProfile()
+    public void Reroad_ActorProfile()
     {
         ActorCount++;
         if (GameManager.Instance.NowActor + PassActors.Count >= GameManager.Instance.MaxActor)
@@ -90,17 +62,15 @@ public class UIManager_04 : MonoBehaviour
         }
         else if (ActorCount <= MaxActor)
         {
-            SetProgbarActive(true);
-
             Count.GetComponent<Text>().text =
                 ActorCount.ToString() + " / " + MaxActor;
-            Profile.transform.Find("Profile Name Text").GetComponent<Text>().text = PprActors[ActorCount - 1].Name;
-            Profile.transform.Find("Profile Stats Text").GetComponent<Text>().text =
+            Profile.transform.GetChild(0).GetComponent<Text>().text = PprActors[ActorCount - 1].Name;
+            Profile.transform.GetChild(1).GetComponent<Text>().text =
                 "연기력 : " + PprActors[ActorCount - 1].Acting + "\n" +
                 "경험 : " + PprActors[ActorCount - 1].Experience + "\n" +
                 "가격 : " + PprActors[ActorCount - 1].Price.ToString("N0");
-            Profile.transform.Find("Profile Character Image").GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].Sprite - 1];
-            Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].Sprite-1];
+            Profile.transform.GetChild(5).GetComponent<Image>().sprite = ActorData.Instance.ActorProfileImage[PprActors[ActorCount - 1].No];
+            Character.sprite = ActorData.Instance.ActorImage[PprActors[ActorCount - 1].No];
         }
         else
         {
@@ -108,17 +78,6 @@ public class UIManager_04 : MonoBehaviour
             Popup_Result.SetActive(true);
             Result();
         }
-    }
-
-    public void SetProgbarActive(bool isActive)
-    {
-        if (isActive)
-        {
-            nowTime = 0;
-            Progbar_Gauge.fillAmount = 1f;
-        }
-        onTimer = isActive;
-        Progbar.SetActive(isActive);
     }
 
     public void Result()
@@ -129,24 +88,24 @@ public class UIManager_04 : MonoBehaviour
             Width += 325;
 
             GameObject ActorObj = Instantiate(ActorPrefab);
-            ActorObj.transform.SetParent(Popup_Result.transform.GetChild(3).GetChild(0));
+            ActorObj.transform.SetParent(Popup_Result.transform.GetChild(2).GetChild(0));
             ActorObj.transform.GetChild(1).GetComponent<Text>().text =
                 PassActors[i].Name;
             ActorObj.transform.GetChild(0).GetComponent<Image>().sprite = 
-                ActorData.Instance.ActorProfileImage[PassActors[i].Sprite-1];
+                ActorData.Instance.ActorProfileImage[PassActors[i].No];
             ActorData.Instance.ActorsList[PassActors[i].No].SetIsCasting(true);
             GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
             GameManager.Instance.PlusNowActor();
-            GameManager.Instance.SetValue(Define.MANAGERDATA.DATALIST.ACTING, PassActors[i].Acting, true);
+            GameManager.Instance.Plus_Quality_Acting(PassActors[i].Acting);
         }
-        Popup_Result.transform.GetChild(3).GetChild(0).
+        Popup_Result.transform.GetChild(2).GetChild(0).
             GetComponent<RectTransform>().sizeDelta = new Vector2(Width, 940.4614f);
     }
 
     public void Out_BT()
     {
         SoundManager.Instance.PlaySound("Pop_3");
-        Reload_ActorProfile();
+        Reroad_ActorProfile();
     }
 
     public void Pass_BT()
@@ -155,7 +114,7 @@ public class UIManager_04 : MonoBehaviour
         PassActors.Add(PprActors[ActorCount - 1]);
         GameManager.Instance.CostMoney(PprActors[ActorCount - 1].Price);
 
-        Reload_ActorProfile();
+        Reroad_ActorProfile();
     }
 
     public void To_Ingame()

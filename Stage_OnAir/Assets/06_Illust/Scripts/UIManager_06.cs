@@ -11,9 +11,6 @@ public class UIManager_06 : MonoBehaviour
 
     public GameObject Scroll;
 
-    public RectTransform Bottom_Button;
-    public RectTransform Bottom_Scroll;
-
     public Sprite Null;
     public List<Sprite> Illusts = new List<Sprite>();
 
@@ -38,15 +35,10 @@ public class UIManager_06 : MonoBehaviour
 
         Popup_Black.SetActive(false);
         Popup_Illust.SetActive(false);
-
-        Bottom_Button.SetY(50 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
-        Bottom_Scroll.SetBottom(230 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
     }
 
     public void Push_IllustBT(int num)
     {
-        if (!GameManager.Instance.ScenarioIllust[num])
-            return;
         SoundManager.Instance.PlaySound("Pop_6");
         Popup_Illust.GetComponent<Image>().sprite = Illusts[num];
         Popup_Black.SetActive(true);
