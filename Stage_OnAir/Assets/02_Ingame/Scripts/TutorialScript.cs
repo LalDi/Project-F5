@@ -39,7 +39,6 @@ public class TutorialScript : MonoBehaviour
 
     private void Start()
     {
-        Num = 28;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -430,7 +429,7 @@ public class TutorialScript : MonoBehaviour
                 if (!UIM_4.Popup_Result.activeSelf)
                     return;
                 IsAdd = false;
-                LowerUI.GetChild(2).GetComponent<Button>().enabled = true;
+                LowerUI.GetChild(5).GetComponent<Button>().enabled = true;
                 SetParent(PopupUI);
                 Time.timeScale = 1;
 
