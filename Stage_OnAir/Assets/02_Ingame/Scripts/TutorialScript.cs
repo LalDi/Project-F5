@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class TutorialScript : MonoBehaviour
 {
@@ -371,14 +372,16 @@ public class TutorialScript : MonoBehaviour
                 Num++;
                 break;
             case 31:
+                if (SceneManager.GetActiveScene().name != "04_Audition")
+                    Tutorial();
+
                 //UI 지정
                 UIM_4 = GameObject.Find("UIManager").GetComponent<UIManager_04>();
                 Time.timeScale = 0;
-                Debug.Log(UIM_4.name);
 
                 TopUI = GameObject.Find("Canvas").transform.GetChild(1);
                 LowerUI = GameObject.Find("Canvas").transform.GetChild(0);
-                PopupUI = GameObject.Find("Canvas").transform.GetChild(4);
+                PopupUI = GameObject.Find("Canvas").transform.GetChild(5);
                 CountUI= GameObject.Find("Canvas").transform.GetChild(2);
 
                 BackGround = Instantiate(Prefab, GameObject.Find("Canvas").transform).transform;
@@ -429,7 +432,6 @@ public class TutorialScript : MonoBehaviour
                 if (!UIM_4.Popup_Result.activeSelf)
                     return;
                 IsAdd = false;
-                LowerUI.GetChild(5).GetComponent<Button>().enabled = true;
                 SetParent(PopupUI);
                 Time.timeScale = 1;
 
@@ -532,7 +534,7 @@ public class TutorialScript : MonoBehaviour
 
                 TopUI = GameObject.Find("Canvas").transform.GetChild(0);
                 LowerUI = GameObject.Find("Canvas").transform.GetChild(1);
-                PopupUI = GameObject.Find("Canvas").transform.GetChild(2);
+                PopupUI = GameObject.Find("Canvas").transform.GetChild(3);
                 ForderUI = TopUI.Find("Forder UI");
 
                 Time.timeScale = 1;
@@ -568,7 +570,10 @@ public class TutorialScript : MonoBehaviour
                 break;
             case 42:
                 SetParent(PopupUI.Find("Period PU"));
-                tutoObj.GetChild(6).GetComponent<Button>().enabled = false;
+                tutoObj.GetChild(7).GetComponent<Button>().enabled = false;
+
+                tutoObj.GetChild(4).GetComponent<Button>().onClick.AddListener(Tutorial);
+                tutoObj.GetChild(5).GetComponent<Button>().onClick.AddListener(Tutorial);
 
                 Message.localPosition = new Vector3(0, -500);
                 Message.GetChild(0).GetComponent<Text>().text
@@ -578,12 +583,19 @@ public class TutorialScript : MonoBehaviour
             case 43:
                 Message.GetChild(0).GetComponent<Text>().text
                     = "준비기간을 적당한 2개월에 맞춰줍니다.";
+
                 if (GameManager.Instance.Period == 2)
+                {
                     Num++;
+                    SetParent(tutoObj.GetChild(7));
+                    tutoObj.GetComponent<Button>().enabled = true;
+                    tutoObj.GetComponent<Button>().onClick.AddListener(Tutorial);
+                    IsAdd = false;
+                }
                 break;
             case 44:
-                tutoObj.GetChild(6).GetComponent<Button>().onClick.AddListener(Tutorial);
-                tutoObj.GetChild(6).GetComponent<Button>().enabled = true;
+                SetParent(TopUI.transform.Find("Date"));
+
                 Message.localPosition = new Vector3(0, 0);
                 Message.GetChild(0).GetComponent<Text>().text
                     = "준비기간이 설정되면 시간이 흐르게됩니다. \n준비기간동안에는 공연홍보와 연극발전 아이템을 구매할 수 있습니다.";
