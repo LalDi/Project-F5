@@ -3409,9 +3409,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 205500369}
+  - component: {fileID: 205500372}
   - component: {fileID: 205500370}
   m_Layer: 5
-  m_Name: GameOver BG
+  m_Name: Play BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3472,6 +3473,14 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264783376}
+  m_CullTransparentMesh: 0
+--- !u!222 &205500372
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205500368}
   m_CullTransparentMesh: 0
 --- !u!224 &205746254
 RectTransform:
