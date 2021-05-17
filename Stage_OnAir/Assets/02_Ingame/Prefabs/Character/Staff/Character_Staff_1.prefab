@@ -2176,7 +2176,7 @@ MonoBehaviour:
   workTime: 0
   waitTime: 0
   workDistance: 0
-  Anim: {fileID: 0}
+  Anim: {fileID: 8050668505513931449}
 --- !u!210 &8050668505513931447
 SortingGroup:
   m_ObjectHideFlags: 0
