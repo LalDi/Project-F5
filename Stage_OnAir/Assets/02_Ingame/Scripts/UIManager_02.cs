@@ -1660,7 +1660,6 @@ public class UIManager_02 : MonoBehaviour
         Play.SetActive(true);
         Play.transform.GetChild(1).DOLocalMoveY(-35, 1.2f).SetEase(Ease.OutExpo);
         NPCManager.DisSummon();
-        NPCManager.Scr_Stop();
         yield return new WaitForSeconds(1.2f);
         Play.transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.5f);
         yield return new WaitForSeconds(1.0f);

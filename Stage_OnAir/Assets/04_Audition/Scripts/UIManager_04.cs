@@ -123,6 +123,7 @@ public class UIManager_04 : MonoBehaviour
 
     public void Result()
     {
+        onTimer = false;
         float Width = 0;
         for(int i = 0; i < PassActors.Count; i++)
         {
@@ -134,8 +135,8 @@ public class UIManager_04 : MonoBehaviour
                 PassActors[i].Name;
             ActorObj.transform.GetChild(0).GetComponent<Image>().sprite = 
                 ActorData.Instance.ActorProfileImage[PassActors[i].Sprite-1];
-            ActorData.Instance.ActorsList[PassActors[i].No].SetIsCasting(true);
-            GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No]);
+            ActorData.Instance.ActorsList[PassActors[i].No - 1].SetIsCasting(true);
+            GameManager.Instance.Actors.Add(ActorData.Instance.ActorsList[PassActors[i].No - 1]);
             GameManager.Instance.PlusNowActor();
             GameManager.Instance.SetValue(Define.MANAGERDATA.DATALIST.ACTING, PassActors[i].Acting, true);
         }
