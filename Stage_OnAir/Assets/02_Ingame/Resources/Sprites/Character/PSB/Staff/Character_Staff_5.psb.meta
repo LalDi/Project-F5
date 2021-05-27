@@ -8266,6 +8266,20 @@ ScriptedImporter:
     spriteID: ee413b585ffddcb44b3abbab17b69109
     layerID: 125
     mosaicPosition: {x: 648, y: 4}
+  - name: "\uC18C\uD4881"
+    spriteName: "\uC18C\uD4881"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: eae0e96292006b341b1cf15dadc7ed0c
+    layerID: 221
+    mosaicPosition: {x: 4, y: 1273}
+  - name: "\uC18C\uD4882"
+    spriteName: "\uC18C\uD4882"
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 5f764f085655ea44a8560406dddec1f7
+    layerID: 129
+    mosaicPosition: {x: 4, y: 4}
   - name: "\uC544\uB798\uD314-R"
     spriteName: "\uC544\uB798\uD314-R"
     isGroup: 0
@@ -8371,20 +8385,6 @@ ScriptedImporter:
     spriteID: 6e38142ca46892f40b185ef7cf81fba2
     layerID: 64
     mosaicPosition: {x: 294, y: 1948}
-  - name: "\uC18C\uD4881"
-    spriteName: "\uC18C\uD4881"
-    isGroup: 0
-    parentIndex: -1
-    spriteID: eae0e96292006b341b1cf15dadc7ed0c
-    layerID: 221
-    mosaicPosition: {x: 4, y: 1273}
-  - name: "\uC18C\uD4882"
-    spriteName: "\uC18C\uD4882"
-    isGroup: 0
-    parentIndex: -1
-    spriteID: 5f764f085655ea44a8560406dddec1f7
-    layerID: 129
-    mosaicPosition: {x: 4, y: 4}
   characterData:
     bones:
     - name: bone_1
