@@ -13,6 +13,7 @@ public class NPC : MonoBehaviour
     public float workDistance = 0f;
 
     public Animator Anim;
+    public IEnumerator Crt;
 
     void Update()
     {
@@ -22,6 +23,8 @@ public class NPC : MonoBehaviour
             workTime = Random.Range(3, 6);
             waitTime = Random.Range(5, 8);
             workDistance= Random.Range(100, 801);
+
+            Crt = Wait(waitTime);
 
             if (transform.localPosition.x + (workDistance * Distance) > 800)
                 workDistance = 800 - transform.localPosition.x;
@@ -34,7 +37,7 @@ public class NPC : MonoBehaviour
                 Anim.SetBool("IsWork", true);
                 transform.DOLocalMoveX(transform.localPosition.x + (workDistance * Distance), workTime)
                     .SetEase(Ease.Linear)
-                    .OnComplete(() => { StartCoroutine(Wait(waitTime)); });
+                    .OnComplete(() => { StartCoroutine(Crt); });
             }
         }
     }
@@ -43,5 +46,10 @@ public class NPC : MonoBehaviour
         Anim.SetBool("IsWork", false);
         yield return new WaitForSeconds(time);
         Distance = 0;
+    }
+
+    public void Stop()
+    {
+        StopCoroutine(Crt);
     }
 }
