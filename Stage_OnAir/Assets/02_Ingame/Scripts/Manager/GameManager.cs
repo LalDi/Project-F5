@@ -84,11 +84,11 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-#if UNITY_EDITOR
-        Debug.unityLogger.logEnabled = true;
-#else
-        Debug.unityLogger.logEnabled = false;
-#endif
+//#if UNITY_EDITOR
+//        Debug.unityLogger.logEnabled = true;
+//#else
+//        Debug.unityLogger.logEnabled = false;
+//#endif
         Screen.SetResolution(Screen.width, Screen.width * 16 / 9, true);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
@@ -117,10 +117,6 @@ public class GameManager : Singleton<GameManager>
         OnPush = true;
         IsBankrupt = false;
     }
-    public void Start()
-    {
-        //Init();
-    }
 
     private void OnApplicationQuit()
     {
@@ -131,7 +127,17 @@ public class GameManager : Singleton<GameManager>
 
     public void Init()
     {
-        //Backend.Chart.GetAllChartAndSave(true);
+        Backend.Chart.GetAllChartAndSave(true);
+        Debug.Log("차트 생성");
+
+        ScenarioData.Instance.SetScenarioData();
+        Debug.Log("시나리오 데이터 생성");
+
+        ActorData.Instance.SetActorsData();
+        Debug.Log("배우 데이터 생성");
+
+        MarketingData.Instance.SetMarketingData();
+        Debug.Log("홍보 데이터 생성");
 
         DevelopData.Instance.SetDevelopData();
         Debug.Log("발전 데이터 생성");

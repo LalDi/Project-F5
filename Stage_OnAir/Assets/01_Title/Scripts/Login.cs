@@ -50,7 +50,7 @@ public class Login : MonoBehaviour
             switch (callback.GetStatusCode())
             {
                 case "200":
-                    SetDataInit();
+                    GameManager.Instance.Init();
                     SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
                     GameManager.Instance.Tutorial = true;
                     TutorialObj.SetActive(true);
@@ -118,7 +118,7 @@ public class Login : MonoBehaviour
         {
             case "201":
                 SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
-                SetDataInit();
+                GameManager.Instance.Init();
                 GameManager.Instance.Tutorial = true;
                 TutorialObj.SetActive(true);
                 LoadManager.Load(LoadManager.Scene.Ingame);
@@ -200,7 +200,7 @@ public class Login : MonoBehaviour
         {
             case "204":
                 SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
-                SetDataInit();
+                GameManager.Instance.Init();
                 GameManager.Instance.Tutorial = true;
                 TutorialObj.SetActive(true);
                 LoadManager.Load(LoadManager.Scene.Ingame);
@@ -223,16 +223,5 @@ public class Login : MonoBehaviour
                 Control_Error(true);
                 break;
         }
-    }
-
-    public void SetDataInit()
-    {
-        //Backend.BMember.RefreshTheBackendToken((callback) => { });
-
-        Backend.Chart.GetAllChartAndSave(true);
-        ScenarioData.Instance.SetScenarioData();
-        ActorData.Instance.SetActorsData();
-        MarketingData.Instance.SetMarketingData();
-        GameManager.Instance.Init();
     }
 }
