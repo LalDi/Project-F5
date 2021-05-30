@@ -37,6 +37,9 @@
 
     public class ERROR_MESSAGE
     {
+        public const string LOGIN_GOOGLEFAIL = "구글에 접속되어있지 않습니다.\n로그인에 실패하였습니다.";
+        public const string LOGIN_INTERNETFAIL = "로그인에 실패하였습니다.";
+
         public const string LOGIN_EMPTY = "모든 항목을 빠짐없이 입력하여주십시오.";
         public const string LOGIN_DUPLICATE = "존재하지 않는 계정입니다.\n아이디 혹은 비밀번호를 확인해주세요.";
         public const string LOGIN_UNKNOWN = "알 수 없는 오류로 로그인에 실패햐였습니다.";

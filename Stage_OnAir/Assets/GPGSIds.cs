@@ -24,7 +24,9 @@
 
 public static class GPGSIds
 {
-        public const string leaderboard_leaderboardtest = "CgkIwcOHhqAKEAIQAg"; // <GPGSID>
+        public const string BestQuality = "CgkIwcOHhqAKEAIQAw"; // <GPGSID>
+        public const string BestAudience = "CgkIwcOHhqAKEAIQBA"; // <GPGSID>
+        public const string BestProfit = "CgkIwcOHhqAKEAIQBQ"; // <GPGSID>
 
 }
 
