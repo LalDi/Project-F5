@@ -52,14 +52,29 @@ public class GoogleLogin : MonoBehaviour
                 if (callback.IsSuccess())
                 {
                     SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
-                    GameManager.Instance.Init();
-                    LoadManager.Load(LoadManager.Scene.Ingame);
+
+                    switch (callback.GetStatusCode())
+                    {
+                        case "200":
+                            GameManager.Instance.Init();
+                            LoadManager.Load(LoadManager.Scene.Ingame);
+                            break;
+                        case "201":
+                            Popup_Loading.SetActive(false);
+                            Nickname_Popup.SetActive(true);
+                            break;
+                        default:
+                            Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
+                            Control_Error(true);
+                            break;
+                    }
                 }
             });
         }
         else
         {
-            Social.localUser.Authenticate((bool success) => {
+            Social.localUser.Authenticate((bool success) =>
+            {
                 if (success)
                 {
                     // 로그인 성공 -> 뒤끝 서버에 획득한 구글 토큰으로 가입요청
@@ -69,8 +84,22 @@ public class GoogleLogin : MonoBehaviour
                         if (callback.IsSuccess())
                         {
                             SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
-                            Popup_Loading.SetActive(false);
-                            Nickname_Popup.SetActive(true);
+
+                            switch (callback.GetStatusCode())
+                            {
+                                case "200":
+                                    GameManager.Instance.Init();
+                                    LoadManager.Load(LoadManager.Scene.Ingame);
+                                    break;
+                                case "201":
+                                    Popup_Loading.SetActive(false);
+                                    Nickname_Popup.SetActive(true);
+                                    break;
+                                default:
+                                    Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
+                                    Control_Error(true);
+                                    break;
+                            }
                         }
                     });
                 }
@@ -78,6 +107,8 @@ public class GoogleLogin : MonoBehaviour
                 {
                     // 로그인 실패
                     Debug.Log("Login failed for some reason");
+                    Error_Message = ERROR_MESSAGE.LOGIN_INTERNETFAIL;
+                    Control_Error(true);
                 }
             });
         }
@@ -99,7 +130,7 @@ public class GoogleLogin : MonoBehaviour
             }
             else
             {
-                switch(callback.GetErrorCode())
+                switch (callback.GetErrorCode())
                 {
                     case "DuplicatedParameterException":
                         Error_Message = ERROR_MESSAGE.SETNICK_DUPLICATE;
@@ -133,10 +164,12 @@ public class GoogleLogin : MonoBehaviour
         else
         {
             Debug.Log("접속되어있지 않습니다. PlayGamesPlatform.Instance.localUser.authenticated :  fail");
+            Error_Message = ERROR_MESSAGE.LOGIN_GOOGLEFAIL;
+            Control_Error(true);
             return null;
         }
     }
-    
+
     public void Control_Error(bool Open)
     {
         Popup_Error.SetActive(Open);

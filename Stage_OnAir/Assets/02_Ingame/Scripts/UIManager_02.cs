@@ -1035,8 +1035,8 @@ public class UIManager_02 : MonoBehaviour
                 Popup_StaffCk.transform.GetChild(4).GetComponent<Text>().text
                     = "보유금액: " + GameManager.Instance.Money.ToString("N0") + " -> "
                     + (GameManager.Instance.Money - Data.Cost_Purchase).ToString("N0")
-                    + "\n연출력: " + (GameManager.Instance.Quality_Direction.ToString("N0")) + " -> "
-                    + (GameManager.Instance.Quality_Direction + Data.Directing).ToString("N0");
+                    + "\n연출력: " + (GameManager.Instance.Quality_Direction - Data.Directing).ToString("N0") + " -> "
+                    + GameManager.Instance.Quality_Direction.ToString("N0");
 
                 Popup_On((int)PopupList.StaffCk);
 

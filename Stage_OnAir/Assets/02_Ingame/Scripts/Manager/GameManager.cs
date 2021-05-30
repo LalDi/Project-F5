@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     public float Best_Profit { get; private set; }
 
     // 현재 보유 금액
-    public int Money { get; private set; }
+    public long Money { get; private set; }
 
     // 현재 날짜
     public int Month { get; private set; }
@@ -320,7 +320,7 @@ public class GameManager : Singleton<GameManager>
 
             if (data.Keys.Contains("Money"))
             {
-                Money = int.Parse(data["Money"]["N"].ToString());
+                Money = long.Parse(data["Money"]["N"].ToString());
             }
             if (data.Keys.Contains("Month"))
             {
@@ -810,7 +810,7 @@ public class GameManager : Singleton<GameManager>
 
 #region Money n Day
 
-    public void CostMoney(int value, bool Reduction = true)
+    public void CostMoney(long value, bool Reduction = true)
     {
         Money = Reduction ? Money - value : Money + value;
     }
