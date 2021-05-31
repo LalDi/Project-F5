@@ -47,5 +47,4 @@ public class UIManager_07 : MonoBehaviour
             Stat_UI.transform.DOLocalMoveX(-290f, 0.3f).SetEase(Ease.OutBack);
     }
 
-
 }

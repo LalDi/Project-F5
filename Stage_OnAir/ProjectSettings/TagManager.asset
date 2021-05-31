@@ -65,3 +65,6 @@ TagManager:
   - name: GameOver
     uniqueID: 3895202591
     locked: 0
+  - name: Tutorial
+    uniqueID: 2786650909
+    locked: 0
