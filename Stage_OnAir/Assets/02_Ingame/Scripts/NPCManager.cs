@@ -51,7 +51,7 @@ public class NPCManager : MonoBehaviour
                 ActorObj[i].transform.GetComponent<NPC>().Code = 10 + i;
             }
         }
-        
+
         if (Staffs != -1)
         {
             StaffObj = Instantiate(StaffPre[Staffs], Parent);
@@ -116,7 +116,7 @@ public class NPCManager : MonoBehaviour
         foreach (var item in GameManager.Instance.Staffs)
         {
             if (item.IsPurchase)
-                RandomStaff.Add(item.Code-1);
+                RandomStaff.Add(item.Code - 1);
         }
 
         if (RandomStaff.Count == 0)
@@ -132,16 +132,20 @@ public class NPCManager : MonoBehaviour
         if (IsOn_Scr == false)
             return;
 
-        if (Actors.Count <= 0)
+        if (ActorObj[0] == null && StaffObj == null)
         {
-            if (StaffObj == null)
-            {
-                IsOn_Scr = false;
-                return;
-            }
-            ScrChr = StaffObj;
+            IsOn_Scr = false;
+            return;
         }
-        else ScrChr = (Random.Range(0, 2) == 0) ? ActorObj[Random.Range(0, 2)] : StaffObj;
+        else if (ActorObj[0] != null && StaffObj != null)
+            ScrChr = (Random.Range(0, 2) == 0) ? ActorObj[Random.Range(0, 2)] : StaffObj;
+        else
+        {
+            if (ActorObj[0] == null)
+                ScrChr = StaffObj;
+            else if (StaffObj == null)
+                ScrChr = ActorObj[(Random.Range(0, 2))];
+        }
 
         ScrObj_1.SetActive(true);
         ScrObj_2.SetActive(false);
@@ -167,7 +171,7 @@ public class NPCManager : MonoBehaviour
 
     public IEnumerator Scr_Timer(int time)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         ScrObj_1.SetActive(false);
         ScrObj_2.SetActive(false);
         ScrObj_2.transform.GetChild(0).GetComponent<Text>().text = "";
