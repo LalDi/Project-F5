@@ -1288,7 +1288,10 @@ public class UIManager_02 : MonoBehaviour
             case 1:
                 Script = "공연 후 광고가 더 이상 나오지 않는다.\n"
                         + "₩2,500";
-                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_2());
+                //obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_2());
+                obj.transform.GetChild(6).GetComponent<IAPButton>().productId = "remove_ad";
+                obj.transform.GetChild(6).GetComponent<IAPButton>().onPurchaseComplete.AddListener(call => Shop_Item_2());
+                obj.transform.GetChild(6).GetComponent<IAPButton>().onPurchaseFailed.AddListener((product, call) => Shop_FailPurchasing(call));
                 break;
             case 2:
                 Script = "+ 10,000,000원\n"
@@ -1345,21 +1348,21 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_2()
     {
-        if (IAPManager.Instance.HadPruchased(IAPManager.Product_RemoveAd))
-        {
-            Debug.Log("이미 구매한 상품입니다.");
-            Error_Message = ERROR_MESSAGE.PURCHASING_DUPLICATE;
-            Popup_On((int)PopupList.Error);
-            return;
-        }
-
-        IAPManager.Instance.Purchase(IAPManager.Product_RemoveAd);
-
-        if (IAPManager.Instance.IsSuccessPurchase == false)
-        { 
-            Shop_FailPurchasing(IAPManager.Instance.FailReason);
-            return;
-        }
+        //if (IAPManager.Instance.HadPruchased(IAPManager.Product_RemoveAd))
+        //{
+        //    Debug.Log("이미 구매한 상품입니다.");
+        //    Error_Message = ERROR_MESSAGE.PURCHASING_DUPLICATE;
+        //    Popup_On((int)PopupList.Error);
+        //    return;
+        //}
+        //
+        //IAPManager.Instance.Purchase(IAPManager.Product_RemoveAd);
+        //
+        //if (IAPManager.Instance.IsSuccessPurchase == false)
+        //{ 
+        //    Shop_FailPurchasing(IAPManager.Instance.FailReason);
+        //    return;
+        //}
 
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
