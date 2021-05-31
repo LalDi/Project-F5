@@ -87,6 +87,12 @@ public class NPCManager : MonoBehaviour
 
         ScrObj_1.SetActive(false);
         ScrObj_2.SetActive(false);
+
+        StopCoroutine(Crt);
+        ScrObj_1.SetActive(false);
+        ScrObj_2.SetActive(false);
+        ScrObj_2.transform.GetChild(0).GetComponent<Text>().text = "";
+        IsOn_Scr = false;
     }
 
     public List<int> RandomActor(int count)
