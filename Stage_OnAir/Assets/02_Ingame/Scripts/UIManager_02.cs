@@ -1266,6 +1266,8 @@ public class UIManager_02 : MonoBehaviour
     public void Open_Shop_Popup(int ItemCode)
     {
         GameObject obj;
+        Button purchaseBtn;
+        IAPButton IAPBtn;
         GameObject Item;
         Sprite Icon;
         string Name;
@@ -1273,52 +1275,73 @@ public class UIManager_02 : MonoBehaviour
 
         Popup_On((int)PopupList.ShopUp);
         obj = Popup_ShopUp;
+        purchaseBtn = obj.transform.GetChild(6).GetComponent<Button>();
+        IAPBtn = obj.transform.GetChild(6).GetComponent<IAPButton>();
         Item = Popup_Shop.transform.GetChild(3).GetChild(0).GetChild(ItemCode).gameObject;
         Icon = Item.transform.Find("Image").GetComponent<Image>().sprite;
         Name = Item.transform.Find("Name").GetComponent<Text>().text;
-        obj.transform.GetChild(6).GetComponent<Button>().onClick.RemoveAllListeners();
+
+        purchaseBtn.onClick.RemoveAllListeners();
+
+        IAPBtn.onPurchaseComplete.RemoveAllListeners();
+        IAPBtn.onPurchaseFailed.RemoveAllListeners();
 
         switch (ItemCode)
         {
             case 0:
                 Script = "현재 보유 금액의 10% 획득\n"
                         + "광고 시청";
-                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Popup_On(23));
+                purchaseBtn.onClick.AddListener(() => Popup_On(23));
                 break;
             case 1:
                 Script = "공연 후 광고가 더 이상 나오지 않는다.\n"
                         + "₩2,500";
                 //obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_2());
-                obj.transform.GetChild(6).GetComponent<IAPButton>().productId = "remove_ad";
-                obj.transform.GetChild(6).GetComponent<IAPButton>().onPurchaseComplete.AddListener(call => Shop_Item_2());
-                obj.transform.GetChild(6).GetComponent<IAPButton>().onPurchaseFailed.AddListener((product, call) => Shop_FailPurchasing(call));
+                IAPBtn.productId = IAPID.ANDROID_REMOVEAD;
+                IAPBtn.onPurchaseComplete.AddListener(product => Shop_Item_2());
+                IAPBtn.onPurchaseFailed.AddListener((product, call) => Shop_FailPurchasing(call));
                 break;
             case 2:
                 Script = "+ 10,000,000원\n"
                         + "+ 첫 수익 획득량 100% 증가\n"
                         + "+ 첫 공연 성공률 100% 증가\n"
                         + "₩5,000";
-                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_3());
+                //obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_3());
+                IAPBtn.productId = IAPID.ANDROID_PACKAGESTART;
+                IAPBtn.onPurchaseComplete.AddListener(call => Shop_Item_3());
+                IAPBtn.onPurchaseFailed.AddListener((product, call) => Shop_FailPurchasing(call));
                 break;
             case 3:
                 Script = "+ 5,000,000원\n"
                         + "₩5,000";
-                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_4());
+                //obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_4());
+                IAPBtn.productId = IAPID.ANDROID_MONEY500;
+                IAPBtn.onPurchaseComplete.AddListener(call => Shop_Item_4());
+                IAPBtn.onPurchaseFailed.AddListener((product, call) => Shop_FailPurchasing(call));
                 break;
             case 4:
                 Script = "+ 10,000,000원\n"
                         + "₩10,000";
-                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_5());
+                //obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_5());
+                IAPBtn.productId = IAPID.ANDROID_MONEY1000;
+                IAPBtn.onPurchaseComplete.AddListener(call => Shop_Item_5());
+                IAPBtn.onPurchaseFailed.AddListener((product, call) => Shop_FailPurchasing(call));
                 break;
             case 5:
                 Script = "+ 50,000,000원\n"
                         + "₩30,000";
-                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_6());
+                //obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_6());
+                IAPBtn.productId = IAPID.ANDROID_MONEY5000;
+                IAPBtn.onPurchaseComplete.AddListener(call => Shop_Item_6());
+                IAPBtn.onPurchaseFailed.AddListener((product, call) => Shop_FailPurchasing(call));
                 break;
             case 6:
                 Script = "+ 100,000,000원\n"
                         + "₩50,000";
-                obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_7());
+                //obj.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => Shop_Item_7());
+                IAPBtn.productId = IAPID.ANDROID_MONEY10000;
+                IAPBtn.onPurchaseComplete.AddListener(call => Shop_Item_7());
+                IAPBtn.onPurchaseFailed.AddListener((product, call) => Shop_FailPurchasing(call));
                 break;
             default:
                 Script = "게임에 벌레가 날아다닌다~";
@@ -1389,21 +1412,21 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_3()
     {
-        if (IAPManager.Instance.HadPruchased(IAPManager.Product_PackageStart))
-        {
-            Debug.Log("이미 구매한 상품입니다.");
-            Error_Message = ERROR_MESSAGE.PURCHASING_DUPLICATE;
-            Popup_On((int)PopupList.Error);
-            return;
-        }
-
-        IAPManager.Instance.Purchase(IAPManager.Product_PackageStart);
-
-        if (IAPManager.Instance.IsSuccessPurchase == false)
-        {
-            Shop_FailPurchasing(IAPManager.Instance.FailReason);
-            return;
-        }
+        //if (IAPManager.Instance.HadPruchased(IAPManager.Product_PackageStart))
+        //{
+        //    Debug.Log("이미 구매한 상품입니다.");
+        //    Error_Message = ERROR_MESSAGE.PURCHASING_DUPLICATE;
+        //    Popup_On((int)PopupList.Error);
+        //    return;
+        //}
+        //
+        //IAPManager.Instance.Purchase(IAPManager.Product_PackageStart);
+        //
+        //if (IAPManager.Instance.IsSuccessPurchase == false)
+        //{
+        //    Shop_FailPurchasing(IAPManager.Instance.FailReason);
+        //    return;
+        //}
 
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
@@ -1437,13 +1460,13 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_4()
     {
-        IAPManager.Instance.Purchase(IAPManager.Product_Money500);
-
-        if (IAPManager.Instance.IsSuccessPurchase == false)
-        {
-            Shop_FailPurchasing(IAPManager.Instance.FailReason);
-            return;
-        }
+        //IAPManager.Instance.Purchase(IAPManager.Product_Money500);
+        //
+        //if (IAPManager.Instance.IsSuccessPurchase == false)
+        //{
+        //    Shop_FailPurchasing(IAPManager.Instance.FailReason);
+        //    return;
+        //}
 
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
@@ -1461,13 +1484,13 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_5()
     {
-        IAPManager.Instance.Purchase(IAPManager.Product_Money1000);
-
-        if (IAPManager.Instance.IsSuccessPurchase == false)
-        {
-            Shop_FailPurchasing(IAPManager.Instance.FailReason);
-            return;
-        }
+        //IAPManager.Instance.Purchase(IAPManager.Product_Money1000);
+        //
+        //if (IAPManager.Instance.IsSuccessPurchase == false)
+        //{
+        //    Shop_FailPurchasing(IAPManager.Instance.FailReason);
+        //    return;
+        //}
 
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
@@ -1485,13 +1508,13 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_6()
     {
-        IAPManager.Instance.Purchase(IAPManager.Product_Money5000);
-
-        if (IAPManager.Instance.IsSuccessPurchase == false)
-        {
-            Shop_FailPurchasing(IAPManager.Instance.FailReason);
-            return;
-        }
+        //IAPManager.Instance.Purchase(IAPManager.Product_Money5000);
+        //
+        //if (IAPManager.Instance.IsSuccessPurchase == false)
+        //{
+        //    Shop_FailPurchasing(IAPManager.Instance.FailReason);
+        //    return;
+        //}
 
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text
@@ -1509,13 +1532,13 @@ public class UIManager_02 : MonoBehaviour
 
     public void Shop_Item_7()
     {
-        IAPManager.Instance.Purchase(IAPManager.Product_Money10000);
-
-        if (IAPManager.Instance.IsSuccessPurchase == false)
-        {
-            Shop_FailPurchasing(IAPManager.Instance.FailReason);
-            return;
-        }
+        //IAPManager.Instance.Purchase(IAPManager.Product_Money10000);
+        //
+        //if (IAPManager.Instance.IsSuccessPurchase == false)
+        //{
+        //    Shop_FailPurchasing(IAPManager.Instance.FailReason);
+        //    return;
+        //}
 
         SoundManager.Instance.PlaySound("Cash_Register");
         Popup_ShopCk.transform.GetChild(3).GetComponent<Text>().text

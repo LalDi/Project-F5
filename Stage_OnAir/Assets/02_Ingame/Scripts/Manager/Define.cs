@@ -25,6 +25,16 @@
         public const string TEST_BANNER = "ca-app-pub-3940256099942544/6300978111";
     }
 
+    public class IAPID
+    {
+        public const string ANDROID_REMOVEAD       = "remove_ad";
+        public const string ANDROID_PACKAGESTART   = "package_start";
+        public const string ANDROID_MONEY500       = "money_500";
+        public const string ANDROID_MONEY1000      = "money_1000";
+        public const string ANDROID_MONEY5000      = "money_5000";
+        public const string ANDROID_MONEY10000     = "money_10000";
+    }
+
 
     public class PLAYERPREFSLIST
     {
