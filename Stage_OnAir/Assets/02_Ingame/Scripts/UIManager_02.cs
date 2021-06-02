@@ -1577,22 +1577,22 @@ public class UIManager_02 : MonoBehaviour
     public void TutorialBT(int sort)
     {
         TutorialSprite.gameObject.SetActive(true);
-        TutorialSprite.sprite = Tutorials[sort].Sprites[0];
+        //TutorialSprite.sprite = Tutorials[sort].Sprites[0];
         TutorialSprite.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
         TutorialSprite.gameObject.GetComponent<Button>().onClick.AddListener(() => TutorialSpriteBT(sort, 1));
     }
 
     public void TutorialSpriteBT(int sort, int num)
     {
-        if (Tutorials[sort].Sprites.Count <= num)
-            TutorialSprite.gameObject.SetActive(false);
-        else
-        {
-            SoundManager.Instance.PlaySound("Pop_6");
-            TutorialSprite.sprite = Tutorials[sort].Sprites[num];
-            TutorialSprite.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
-            TutorialSprite.gameObject.GetComponent<Button>().onClick.AddListener(() => TutorialSpriteBT(sort, num + 1));
-        }
+        //if (Tutorials[sort].Sprites.Count <= num)
+        //    TutorialSprite.gameObject.SetActive(false);
+        //else
+        //{
+        //    SoundManager.Instance.PlaySound("Pop_6");
+        //    TutorialSprite.sprite = Tutorials[sort].Sprites[num];
+        //    TutorialSprite.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+        //    TutorialSprite.gameObject.GetComponent<Button>().onClick.AddListener(() => TutorialSpriteBT(sort, num + 1));
+        //}
     }
 
     public void Stat_UI_Anim()
