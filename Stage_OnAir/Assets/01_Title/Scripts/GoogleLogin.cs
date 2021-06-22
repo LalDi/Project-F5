@@ -9,9 +9,9 @@ using Define;
 
 public class GoogleLogin : MonoBehaviour
 {
-    [Header("NickName")]
-    public GameObject Nickname_Popup;
-    public InputField Nickname_Inputfield;
+    //[Header("NickName")]
+    //public GameObject Nickname_Popup;
+    //public InputField Nickname_Inputfield;
 
     [Header("GameObject")]
     public GameObject Popup_Loading;
@@ -53,15 +53,14 @@ public class GoogleLogin : MonoBehaviour
                 {
                     SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
 
+                    Popup_Loading.SetActive(false);
+
                     switch (callback.GetStatusCode())
                     {
                         case "200":
+                        case "201":
                             GameManager.Instance.Init();
                             LoadManager.Load(LoadManager.Scene.Ingame);
-                            break;
-                        case "201":
-                            Popup_Loading.SetActive(false);
-                            Nickname_Popup.SetActive(true);
                             break;
                         default:
                             Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
@@ -85,15 +84,14 @@ public class GoogleLogin : MonoBehaviour
                         {
                             SoundManager.Instance.PlaySound("Prize_Wheel_Spin_2_Reward");
 
+                            Popup_Loading.SetActive(false);
+
                             switch (callback.GetStatusCode())
                             {
                                 case "200":
+                                case "201":
                                     GameManager.Instance.Init();
                                     LoadManager.Load(LoadManager.Scene.Ingame);
-                                    break;
-                                case "201":
-                                    Popup_Loading.SetActive(false);
-                                    Nickname_Popup.SetActive(true);
                                     break;
                                 default:
                                     Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
@@ -114,6 +112,7 @@ public class GoogleLogin : MonoBehaviour
         }
     }
 
+    /*
     public void SignUp_NickName()
     {
         Popup_Loading.SetActive(true);
@@ -149,6 +148,7 @@ public class GoogleLogin : MonoBehaviour
             }
         });
     }
+    */
 
     // 구글 토큰 받아옴
     public string GetTokens()
