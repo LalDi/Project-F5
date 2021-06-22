@@ -141,6 +141,7 @@ public class UIManager_02 : MonoBehaviour
     public List<Tutorial> Tutorials;
     public Image TutorialSprite;
 
+    private List<GameObject> DevelopItems = new List<GameObject>();
     private int CountMonth;
     private float MaxLeftDays = 0;
 
@@ -1148,6 +1149,13 @@ public class UIManager_02 : MonoBehaviour
 
     public void SetDevelopItem()
     {
+        foreach (var item in DevelopItems)
+        {
+            item.SetActive(false);
+        }
+
+        DevelopItems.Clear();
+
         foreach (var item in GameManager.Instance.Develops)
         {
             GameObject Obj = ObjManager.SpawnPool("DevelopItem", Vector3.zero, Quaternion.Euler(0, 0, 0));
@@ -1157,6 +1165,8 @@ public class UIManager_02 : MonoBehaviour
             Obj.transform.GetChild(0).GetComponent<Image>().sprite = DevelopData.Instance.DevelopIcon[SpriteCode];
             Obj.transform.GetChild(1).GetComponent<Text>().text = item.Name;
             Obj.transform.GetComponent<Button>().onClick.AddListener(() => Open_Develop_Popup(item));
+
+            DevelopItems.Add(Obj);
         }
         double count = (GameManager.Instance.Develops.Count / 2f);
         Popup_Develop.transform.GetChild(3).GetChild(0).GetComponent<RectTransform>().sizeDelta =
