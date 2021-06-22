@@ -7159,8 +7159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ddad2f2d576c547b87edd80e980e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Nickname_Popup: {fileID: 1921757780}
-  Nickname_Inputfield: {fileID: 1652821873}
   Popup_Loading: {fileID: 975941271}
   Popup_Error: {fileID: 294168704}
   Error_Text: {fileID: 84183907}
