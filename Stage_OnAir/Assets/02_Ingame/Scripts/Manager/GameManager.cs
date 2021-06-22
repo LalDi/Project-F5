@@ -152,7 +152,7 @@ public class GameManager : Singleton<GameManager>
     public void Reset()
     {
         Play_Quality = 0;
-        Play_Marketing = 100;
+        Play_Marketing = 200;
         Play_Success = 0;
 
         Quality_Acting = 0;
