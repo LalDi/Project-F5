@@ -169,6 +169,7 @@ public class UIManager_02 : MonoBehaviour
             }
             else
                 StartCoroutine(StartPrepare());
+            MaxLeftDays = Sum_MaxLeftDays();
         }
         else
         {
@@ -751,23 +752,32 @@ public class UIManager_02 : MonoBehaviour
         StartCoroutine(StartPrepare());
         Popup_Quit();
 
+        MaxLeftDays = Sum_MaxLeftDays();
+
         DOTween.To(() => Gauge_Progress.fillAmount, x => Gauge_Progress.fillAmount = x
         , (float)(GameManager.Instance.NowStep + 1) * 0.2f, 1);
 
-        MaxLeftDays = 0;
+        GameManager.Instance.SetLeftDays((int)MaxLeftDays);
+    }
+
+    public float Sum_MaxLeftDays()
+    {
+        float maxday;
+
+        maxday = 0;
         for (int i = 0; i < GameManager.Instance.Period; i++)
         {
             switch ((GameManager.Instance.Month + i) % 12 + 1)
             {
                 case 2:
-                    MaxLeftDays += 28;
+                    maxday += 28;
                     break;
 
                 case 4:
                 case 6:
                 case 9:
                 case 11:
-                    MaxLeftDays += 30;
+                    maxday += 30;
                     break;
 
                 case 1:
@@ -777,11 +787,12 @@ public class UIManager_02 : MonoBehaviour
                 case 8:
                 case 10:
                 case 12:
-                    MaxLeftDays += 31;
+                    maxday += 31;
                     break;
             }
         }
-        GameManager.Instance.SetLeftDays((int)MaxLeftDays);
+
+        return maxday;
     }
 
     public void Progress_Play()

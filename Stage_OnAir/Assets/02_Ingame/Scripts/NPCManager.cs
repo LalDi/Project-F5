@@ -169,7 +169,7 @@ public class NPCManager : MonoBehaviour
         ScrObj_1.SetActive(false);
         ScrObj_2.SetActive(true);
 
-        GameManager.Instance.CostMoney(Random.Range(1000, 5000));
+        GameManager.Instance.CostMoney(Random.Range(1000, 5000), false);
         ParticleObj.Play();
         Crt = Scr_Timer(Random.Range(10, 30));
         StartCoroutine(Crt);

@@ -345,7 +345,7 @@ public class GameManager : Singleton<GameManager>
             }
             if (data.Keys.Contains("BestProfit"))
             {
-                Best_Profit = int.Parse(data["BestProfit"]["N"].ToString());
+                Best_Profit = long.Parse(data["BestProfit"]["N"].ToString());
             }
 
             Debug.Log("기존 데이터 불러오기");
