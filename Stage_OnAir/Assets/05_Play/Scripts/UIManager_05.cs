@@ -162,7 +162,8 @@ public class UIManager_05 : MonoBehaviour
     public void Illust()
     {
         if (!(GameManager.Instance.OnPackage == true && GameManager.Instance.UsePackage == true) && // 패키지 적용중이 아니면서
-            GameManager.Instance.Play_Success >= 90 && Success) //일정 성공률 이상이면 일러스트 해금
+            Define.Math.FINALQUALITY() >= GameManager.Instance.NowScenario.Mission // 퀄리티가 시나리오의 조건값 이상이고
+            && Success)                                                 //공연에 성공했다면 일러스트 해금
             GameManager.Instance.ScenarioIllust[GameManager.Instance.NowScenario.No - 1] = true;
         else
         {

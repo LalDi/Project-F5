@@ -12,15 +12,17 @@ public class Scenario
     public int Quality { get; private set; }
     public int Actors { get; private set; }
     public int Price { get; private set; }
+    public int Mission { get; private set; }
     public int Code { get; private set; }
 
-    public Scenario(int _No, string _Name, int _Quality, int _Actors, int _Price, int _Code)
+    public Scenario(int _No, string _Name, int _Quality, int _Actors, int _Price, int _Mission, int _Code)
     {
         No = _No;
         Name = _Name;
         Quality = _Quality;
         Actors = _Actors;
         Price = _Price;
+        Mission = _Mission;
         Code = _Code;
     }
 }
@@ -52,7 +54,8 @@ public class ScenarioData : Singleton<ScenarioData>
                 int.Parse(item["Quality"]["S"].ToString()),
                 int.Parse(item["Actors"]["S"].ToString()),
                 int.Parse(item["Price"]["S"].ToString()),
-                int.Parse(item["Code"]["S"].ToString()) );
+                int.Parse(item["Mission"]["S"].ToString()),
+                int.Parse(item["Code"]["S"].ToString()));
 
             ScenarioList.Add(scenario);
         }
