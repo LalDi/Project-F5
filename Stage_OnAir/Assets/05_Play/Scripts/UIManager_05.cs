@@ -40,6 +40,8 @@ public class UIManager_05 : MonoBehaviour
             GoogleAdsManager.Instance.IntersAdsShow();
         }
 
+        GoogleAdsManager.Instance.HideBanner();
+
         SoundManager.Instance.StopBGM();
         Bgm = SoundManager.Instance.LoopSound(Scrs.scripts[GameManager.Instance.NowScenario.No - 1].Bgm
             ? "Bgm_Play2" : "Bgm_Play1");
@@ -161,9 +163,12 @@ public class UIManager_05 : MonoBehaviour
 
     public void Illust()
     {
-        if (GameManager.Instance.Play_Success >= 90 && Success) //일정 성공률 이상이면 일러스트 해금
+        if (!(GameManager.Instance.OnPackage == true && GameManager.Instance.UsePackage == true) && // 패키지 적용중이 아니면서
+            Define.Math.FINALQUALITY() >= GameManager.Instance.NowScenario.Mission // 퀄리티가 시나리오의 조건값 이상이고
+            && Success)                                                 //공연에 성공했다면 일러스트 해금
             GameManager.Instance.ScenarioIllust[GameManager.Instance.NowScenario.No - 1] = true;
-        else { 
+        else
+        {
             To_Ingame();
             return;
         }
