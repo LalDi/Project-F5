@@ -19,6 +19,8 @@ public class UIManager_06 : MonoBehaviour
 
     void Start()
     {
+        GoogleAdsManager.Instance.HideBanner();
+
         for (int i = 0; i < ScenarioData.Instance.ScenarioList.Count; i++)
         {
             GameObject item = ObjManager.SpawnPool("Illust", Vector3.zero, Quaternion.Euler(0, 0, 0));
@@ -39,8 +41,8 @@ public class UIManager_06 : MonoBehaviour
         Popup_Black.SetActive(false);
         Popup_Illust.SetActive(false);
 
-        Bottom_Button.SetY(50 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
-        Bottom_Scroll.SetBottom(230 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+        //Bottom_Button.SetY(50 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
+        //Bottom_Scroll.SetBottom(230 + Define.Math.DPToPixel(Screen.width * 16 / 9, GoogleAdsManager.Instance.GetBannerHeight()));
     }
 
     public void Push_IllustBT(int num)
