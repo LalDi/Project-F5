@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
     // 연극의 최고 점수
     public float Best_Quality { get; private set; }
     public float Best_Audience { get; private set; }
-    public float Best_Profit { get; private set; }
+    public long Best_Profit { get; private set; }
 
     // 현재 보유 금액
     public long Money { get; private set; }
@@ -152,7 +152,7 @@ public class GameManager : Singleton<GameManager>
     public void Reset()
     {
         Play_Quality = 0;
-        Play_Marketing = 100;
+        Play_Marketing = 200;
         Play_Success = 0;
 
         Quality_Acting = 0;
@@ -782,7 +782,7 @@ public class GameManager : Singleton<GameManager>
         Backend.GameSchemaInfo.Update("Shop", InfoInDate, param); // 동기
     }
 
-    public void CheckBestScore(float Quality, float Audience, float Profit)
+    public void CheckBestScore(float Quality, float Audience, long Profit)
     {
         string InDate = Backend.BMember.GetUserInfo().GetInDate();
         var Info = Backend.GameSchemaInfo.Get("Player", InDate);

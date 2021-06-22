@@ -9,7 +9,7 @@ using Coffee.UIExtensions;
 public class UIManager_05 : MonoBehaviour
 {
     private bool Success = false;
-    private int ResultMoney;
+    private long ResultMoney;
 
     public List<GameObject> Backgrounds;
     public GameObject Light;
@@ -118,7 +118,7 @@ public class UIManager_05 : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Popup_Result.SetActive(true);
 
-        ResultMoney = Success ? (int)Define.Math.RESULT() : (int)(Define.Math.RESULT() / 2);
+        ResultMoney = Success ? Define.Math.RESULT() : (Define.Math.RESULT() / 2);
 
         // 패키지 사용중일 경우, 보상 금액 2배
         if (GameManager.Instance.OnPackage == true && GameManager.Instance.UsePackage == true)

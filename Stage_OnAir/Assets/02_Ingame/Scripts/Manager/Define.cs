@@ -163,10 +163,10 @@
 
             float result;
             if (Actors != 0)
-                result = Scenario + (Scenario * Direction * 0.01f) + (Acting + (Acting * (Actors - 2) * 0.1f) / Actors);
+                result = Scenario + (Scenario * Direction * 0.015f) + (Acting + (Acting * (Actors - 1) * 0.2f) / Actors);
             else
-                result = Scenario + (Scenario * Direction * 0.01f);
-            //(시나리오 퀄리티) + (시나리오 퀄리티 * 스태프 기술력 * 0.01) + ((배우 연기력 총합 + 배우 연기력 총합 * (배우 수 - 2) * 0.1) / 배우 수)
+                result = Scenario + (Scenario * Direction * 0.015f);
+            //(시나리오 퀄리티) + (시나리오 퀄리티 * 스태프 기술력 * 0.015) + ((배우 연기력 총합 + 배우 연기력 총합 * (배우 수 - 1) * 0.2) / 배우 수)
 
             return result;
         }
@@ -176,21 +176,25 @@
          */
         static public float MARKETING()
         {
-            float Ratio = 500f;
+            float Ratio = 1000f;
             return GameManager.Instance.Play_Marketing / Ratio;
         }
 
         /**
          *  @return  최종 수익을 계산
          */
-        static public float RESULT()
+        static public long RESULT()
         {
             //float Quality = GameManager.Instance.Play_Quality;
             float Quality = FINALQUALITY();
             float Marketing = MARKETING();
 
-            float result;
-            result = Quality * Marketing * 10000;
+            long result;
+            float temp;
+
+            temp = Quality * Marketing;
+
+            result = (long)temp * 10000;
 
             return result;
         }
