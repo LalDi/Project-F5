@@ -183,14 +183,18 @@
         /**
          *  @return  최종 수익을 계산
          */
-        static public float RESULT()
+        static public long RESULT()
         {
             //float Quality = GameManager.Instance.Play_Quality;
             float Quality = FINALQUALITY();
             float Marketing = MARKETING();
 
-            float result;
-            result = Quality * Marketing * 10000;
+            long result;
+            float temp;
+
+            temp = Quality * Marketing;
+
+            result = (long)temp * 10000;
 
             return result;
         }
