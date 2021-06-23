@@ -296,6 +296,33 @@ public class GameManager : Singleton<GameManager>
             }
         }
 
+        //Illust 
+        param = new Param();
+
+        for (int i = 0; i < ScenarioIllust.Length; i++)
+        {
+            bool item = ScenarioIllust[i];
+            param.Add("Illust" + i, item);
+        }
+
+        Info = Backend.GameInfo.GetPrivateContents("Illust");
+
+        if (Info.GetStatusCode() == "404")
+        {
+            if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+            {
+                InfoInDate = Info.Rows()[0]["inDate"]["S"].ToString();
+                Backend.GameInfo.Delete("Illust", InfoInDate);
+                Backend.GameInfo.Insert("Illust", param);
+                Debug.Log("Illust -> 기존 데이터 갱신");
+            }
+        }
+        else
+        {
+            Backend.GameInfo.Insert("Illust", param);
+            Debug.Log("Illust -> 새로운 데이터 생성");
+        }
+
         StaffData.SaveAllStaff();
 
         Debug.LogError("데이터 저장 완료");
@@ -556,36 +583,65 @@ public class GameManager : Singleton<GameManager>
         }
 
 
-        // 서버로부터 Develops테이블의 데이터를 받아옴
-        Info = Backend.GameInfo.GetPrivateContents("Develops");
+        // 서버로부터 Illust테이블의 데이터를 받아옴
+        Info = Backend.GameInfo.GetPrivateContents("Illust");
 
         if (Info.GetStatusCode() == "200")
         {
-            Debug.Log("Develops 테이블의 데이터를 받아오는데 성공");
+            Debug.Log("Illust 테이블의 데이터를 받아오는데 성공");
 
-            // Develops 테이블의 데이터를 받아오는데 성공
+            // Illust 테이블의 데이터를 받아오는데 성공
             if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
             {
-                Debug.Log("Develops 테이블 데이터 있음");
-
-                Develops.Clear();
+                Debug.Log("Illust 테이블 데이터 있음");
 
                 var Data = Info.Rows()[0];
 
-                for (int i = 0; Data.Keys.Contains("Develop" + i); i++)
+                for (int i = 0; Data.Keys.Contains("Illust" + i); i++)
                 {
-                    int Code = int.Parse(Data["Develop" + i]["N"].ToString());
-                    var temp = DevelopData.Instance.FindDevelop(Code);
-                    Develops.Add(temp);
+                    var temp = (bool)Data["Illust" + i]["BOOL"];
+                    ScenarioIllust[i] = temp;
                 }
 
             }
-            // Develops 테이블의 데이터를 받아오는데 실패
+            // Illust 테이블의 데이터를 받아오는데 실패
             else
             {
-                Debug.Log("Develops 테이블 데이터 없음");
+                Debug.Log("Illust 테이블 데이터 없음");
 
-                CreateDevelop();
+                for (int i = 0; i < ScenarioIllust.Length; i++)
+                    ScenarioIllust[i] = false;
+            }
+        }
+
+        // 서버로부터 Illust테이블의 데이터를 받아옴
+        Info = Backend.GameInfo.GetPrivateContents("Illust");
+
+        if (Info.GetStatusCode() == "200")
+        {
+            Debug.Log("Illust 테이블의 데이터를 받아오는데 성공");
+
+            // Illust 테이블의 데이터를 받아오는데 성공
+            if (Info.GetReturnValuetoJSON()["rows"].Count > 0)
+            {
+                Debug.Log("Illust 테이블 데이터 있음");
+
+                var Data = Info.Rows()[0];
+
+                for (int i = 0; Data.Keys.Contains("Illust" + i); i++)
+                {
+                    var temp = (bool)Data["Illust" + i]["BOOL"];
+                    ScenarioIllust[i] = temp;
+                }
+
+            }
+            // Illust 테이블의 데이터를 받아오는데 실패
+            else
+            {
+                Debug.Log("Illust 테이블 데이터 없음");
+
+                for (int i = 0; i < ScenarioIllust.Length; i++)
+                    ScenarioIllust[i] = false;
             }
         }
     }
