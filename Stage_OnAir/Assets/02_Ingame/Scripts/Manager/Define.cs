@@ -25,6 +25,16 @@
         public const string TEST_BANNER = "ca-app-pub-3940256099942544/6300978111";
     }
 
+    public class IAPID
+    {
+        public const string ANDROID_REMOVEAD       = "remove_ad";
+        public const string ANDROID_PACKAGESTART   = "package_start";
+        public const string ANDROID_MONEY500       = "money_500";
+        public const string ANDROID_MONEY1000      = "money_1000";
+        public const string ANDROID_MONEY5000      = "money_5000";
+        public const string ANDROID_MONEY10000     = "money_10000";
+    }
+
 
     public class PLAYERPREFSLIST
     {
@@ -37,6 +47,9 @@
 
     public class ERROR_MESSAGE
     {
+        public const string LOGIN_GOOGLEFAIL = "구글에 접속되어있지 않습니다.\n로그인에 실패하였습니다.";
+        public const string LOGIN_INTERNETFAIL = "로그인에 실패하였습니다.";
+
         public const string LOGIN_EMPTY = "모든 항목을 빠짐없이 입력하여주십시오.";
         public const string LOGIN_DUPLICATE = "존재하지 않는 계정입니다.\n아이디 혹은 비밀번호를 확인해주세요.";
         public const string LOGIN_UNKNOWN = "알 수 없는 오류로 로그인에 실패햐였습니다.";
@@ -150,10 +163,10 @@
 
             float result;
             if (Actors != 0)
-                result = Scenario + (Scenario * Direction * 0.01f) + (Acting + (Acting * (Actors - 2) * 0.1f) / Actors);
+                result = Scenario + (Scenario * Direction * 0.015f) + (Acting + (Acting * (Actors - 1) * 0.2f) / Actors);
             else
-                result = Scenario + (Scenario * Direction * 0.01f);
-            //(시나리오 퀄리티) + (시나리오 퀄리티 * 스태프 기술력 * 0.01) + ((배우 연기력 총합 + 배우 연기력 총합 * (배우 수 - 2) * 0.1) / 배우 수)
+                result = Scenario + (Scenario * Direction * 0.015f);
+            //(시나리오 퀄리티) + (시나리오 퀄리티 * 스태프 기술력 * 0.015) + ((배우 연기력 총합 + 배우 연기력 총합 * (배우 수 - 1) * 0.2) / 배우 수)
 
             return result;
         }
@@ -163,21 +176,25 @@
          */
         static public float MARKETING()
         {
-            float Ratio = 500f;
+            float Ratio = 1000f;
             return GameManager.Instance.Play_Marketing / Ratio;
         }
 
         /**
          *  @return  최종 수익을 계산
          */
-        static public float RESULT()
+        static public long RESULT()
         {
             //float Quality = GameManager.Instance.Play_Quality;
             float Quality = FINALQUALITY();
             float Marketing = MARKETING();
 
-            float result;
-            result = Quality * Marketing * 10000;
+            long result;
+            float temp;
+
+            temp = Quality * Marketing;
+
+            result = (long)temp * 10000;
 
             return result;
         }

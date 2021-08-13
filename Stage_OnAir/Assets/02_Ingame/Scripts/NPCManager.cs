@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Coffee.UIExtensions;
+using DG.Tweening;
 
 public class NPCManager : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class NPCManager : MonoBehaviour
     public GameObject ScrObj_2;
     public UIParticle ParticleObj;
 
+    public IEnumerator Crt;
+
     private void Update()
     {
         if (ScrChr != null)
@@ -39,12 +42,16 @@ public class NPCManager : MonoBehaviour
 
         Staffs = RandomStaff();
 
-        for (int i = 0; i < Actors.Count(); i++) {
-            ActorObj[i] = Instantiate(ActorPre[Actors[i]], Parent);
-            ActorObj[i].transform.localPosition = new Vector3(-800 * (i - 1), -800);
-            ActorObj[i].transform.GetComponent<NPC>().Code = 10 + i;
+        if (Actors != null)
+        {
+            for (int i = 0; i < Actors.Count(); i++)
+            {
+                ActorObj[i] = Instantiate(ActorPre[Actors[i]], Parent);
+                ActorObj[i].transform.localPosition = new Vector3(-800 * (i - 1), -750);
+                ActorObj[i].transform.GetComponent<NPC>().Code = 10 + i;
+            }
         }
-        
+
         if (Staffs != -1)
         {
             StaffObj = Instantiate(StaffPre[Staffs], Parent);
@@ -54,7 +61,8 @@ public class NPCManager : MonoBehaviour
 
         ScrObj_1.SetActive(false);
         ScrObj_2.SetActive(false);
-        StartCoroutine(Scr_Timer(30));
+        Crt = Scr_Timer(30);
+        StartCoroutine(Crt);
     }
 
     public void DisSummon()
@@ -62,31 +70,46 @@ public class NPCManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             if (ActorObj[i] != null)
-            { 
+            {
+                ActorObj[i].GetComponent<NPC>().Stop();
+                DOTween.Kill(ActorObj[i]);
                 ActorObj[i].SetActive(false);
                 ActorObj[i] = null;
             }
         }
         if (StaffObj != null)
         {
+            StaffObj.GetComponent<NPC>().Stop();
+            DOTween.Kill(StaffObj);
             StaffObj.SetActive(false);
             StaffObj = null;
         }
+
+        ScrObj_1.SetActive(false);
+        ScrObj_2.SetActive(false);
+
+        StopCoroutine(Crt);
+        ScrObj_1.SetActive(false);
+        ScrObj_2.SetActive(false);
+        ScrObj_2.transform.GetChild(0).GetComponent<Text>().text = "";
+        IsOn_Scr = false;
     }
 
     public List<int> RandomActor(int count)
     {
+        if (count <= 0) return null;
         if (count > 2) count = 2;
 
         List<int> RandomActor = new List<int>();
         List<Actor> Select = new List<Actor>();
 
-        Select = GameManager.Instance.Actors.ToList();
+        Select = new List<Actor>(GameManager.Instance.Actors);
         Select = Math.ShuffleList(Select);
 
         for (int i = 0; i < count; i++)
         {
-            RandomActor.Add(Select[i].No % 8);
+            RandomActor.Add(Select[i].Sprite - 1);
+            Debug.Log(Select[i].Name);
         }
 
         return RandomActor;
@@ -99,7 +122,7 @@ public class NPCManager : MonoBehaviour
         foreach (var item in GameManager.Instance.Staffs)
         {
             if (item.IsPurchase)
-                RandomStaff.Add(item.Code-1);
+                RandomStaff.Add(item.Code - 1);
         }
 
         if (RandomStaff.Count == 0)
@@ -115,7 +138,20 @@ public class NPCManager : MonoBehaviour
         if (IsOn_Scr == false)
             return;
 
-        ScrChr = (Random.Range(0, 2) == 0) ? ActorObj[Random.Range(0, 2)] : StaffObj ;
+        if (ActorObj[0] == null && StaffObj == null)
+        {
+            IsOn_Scr = false;
+            return;
+        }
+        else if (ActorObj[0] != null && StaffObj != null)
+            ScrChr = (Random.Range(0, 2) == 0) ? ActorObj[Random.Range(0, 2)] : StaffObj;
+        else
+        {
+            if (ActorObj[0] == null)
+                ScrChr = StaffObj;
+            else if (StaffObj == null)
+                ScrChr = ActorObj[(Random.Range(0, 2))];
+        }
 
         ScrObj_1.SetActive(true);
         ScrObj_2.SetActive(false);
@@ -133,14 +169,15 @@ public class NPCManager : MonoBehaviour
         ScrObj_1.SetActive(false);
         ScrObj_2.SetActive(true);
 
-        GameManager.Instance.CostMoney(Random.Range(1000, 5000));
+        GameManager.Instance.CostMoney(Random.Range(1000, 5000), false);
         ParticleObj.Play();
-        StartCoroutine(Scr_Timer(Random.Range(10, 30)));
+        Crt = Scr_Timer(Random.Range(10, 30));
+        StartCoroutine(Crt);
     }
 
     public IEnumerator Scr_Timer(int time)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         ScrObj_1.SetActive(false);
         ScrObj_2.SetActive(false);
         ScrObj_2.transform.GetChild(0).GetComponent<Text>().text = "";
