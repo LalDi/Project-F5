@@ -62,6 +62,11 @@ public class GoogleLogin : MonoBehaviour
                             GameManager.Instance.Init();
                             LoadManager.Load(LoadManager.Scene.Ingame);
                             break;
+                        case "403":
+                            SoundManager.Instance.PlaySound("Pop_6");
+                            Error_Message = callback.GetErrorCode();
+                            Control_Error(true);
+                            break;
                         default:
                             Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
                             Control_Error(true);
@@ -92,6 +97,11 @@ public class GoogleLogin : MonoBehaviour
                                 case "201":
                                     GameManager.Instance.Init();
                                     LoadManager.Load(LoadManager.Scene.Ingame);
+                                    break;
+                                case "403":
+                                    SoundManager.Instance.PlaySound("Pop_6");
+                                    Error_Message = callback.GetErrorCode();
+                                    Control_Error(true);
                                     break;
                                 default:
                                     Error_Message = ERROR_MESSAGE.LOGIN_UNKNOWN;
