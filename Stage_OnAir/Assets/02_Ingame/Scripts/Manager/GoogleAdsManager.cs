@@ -10,7 +10,7 @@ public class GoogleAdsManager : Singleton<GoogleAdsManager>
     private InterstitialAd IntersAd;
     private BannerView BannerAd;
 
-    private bool isTest = true;
+    private bool isTest = false;
 
     new void Awake()
     {
