@@ -182,6 +182,8 @@ public class GoogleLogin : MonoBehaviour
 
     public void Control_Error(bool Open)
     {
+        Popup_Loading.SetActive(false);
+
         Popup_Error.SetActive(Open);
         Error_Text.text = Error_Message;
     }
